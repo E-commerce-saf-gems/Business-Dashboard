@@ -124,12 +124,14 @@ const gemData = {
 	}]
 };
 
-// Configuration for the gemstone types pie chart
+// Configuration for the gemstone types doughnut chart
 const gemConfig = {
-	type: "pie",
+	type: "doughnut",  // Changed from 'pie' to 'doughnut'
 	data: gemData,
 	options: {
 		responsive: true,
+		maintainAspectRatio: false, // Allow canvas size to control the chart size
+		cutout: '70%', // Control the inner radius for the doughnut hole size
 		plugins: {
 			legend: {
 				display: true,
@@ -139,8 +141,9 @@ const gemConfig = {
 	}
 };
 
-// Render the pie chart in the canvas with id 'gemChart'
+// Render the doughnut chart in the canvas with id 'gemChart'
 const gemChart = new Chart(
 	document.getElementById("gemChart"),
 	gemConfig
 );
+

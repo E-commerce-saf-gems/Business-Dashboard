@@ -402,11 +402,12 @@ body {
 /* Sales */
 /* Right side: Sales Summary */
 .sales-summary {
-	width: 50%;
-	padding: 20px;
-	background: var(--light);
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Takes up the other half of the width */
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Make it a positioning context for the link */
 }
 
 .sales-summary h2 {
@@ -422,25 +423,21 @@ body {
 	height: 300px; /* Keep the line chart at a larger size */
 }
 
-#gemChart {
-	width: 100%;
-	height: 100px; /* Reduce the size of the pie chart */
+/* Style for the 'View More' text link */
+.view-more {
+    position: absolute;
+	top: 20px; /* Position 10px from the bottom */
+    right: 25px;  /* Position 10px from the right */
+    font-size: 12px;
+    color: var(--teal); /* Set text color */
+    text-decoration: underline; /* Underline the text */
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-/* Inventory */
-/* Gem Chart Section */
-.gem-chart {
-	margin-top: 20px;
-	padding: 20px;
-	background: var(--light);
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.gem-chart h2 {
-	font-size: 20px;
-	color: var(--dark);
-	margin-bottom: 16px;
+/* Hover effect for the 'View More' link */
+.view-more:hover {
+    color: var(--dark-teal); /* Darken the color when hovered */
 }
 
 

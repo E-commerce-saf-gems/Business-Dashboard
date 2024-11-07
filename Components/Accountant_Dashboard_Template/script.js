@@ -6,8 +6,8 @@ class Dashboard extends HTMLElement {
                     <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
-                    <li class="active">
-                        <a href="#">
+                    <li>
+                        <a href="/Accoutant_Dashboard/dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
@@ -34,24 +34,6 @@ class Dashboard extends HTMLElement {
                         <a href="#">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-user-detail'></i>
-                            <span class="text">Customers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-calendar'></i>
-                            <span class="text">Meetings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-dashboard'></i>
-                            <span class="text">Requests</span>
                         </a>
                     </li>
                 </ul>
@@ -85,3 +67,30 @@ class Dashboard extends HTMLElement {
 
 
 customElements.define('dashboard-component', Dashboard);
+
+// Function to update active class based on the current URL
+function updateActiveMenu() {
+    const allSideMenu = document.querySelectorAll('#sidebar .side-menu li a');
+    const currentPath = window.location.pathname;
+
+    allSideMenu.forEach(item => {
+        const link = item.getAttribute('href');
+        const li = item.parentElement;
+
+        if (currentPath === link) {
+            li.classList.add('active');
+        } else {
+            li.classList.remove('active');
+        }
+
+        item.addEventListener('click', function () {
+            allSideMenu.forEach(i => {
+                i.parentElement.classList.remove('active');
+            });
+            li.classList.add('active');
+        });
+    });
+}
+
+// Run the updateActiveMenu function on page load
+window.addEventListener('DOMContentLoaded', updateActiveMenu);
