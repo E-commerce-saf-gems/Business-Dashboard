@@ -18,10 +18,12 @@
 					<h1>Sales</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Sales Summary</a>
+							<a class="active" href="#">Sales Summary</a>
 						</li>
 					</ul>
 				</div>
+                <a href="./addSales.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+
 			</div>
             <div class="sales-summary-box">
                 <div class="sales-summary-title">
@@ -41,9 +43,7 @@
                 </div>
             </div>
 
-            <!-- Sales Table with Filtering Options -->
             <div class="sales-table-container">
-                <!-- Filter Options -->
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter">
@@ -76,7 +76,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example row -->
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>2024-11-01</td>
@@ -90,11 +89,9 @@
                                 <a class="btn"><i class="bx bx-trash"></i></a>
                             </td>
                             <td class="options">
-                                <a class="btn"><i class='bx bx-printer'></i></a>
-                                <a class="btn"><i class='bx bx-share'></i></a>
+                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
                             </td>
                         </tr>
-                        <!-- Repeat rows as needed -->
                     </tbody>
                 </table>
             </div>    

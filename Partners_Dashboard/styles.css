@@ -449,7 +449,7 @@ body {
 
 /* inventory */
 .gem-chart {
-	width: 100%;
+	width: 50%;
 	height: 250px; 
 	margin-top: 20px;
 	padding: 10px;

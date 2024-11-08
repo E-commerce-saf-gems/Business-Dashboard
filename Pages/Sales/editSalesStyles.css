@@ -1,12 +1,47 @@
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	font-family: var(--poppins);
+	max-height: calc(100vh - 50px);
+	overflow-y: auto;
+}
+#content main .head-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	grid-gap: 16px;
+	flex-wrap: wrap;
+}
+#content main .head-title .left h1 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+}
+#content main .head-title .left .breadcrumb li {
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb li a {
+	color: var(--black-grey);
+}
+#content main .head-title .left .breadcrumb li a.active {
+	color: var(--teal);
+	pointer-events: unset;
+}
+
 /* Container and Layout */
 .edit-sales-container {
-    width: 60%;
-    margin: 40px auto;
+    width: 100% ;
+    margin-top: 20px;
+    background: var(--light);
     padding: 20px;
-    background-color: var(--light);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: var(--poppins);
 }
 
 a {

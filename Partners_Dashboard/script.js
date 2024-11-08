@@ -182,7 +182,7 @@ const cashFlowConfig = {
 			x: {
 				title: {
 					display: true,
-					text: 'Day of the Month'
+					text: 'Day'
 				},
 				stacked: false // Keeps bars side-by-side for each day
 			}
