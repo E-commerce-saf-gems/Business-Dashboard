@@ -124,14 +124,12 @@ const gemData = {
 	}]
 };
 
-// Configuration for the gemstone types doughnut chart
+// Configuration for the gemstone types pie chart
 const gemConfig = {
-	type: "doughnut",  // Changed from 'pie' to 'doughnut'
+	type: "pie",
 	data: gemData,
 	options: {
 		responsive: true,
-		maintainAspectRatio: false, // Allow canvas size to control the chart size
-		cutout: '70%', // Control the inner radius for the doughnut hole size
 		plugins: {
 			legend: {
 				display: true,
@@ -141,9 +139,66 @@ const gemConfig = {
 	}
 };
 
-// Render the doughnut chart in the canvas with id 'gemChart'
+// Render the pie chart in the canvas with id 'gemChart'
 const gemChart = new Chart(
 	document.getElementById("gemChart"),
 	gemConfig
 );
 
+// cashflow
+// Updated Data and configuration for the Cash Flow Bar Chart
+const cashFlowData = {
+	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
+	datasets: [
+		{
+			label: 'Cash In',
+			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
+			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
+			borderColor: 'rgba(75, 192, 192, 1)',
+			borderWidth: 1
+		},
+		{
+			label: 'Cash Out',
+			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
+			backgroundColor: "#3caaaa", // Red color
+			borderColor: '#3caaaa',
+			borderWidth: 1
+		}
+	]
+};
+
+const cashFlowConfig = {
+	type: 'bar',
+	data: cashFlowData,
+	options: {
+		scales: {
+			y: {
+				beginAtZero: true,
+				title: {
+					display: true,
+					text: 'Amount ($)'
+				}
+			},
+			x: {
+				title: {
+					display: true,
+					text: 'Day of the Month'
+				},
+				stacked: false // Keeps bars side-by-side for each day
+			}
+		},
+		plugins: {
+			legend: {
+				position: 'top'
+			}
+		}
+	}
+};
+
+// Initialize the Cash Flow Bar Chart
+const cashFlowChart = new Chart(
+	document.getElementById('cashFlowChart'),
+	cashFlowConfig
+);
+
+// cashflow

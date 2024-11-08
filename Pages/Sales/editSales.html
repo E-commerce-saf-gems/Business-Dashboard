@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Sales Details</title>
+    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./editSalesStyles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main class="edit-sales-container">
+            <form class="edit-sales-form" id="editSalesForm">
+                <h2>Edit Sales Details</h2>
+                
+                <!-- Date Field -->
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <!-- Type Field -->
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select id="type" name="type">
+                        <option value="Gem Sale">Gem Sale</option>
+                        <option value="Jewelry Sale">Jewelry Sale</option>
+                    </select>
+                </div>
+
+                <!-- Customer Field -->
+                <div class="form-group">
+                    <label for="customer">Customer ID</label>
+                    <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
+                </div>
+
+                <!-- Amount Field -->
+                <div class="form-group">
+                    <label for="amount">Amount ($)</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                </div>
+
+                <!-- Status Field -->
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                        <option value="Paid">Paid</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                
+                <!-- Save Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">
+                        <a href="/Pages/Sales/sales.html">
+                            <i class='bx bx-save'></i> Save Changes
+                        </a>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </section>
+
+    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+</body>
+</html>
