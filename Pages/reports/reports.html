@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Reports</title>
+    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./styles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Generate Report</h1>
+                </div>
+            </div>
+
+            <!-- Report Boxes Section -->
+            <div class="report-boxes-container">
+                <div class="report-box">
+                    <h2>Profit and Loss Report</h2>
+                    <p>Generate a report detailing profits, losses, revenue, expenses, and net profit.</p>
+                    <a href="profitreport.html" class="report-link">View Report</a>
+                </div>
+
+                <div class="report-box">
+                    <h2>Sales Report</h2>
+                    <p>Generate a report on total sales, sales by gem type, auction vs regular sales, and customer segments.</p>
+                    <a href="salesreport.html" class="report-link">View Report</a>
+                </div>
+
+                <div class="report-box">
+                    <h2>Inventory Report</h2>
+                    <p>Generate a report on current inventory value, gem types, acquisitions, and aging of gemstones.</p>
+                    <a href="inventoryreport.html" class="report-link">View Report</a>
+                </div>
+            </div>
+
+            
+
+            
+            <!-- Export Options inside Modal -->
+            <div class="export-options">
+                <button onclick="exportToPDF()">Export to PDF</button>
+                <button onclick="exportToWord()">Export to Word</button>
+            </div>
+
+           
+
+            
+
+        </main>
+    </section>
+
+    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</body>
+</html>
+
+
