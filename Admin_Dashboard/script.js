@@ -103,22 +103,21 @@ const salesChart = new Chart(
 
 // Sample data for gemstone types
 const gemData = {
-	labels: ["Ruby", "Emerald", "Sapphire", "Amethyst", "Diamond"],
+	labels: ["Online", "Offline", "Registered", "Visit"],
 	datasets: [{
-		data: [12, 19, 7, 10, 15], // Sample quantities for each gemstone type
+		data: [12, 19, 7, 10], // Sample quantities for each gemstone type
 		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Ruby color
-			"rgba(75, 192, 192, 0.6)", // Emerald color
-			"rgba(54, 162, 235, 0.6)", // Sapphire color
-			"rgba(153, 102, 255, 0.6)", // Amethyst color
-			"rgba(255, 206, 86, 0.6)"   // Diamond color
+			"rgba(255, 99, 132, 0.6)", // Online color
+			"rgba(75, 192, 192, 0.6)", // Offline color
+			"rgba(54, 162, 235, 0.6)", // Registered color
+			"rgba(153, 102, 255, 0.6)", // Visit color
+			
 		],
 		borderColor: [
 			"rgba(255, 99, 132, 1)",
 			"rgba(75, 192, 192, 1)",
 			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)",
-			"rgba(255, 206, 86, 1)"
+			"rgba(153, 102, 255, 1)"
 		],
 		borderWidth: 1
 	}]
@@ -141,7 +140,7 @@ const gemConfig = {
 
 // Render the pie chart in the canvas with id 'gemChart'
 const gemChart = new Chart(
-	document.getElementById("gemChart"),
+	document.getElementById("userChart"),
 	gemConfig
 );
 

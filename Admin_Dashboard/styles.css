@@ -448,7 +448,7 @@ body {
 
 
 /* inventory */
-.gem-chart {
+.user-chart {
 	width: 50%;
 	height: 250px; 
 	margin-top: 20px;
@@ -458,12 +458,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.gem-chart:hover{
+.user-chart:hover{
 	transform: translateY(-3px);
     transition: 0.3s ease;
 }
 
-#gemChart {
+#userChart {
 	width: 450px;
 	height: 450px;
 	margin: -40px auto 0;

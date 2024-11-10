@@ -429,7 +429,7 @@ body {
 
 /* Inventory */
 /* Gem Chart Section */
-.gem-chart {
+.user-chart {
 	margin-top: 20px;
 	padding: 20px;
 	background: var(--light);
@@ -437,7 +437,7 @@ body {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.gem-chart h2 {
+.user-chart h2 {
 	font-size: 20px;
 	color: var(--dark);
 	margin-bottom: 16px;

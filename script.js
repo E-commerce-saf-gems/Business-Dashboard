@@ -141,6 +141,6 @@ const gemConfig = {
 
 // Render the pie chart in the canvas with id 'gemChart'
 const gemChart = new Chart(
-	document.getElementById("gemChart"),
+	document.getElementById("userChart"),
 	gemConfig
 );
