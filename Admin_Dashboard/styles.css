@@ -420,7 +420,7 @@ body {
 }
 
 /* Sales */
-.sales-summary {
+.Visit-summary {
 	flex: 1 ;
     width: 50%; 
     padding: 20px;
@@ -430,18 +430,18 @@ body {
     position: relative; 
 }
 
-.sales-summary:hover {
+.Visit-summary:hover {
 	transform: translateY(-3px);	
 	transition: 0.3s ease;
 }
 
-.sales-summary h2 {
+.Visit-summary h2 {
 	font-size: 20px;
 	color: var(--dark);
 	margin-bottom: 16px;
 }
 
-#salesChart {
+#VisitChart {
 	width: 100%;
 	height: 30%; 
 }
@@ -471,8 +471,8 @@ body {
 
 /* inventory */
 
-/* cashflow */
-.cash-flow-chart {
+/* staffflow */
+.staff-flow-chart {
 	width: 100%; 
 	margin-top: 20px; 
 	padding: 20px;
@@ -481,17 +481,16 @@ body {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cash-flow-chart:hover {
+.staff-flow-chart:hover {
 	transform: translateY(-3px);	
 	transition: 0.3s ease;
-}
+} */
 
-/* Cash Flow Chart Style */
-#cashFlowChart {
+/* staff Flow Chart Style */
+#staffFlowChart {
 	width: 100%;
 	height: 200px;
 }
-/* cashflow */
 
 
 @media screen and (max-width: 768px) {

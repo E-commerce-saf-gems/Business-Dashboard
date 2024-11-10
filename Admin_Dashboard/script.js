@@ -50,11 +50,11 @@ window.addEventListener('resize', function () {
 })
 
 // Sample data for monthly sales
-const salesData = {
+const monthlyuserData = {
 	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	datasets: [{
-		label: "Sales ($)",
-		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
+		label: "Users",
+		data: [100, 300, 400, 600, 650, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
 		borderColor: "rgba(75, 192, 192, 1)",
 		backgroundColor: "rgba(75, 192, 192, 0.2)",
 		fill: true,
@@ -67,7 +67,7 @@ const salesData = {
 // Configuration options for the chart
 const config = {
 	type: "line",
-	data: salesData,
+	data: monthlyuserData,
 	options: {
 		responsive: true,
 		plugins: {
@@ -86,7 +86,7 @@ const config = {
 			y: {
 				title: {
 					display: true,
-					text: "Sales ($)"
+					text: "Users"
 				},
 				beginAtZero: true
 			}
@@ -95,14 +95,14 @@ const config = {
 };
 
 // Render the chart in the canvas with id 'salesChart'
-const salesChart = new Chart(
-	document.getElementById("salesChart"),
+const monthlyuserChart = new Chart(
+	document.getElementById("VisitChart"),
 	config
 );
 
 
-// Sample data for gemstone types
-const gemData = {
+// Sample data for users
+const userData = {
 	labels: ["Online", "Offline", "Registered", "Visit"],
 	datasets: [{
 		data: [12, 19, 7, 10], // Sample quantities for each gemstone type
@@ -124,9 +124,9 @@ const gemData = {
 };
 
 // Configuration for the gemstone types pie chart
-const gemConfig = {
+const userConfig = {
 	type: "pie",
-	data: gemData,
+	data: userData,
 	options: {
 		responsive: true,
 		plugins: {
@@ -139,65 +139,50 @@ const gemConfig = {
 };
 
 // Render the pie chart in the canvas with id 'gemChart'
-const gemChart = new Chart(
+const userChart = new Chart(
 	document.getElementById("userChart"),
-	gemConfig
+	userConfig
 );
 
-// cashflow
-// Updated Data and configuration for the Cash Flow Bar Chart
-const cashFlowData = {
-	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
-	datasets: [
-		{
-			label: 'Cash In',
-			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
-			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
-			borderColor: 'rgba(75, 192, 192, 1)',
-			borderWidth: 1
-		},
-		{
-			label: 'Cash Out',
-			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
-			backgroundColor: "#3caaaa", // Red color
-			borderColor: '#3caaaa',
-			borderWidth: 1
-		}
-	]
+// Sample data for users
+const staffData = {
+	labels: ["Partners", "Sales Res.", "Accountants", "Admin"],
+	datasets: [{
+		data: [3, 2, 1, 1], // Sample quantities for each gemstone type
+		backgroundColor: [
+			"rgba(255, 99, 132, 0.6)", // Partners color
+			"rgba(75, 192, 192, 0.6)", // Sales Res color
+			"rgba(54, 162, 235, 0.6)", // Accountant color
+			"rgba(153, 102, 255, 0.6)", // Admin color
+			
+		],
+		borderColor: [
+			"rgba(255, 99, 132, 1)",
+			"rgba(75, 192, 192, 1)",
+			"rgba(54, 162, 235, 1)",
+			"rgba(153, 102, 255, 1)"
+		],
+		borderWidth: 1
+	}]
 };
 
-const cashFlowConfig = {
-	type: 'bar',
-	data: cashFlowData,
+// Configuration for the gemstone types pie chart
+const staffConfig = {
+	type: "pie",
+	data: staffData,
 	options: {
-		scales: {
-			y: {
-				beginAtZero: true,
-				title: {
-					display: true,
-					text: 'Amount ($)'
-				}
-			},
-			x: {
-				title: {
-					display: true,
-					text: 'Day'
-				},
-				stacked: false // Keeps bars side-by-side for each day
-			}
-		},
+		responsive: true,
 		plugins: {
 			legend: {
-				position: 'top'
+				display: true,
+				position: "right" // Position legend on the right
 			}
 		}
 	}
 };
 
-// Initialize the Cash Flow Bar Chart
-const cashFlowChart = new Chart(
-	document.getElementById('cashFlowChart'),
-	cashFlowConfig
+// Render the pie chart in the canvas with id 'gemChart'
+const staffChart = new Chart(
+	document.getElementById("staffFlowChart"),
+	staffConfig
 );
-
-// cashflow
