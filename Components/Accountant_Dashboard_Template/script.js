@@ -5,38 +5,63 @@ class Dashboard extends HTMLElement {
                 <a href="#" class="logo">
                     <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
-                <ul class="side-menu">
-                    <li>
-                        <a href="/Accoutant_Dashboard/dashboard.html">
-                            <i class='bx bxs-dashboard'></i>
-                            <span class="text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-chart'></i>
-                            <span class="text">Sales</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-dollar-circle'></i>
-                            <span class="text">Bids</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-money'></i>
-                            <span class="text">Transactions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-inbox'></i>
-                            <span class="text">Inventory</span>
-                        </a>
-                    </li>
-                </ul>
+                        <ul class="side-menu">
+            <li class="active">
+                <a href="#">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Pages/Sales/sales.html">
+                    <i class='bx bx-chart' ></i>
+                    <span class="text">Sales</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-dollar-circle' ></i>
+                    <span class="text">Bids</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Pages/transactions/transactions.html">
+                    <i class='bx bx-money' ></i>
+                    <span class="text">Transactions</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-package' ></i>
+                    <span class="text">Inventory</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Pages/reports/reports.html">
+                    <i class='bx bx-clipboard' ></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-file' ></i>
+                    <span class="text">Invoicing</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#">
+                    <i class='bx bxs-credit-card'></i>
+                    <span class="text">Expense Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-wallet'></i>
+                    <span class="text">Receivables & Payables</span>
+                </a>
+            </li>
+        </ul>
             </section>
 
             <section id="content">
