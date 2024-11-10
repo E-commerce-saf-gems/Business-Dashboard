@@ -31,7 +31,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/Pages/Inventory/inventory.html">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
@@ -43,7 +43,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/Pages/Meetings/meeting.html">
                             <i class='bx bx-calendar'></i>
                             <span class="text">Meetings</span>
                         </a>

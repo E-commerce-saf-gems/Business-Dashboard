@@ -324,21 +324,46 @@ body {
 	background: var(--teal);
 	color: var(--white);
 }
+
 /* main */
 
-/* shortcuts */
-/* Container for the Shortcuts Section */
-/* Overall container for the dashboard */
+/* common */
 .dashboard-container {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 20px;
 	width: 100%;
 	padding: 20px;
 	box-sizing: border-box;
+	align-items: flex-start;
 }
 
-/* Left side: Shortcuts */
+/* .view-more */
+.view-more {
+    position: absolute;
+	top: 20px; 
+    right: 25px;  
+    font-size: 12px;
+    color: var(--teal); 
+    text-decoration: underline; 
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.view-more:hover {
+    color: var(--dark-teal); 
+}
+
+.gem-chart, .sales-summary, .cash-flow-chart {
+	position: relative; 
+}
+/* .view-more */
+/* common */
+
+
+/* shortcuts */
 .shortcuts {
+	flex: 1 ;
 	width: 50%;
 	text-align: left;
 }
@@ -347,20 +372,18 @@ body {
 	font-size: 20px;
 	color: var(--dark);
 	margin-bottom: 16px;
-	padding-left: 10px; /* Adds left padding to align the title */
+	padding-left: 10px;
 }
 
-/* Styling for the Shortcut Options */
 .shortcuts .shortcut-options {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr; /* Two columns to make the items smaller */
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 12px;
 	margin-top: 12px;
 	list-style-type: none;
 	padding: 0;
 }
 
-/* Individual Shortcut Item Styling */
 .shortcuts .shortcut-options li {
 	padding: 10px;
 	background: var(--light);
@@ -373,18 +396,16 @@ body {
 	cursor: pointer;
 }
 
-/* Hover Effect for Shortcut Items */
 .shortcuts .shortcut-options li:hover {
 	transform: translateY(-3px);
 }
 
-/* Icon Styling */
 .shortcuts .shortcut-options li .bx {
 	width: 40px;
 	height: 40px;
 	border-radius: 8px;
 	font-size: 24px;
-	margin-right: 10px; /* Adds space between icon and text */
+	margin-right: 10px; 
 	background: var(--teal);
 	color: var(--white);
 	display: flex;
@@ -392,7 +413,6 @@ body {
 	justify-content: center;
 }
 
-/* Text Styling */
 .shortcuts .shortcut-options li .text h3 {
 	font-size: 14px;
 	color: var(--dark);
@@ -400,13 +420,19 @@ body {
 }
 
 /* Sales */
-/* Right side: Sales Summary */
 .sales-summary {
-	width: 50%;
-	padding: 20px;
-	background: var(--light);
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	flex: 1 ;
+    width: 50%; 
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}
+
+.sales-summary:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
 }
 
 .sales-summary h2 {
@@ -415,34 +441,57 @@ body {
 	margin-bottom: 16px;
 }
 
-/* Style for the Chart.js canvas */
-/* Style for Chart.js canvases */
 #salesChart {
 	width: 100%;
-	height: 300px; /* Keep the line chart at a larger size */
+	height: 30%; 
+}
+
+
+/* inventory */
+.gem-chart {
+	width: 50%;
+	height: 250px; 
+	margin-top: 20px;
+	padding: 10px;
+	background: var(--light);
+	border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gem-chart:hover{
+	transform: translateY(-3px);
+    transition: 0.3s ease;
 }
 
 #gemChart {
-	width: 100%;
-	height: 100px; /* Reduce the size of the pie chart */
+	width: 450px;
+	height: 450px;
+	margin: -40px auto 0;
 }
 
-/* Inventory */
-/* Gem Chart Section */
-.gem-chart {
-	margin-top: 20px;
+/* inventory */
+
+/* cashflow */
+.cash-flow-chart {
+	width: 100%; 
+	margin-top: 20px; 
 	padding: 20px;
 	background: var(--light);
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.gem-chart h2 {
-	font-size: 20px;
-	color: var(--dark);
-	margin-bottom: 16px;
+.cash-flow-chart:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
 }
 
+/* Cash Flow Chart Style */
+#cashFlowChart {
+	width: 100%;
+	height: 200px;
+}
+/* cashflow */
 
 
 @media screen and (max-width: 768px) {
