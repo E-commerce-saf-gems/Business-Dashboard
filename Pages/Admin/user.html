@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
     <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./salesStyles.css">   
+    <link rel="stylesheet" href="./userStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -25,6 +25,23 @@
                 <a href="./ManageUserAccess.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
+            <div class="sales-summary-box">
+                <div class="sales-summary-title">
+                    <h2>Monthly Users Visit Website</h2>
+                </div>
+                <div class="sales-item">
+                    <h3>This Month</h3>
+                    <p>750</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Last Month</h3>
+                    <p>600</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Last Two Months</h3>
+                    <p>1200</p>
+                </div>
+            </div>
 
             <div class="sales-table-container">
                 <div class="table-filters">
@@ -34,13 +51,13 @@
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Accountant</option>
-                        <option value="pending">Partners</option>
-                        <option value="pending">Sales Res.</option>
+                        <option value="paid">Online</option>
+                        <option value="pending">Offline</option>
+                        <option value="pending">Registered</option>
                     </select>
 
-                    <label for="customer-filter">Staff Member:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Member">
+                    <label for="customer-filter">Customer:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Customer">
                     
                     <button class="btn-filter">Filter</button>
                 </div>
@@ -51,9 +68,9 @@
                         <tr>
                             <th><input type="checkbox" class="select-all"></th>
                             <th>Date</th>
-                            <th>Staff Id</th>
+                            <th>Customer Id</th>
                             <th>Status</th>
-                            <th>Phone No</th>
+                            <th>Actions</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -62,8 +79,7 @@
                             <td><input type="checkbox"></td>
                             <td>2024-11-01</td>
                             <td>1234</td>
-                            <td>Partner</td> 
-                            <td>077 1654321</td>
+                            <td>Registered</td>                            
                             <td class="actions">
                                 <a href="./edituser.html" class="btn"><i class="bx bx-pencil"></i></a>
                                 <a class="btn"><i class="bx bx-eye"></i></a>

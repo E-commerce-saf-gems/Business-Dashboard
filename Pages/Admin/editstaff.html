@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Sales Details</title>
+    <title>Edit Staff Details</title>
     <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./editSalesStyles.css">   
+    <link rel="stylesheet" href="./editCustomerStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,60 +14,55 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Sales</h1>
+					<h1>Staff Members</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="/Pages/Sales/sales.html">Sales Summary</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Edit Sales</a>
+							<a class="active" href="#">Edit Staff Member</a>
 						</li>
 					</ul>
 				</div>
 			</div>
             <div class="edit-sales-container">
                 <form class="edit-sales-form" id="editSalesForm">
-                    <h2>Edit Sales Details</h2>
+                    <h2>Edit Staff Details</h2>
 
                     <div class="form-group">
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date" required>
                     </div>
     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="type">Type</label>
                         <select id="type" name="type">
                             <option value="Gem Sale">Gem Sale</option>
                             <option value="Jewelry Sale">Jewelry Sale</option>
                         </select>
-                    </div>
+                    </div> -->
     
                     <!-- Customer Field -->
                     <div class="form-group">
-                        <label for="customer">Customer ID</label>
+                        <label for="staff">Staff ID</label>
                         <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
-                    </div>
-    
-                    <!-- Amount Field -->
-                    <div class="form-group">
-                        <label for="amount">Amount ($)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
                     </div>
     
                     <!-- Status Field -->
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status">
-                            <option value="Paid">Paid</option>
-                            <option value="Pending">Pending</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Sales">Sales Res.</option>
+                            <option value="Acc">Accountant</option>
                         </select>
                     </div>
                     
+                    <div>
+                        <label for="staff">Phone Number</label>
+                        <input type="number" id="staff" name="staff" placeholder="Phone Number" required>
+                    </div>
                     <!-- Save Button -->
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <a href="/Pages/Sales/sales.html">
+                            <a href="/Pages/Admin/staff.html">
                                 <i class='bx bx-save'></i> Save Changes
                             </a>
                         </button>
