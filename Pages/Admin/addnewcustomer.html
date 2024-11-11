@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Customer Details</title>
+    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./editCustomerStyles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Customers</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="#">Add New Customer</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editSalesForm">
+                    <h2>Add Customer Details</h2>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+    
+                    <!-- <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type">
+                            <option value="Gem Sale">Gem Sale</option>
+                            <option value="Jewelry Sale">Jewelry Sale</option>
+                        </select>
+                    </div> -->
+    
+                    <!-- Customer Field -->
+                    <div class="form-group">
+                        <label for="customer">Customer Name</label>
+                        <input type="number" id="customer" name="customer" placeholder="Customer Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                    </div>
+
+                    <!-- NIC Field -->
+                     <div class="form-group">
+                        <label for="nic">NIC Number</label>
+                        <input type="text" id="nic" name="nic" placeholder="NIC Number" required>
+                    </div>
+
+                    <!-- Email Field -->
+                     <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    </div>
+
+                    <!-- Total purchases Field -->
+                     <div class="form-group">
+                        <label for="totalPurchases">Total Purchases</label>
+                        <input type="number" id="totalPurchases" name="totalPurchases" placeholder="Total Purchases" required>
+                    </div>
+
+                    <!-- Status Field -->
+                    <!-- <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="online">Online Registered</option>
+                            <option value="offline">Walking Customer</option>
+                        </select>
+                    </div>
+                     -->
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <a href="/Pages/Admin/customers.html"><button>Save</button>
+                                <i class='bx bx-save'></i> Save Changes
+                            </a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+</body>
+</html>
