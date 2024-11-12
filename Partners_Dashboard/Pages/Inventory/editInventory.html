@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Transactions Details</title>
-    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./editTransactionStyles.css">   
+    <title>Edit Inventory Details</title>
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,26 +14,21 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Transactions</h1>
+					<h1>Inventory</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="/Pages/transactions/transactions.html">Home</a>
+							<a href="./inventory.html">Inventory Summary</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Edit Transactions</a>
+							<a class="active" href="#">Edit Inventory</a>
 						</li>
 					</ul>
 				</div>
 			</div>
             <div class="edit-sales-container">
                 <form class="edit-sales-form" id="editSalesForm">
-                    <h2>Edit Transactions Details</h2>
-
-                    <div class="form-group">
-                        <label for="transaction">Transaction No</label>
-                        <input type="number" id="transaction" name="transaction" placeholder="Transaction No" required>
-                    </div>
+                    <h2>Edit Inventory Details</h2>
 
                     <div class="form-group">
                         <label for="date">Date</label>
@@ -43,22 +38,30 @@
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select id="type" name="type">
-                            <option value="Gem Sale">Gem Sale</option>
-                            <option value="Gem Auction">Gem Auction</option>
-                            <option value="Refund">Refund</option>
+                            <option value="Ruby">Ruby</option>
+                            <option value="Emerald">Emerald</option>
+                            <option value="Sapphire">Sapphire</option>
+                            <option value="Amethyst">Amethyst</option>
+                            <option value="Diamond">Diamond</option>
                         </select>
                     </div>
     
-                    <!-- Gem Field -->
-                    <div class="form-group">
-                        <label for="gem">Gem ID</label>
-                        <input type="number" id="gem" name="gem" placeholder="Gem ID" required>
+                     <!-- Color Field -->
+                     <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" id="color" name="color" placeholder="Color" required>
                     </div>
-                    
-                    <!-- Customer Field -->
+
+                    <!--shape Feild-->
                     <div class="form-group">
-                        <label for="customer">Customer ID</label>
-                        <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
+                        <label for="shape">Shape</label>
+                        <input type="text" id="shape" name="shape" placeholder="shape" required>
+                    </div>
+
+                    <!--size Field-->
+                    <div class="form-group">
+                        <label for="size">Size</label>
+                        <input type="text" id="color" name="size" placeholder="size" required>
                     </div>
     
                     <!-- Amount Field -->
@@ -67,19 +70,16 @@
                         <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
                     </div>
     
-                    <!-- Status Field -->
+                    <!-- origin Field -->
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status">
-                            <option value="Paid">Paid</option>
-                            <option value="Pending">Pending</option>
-                        </select>
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" name="origin" placeholder="Origin" required>
                     </div>
                     
                     <!-- Save Button -->
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <a href="/Pages/transactions/transactions.html">
+                            <a href="./inventory.html">
                                 <i class='bx bx-save'></i> Save Changes
                             </a>
                         </button>
@@ -89,6 +89,6 @@
         </main>
     </section>
 
-    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
 </body>
 </html>

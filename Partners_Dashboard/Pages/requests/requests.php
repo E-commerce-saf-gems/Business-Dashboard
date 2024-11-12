@@ -1,20 +1,11 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "safgems";
+include '../../../database/db.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch data from the 'request' table
-$sql = "SELECT date, customer_name, shape, type, weight, color, requirement, status FROM request";
+// Fetch data from the 'request' and 'customer' tables using a JOIN
+$sql = "SELECT request.date, customer.firstName AS customer_name, request.shape, request.type, 
+               request.weight, request.color, request.requirement, request.status
+        FROM request
+        JOIN customer ON request.customer_id = customer.customer_id";
 $result = $conn->query($sql);
 ?>
 
@@ -24,7 +15,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Gems</title>
-    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./requests.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -53,7 +44,8 @@ $result = $conn->query($sql);
                     <select id="status-filter">
                         <option value="">All</option>
                         <option value="A">Approved</option>
-                        <option value="P"> Pending</option>
+                        <option value="P">Pending</option>
+                        <option value="C">Complete</option>
                     </select>
 
                     <label for="customer-filter">Gem Type:</label>
@@ -75,6 +67,8 @@ $result = $conn->query($sql);
                             <th>Color</th>
                             <th>Special Requirements</th>
                             <th>Status</th>
+                            <th>Options</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -82,6 +76,28 @@ $result = $conn->query($sql);
                         // Check if there are results and display each row in the table
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                                // Determine the status label and color
+                                $statusLabel = '';
+                                $statusColor = '';
+
+                                switch ($row['status']) {
+                                    case 'P':
+                                        $statusLabel = 'Pending';
+                                        $statusColor = 'color: red;';
+                                        break;
+                                    case 'A':
+                                        $statusLabel = 'Approved';
+                                        $statusColor = 'color: blue;';
+                                        break;
+                                    case 'C':
+                                        $statusLabel = 'Complete';
+                                        $statusColor = 'color: green;';
+                                        break;
+                                    default:
+                                        $statusLabel = 'Unknown';
+                                        $statusColor = 'color: black;';
+                                }
+
                                 echo "<tr>";
                                 echo "<td><input type='checkbox'></td>";
                                 echo "<td>" . $row['date'] . "</td>";
@@ -91,8 +107,12 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['weight'] . "</td>";
                                 echo "<td>" . $row['color'] . "</td>";
                                 echo "<td>" . $row['requirement'] . "</td>";
-                                echo "<td>" . $row['status'] . "</td>";
-                                echo "</tr>";
+                                echo "<td style='$statusColor'>$statusLabel</td>";
+                                echo "<td class='actions'>
+                                <a href='./editSales.html' class='btn'><i class='bx bx-pencil'></i></a>
+                                <a class='btn'><i class='bx bx-trash'></i></a>
+                                </td>";
+                                echo '</tr>';
                             }
                         } else {
                             echo "<tr><td colspan='9'>No requests found.</td></tr>";
@@ -104,8 +124,7 @@ $result = $conn->query($sql);
         </main>
     </section>
 
-    <script src="/Components/Dashboard_Template/script.js"></script>
-    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
     <script src="./admin.js"></script>
 </body>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountants' Dashboard</title>
-    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./salesStyles.css">   
+    <title>Inventory</title>
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../Sales/salesStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -15,31 +15,39 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Sales</h1>
+					<h1>Inventory</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Sales Summary</a>
+							<a class="active" href="#">Inventory Summary</a>
 						</li>
 					</ul>
 				</div>
-                <a href="./addSales.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                <a href="./addinventory.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
             <div class="sales-summary-box">
                 <div class="sales-summary-title">
-                    <h2>Monthly Sales Summary</h2>
+                    <h2>Monthly Inventory Summary</h2>
                 </div>
                 <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>$2543</p>
+                    <h3>Ruby</h3>
+                    <p>8</p>
                 </div>
                 <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>$2132</p>
+                    <h3>Emerald</h3>
+                    <p>4</p>
                 </div>
                 <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>$4089</p>
+                    <h3>Sapphire</h3>
+                    <p>5</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Amethyst</h3>
+                    <p>2</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Diamond</h3>
+                    <p>15</p>
                 </div>
             </div>
 
@@ -48,15 +56,18 @@
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter">
                     
-                    <label for="status-filter">Status:</label>
+                    <label for="status-filter">Type:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Paid</option>
-                        <option value="pending">Pending</option>
+                        <option value="paid">Ruby</option>
+                        <option value="pending">Emerald</option>
+                        <option value="pending">Sapphire</option>
+                        <option value="pending">Amethyst</option>
+                        <option value="pending">Diamond</option>
                     </select>
 
-                    <label for="customer-filter">Customer:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer">
+                    <label for="customer-filter">color:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Color">
                     
                     <button class="btn-filter">Filter</button>
                 </div>
@@ -68,9 +79,11 @@
                             <th><input type="checkbox" class="select-all"></th>
                             <th>Date</th>
                             <th>Type</th>
-                            <th>No. Customer</th>
+                            <th>Color</th>
+                            <th>Shape</th>
+                            <th>Size</th>
                             <th>Amount</th>
-                            <th>Status</th>
+                            <th>Origin</th>
                             <th>Actions</th>
                             <th>Options</th>
                         </tr>
@@ -78,13 +91,15 @@
                     <tbody>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>2024-11-01</td>
-                            <td>Gem Sale</td>
-                            <td>1234</td>
-                            <td>$500</td>
-                            <td>Paid</td>
+                            <td>2024-10-20</td>
+                            <td>Diamond</td>
+                            <td>Red</td>
+                            <td>Round</td>
+                            <td>10 Oct</td>
+                            <td>$350</td>
+                            <td>Sri Lanka</td>
                             <td class="actions">
-                                <a href="./editSales.html" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a href="./editInventory.html" class="btn"><i class="bx bx-pencil"></i></a>
                                 <a class="btn"><i class="bx bx-eye"></i></a>
                                 <a class="btn"><i class="bx bx-trash"></i></a>
                             </td>
@@ -98,9 +113,7 @@
         </main>
     </section>
 
-
-    <script src="/Components/Dashboard_Template/script.js"></script>
-    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
-    <script scr="./sales.js"></script>
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script scr="./inventory.js"></script>
 </body>
 </html>
