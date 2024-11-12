@@ -41,37 +41,14 @@
               <input type="date" id="date" name="date" required />
             </div>
 
-            <div class="form-group">
-              <label for="type">Type</label>
-              <select id="type" name="type">
-                <option value="Ruby">Ruby</option>
-                <option value="Emerald">Emerald</option>
-                <option value="Sapphire">Sapphire</option>
-                <option value="Amethyst">Amethyst</option>
-                <option value="Diamond">Diamond</option>
-              </select>
-            </div>
-
-            <!-- Color Field -->
-            <div class="form-group">
-              <label for="color">Color</label>
+             <!-- stone Id Field -->
+             <div class="form-group">
+              <label for="stone_id">Stone Id </label>
               <input
-                type="text"
-                id="color"
-                name="color"
-                placeholder="Color"
-                required
-              />
-            </div>
-
-            <!--shape Feild-->
-            <div class="form-group">
-              <label for="shape">Shape</label>
-              <input
-                type="text"
-                id="shape"
-                name="shape"
-                placeholder="shape"
+                type="number"
+                id="stone_id"
+                name="stone_id"
+                placeholder="Enter Stone Id"
                 required
               />
             </div>
@@ -88,6 +65,69 @@
               />
             </div>
 
+             <!--shape Feild-->
+             <div class="form-group">
+              <label for="shape">Shape</label>
+              <input
+                type="text"
+                id="shape"
+                name="shape"
+                placeholder="shape"
+                required
+              />
+            </div>
+
+             <!-- Color Field -->
+             <div class="form-group">
+              <label for="color">Color</label>
+              <input
+                type="text"
+                id="color"
+                name="color"
+                placeholder="Color"
+                required
+              />
+            </div>
+
+           
+
+
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select id="type" name="type">
+                <option value="Ruby">Ruby</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Sapphire">Sapphire</option>
+                <option value="Amethyst">Amethyst</option>
+                <option value="Diamond">Diamond</option>
+              </select>
+            </div>
+
+           <!-- origin Field -->
+           <div class="form-group">
+            <label for="origin">Origin</label>
+            <input
+              type="text"
+              id="origin"
+              name="origin"
+              placeholder="Origin"
+              required
+            />
+          </div>
+
+          <!-- Amount Field -->
+          <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              placeholder="Enter Amount"
+              required
+            />
+          </div>
+
+            
             <!-- Image Field-->
             <label for="image">Image:</label>
             <input
@@ -108,30 +148,13 @@
               required
             />
 
-            <!-- Amount Field -->
-            <div class="form-group">
-              <label for="amount">Amount ($)</label>
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                placeholder="Enter Amount"
-                required
-              />
-            </div>
+            <label for="viisibility">Visibility:</label>
+            <select id="viisibility">
+              <option value="paid">Show</option>
+              <option value="pending">Hide</option>
+            </select>
 
-            <!-- origin Field -->
-            <div class="form-group">
-              <label for="origin">Origin</label>
-              <input
-                type="text"
-                id="origin"
-                name="origin"
-                placeholder="Origin"
-                required
-              />
-            </div>
-
+            
             <!-- Save Button -->
             <div class="form-actions">
               <button type="submit" class="btn-save">
