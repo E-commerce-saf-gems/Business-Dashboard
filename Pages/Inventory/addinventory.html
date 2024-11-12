@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Inventory Details</title>
-    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../Sales/editSalesStyles.css">
+    <!-- <link rel="stylesheet" href="../../Components/Partner_Dashboard_Template/styles.css"> -->
+    <!-- <link rel="stylesheet" href="../Sales/editSalesStyles.css"> -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -17,7 +17,7 @@
                     <h1>Inventory</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="/Pages/Inventory/inventory.html">Inventory Summary</a>
+                            <a href="../addinventory.html">Inventory Summary</a>
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li>
@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select id="type" name="type">
+                        <select id="type" name="type" required>
                             <option value="Ruby">Ruby</option>
                             <option value="Emerald">Emerald</option>
                             <option value="Sapphire">Sapphire</option>
@@ -94,9 +94,12 @@
             // Collect form data
             const formData = new FormData(event.target);
 
+            // Log form data for debugging
+            console.log("Form data being sent:", Array.from(formData.entries()));
+
             try {
                 // Send data to the server
-                const response = await fetch("../../Pages/Inventory/addinventory.php", {
+                const response = await fetch("../addinventory.php", {
                     method: "POST",
                     body: formData,
                 });
@@ -106,7 +109,7 @@
                 if (result.status === "success") {
                     alert(result.message);
                     // Redirect to inventory summary page after successful insertion
-                    window.location.href = "../../Pages/Inventory/addinventory.html";
+                    window.location.href = "../addinventory.html";
                 } else {
                     alert("Error: " + result.message);
                 }
@@ -117,6 +120,6 @@
         });
     </script>
 
-    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+    <!-- <script src="../../Components/Partner_Dashboard_Template/script.js"></script> -->
 </body>
 </html>
