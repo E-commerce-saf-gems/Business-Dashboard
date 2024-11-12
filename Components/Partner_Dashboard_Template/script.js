@@ -3,11 +3,12 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../images/logo.png" width="90" height="90" alt="SAF GEMS">
+                <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
+
                 <ul class="side-menu">
                     <li>
-                        <a href="/Partners_Dashboard/dashboard.html">
+                        <a href="../../dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
@@ -25,7 +26,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/transactions/transactions.html">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
@@ -49,9 +50,15 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/requests/requests.html">
+                        <a href="../../Pages/requests/requests.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../Pages/reports/reports.html">
+                            <i class='bx bx-clipboard' ></i>
+                            <span class="text">Reports</span>
                         </a>
                     </li>
                 </ul>
@@ -60,7 +67,6 @@ class Dashboard extends HTMLElement {
             <section id="content">
                 <nav>
                     <i class='bx bx-menu'></i>
-                    <a href="#" class="nav-link">Categories</a>
                     <form action="#">
                         <div class="form-input">
                             <input type="search" placeholder="Search">
@@ -73,9 +79,13 @@ class Dashboard extends HTMLElement {
                         <i class='bx bxs-bell'></i>
                         <span class="num">8</span>
                     </a>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                    </a>
+                    <div class="profile">
+                        <i class='bx bx-user' id="profile-icon"></i>
+                        <ul class="dropdown-menu">
+                            <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
+                            <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                        </ul>
+                    </div>
                 </nav>
             </section>
         `;
@@ -149,3 +159,26 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Activate sidebar menu based on current path
+    updateActiveMenu();
+
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    // Toggle dropdown visibility
+    profileIcon.addEventListener("click", function (e) {
+        e.stopPropagation(); // Prevent click from bubbling up
+        profileMenu.classList.toggle("active");
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener("click", function (e) {
+        if (!profileMenu.contains(e.target)) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
