@@ -281,8 +281,9 @@ document.getElementById("editSalesForm").addEventListener("submit", function(eve
 
     // If the form is valid, submit it; otherwise, show the error message
     if (isValid) {
+        alert("Form filled correctly! Redirecting to the request page.");
         // Redirect to request.html only if validation is successful
-        window.location.href = "./request.html";
+        window.location.href = "../Pages/Admin/request.html";
     } else {
         alert(errorMessage); // Display the error messages
     }
