@@ -21,100 +21,107 @@ document.addEventListener("DOMContentLoaded", function () {
 document.getElementById("AddCustomerForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
 
-    // Get form values
+    // Retrieve field values
     const date = document.getElementById("date").value;
     const customerName = document.getElementById("customer").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const nic = document.getElementById("nic").value.trim();
+    const phoneNumber = document.getElementById("phone").value.trim();
+    const nicNumber = document.getElementById("nic").value.trim();
     const email = document.getElementById("email").value.trim();
     const totalPurchases = document.getElementById("totalPurchases").value.trim();
 
-    // Validation flags and error message
+    // Validation checks
     let isValid = true;
     let errorMessage = "";
 
-    // Validate each field
+    // Date validation
     if (!date) {
         isValid = false;
-        errorMessage += "Please enter a valid date.\n";
+        errorMessage += "Please enter the date.\n";
     }
 
-    if (customerName === "" || isNaN(customerName)) {
+    // Customer Name validation (should be non-empty)
+    if (!customerName) {
         isValid = false;
-        errorMessage += "Please enter a valid customer name.\n";
+        errorMessage += "Please enter the customer name.\n";
     }
 
-    if (phone === "" || !/^\d{10}$/.test(phone)) {
+    // Phone Number validation (10 digits)
+    if (!/^\d{10}$/.test(phoneNumber)) {
         isValid = false;
         errorMessage += "Please enter a valid 10-digit phone number.\n";
     }
 
-    if (nic === "" || !/^[A-Z0-9]{9,12}$/.test(nic)) {
+    // NIC validation (alphanumeric and non-empty)
+    if (!nicNumber || !/^[A-Za-z0-9]+$/.test(nicNumber)) {
         isValid = false;
         errorMessage += "Please enter a valid NIC number.\n";
     }
 
-    if (email === "" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    // Email validation
+    if (!/\S+@\S+\.\S+/.test(email)) {
         isValid = false;
         errorMessage += "Please enter a valid email address.\n";
     }
 
-    const totalPurchasesValue = parseFloat(totalPurchases);
-    if (isNaN(totalPurchasesValue) || totalPurchasesValue < 0) {
+    // Total Purchases validation (should be a positive number)
+    if (!totalPurchases || isNaN(totalPurchases) || parseFloat(totalPurchases) <= 0) {
         isValid = false;
-        errorMessage += "Please enter a valid total purchases amount.\n";
+        errorMessage += "Please enter a valid positive amount for total purchases.\n";
     }
 
-    // Redirect if valid; otherwise, show error message
+    // If form is valid, simulate the link click
     if (isValid) {
-        window.location.href = "../../Pages/Admin/customers.html";
+        window.location.href = "../../Pages/Admin/customers.html"; // Trigger the `<a>` link within the submit button
     } else {
-        alert(errorMessage); // Show error message
+        // If there are validation errors, display them
+        alert(errorMessage);
     }
 });
 
 /*Add Staff form validation*/
 document.getElementById("AddStaffForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); // Prevent the form from submitting automatically
 
-    // Get form values
+    // Retrieve input values
     const date = document.getElementById("date").value;
     const staffId = document.getElementById("staffid").value.trim();
     const status = document.getElementById("status").value;
     const phoneNumber = document.getElementById("staff").value.trim();
 
-    // Initialize validation flag and error message
+    // Initialize a flag for form validity and a message for errors
     let isValid = true;
     let errorMessage = "";
 
-    // Validate Date
+    // Validate the Date field
     if (!date) {
         isValid = false;
-        errorMessage += "Please enter a valid date.\n";
+        errorMessage += "Please select a date.\n";
     }
 
-    // Validate Staff ID
+    // Validate the Staff ID - should be a positive number
     if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
         isValid = false;
         errorMessage += "Please enter a valid Staff ID (positive number).\n";
     }
 
-    // Validate Status
+    // Validate the Status selection
     if (!status) {
         isValid = false;
         errorMessage += "Please select a status.\n";
     }
 
-    // Validate Phone Number (10-digit format)
+    // Validate the Phone Number - should be a 10-digit number
     if (!phoneNumber || !/^\d{10}$/.test(phoneNumber)) {
         isValid = false;
         errorMessage += "Please enter a valid 10-digit phone number.\n";
     }
 
-    // If valid, redirect; otherwise, show errors
+    // If all fields are valid, redirect to Staff.html
     if (isValid) {
         window.location.href = "../../Pages/Admin/Staff.html";
     } else {
-        alert(errorMessage); // Display validation errors
+        // Show error messages if validation failed
+        alert(errorMessage);
     }
 });
+
