@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Inventory Details</title>
+    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Inventory</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/Pages/Inventory/inventory.html">Inventory Summary</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Add Inventory</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editSalesForm">
+                    <h2>New Inventory Details</h2>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="size">Size</label>
+                        <input type="text" id="size" name="size" placeholder="Size" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shape">Shape</label>
+                        <input type="text" id="shape" name="shape" placeholder="Shape" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" id="color" name="color" placeholder="Color" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type">
+                            <option value="Ruby">Ruby</option>
+                            <option value="Emerald">Emerald</option>
+                            <option value="Sapphire">Sapphire</option>
+                            <option value="Amethyst">Amethyst</option>
+                            <option value="Diamond">Diamond</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" name="origin" placeholder="Origin" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Amount ($)</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificate">Certificate</label>
+                        <input type="text" id="certificate" name="certificate" placeholder="Certificate" required>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <i class='bx bx-save'></i> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script>
+        document.getElementById("editSalesForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect form data
+            const formData = new FormData(event.target);
+
+            try {
+                // Send data to the server
+                const response = await fetch("../../Pages/Inventory/addinventory.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    alert(result.message);
+                    // Redirect to inventory summary page after successful insertion
+                    window.location.href = "../../Pages/Inventory/addinventory.html";
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while saving the inventory.");
+            }
+        });
+    </script>
+
+    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+</body>
+</html>
