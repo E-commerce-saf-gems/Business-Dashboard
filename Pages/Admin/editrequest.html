@@ -42,7 +42,7 @@
                     <!-- Customer Field -->
                     <div class="form-group">
                         <label for="Gem">Gemstone Type</label>
-                        <input type="number" id="Gem" name="Gem" placeholder="Gemstone" required>
+                        <input type="text" id="Gem" name="Gem" placeholder="Gemstone" required>
                     </div>
     
                     <!-- Status Field -->
@@ -57,37 +57,38 @@
                     
                     <div>
                         <label for="weight">Carat Weight</label>
-                        <input type="weight" id="weight" name="weight" placeholder="Carat Weight" required>
+                        <input type="number" id="weight" name="weight" placeholder="Carat Weight" required>
                     </div>
 
                     <div>
                         <label for="shape">Shape</label>
-                        <input type="shape" id="shape" name="shape" placeholder="Shape" required>
+                        <input type="text" id="shape" name="shape" placeholder="Shape" required>
                     </div>
 
                     <div>
                         <label for="color">Color</label>
-                        <input type="color" id="color" name="color" placeholder="Color" required>
+                        <input type="text" id="color" name="color" placeholder="Color" required>
                     </div>
 
                     <div>
                         <label for="req">Special Requirement</label>
-                        <input type="req" id="req" name="req" placeholder="Special Requirement" required>
+                        <input type="text" id="req" name="req" placeholder="Special Requirement" required>
                     </div>
                     <!-- Save Button -->
                     <div class="form-actions">
-                        <button type="submit" class="btn-save">
-                            <a href="../../Pages/Admin/request.html">
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
-                            </a>
-                        </button>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
         </main>
     </section>
 
-    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="admin.js"></script>
+    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
+    
 </body>
 </html>
