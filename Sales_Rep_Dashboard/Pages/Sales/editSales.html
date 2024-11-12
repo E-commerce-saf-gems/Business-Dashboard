@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Inventory Details</title>
-    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../Sales/editSalesStyles.css">   
+    <title>Edit Sales Details</title>
+    <link rel="stylesheet" href="/Components/SalesRep_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./editSalesStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,21 +14,21 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Inventory</h1>
+					<h1>Sales</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="/Pages/Inventory/inventory.html">Inventory Summary</a>
+							<a href="./sales.html">Sales Summary</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Edit Inventory</a>
+							<a class="active" href="#">Edit Sales</a>
 						</li>
 					</ul>
 				</div>
 			</div>
             <div class="edit-sales-container">
                 <form class="edit-sales-form" id="editSalesForm">
-                    <h2>Edit Inventory Details</h2>
+                    <h2>Edit Sales Details</h2>
 
                     <div class="form-group">
                         <label for="date">Date</label>
@@ -38,30 +38,15 @@
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select id="type" name="type">
-                            <option value="Ruby">Ruby</option>
-                            <option value="Emerald">Emerald</option>
-                            <option value="Sapphire">Sapphire</option>
-                            <option value="Amethyst">Amethyst</option>
-                            <option value="Diamond">Diamond</option>
+                            <option value="Gem Sale">Gem Sale</option>
+                            <option value="Jewelry Sale">Jewelry Sale</option>
                         </select>
                     </div>
     
-                     <!-- Color Field -->
-                     <div class="form-group">
-                        <label for="color">Color</label>
-                        <input type="text" id="color" name="color" placeholder="Color" required>
-                    </div>
-
-                    <!--shape Feild-->
+                    <!-- Customer Field -->
                     <div class="form-group">
-                        <label for="shape">Shape</label>
-                        <input type="text" id="shape" name="shape" placeholder="shape" required>
-                    </div>
-
-                    <!--size Field-->
-                    <div class="form-group">
-                        <label for="size">Size</label>
-                        <input type="text" id="color" name="size" placeholder="size" required>
+                        <label for="customer">Customer ID</label>
+                        <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
                     </div>
     
                     <!-- Amount Field -->
@@ -70,16 +55,19 @@
                         <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
                     </div>
     
-                    <!-- origin Field -->
+                    <!-- Status Field -->
                     <div class="form-group">
-                        <label for="origin">Origin</label>
-                        <input type="text" id="origin" name="origin" placeholder="Origin" required>
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="Paid">Paid</option>
+                            <option value="Pending">Pending</option>
+                        </select>
                     </div>
                     
                     <!-- Save Button -->
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <a href="/Pages/Inventory/inventory.html">
+                            <a href="./sales.html">
                                 <i class='bx bx-save'></i> Save Changes
                             </a>
                         </button>
@@ -89,6 +77,6 @@
         </main>
     </section>
 
-    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="/Components/SalesRep_Dashboard_Template/script.js"></script>
 </body>
 </html>

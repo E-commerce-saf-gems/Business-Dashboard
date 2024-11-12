@@ -7,13 +7,13 @@ class Dashboard extends HTMLElement {
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="/Partners_Dashboard/dashboard.html">
+                        <a href="/Sales_Rep_Dashboard/dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/Pages/Sales/sales.html">
+                        <a href="/Sales_Rep_Dashboard/Pages/Sales/sales.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
@@ -24,14 +24,9 @@ class Dashboard extends HTMLElement {
                             <span class="text">Bids</span>
                         </a>
                     </li>
+                   
                     <li>
-                        <a href="#">
-                            <i class='bx bx-money'></i>
-                            <span class="text">Transactions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="/Sales_Rep_Dashboard/Pages/Inventory/inventory.html">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
@@ -43,7 +38,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/Sales_Rep_Dashboard/Pages/Meetings/meeting.html">
                             <i class='bx bx-calendar'></i>
                             <span class="text">Meetings</span>
                         </a>
