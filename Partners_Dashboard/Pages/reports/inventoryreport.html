@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Reports</title>
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Reports</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="./reports.html">Home</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Inventory Report</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Inventory Report Form -->
+            <div id="inventoryReportForm" class="report-form">
+                <h2>Inventory Report</h2>
+                <label>As of Date: <input type="date" id="inventoryDate"></label>
+
+                <!-- Total Inventory Value Section -->
+                <h3>Total Inventory Value</h3>
+                <label>Total Value of Inventory: <input type="number" id="totalInventoryValue" step="0.01"></label>
+
+                <!-- Gem Type Breakdown Section -->
+                <h3>Gem Type Breakdown</h3>
+                <label>Gem Type: <input type="text" id="gemTypeBreakdown"></label>
+                <label>Current Quantity: <input type="number" id="currentQuantity" step="1"></label>
+                <label>Value per Gem Type: <input type="number" id="valuePerGemType" step="0.01"></label>
+
+                <!-- Sales and Acquisitions Summary Section -->
+                <h3>Sales and Acquisitions Summary</h3>
+                <label>Items Sold: <input type="number" id="itemsSold" step="1"></label>
+                <label>New Acquisitions: <input type="number" id="newAcquisitions" step="1"></label>
+                <label>Net Change in Inventory: <input type="number" id="netChangeInventory" step="0.01"></label>
+
+                <!-- Inventory Aging Section -->
+                <h3>Inventory Aging</h3>
+                <label>Average Days in Inventory: <input type="number" id="avgDaysInventory" step="1"></label>
+                <label>Percentage Older than 30 Days: <input type="number" id="percentOlder30" step="0.01"></label>
+                <label>Percentage Older than 60 Days: <input type="number" id="percentOlder60" step="0.01"></label>
+                <label>Percentage Older than 90 Days: <input type="number" id="percentOlder90" step="0.01"></label>
+                <button onclick="generateInventoryReport()">Generate Inventory Report</button>
+            </div>
+
+            <!-- Inventory Report Preview Modal -->
+            <div id="inventoryReportModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeInventoryModal()">&times;</span>
+                    <div id="inventoryReportTemplate">
+                        <!-- Inventory report content will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Options inside Modal -->
+            <div class="export-options">
+                <button onclick="exportToPDF()">Export to PDF</button>
+                <button onclick="exportToWord()">Export to Word</button>
+            </div>
+
+
+
+        </main>
+    </section>
+
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+</html>
