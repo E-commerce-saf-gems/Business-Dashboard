@@ -244,6 +244,46 @@ img {
 	align-items: center;
 }
 
+/* Profile dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.profile .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 10;
+}
+
+/* Dropdown menu links */
+.profile .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.profile .dropdown-menu a:hover {
+    background-color: var(--grey);
+    color: var(--teal);
+}
+
+/* Show dropdown when profile icon is clicked */
+.profile.active .dropdown-menu {
+    display: block;
+}
 /*nav-bar*/
 
 @media screen and (max-width: 768px) {
