@@ -1,12 +1,12 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, t.type, i.gem_name, c.name AS customer_name, 
-               b.supplier_name, t.amount, t.status
+$sql = "SELECT t.transaction_id, t.date, t.type, CONCAT(i.shape, ' ', i.color, ' ', i.type) AS gem_name, c.firstname AS customer_name, 
+               b.name AS buyer_name, t.amount, t.status
         FROM transactions t
-        JOIN customers c ON t.customer_id = c.customer_id
-        JOIN inventory i ON t.gem_id = i.gem_id
-        JOIN buyers b ON t.supplier_id = b.buyer_id";
+        JOIN customer c ON t.customer_id = c.customer_id
+        JOIN inventory i ON t.stone_id = i.stone_id
+        JOIN buyer b ON t.buyer_id = b.buyer_id";
 $result = $conn->query($sql);
 ?>
 
@@ -86,7 +86,7 @@ $result = $conn->query($sql);
                             <th>Type</th>
                             <th>Gem Name</th>
                             <th>Customer Name</th>
-                            <th>Supplier Name</th>
+                            <th>Buyer Name</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -106,7 +106,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['gem_name']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['supplier_name']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['buyer_name']) . "</td>";
                                 echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td style='$statusColor'>$statusLabel</td>";
                                 echo "<td class='actions'>

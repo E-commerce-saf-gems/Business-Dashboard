@@ -1,40 +1,42 @@
 <?php
 // addTransaction.php
 // Database connection
-$servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database";
+include '../../../database/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Debugging
+var_dump($_POST); // Shows all POST data received
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Check if all required POST variables are set
+$transaction_id = isset($_POST['transaction_id']) ? $_POST['transaction_id'] : null;
+$date = isset($_POST['date']) ? $_POST['date'] : null;
+$type = isset($_POST['type']) ? $_POST['type'] : null;
+$stone_id = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
+$customer_id = isset($_POST['customer_id']) ? $_POST['customer_id'] : null;
+$buyer_id = isset($_POST['buyer_id']) ? $_POST['buyer_id'] : null;
+$amount = isset($_POST['amount']) ? $_POST['amount'] : null;
+$status = isset($_POST['status']) ? $_POST['status'] : null;
+
+// Check if any required fields are missing
+if (!$transaction_id || !$date || !$type || !$stone_id || !$customer_id || !$buyer_id || !$amount || !$status) {
+    echo "Error: Missing required fields";
+    exit();
 }
 
-// Get data from POST request
-$transaction_id = $_POST['transaction_id'];
-$date = $_POST['date'];
-$type = $_POST['type'];
-$gem_id = $_POST['gem_id'];
-$customer_id = $_POST['customer_id'];
-$supplier_id = $_POST['supplier_id'];
-$amount = $_POST['amount'];
-$status = $_POST['status'];
+// Prepare an SQL statement to insert the transaction into the database
+$stmt = $conn->prepare("INSERT INTO transactions (transaction_id, date, type, stone_id, customer_id, buyer_id, amount, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $transaction_id, $date, $type, $stone_id, $customer_id, $buyer_id, $amount, $status);
 
-// Insert transaction into database
-$sql = "INSERT INTO transactions (transaction_id, date, type, gem_id, customer_id, supplier_id, amount, status)
-        VALUES ('$transaction_id', '$date', '$type', '$gem_id', '$customer_id', '$supplier_id', '$amount', '$status')";
-
-if ($conn->query($sql) === TRUE) {
+if ($stmt->execute()) {
     echo "New transaction added successfully";
     // Redirect to transactions page or display a success message
-    header("Location: transactions.html"); // Adjust path as needed
+    header("Location: ../transactions.php"); // Adjust path as needed
     exit();
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $stmt->error;
 }
 
+// Close the statement and the database connection
+$stmt->close();
 $conn->close();
 ?>
+
