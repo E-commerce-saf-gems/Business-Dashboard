@@ -14,7 +14,3 @@ if ($conn->connect_error) {
 } else {
     echo "Connection successful!";
 }
-
-// // Close the connection
-// $conn->close();
-// ?>

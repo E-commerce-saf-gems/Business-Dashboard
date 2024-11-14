@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include '../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
+include '../../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
 
 // Initialize variables for form inputs
 $date = "";
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Basic validation
     if (empty($date) || empty($size) || empty($shape) || empty($color) || empty($type) || empty($weight) || empty($origin) 
-     || empty($amount) || empty($image) || empty)($certificate)  || empty($description) || empty($visibility) {
+     || empty($amount) || empty($image) || empty($certificate)  || empty($description) || empty($visibility)) {
         $errorMessage = "All information are required.";
     } else {
         // Construct the SQL query
