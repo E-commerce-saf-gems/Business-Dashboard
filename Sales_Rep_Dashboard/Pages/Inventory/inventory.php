@@ -136,7 +136,7 @@ if (!$result) {
                 <th>Amount</th>
                 <!-- <th>Image</th>
                 <th>Certificate</th> -->
-                <th>Buyer ID</th>
+                <th>Buyer Name</th>
                 <th>Visibility</th>
                 <th>Action</th>
               </tr>
@@ -147,17 +147,17 @@ if (!$result) {
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 // Determine the status label and color
-                                $statusLabel = '';
+                                $visibilityLabel = '';
                                 $statusColor = '';
 
                                 switch ($row['visibility']) {
                                   case 'P':
-                                      $statusLabel = 'hide';
-                                      $statusColor = 'color: red;';
+                                      $visibilityLabel = 'hide';
+                                      $visibilityColor = 'color: red;';
                                       break;
                                   case 'A':
-                                      $statusLabel = 'show';
-                                      $statusColor = 'color: green;';
+                                      $visibilityLabel = 'show';
+                                      $visibilityColor = 'color: green;';
                                       break;
 
                                 }
@@ -170,9 +170,9 @@ if (!$result) {
                                 echo "<td>" . $row['origin'] . "</td>";
                                 echo "<td>" . $row['amount'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
-                                echo "<td style='$statusColor'>$statusLabel</td>";
+                                echo "<td style='$visibilityColor'>$visibilityLabel</td>";
                                 echo "<td class='actions'>
-                                <a href='../../Pages/Inventory/editinventory.html' class='btn'>
+                                <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php' class='btn'>
                                 <i class='bx bx-pencil'></i></a>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
