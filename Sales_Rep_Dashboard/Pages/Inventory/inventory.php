@@ -1,12 +1,26 @@
 <?php
 include '../../../database/db.php';
 
-// Fetch data from the 'request' and 'customer' tables using a JOIN
-$sql = "SELECT inventory.date,inventory.size,inventory.shape,inventory.colour,inventory.type,
-        inventory.origin,inventory.amount,buyer.name,inventory.visibility,
-        FROM inventory,buyer
-        JOIN inventory ON inventory.stone_id = buyer.buyer_id";
-$result = $conn->query($sql);
+// Corrected SQL query syntax
+$ssql = "SELECT 
+            inventory.date, 
+            inventory.size, 
+            inventory.shape, 
+            inventory.colour, 
+            inventory.type, 
+            inventory.origin, 
+            inventory.amount, 
+            buyer.name, 
+            inventory.visibility
+        FROM inventory
+        JOIN buyer ON inventory.stone_id = buyer.buyer_id";
+
+$result = $conn->query($ssql);
+
+// Check if query was successful
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
