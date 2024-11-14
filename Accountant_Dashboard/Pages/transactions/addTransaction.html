@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Transactions Details</title>
-    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./editTransactionStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -17,7 +17,7 @@
 					<h1>Transactions</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="/Pages/transactions/transactions.html">Home</a>
+							<a href="../../Pages/transactions/transactions.html">Home</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -31,7 +31,7 @@
                     <h2>New Transactions Details</h2>
 
                     <div class="form-group">
-                        <label for="transaction">Transaction No</label>
+                        <label for="transaction">Transaction ID</label>
                         <input type="number" id="transaction" name="transaction" placeholder="Transaction No" required>
                     </div>
 
@@ -43,8 +43,9 @@
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select id="type" name="type">
-                            <option value="Gem Sale">Gem Sale</option>
-                            <option value="Gem Auction">Gem Auction</option>
+                            <option value="Sale">Sale</option>
+                            <option value="Puechase">Purchase</option>
+                            <option value="Auction">Auction</option>
                             <option value="Refund">Refund</option>
                         </select>
                     </div>
@@ -60,6 +61,12 @@
                         <label for="customer">Customer ID</label>
                         <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
                     </div>
+
+                    <!-- Supplier Field -->
+                    <div class="form-group">
+                        <label for="supplier">Supplier ID</label>
+                        <input type="number" id="supplier" name="supplier" placeholder="Supplier ID" required>
+                    </div>
     
                     <!-- Amount Field -->
                     <div class="form-group">
@@ -71,7 +78,7 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="status">
-                            <option value="Paid">Paid</option>
+                            <option value="Paid">Completed</option>
                             <option value="Pending">Pending</option>
                         </select>
                     </div>
@@ -79,7 +86,7 @@
                     <!-- Save Button -->
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <a href="/Pages/transactions/transactions.html">
+                            <a href="../../Pages/transactions/transactions.html">
                                 <i class='bx bx-save'></i> Save</a>
                         </button>
                     </div>
@@ -88,6 +95,6 @@
         </main>
     </section>
 
-    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
 </body>
 </html>
