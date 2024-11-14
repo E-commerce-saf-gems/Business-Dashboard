@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
+}
+
+a{
+    text-decoration: none ;
+}
+
+li {
+    list-style: none ;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+    --white: #FFFFFF ;
+	--blue: #3C91E6;
+    --black: #000000 ;
+    --teal: #46939d ;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--black-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+}
+
+body {
+    background-color: var(--grey);
+}
+
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	font-family: var(--poppins);
+	max-height: calc(100vh - 56px);
+	overflow-y: auto;
+}
+
+
+#content main .head-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	grid-gap: 16px;
+	flex-wrap: wrap;
+}
+#content main .head-title .left h1 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+}
+#content main .head-title .left .breadcrumb li {
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb li a {
+	color: var(--black-grey);
+	pointer-events: none;
+}
+
+/*Toggle Button*/
+.toggle-buttons button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .toggle.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-add {
+    background: var(--teal);
+    color: var(--white);
+    margin-top: 50px;
+    padding: 10px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-add:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Sales Summary Box */
+.sales-summary-box {
+    display: flex;
+    justify-content: space-between; /* Distribute the sections evenly */
+    width: 90%; /* Increased width to 90% for a wider box */
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sales-item {
+    width: 30%;
+    text-align: center;
+}
+
+.sales-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--black);
+}
+
+.sales-item p {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--teal);
+}
+
+.addnew{
+    display: flex;
+    justify-content: flex-end; /* Moves content to the right */
+}
+
+/* Sales Table */
+.sales-table-container {
+    margin-top: 20px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    grid-gap: 20px;
+}
+
+.table-filters label {
+    font-size: 16px;
+    font-family: var(--lato);
+    color: var(--black-grey);
+}
+
+.table-filters input, .table-filters select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--grey);
+    font-size: 14px;
+}
+
+.table-filters .btn-filter {
+    background: var(--teal);
+    color: var(--white);
+    padding: 6px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.table-filters .btn-filter:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Table Styles */
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th, .sales-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.sales-table th {
+    background: var(--light);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.sales-table td {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.sales-table tr:nth-child(even) {
+    background: var(--grey-light);
+}
+
+.sales-table td .actions button, .sales-table td .options button {
+    background: var(--teal);
+    color: var(--light);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.sales-table td .actions button:hover, .sales-table td .options button:hover {
+    background: var(--dark-teal);
+}
+
+.sales-table td .options button {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checkbox and Option Styling */
+.sales-table td input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+.sales-table .select-all {
+    transform: scale(1.5);
+}
+
+
+.sales-table td .btn {
+    font-size: 18px;
+}
+
+.sales-table td .btn:hover{
+    color: var(--teal);
+}
+
+/* Icons for Actions (Print and Share) */
+.sales-table td .options button i {
+    margin-right: 5px;
+}
+
+/* .view-more */
+.view-more {
+    position: absolute;
+	top: 20px; 
+    right: 25px;  
+    font-size: 12px;
+    color: var(--teal); 
+    text-decoration: underline; 
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.view-more:hover {
+    color: var(--dark-teal); 
+}
+
+.gem-chart, .sales-summary, .cash-flow-chart {
+	position: relative; 
+}
+/* .view-more */
+/* common */
+
+
+/* shortcuts 
+.shortcuts {
+	flex: 1 ;
+	width: 50%;
+	text-align: left;
+}
+
+.shortcuts h2 {
+	font-size: 20px;
+	color: var(--dark);
+	margin-bottom: 16px;
+	padding-left: 10px;
+}
+
+.shortcuts .shortcut-options {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 12px;
+	margin-top: 12px;
+	list-style-type: none;
+	padding: 0;
+}
+
+.shortcuts .shortcut-options li {
+	padding: 10px;
+	background: var(--light);
+	border-radius: 8px;
+	text-align: left;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s;
+	cursor: pointer;
+}
+
+.shortcuts .shortcut-options li:hover {
+	transform: translateY(-3px);
+}
+
+.shortcuts .shortcut-options li .bx {
+	width: 40px;
+	height: 40px;
+	border-radius: 8px;
+	font-size: 24px;
+	margin-right: 10px; 
+	background: var(--teal);
+	color: var(--white);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.shortcuts .shortcut-options li .text h3 {
+	font-size: 14px;
+	color: var(--dark);
+	margin: 0;
+}
+
+Charts 
+.sales-summary {
+	flex: 1 ;
+    width: 50%; 
+	margin-top: 20px;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}
+
+.sales-summary:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
+}
+
+.sales-summary h2 {
+	font-size: 20px;
+	color: var(--dark);
+	margin-bottom: 16px;
+}
+
+#salesChart {
+	width: 100%;
+	height: 30%; 
+}
+
+.cash-flow-chart {
+	flex: 1 ;
+	width:50%; 
+	margin-top: 20px; 
+	padding: 20px;
+	background: var(--light);
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	position: relative; 
+}
+
+.cash-flow-chart:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
+}
+
+.cash-flow-chart h2 {
+	font-size: 20px;
+	color: var(--dark);
+	margin-bottom: 16px;
+}
+
+#cashFlowChart {
+	width: 100%;
+	height: 200px;
+}*/
+
+
+
+.hidden {
+    display: none;
+  }
+
+  .toggle-buttons .toggle.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.table-filters {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Chart Section */
+.charts {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.sales-summary,
+.cash-flow-chart {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+canvas {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+}

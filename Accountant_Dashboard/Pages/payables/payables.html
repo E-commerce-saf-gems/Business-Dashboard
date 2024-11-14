@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Dashboard</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./payables.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Receivables & Payables</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="#">Transactions Summary</a>
+						</li>
+					</ul>
+				</div>
+                <div class="toggle-buttons">
+                    <button id="receivablesBtn" class="toggle active">Receivables</button>
+                    <button id="payablesBtn" class="toggle">Payables</button>
+                </div>
+                
+
+			</div>
+
+            
+            <div class="sales-summary-box">
+                
+                <div class="sales-summary-title">
+                    <h2>Monthly Summary</h2>
+                </div>
+                <div class="sales-item">
+                    <h3>Total Reveivables</h3>
+                    <p>$2543</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Total Payables</h3>
+                    <p>$2132</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Overdue Amounts</h3>
+                    <p>$4089</p>
+                </div>
+            </div>
+
+            <div class="addnew">
+                <a href="./addTransaction.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            </div>
+            
+            <div class="sales-table-container">
+                <div class="table-filters">
+                    <label for="date-filter">Date:</label>
+                    <input type="date" id="date-filter">
+                    
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="">All</option>
+                        <option value="paid">Paid</option>
+                        <option value="unpaid">Unpaid</option>
+                        <option value="pending">Overdue</option>
+                    </select>
+
+                    <label for="customer-filter">Customer/Supplier:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Customer">
+                    
+                    <button class="btn-filter">Filter</button>
+                </div>
+
+                <!-- Receivables Table -->
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>2024-11-01</td>
+                            <td>$500</td>
+                            <td>Paid</td>
+                            <td class="actions">
+                                <a href="./editTransaction.html" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Payables Table -->
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Supplier Name</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rayan</td>
+                            <td>2024-11-01</td>
+                            <td>$500</td>
+                            <td>Paid</td>
+                            <td class="actions">
+                                <a href="./editTransaction.html" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            
+            <!-- Charts Section -->
+            <!-- Charts Section (always visible) -->
+            <section class="charts">
+                <div class="sales-summary">
+                    <h2>Monthly Sales Summary</h2>
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="cash-flow-chart">
+                    <h2>Cash Flow</h2>
+                    <canvas id="cashFlowChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </section>
+
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script scr="./payables.js"></script>
+</body>
+</html>
