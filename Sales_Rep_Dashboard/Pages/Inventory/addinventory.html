@@ -18,6 +18,7 @@
     <dashboard-component></dashboard-component>
     <section id="content">
       <main>
+        <form id="addgemForm" action="../../../Sales_Rep_Dashboard/Pages/Inventory/addgem.php" method="post">
         <div class="head-title">
           <div class="left">
             <h1>Inventory</h1>
@@ -41,7 +42,7 @@
               <input type="date" id="date" name="date" required />
             </div>
 
-            <!-- stone Id Field -->
+            <!-- stone Id Field
             <div class="form-group">
               <label for="stone_id">Stone Id </label>
               <input
@@ -51,13 +52,13 @@
                 placeholder="Enter Stone Id"
                 required
               />
-            </div>
+            </div> -->
 
             <!--size Field-->
             <div class="form-group">
               <label for="size">Size</label>
               <input
-                type="text"
+                type="float"
                 id="color"
                 name="size"
                 placeholder="size"
@@ -99,6 +100,18 @@
                 <option value="Diamond">Diamond</option>
               </select>
             </div>
+            
+            <!--Weight-->
+            <div class="form-group">
+              <label for="weight">Weight</label>
+              <input
+                type="float"
+                id="weight"
+                name="weight"
+                placeholder="Weight"
+                required
+              />
+            </div>
 
             <!-- origin Field -->
             <div class="form-group">
@@ -116,7 +129,7 @@
             <div class="form-group">
               <label for="amount">Amount ($)</label>
               <input
-                type="number"
+                type="float"
                 id="amount"
                 name="amount"
                 placeholder="Enter Amount"
@@ -144,8 +157,21 @@
               required
             />
 
-            <label for="viisibility">Visibility:</label>
-            <select id="viisibility">
+            
+            <!--description-->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+
+            <label for="visibility">Visibility:</label>
+            <select id="visibility">
               <option value="paid">Show</option>
               <option value="pending">Hide</option>
             </select>
@@ -173,5 +199,6 @@
     </section>
 
     <script src="../../Pages/Inventory/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
   </body>
 </html>

@@ -100,6 +100,20 @@
               </select>
             </div>
 
+
+              <!--Weight-->
+            <div class="form-group">
+              <label for="weight">Weight</label>
+              <input
+                type="float"
+                id="weight"
+                name="weight"
+                placeholder="Weight"
+                required
+              />
+            </div>
+
+            
             <!-- origin Field -->
             <div class="form-group">
               <label for="origin">Origin</label>
@@ -144,8 +158,21 @@
               required
             />
 
-            <label for="viisibility">Visibility:</label>
-            <select id="viisibility">
+               <!--description-->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+
+            <!-- Visibility Field -->
+            <label for="visibility">Visibility:</label>
+            <select id="visibility">
               <option value="paid">Show</option>
               <option value="pending">Hide</option>
             </select>
@@ -173,5 +200,6 @@
     </section>
 
     <script src="../../Pages/Inventory/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
   </body>
 </html>
