@@ -1,3 +1,24 @@
+<?php
+include '../../database/db.php';
+
+// Corrected SQL query syntax
+$ssql = "SELECT 
+            customer.date, 
+            customer.firstName, 
+            customer.contactNo, 
+            customer.NIC, 
+            customer.email, 
+            customer.city
+        FROM customer";
+
+$result = $conn->query($ssql);
+
+// Check if query was successful
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,19 +86,42 @@
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" class="select-all"></th>
+                            <!-- <th><input type="checkbox" class="select-all"></th> -->
                             <th>Date</th>
                             <th>Customer Name</th>
                             <th>Telephone No</th>
                             <th>NIC</th>
                             <th>Email</th>
-                            <th>Total Purchases</th>
+                            <th>City</th>
+                            <!-- <th>Total Purchases</th> -->
                             <th>Actions</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                    <?php
+                        // Check if there are results and display each row in the table
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()){
+                                echo "<tr>";
+                                echo "<td>" . $row['date'] . "</td>";
+                                echo "<td>" . $row['firstName'] . "</td>";
+                                echo "<td>" . $row['contactNo'] . "</td>";
+                                echo "<td>" . $row['NIC'] . "</td>";
+                                echo "<td>" . $row['email'] . "</td>";
+                                echo "<td>" . $row['city'] . "</td>";
+                                echo "<td class='actions'>
+                                <a href='../../Pages/Admin/customers.php' class='btn'>
+                                <i class='bx bx-pencil'></i></a>
+                                <a class='btn'><i class='bx bx-trash'></i></a>
+                                </td>";
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo "<tr><td colspan='9'>No customers in the inventory.</td></tr>";
+                        }
+                        ?>
+                        <!-- <tr>
                             <td><input type="checkbox"></td>
                             <td>2024-11-01</td>
                             <td>Chethana</td>
@@ -93,7 +137,7 @@
                             <td class="options">
                                 <a class="btn printBtn"><i class='bx bx-printer'></i></a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>    
@@ -106,3 +150,8 @@
     <script scr="admin.js"></script>
 </body>
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>

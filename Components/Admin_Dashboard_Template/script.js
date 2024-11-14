@@ -13,7 +13,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Admin/customers.html">
+                        <a href="../../Pages/Admin/customers.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Customers</span>
                         </a>
