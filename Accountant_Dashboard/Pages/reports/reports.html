@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accountant Reports</title>
-    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./styles.css">   
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./reports.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -23,31 +23,79 @@
             <div class="report-boxes-container">
                 <div class="report-box">
                     <h2>Profit and Loss Report</h2>
-                    <p>Generate a report detailing profits, losses, revenue, expenses, and net profit.</p>
-                    <a href="profitreport.html" class="report-link">View Report</a>
+                    <p>The Profit and Loss Report shows our business’s revenue, costs, expenses, and net profit over a specific period.</p>
+                    <a href="./profitreport.html" class="report-link">Generate Report</a>
                 </div>
 
                 <div class="report-box">
                     <h2>Sales Report</h2>
-                    <p>Generate a report on total sales, sales by gem type, auction vs regular sales, and customer segments.</p>
-                    <a href="salesreport.html" class="report-link">View Report</a>
+                    <p>The Sales Report provides insights into total sales, sales by gem type, auction vs. regular sales, and customer segments. </p>
+                    <a href="./salesreport.html" class="report-link">Generate Report</a>
                 </div>
 
                 <div class="report-box">
                     <h2>Inventory Report</h2>
-                    <p>Generate a report on current inventory value, gem types, acquisitions, and aging of gemstones.</p>
-                    <a href="inventoryreport.html" class="report-link">View Report</a>
+                    <p>The Inventory Report gives an overview of our stock, including total value, sales, acquisitions, and aging. </p>
+                    <a href="./inventoryreport.html" class="report-link">Generate Report</a>
                 </div>
             </div>
 
-            
+            <div class="sales-table-container">
+                <h2>Recent Reports</h2>
+                <div class="table-filters">
+                    <label for="date-filter">Date:</label>
+                    <input type="date" id="date-filter">
+                    
+                    <label for="status-filter">Type:</label>
+                    <select id="status-filter">
+                        <option value="">Profit & Loss</option>
+                        <option value="paid">Sales</option>
+                        <option value="pending">Inventory</option>
+                    </select>
 
-            
-            <!-- Export Options inside Modal -->
-            <div class="export-options">
-                <button onclick="exportToPDF()">Export to PDF</button>
-                <button onclick="exportToWord()">Export to Word</button>
+                    
+                    
+                    <button class="btn-filter">Filter</button>
+                </div>
+
+                <!-- Table -->
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Report Number</th>
+                            <th>Report Type</th>
+                            <th>Generated Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example rows (dynamic content should replace these) -->
+                        <tr>
+                            <td>001</td>
+                            <td>Profit and Loss</td>
+                            <td>2024-01-15</td>
+                            <td class="actions">
+                                <a href="#" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Sales Report</td>
+                            <td>2024-01-20</td>
+                            <td class="actions">
+                                <a href="#" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            
+            
+            
 
            
 
@@ -56,8 +104,8 @@
         </main>
     </section>
 
-    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./reports.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 

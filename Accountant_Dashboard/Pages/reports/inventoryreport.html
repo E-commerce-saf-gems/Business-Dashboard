@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accountant Reports</title>
-    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./reports.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -18,7 +18,7 @@
                     <h1>Reports</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="/Pages/reports/reports.html">Home</a>
+                            <a href="../../Pages/reports/reports.html">Home</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -39,8 +39,10 @@
 
                 <!-- Gem Type Breakdown Section -->
                 <h3>Gem Type Breakdown</h3>
-                <label>Gem Type: <input type="text" id="gemTypeBreakdown"></label>
-                <label>Current Quantity: <input type="number" id="currentQuantity" step="1"></label>
+                <label>Diamond Quantity: <input type="number" id="diamondQuantity" step="1"></label>
+                <label>Ruby Quantity: <input type="number" id="rubyQuantity" step="1"></label>
+                <label>Sapphire Quantity: <input type="number" id="sapphireQuantity" step="1"></label>
+                <label>Emerald Quantity: <input type="number" id="emeraldQuantity" step="1"></label>
                 <label>Value per Gem Type: <input type="number" id="valuePerGemType" step="0.01"></label>
 
                 <!-- Sales and Acquisitions Summary Section -->
@@ -55,8 +57,10 @@
                 <label>Percentage Older than 30 Days: <input type="number" id="percentOlder30" step="0.01"></label>
                 <label>Percentage Older than 60 Days: <input type="number" id="percentOlder60" step="0.01"></label>
                 <label>Percentage Older than 90 Days: <input type="number" id="percentOlder90" step="0.01"></label>
-                <button onclick="generateInventoryReport()">Generate Inventory Report</button>
+                
+                <button id="generateReportBtn" onclick="generateInventoryReport()" class="generatebutton">Generate Inventory Report</button>
             </div>
+
 
             <!-- Inventory Report Preview Modal -->
             <div id="inventoryReportModal" class="modal">
@@ -68,19 +72,15 @@
                 </div>
             </div>
 
-            <!-- Export Options inside Modal -->
-            <div class="export-options">
-                <button onclick="exportToPDF()">Export to PDF</button>
-                <button onclick="exportToWord()">Export to Word</button>
-            </div>
+            
 
 
 
         </main>
     </section>
 
-    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./reports.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </body>
