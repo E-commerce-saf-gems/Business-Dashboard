@@ -32,3 +32,4 @@ document.getElementById("addgemForm").addEventListener("submit", function (event
     // Reset the form fields after submission
     event.target.reset();
 });
+
