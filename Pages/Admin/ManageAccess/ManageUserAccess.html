@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Customer Details</title>
-    <link rel="stylesheet" href="../../Components/Admin_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./userStyles.css">   
+    <title>Manage Access of Staff</title>
+    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../userStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -15,33 +15,17 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Online Customers</h1>
+					<h1>Manage Access</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Customer Details Summary</a>
+							<a class="active" href="#">Manage Access Summary</a>
+						</li>
 					</ul>
 				</div>
-                <!-- <a href="./addnewcustomer.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a> -->
+                <!-- <a href="./ManageUserAccess.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a> -->
 
 			</div>
 
-            <!-- <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Users Visit Website</h2>
-                </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>750</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>600</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>1200</p>
-                </div>
-            </div> -->
             <div class="sales-table-container">
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>
@@ -50,12 +34,13 @@
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Online Registered</option>
-                        <option value="pending">Walking Customers</option>
+                        <option value="paid">Partner</option>
+                        <option value="pending">Accountant</option>
+                        <option value="pending"> Sales Res.</option>
                     </select>
 
-                    <label for="customer-filter">Customer Name</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer Name">
+                    <label for="customer-filter">Staff Id:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Staff Id">
                     
                     <button class="btn-filter">Filter</button>
                 </div>
@@ -67,12 +52,8 @@
                             <th><input type="checkbox" class="select-all"></th>
                             <th>Date</th>
                             <th>Customer Name</th>
-                            <th>Telephone No</th>
-                            <!-- <th>NIC</th>
-                            <th>Email</th>
-                            <th>Total Purchases</th>
-                            <th>Actions</th>
-                            <th>Options</th> -->
+                            <th>User Role</th>
+                            <th>Access</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,12 +61,11 @@
                             <td><input type="checkbox"></td>
                             <td>2024-11-01</td>
                             <td>Chethana</td>
-                            <td>071 4562341</td> 
-                            <!-- <td>200267893412</td>
-                            <td>ck@gmail.com</td>
-                            <td>1</td>
-                            <td class="actions">
-                                <a href="./editcustomer.html" class="btn"><i class="bx bx-pencil"></i></a>
+                            <td>Partner</td>
+                            <td>View Dashboard</td>
+                            <td><input type="checkbox"></td>
+                            <!-- <td class="actions">
+                                <a href="./editstaff.html" class="btn"><i class="bx bx-pencil"></i></a>
                                 <a class="btn"><i class="bx bx-eye"></i></a>
                                 <a class="btn"><i class="bx bx-trash"></i></a>
                             </td>
@@ -101,8 +81,8 @@
 
 
     <!-- <script src="/Components/Dashboard_Template/script.js"></script> -->
-    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script scr="admin.js"></script>
+    <script src="../admin.js"></script>
+    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
+    <script src="../../../Admin_Dashboard/script.js"></script>
 </body>
 </html>

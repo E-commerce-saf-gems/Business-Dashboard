@@ -3,31 +3,37 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../Admin_Dashboard/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../Admin_Dashboard/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="../../Admin_Dashboard/dashboard.html">
+                        <a href="../Admin_Dashboard/dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Admin/customers.php">
+                        <a href="../Pages/Admin/Customer/customers.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Customers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Admin/ManageUserAccess.html">
+                        <a href="../Pages/Admin/ManageAccess/ManageUserAccess.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">ManageUserAccess</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Admin/request.html">
+                        <a href="../Pages/Admin/Request/request.html">
                             <i class='bx bx-money'></i>
                             <span class="text">Request</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../Pages/Admin/Staff/Staff.php">
+                            <i class='bx bx-chart'></i>
+                            <span class="text">Staff</span>
                         </a>
                     </li>
                 </ul>

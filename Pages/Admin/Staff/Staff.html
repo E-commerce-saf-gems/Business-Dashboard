@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Gems</title>
-    <link rel="stylesheet" href="../../Components/Admin_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./userStyles.css">   
+    <title>Staff</title>
+    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Pages/Admin/userStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -15,14 +15,14 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Request special gems</h1>
+					<h1>Staff</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Request Summary</a>
+							<a class="active" href="#">Staff Summary</a>
 						</li>
 					</ul>
 				</div>
-                <!-- <a href="./ManageUserAccess.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a> -->
+                <a href="../../Pages/Admin/Staff/addnewstaff.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
 
@@ -34,13 +34,13 @@
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Approved</option>
-                        <option value="pending">Not Approved</option>
-                        <option value="pending"> Pending</option>
+                        <option value="paid">Accountant</option>
+                        <option value="pending">Partners</option>
+                        <option value="pending">Sales Res.</option>
                     </select>
 
-                    <label for="customer-filter">Gem Type:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Gem Type">
+                    <label for="customer-filter">Staff Member:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Member">
                     
                     <button class="btn-filter">Filter</button>
                 </div>
@@ -50,30 +50,28 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" class="select-all"></th>
-                            <th>Gemstone Type</th>
-                            <th>Carat Weight</th>
-                            <th>Shape</th>
-                            <th>Color</th>
-                            <th>Special Requirement</th>
-                            <th>Action</th>
+                            <th>Date</th>
+                            <th>Staff Id</th>
+                            <th>Status</th>
+                            <th>Phone No</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>Emerald</td>
-                            <td>10</td>
-                            <td>Square</td> 
-                            <td>Red</td>
-                            <td>No</td>
+                            <td>2024-11-01</td>
+                            <td>1234</td>
+                            <td>Partner</td> 
+                            <td>077 1654321</td>
                             <td class="actions">
-                                <a href="./editrequest.html" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a href="../../Pages/Admin/Staff/editstaff.html" class="btn"><i class="bx bx-pencil"></i></a>
                                 <a class="btn"><i class="bx bx-eye"></i></a>
                                 <a class="btn"><i class="bx bx-trash"></i></a>
                             </td>
-                            <!-- <td class="options">
+                            <td class="options">
                                 <a class="btn printBtn"><i class='bx bx-printer'></i></a>
-                            </td> -->
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -81,10 +79,9 @@
         </main>
     </section>
 
-
-    <!-- <script src="/Components/Dashboard_Template/script.js"></script> -->
-    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script src="../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script scr="admin.js"></script>
+    <script src="../admin.js"></script>
+    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
+    <script src="../../../Admin_Dashboard/script.js"></script>
+    
 </body>
 </html>

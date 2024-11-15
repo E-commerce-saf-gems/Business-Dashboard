@@ -98,7 +98,7 @@ document.getElementById("AddCustomerForm").addEventListener("submit", function (
 
     // If form is valid, simulate the link click
     if (isValid) {
-        window.location.href = "../../Pages/Admin/customers.php"; // Redirect to the page
+        window.location.href = "../../Pages/Admin/Customer/customers.php"; // Redirect to the page
     } else {
         // If there are validation errors, display them
         alert(errorMessage);
@@ -146,7 +146,7 @@ document.getElementById("AddStaffForm").addEventListener("submit", function (eve
 
     // If all fields are valid, redirect to Staff.html
     if (isValid) {
-        window.location.href = "../../Pages/Admin/Staff.html";
+        window.location.href = "../../Pages/Admin/Staff/Staff.html";
     } else {
         // Show error messages if validation failed
         alert(errorMessage);
@@ -208,7 +208,7 @@ document.getElementById("editCustomerForm").addEventListener("submit", function 
 
     // If all validations pass, submit the form and redirect
     if (isValid) {
-        window.location.href = "../../Pages/Admin/customers.php"; // Navigate to the customers page
+        window.location.href = "../../Pages/Admin/Customer/customers.php"; // Navigate to the customers page
     } else {
         alert(errorMessage); // Show validation error messages
     }
@@ -255,7 +255,7 @@ document.getElementById("editStaffForm").addEventListener("submit", function (ev
     // If the form is valid, submit it; otherwise, show the error message
     if (isValid) {
         // Redirect to staff.html only if validation is successful
-        window.location.href = "../../Pages/Admin/Staff.html";
+        window.location.href = "../../Pages/Admin/Staff/Staff.html";
     } else {
         alert(errorMessage); // Display the error messages
     }
@@ -311,7 +311,7 @@ document.getElementById("editSalesForm").addEventListener("submit", function(eve
     if (isValid) {
         alert("Form filled correctly! Redirecting to the request page.");
         // Redirect to request.html only if validation is successful
-        window.location.href = "../Pages/Admin/request.html";
+        window.location.href = "../Pages/Admin/Request/request.html";
     } else {
         alert(errorMessage); // Display the error messages
     }

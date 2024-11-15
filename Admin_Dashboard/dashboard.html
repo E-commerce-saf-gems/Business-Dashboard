@@ -23,21 +23,29 @@
                 </a>
             </li>
             <li>
-                <a href="../../Pages/Admin/customers.php">
+                <a href="../Pages/Admin/Customer/customers.php">
                     <i class='bx bxs-user-detail' ></i>
                     <span class="text">Customers</span>
                 </a>
             </li>
             <li>
-                <a href="../../Pages/Admin/ManageUserAccess.html">
+                <a href="../Pages/Admin/ManageAccess/ManageUserAccess.html">
                     <i class='bx bxs-user-detail' ></i>
                     <span class="text">ManageUserAccess</span>
                 </a>
             </li>
             <li>
-                <a href="../../Pages/Admin/request.html">
+                <a href="../Pages/Admin/Request/request.html">
                     <i class='bx bxs-inbox' ></i>
                     <span class="text">Request</span>
+                   
+                </a>
+            </li>
+
+            <li>
+                <a href="../Pages/Admin/Staff/Staff.html">
+                    <i class='bx bxs-inbox' ></i>
+                    <span class="text">Staff</span>
                    
                 </a>
             </li>
@@ -91,25 +99,25 @@
                         <li>
                             <i class='bx bxs-user-plus'></i>
                             <span class="text">
-                                <a href="../Pages/Admin/addnewcustomer.html"><h3>Add New Customer</h3></a>
+                                <a href="../Pages/Admin/Customer/addnewcustomer.html"><h3>Add New Customer</h3></a>
                             </span>
                         </li>
                         <li>
                             <i class='bx bxs-diamond'></i>
                             <span class="text">
-                                <a href="../Pages/Admin/editcustomer.html"><h3>Edit Customer</h3></a>
+                                <a href="../Pages/Admin/Customer/editcustomer.html"><h3>Edit Customer</h3></a>
                             </span>
                         </li>
                         <li>
                             <i class='bx bxs-dollar-circle'></i>
                             <span class="text">
-                                <a href="../Pages/Admin/onlineusers.html"><h3>Show Online Users</h3></a>
+                                <a href="../Pages/Admin/OnlineUsers/onlineusers.html"><h3>Show Online Users</h3></a>
                             </span>
                         </li>
                         <li>
                             <i class='bx bxs-credit-card'></i>
                             <span class="text">
-                                <a href="../Pages/Admin/Staff.html"><h3>View Summary of Staff</h3></a>
+                                <a href="../Pages/Admin/Staff/Staff.html"><h3>View Summary of Staff</h3></a>
                             </span>
                         </li>
                     </ul>
@@ -118,13 +126,13 @@
                     <div class="user-chart">
                         <h2>Users</h2>
                         <canvas id="userChart"></canvas> 
-                        <a href="../Pages/Admin/customers.html" class="view-more">View More</a>
+                        <a href="../Pages/Admin/Customer/customers.html" class="view-more">View More</a>
                     </div>
 
                     <div class="user-chart">
                         <h2>Staff</h2>
                         <canvas id="staffFlowChart"></canvas>
-                        <a href="../Pages/Admin/staff.html" class="view-more">View More</a>
+                        <a href="../Pages/Admin/Staff/staff.html" class="view-more">View More</a>
                     </div>
             
                     <div class="Visit-summary">
@@ -136,6 +144,8 @@
     </section>
 
 
-	<script src="script.js"></script>
+    <script src="../admin.js"></script>
+    <script src="../Components/Admin_Dashboard_Template/script.js"></script>
+    <script src="../../../Admin_Dashboard/script.js"></script>
 </body>
 </html>
