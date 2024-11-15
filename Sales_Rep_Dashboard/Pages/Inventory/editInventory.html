@@ -23,7 +23,7 @@
             <h1>Inventory</h1>
             <ul class="breadcrumb">
               <li>
-                <a href="../../Pages/Inventory/inventory.html">Inventory Summary</a>
+                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">Inventory Summary</a>
               </li>
               <li><i class="bx bx-chevron-right"></i></li>
               <li>
@@ -100,6 +100,20 @@
               </select>
             </div>
 
+
+              <!--Weight-->
+            <div class="form-group">
+              <label for="weight">Weight</label>
+              <input
+                type="float"
+                id="weight"
+                name="weight"
+                placeholder="Weight"
+                required
+              />
+            </div>
+
+            
             <!-- origin Field -->
             <div class="form-group">
               <label for="origin">Origin</label>
@@ -135,6 +149,7 @@
             />
 
             <!-- Certificate Field-->
+            <div class="form-group">
             <label for="certificate">Certificate:</label>
             <input
               type="file"
@@ -143,9 +158,23 @@
               accept=".pdf,.jpg,.jpeg,.png"
               required
             />
+            </div>
 
-            <label for="viisibility">Visibility:</label>
-            <select id="viisibility">
+               <!--description-->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+
+            <!-- Visibility Field -->
+            <label for="visibility">Visibility:</label>
+            <select id="visibility">
               <option value="paid">Show</option>
               <option value="pending">Hide</option>
             </select>
@@ -164,7 +193,7 @@
             <!-- Save Button -->
             <div class="form-actions">
               <button type="submit" class="btn-save">
-                <a href="../../Pages/Inventory/inventory.html"> <i class="bx bx-save"></i> Save</a>
+                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php"> <i class="bx bx-save"></i> Save</a>
               </button>
             </div>
           </form>
@@ -173,5 +202,6 @@
     </section>
 
     <script src="../../Pages/Inventory/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
   </body>
 </html>

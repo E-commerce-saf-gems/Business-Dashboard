@@ -26,7 +26,7 @@ class Dashboard extends HTMLElement {
                     </li>
                    
                     <li>
-                        <a href="/Sales_Rep_Dashboard/Pages/Inventory/inventory.html">
+                        <a href="../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
