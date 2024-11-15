@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Basic validation
     if (empty($date) || empty($size) || empty($shape) || empty($color) || empty($type) || empty($weight) || empty($origin) 
-     || empty($amount) || empty($image) || empty($certificate)  || empty($description) || empty($visibility)) {
+     || empty($amount) || empty($image) || empty($certificate)  || empty($description) || empty($visibility) || empty($buyer_id) {
         $errorMessage = "All information are required.";
     } else {
         // Construct the SQL query
         $sql = "INSERT INTO inventory (date, size, shape, colour, type, weight, origin, amount, image,  certificate, description, visibility) 
-                VALUES ('$date', '$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility')";
+                VALUES ('$date', '$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility','$buyer_id')";
 
         // Execute the query
         if ($conn->query($sql) === TRUE) {
