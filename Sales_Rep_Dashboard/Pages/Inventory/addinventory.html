@@ -23,7 +23,7 @@
             <h1>Inventory</h1>
             <ul class="breadcrumb">
               <li>
-                <a href="../../Pages/Inventory/inventory.html">Inventory Summary</a>
+                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">Inventory Summary</a>
               </li>
               <li><i class="bx bx-chevron-right"></i></li>
               <li>
@@ -32,16 +32,17 @@
             </ul>
           </div>
         </div>
+
         <div class="edit-sales-container">
-          <form action="./addgem.php" class="edit-sales-form" id="editSalesForm">
+          <form action="./addgem.php" method="post" enctype="multipart/form-data">
             <h2>New Inventory Details</h2>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="date">Date</label>
               <input type="date" id="date" name="date" required />
-            </div>
+            </div> -->
 
-            <!-- stone Id Field -->
+            <!-- stone Id Field
             <div class="form-group">
               <label for="stone_id">Stone Id </label>
               <input
@@ -51,13 +52,13 @@
                 placeholder="Enter Stone Id"
                 required
               />
-            </div>
+            </div> -->
 
             <!--size Field-->
             <div class="form-group">
               <label for="size">Size</label>
               <input
-                type="text"
+                type="float"
                 id="color"
                 name="size"
                 placeholder="size"
@@ -99,6 +100,18 @@
                 <option value="Diamond">Diamond</option>
               </select>
             </div>
+            
+            <!--Weight-->
+            <div class="form-group">
+              <label for="weight">Weight</label>
+              <input
+                type="float"
+                id="weight"
+                name="weight"
+                placeholder="Weight"
+                required
+              />
+            </div>
 
             <!-- origin Field -->
             <div class="form-group">
@@ -116,7 +129,7 @@
             <div class="form-group">
               <label for="amount">Amount ($)</label>
               <input
-                type="number"
+                type="float"
                 id="amount"
                 name="amount"
                 placeholder="Enter Amount"
@@ -130,11 +143,12 @@
               type="file"
               id="image"
               name="image"
-              accept=".pdf,.jpg,.jpeg,.png"
+              accept=".pdf,.jpg,.jpeg,.png,.webp"
               required
             />
 
             <!-- Certificate Field-->
+            <div class="form-group">
             <label for="certificate">Certificate:</label>
             <input
               type="file"
@@ -143,9 +157,22 @@
               accept=".pdf,.jpg,.jpeg,.png"
               required
             />
+            </div>
+            
+            <!--description-->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Description"
+                required
+              />
+            </div>
 
-            <label for="viisibility">Visibility:</label>
-            <select id="viisibility">
+            <label for="visibility">Visibility:</label>
+            <select id="visibility">
               <option value="paid">Show</option>
               <option value="pending">Hide</option>
             </select>
@@ -163,15 +190,18 @@
 
             <!-- Save Button -->
             <div class="form-actions">
-              <button type="submit" class="btn-save">
-                <i class="bx bx-save"></i> Save</a>
-              </button>
-            </div>
+              <div class="form-actions">
+                  <button type="submit" class="btn-save">
+                      <i class='bx bx-save'></i> Save Changes
+                  </button>
+              </div>                        
+          </div>
           </form>
         </div>
       </main>
     </section>
 
     <script src="../../Pages/Inventory/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
   </body>
 </html>

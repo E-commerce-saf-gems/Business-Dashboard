@@ -10,10 +10,11 @@ $ssql = "SELECT
             inventory.type, 
             inventory.origin, 
             inventory.amount, 
-            buyer.name, 
-            inventory.visibility
+            inventory.certificate, 
+            buyer.name,
+            inventory.visibility 
         FROM inventory
-        JOIN buyer ON inventory.stone_id = buyer.buyer_id";
+        JOIN buyer ON inventory.buyer_id = buyer.buyer_id";
 
 $result = $conn->query($ssql);
 
@@ -125,17 +126,13 @@ if (!$result) {
           <table class="sales-table">
             <thead>
               <tr>
-               <!-- <th><input type="checkbox" class="select-all" /></th>  -->
                 <th>Date</th>
-                <!-- <th>Stone ID</th> -->
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
                 <th>Type</th>
                 <th>Origin</th>
                 <th>Amount</th>
-                <!-- <th>Image</th>
-                <th>Certificate</th> -->
                 <th>Buyer Name</th>
                 <th>Visibility</th>
                 <th>Action</th>
@@ -144,81 +141,29 @@ if (!$result) {
             <tbody>
             <?php
                         // Check if there are results and display each row in the table
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                // Determine the status label and color
-                                $visibilityLabel = '';
-                                $statusColor = '';
-
-                                switch ($row['visibility']) {
-                                  case 'P':
-                                      $visibilityLabel = 'hide';
-                                      $visibilityColor = 'color: red;';
-                                      break;
-                                  case 'A':
-                                      $visibilityLabel = 'show';
-                                      $visibilityColor = 'color: green;';
-                                      break;
-
-                                }
-                                echo "<tr>";
-                                echo "<td>" . $row['date'] . "</td>";
-                                echo "<td>" . $row['size'] . "</td>";
-                                echo "<td>" . $row['shape'] . "</td>";
-                                echo "<td>" . $row['colour'] . "</td>";
-                                echo "<td>" . $row['type'] . "</td>";
-                                echo "<td>" . $row['origin'] . "</td>";
-                                echo "<td>" . $row['amount'] . "</td>";
-                                echo "<td>" . $row['name'] . "</td>";
-                                echo "<td style='$visibilityColor'>$visibilityLabel</td>";
-                                echo "<td class='actions'>
-                                <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php' class='btn'>
-                                <i class='bx bx-pencil'></i></a>
-                                <a class='btn'><i class='bx bx-trash'></i></a>
-                                </td>";
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo "<tr><td colspan='9'>No Gems in the inventory.</td></tr>";
-                        }
-                        ?>
-              <!-- <tr> -->
-               <!-- <td><input type="checkbox" /></td>  -->
-                <!-- <td>2024-10-20</td> -->
-                <!-- <td>004</td> -->
-                <!-- <td>10 Oct</td>
-                <td>Round</td>
-                <td>Red</td>
-                <td>Ruby</td>
-                <td>Sri Lanka</td>
-                <td>$350</td> -->
-                <!-- <td>
-                  <img
-                    src="./path/to/gem-image.jpg"
-                    alt="Gem Image"
-                    width="50"
-                    height="50"
-                  />
-                </td> -->
-                <!-- Image of the certificate -->
-                <!-- <td>
-                  <img
-                    src="./path/to/certificate-image.jpg"
-                    alt="Certificate Image"
-                    width="50"
-                    height="50"
-                  />
-                </td> -->
-                <!-- <td>b006</td>
-                <td>Hide</td>
-                <td class="actions">
-                  <a href="../../Pages/Inventory/editinventory.html" class="btn">
-                    <i class="bx bx-pencil"></i>
-                  </a>
-                  <a class="btn"><i class="bx bx-eye"></i></a>
-                  <a class="btn"><i class="bx bx-trash"></i></a>
-                </td>
-              </tr> -->
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()){
+                  echo "<tr>";
+                  echo "<td>" . $row['date'] . "</td>";
+                  echo "<td>" . $row['size'] . "</td>";
+                  echo "<td>" . $row['shape'] . "</td>";
+                  echo "<td>" . $row['colour'] . "</td>";
+                  echo "<td>" . $row['type'] . "</td>";
+                  echo "<td>" . $row['origin'] . "</td>";
+                  echo "<td>" . $row['amount'] . "</td>";
+                  echo "<td>" . $row['name'] . "</td>";
+                  echo "<td>"  . $row['visibility'] . "</td>";
+                  echo "<td class='actions'>
+                  <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php' class='btn'>
+                  <i class='bx bx-pencil'></i></a>
+                  <a class='btn'><i class='bx bx-trash'></i></a>
+                  </td>";
+                  echo '</tr>';
+                    }
+                  } else {
+                    echo "<tr><td colspan='9'>No Gems in the inventory.</td></tr>";
+                  }
+               ?>
             </tbody>
 
             
@@ -228,7 +173,7 @@ if (!$result) {
     </section>
 
     <script src="../../Pages/Inventory/script.js"></script>
-    <script scr="./inventory.js"></script>
+    <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
   </body>
 </html>
 
