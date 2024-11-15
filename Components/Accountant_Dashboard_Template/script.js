@@ -25,7 +25,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../transactions/transactions.php">
+                        <a href="../../Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
