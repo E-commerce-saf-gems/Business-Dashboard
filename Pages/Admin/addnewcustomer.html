@@ -26,11 +26,11 @@
                 <form class="edit-sales-form" id="AddCustomerForm">
                     <h2>Add Customer Details</h2>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date" required>
                     </div>
-    
+     -->
                     <!-- <div class="form-group">
                         <label for="type">Type</label>
                         <select id="type" name="type">
@@ -40,34 +40,105 @@
                     </div> -->
     
                     <!-- Customer Field -->
+                     <!-- NIC Field -->
+                     <div class="form-group">
+                        <label for="NIC">NIC Number</label>
+                        <input type="text" id="NIC" name="NIC" placeholder="NIC Number" required>
+                    </div>
+
+                    <!-- Title Field -->
                     <div class="form-group">
-                        <label for="customer">Customer Name</label>
-                        <input type="text" id="customer" name="customer" placeholder="Customer Name" required>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">First Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="number" id="phone" name="phone" placeholder="Phone Number" required>
+                        <label for="contactNo">Contact Number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Contact Number" required>
                     </div>
 
-                    <!-- NIC Field -->
-                     <div class="form-group">
-                        <label for="nic">NIC Number</label>
-                        <input type="text" id="nic" name="nic" placeholder="NIC Number" required>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png,.webp" required />
                     </div>
 
+                    <div class="form-group">
+                        <label for="pdf">PDF</label>
+                        <input type="file" id="pdf" name="pdf" accept=".pdf,.jpg,.jpeg,.png,.webp" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input type="char" id="status" name="status" placeholder="Status" required>
+                    </div>
+
+                    
                     <!-- Email Field -->
                      <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" placeholder="Email Address" required>
                     </div>
 
-                    <!-- Total purchases Field -->
-                     <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="number" id="city" name="city" placeholder="city" required>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
                     </div>
 
+                    <div class="form-group">
+                        <label for="address1">Address Line 1</label>
+                        <input type="text" id="address1" name="address1" placeholder="Address Line 1" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="address2">Address Line 2</label>
+                        <input type="text" id="address2" name="address2" placeholder="Address Line 2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="city" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Country" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="DOB">DOB</label>
+                        <input type="date" id="DOB" name="DOB" placeholder="DOB" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="token">Token</label>
+                        <input type="text" id="token" name="token" placeholder="Token" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verificationStatus">Verification Status</label>
+                        <input type="text" id="verificationStatus" name="verificationStatus" 
+                        placeholder="Verification Status" required>
+                    </div>
                     <!-- Status Field -->
                     <!-- <div class="form-group">
                         <label for="status">Status</label>
