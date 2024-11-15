@@ -3,8 +3,7 @@
 // Database connection
 include '../../../database/db.php';
 
-// Debugging
-var_dump($_POST); // Shows all POST data received
+
 
 // Check if all required POST variables are set
 $transaction_id = isset($_POST['transaction_id']) ? $_POST['transaction_id'] : null;
@@ -29,7 +28,7 @@ $stmt->bind_param("ssssssss", $transaction_id, $date, $type, $stone_id, $custome
 if ($stmt->execute()) {
     echo "New transaction added successfully";
     // Redirect to transactions page or display a success message
-    header("Location: ../transactions.php"); // Adjust path as needed
+    header("Location: transactions.php"); // Adjust path as needed
     exit();
 } else {
     echo "Error: " . $stmt->error;
@@ -39,4 +38,9 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
+
+
+
+
+
 

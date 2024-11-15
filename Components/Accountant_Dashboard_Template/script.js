@@ -13,7 +13,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="../Sales/sales.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
@@ -25,7 +25,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/transactions/transactions.html">
+                        <a href="../transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
@@ -102,12 +102,13 @@ function updateActiveMenu() {
         const link = item.getAttribute('href');
         const li = item.parentElement;
 
-        if (currentPath === link) {
+        if (currentPath.includes(link)){
             li.classList.add('active');
         } else {
             li.classList.remove('active');
         }
 
+        // Add click event listener to handle navigation
         item.addEventListener('click', function () {
             allSideMenu.forEach(i => {
                 i.parentElement.classList.remove('active');

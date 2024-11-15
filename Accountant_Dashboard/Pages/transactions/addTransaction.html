@@ -130,7 +130,7 @@
 			</div>
             
             <div class="add-transaction-container">
-                <form class="add-transaction-form" id="addTransactionForm" action="addTransaction.php" method="post">
+                <form class="add-transaction-form" id="addTransactionForm" method="POST" action="addTransaction.php" >
                     <h2>New Transaction Details</h2>
 
                     <div class="form-group">
@@ -154,22 +154,22 @@
                     </div>
     
                     <div class="form-group">
-                        <label for="stone">Stone ID</label>
-                        <input type="number" id="stone" name="stone_id" placeholder="Stone ID" required>
+                        <label for="stone_id">Stone ID</label>
+                        <input type="number" id="stone_id" name="stone_id" placeholder="Stone ID" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="customer">Customer ID</label>
-                        <input type="number" id="customer" name="customer_id" placeholder="Customer ID" required>
+                        <label for="customer_id">Customer ID</label>
+                        <input type="number" id="customer_id" name="customer_id" placeholder="Customer ID" >
                     </div>
 
                     <div class="form-group">
-                        <label for="buyer">Supplier ID</label>
-                        <input type="number" id="buyer" name="buyer_id" placeholder="Buyer ID" required>
+                        <label for="buyer_id">Supplier ID</label>
+                        <input type="number" id="buyer_id" name="buyer_id" placeholder="Buyer ID" >
                     </div>
     
                     <div class="form-group">
-                        <label for="amount">Amount ($)</label>
+                        <label for="amount">Amount (Rs.)</label>
                         <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
                     </div>
     
@@ -182,7 +182,7 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save</button>
+                        <button type="submit" class="btn-save"><i class='bx bx-save'></i> Add Transactions</button>
                     </div>
                 </form>
             </div>

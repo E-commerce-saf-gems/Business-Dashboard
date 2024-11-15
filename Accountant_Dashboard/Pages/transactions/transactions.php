@@ -1,7 +1,7 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, t.type, CONCAT(i.shape, ' ', i.color, ' ', i.type) AS gem_name, c.firstname AS customer_name, 
+$sql = "SELECT t.transaction_id, t.date, t.type, CONCAT(i.shape, ' ', i.colour, ' ', i.type) AS gem_name, c.firstname AS customer_name, 
                b.name AS buyer_name, t.amount, t.status
         FROM transactions t
         JOIN customer c ON t.customer_id = c.customer_id
