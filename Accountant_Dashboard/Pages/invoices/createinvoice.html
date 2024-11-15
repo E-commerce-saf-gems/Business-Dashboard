@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Invoice</title>
+    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./invoice.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Invoice</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="/Pages/invoices/invoice.html">Home</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Add Invoice</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editSalesForm">
+                    <h2>New Invoice Details</h2>
+
+                    <div class="form-group">
+                        <label for="transaction">Invoice No</label>
+                        <input type="number" id="transaction" name="transaction" placeholder="Transaction No" required>
+                    </div>
+
+                    <!-- Customer Field -->
+                    <div class="form-group">
+                        <label for="customer">Customer Name</label>
+                        <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Invoice Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Due Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+    
+                    <!-- Amount Field -->
+                    <div class="form-group">
+                        <label for="amount">Amount ($)</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                    </div>
+    
+                    <!-- Status Field -->
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="Paid">Paid</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <a href="/Pages/transactions/transactions.html">
+                                <i class='bx bx-save'></i> Save</a>
+                        </button>
+
+                        <!--create button-->
+                        <button class="btn-save">
+                            <a href="invoicepreview.html">
+                                <i class='bx bx-save'></i> Create Invoice</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
+    <script scr="invoice.js"></script>
+
+</body>
+</html>

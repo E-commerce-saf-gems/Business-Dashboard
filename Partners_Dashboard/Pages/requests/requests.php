@@ -111,7 +111,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['requirement'] . "</td>";
                                 echo "<td style='$statusColor'>$statusLabel</td>";
                                 echo "<td class='actions'>
-                                <a href='./editRequest' class='btn'><i class='bx bx-pencil'></i></a>
+                                <a onclick='#' class='btn'><i class='bx bx-pencil'></i></a>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
                                 echo '</tr>';

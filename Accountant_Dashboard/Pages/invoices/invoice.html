@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accountant Dashboard</title>
-    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./styles.css">   
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./invoice.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -15,10 +15,10 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Transactions</h1>
+					<h1>Invoices</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Transactions Summary</a>
+							<a class="active" href="#">Invoices Summary</a>
 						</li>
 					</ul>
 				</div>
@@ -34,16 +34,20 @@
                 </div>
                 <div class="sales-item">
                     <h3>This Month</h3>
-                    <p>Rs. 254300</p>
+                    <p>$2543</p>
                 </div>
                 <div class="sales-item">
                     <h3>Last Month</h3>
-                    <p>Rs. 213200</p>
+                    <p>$2132</p>
                 </div>
                 <div class="sales-item">
                     <h3>Last Two Months</h3>
-                    <p>Rs. 408900</p>
+                    <p>$4089</p>
                 </div>
+            </div>
+
+            <div class="addnew">
+                <a href="./createinvoice.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
             </div>
             
             <div class="sales-table-container">
@@ -68,24 +72,30 @@
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th>Transaction No</th>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Gem ID</th>
-                            <th>Customer ID</th>
+                            <th>Invoice No</th>
+                            <th>Customer Name</th>
+                            <th>Invoice Date</th>
+                            <th>Due Date</th>
                             <th>Amount</th>
                             <th>Status</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>0001</td>
-                            <td>2024-11-01</td>
                             <td>Gem Sale</td>
-                            <td>1234</td>
-                            <td>5678</td>
-                            <td>Rs. 50000</td>
+                            <td>2024-11-01</td>
+                            <td>2024-12-01</td>
+                            <td>$5000</td>
                             <td>Paid</td>
+                            <td class="actions">
+                                <a href="./invoicepreview.html" class="btn"><i class="bx bx-show"></i></a>
+                                <a href="./createinvoice.html" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                                
+                            </td>
                             
                         </tr>
                     </tbody>
@@ -95,15 +105,7 @@
     </section>
 
 
-    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
-    <script scr="script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script scr="invoice.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-

@@ -57,7 +57,7 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
                         <a href="../../Pages/reports/reports.html">
-                            <i class='bx bx-clipboard' ></i>
+                            <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
                         </a>
                     </li>

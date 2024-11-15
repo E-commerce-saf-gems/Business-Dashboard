@@ -59,9 +59,15 @@
                 </a>
             </li>
             <li>
-                <a href="../Partners_Dashboard/Pages/requests/requests.php">
-                    <i class='bx bxs-dashboard'></i>
+                <a href="./Pages/requests/requests.php">
+                    <i class='bx bx-clipboard' ></i>
                     <span class="text">Requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/reports/reports.html">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Reports</span>
                 </a>
             </li>
         </ul>
@@ -104,45 +110,87 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
-					<i class='bx bxs-download' ></i>
-					<span class="text">Download PDF</span>
-				</a>
 			</div>
+
+            <section id="filter">  
+                <select id="date-filter">
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="yearly">Yearly</option>
+                </select>  
+            </section>  
+
+            <section class="summary-cards">
+                <div class="card">
+                    <h3>Total Revenue</h3>
+                    <p id="total-revenue">Rs.0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses">Rs.0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Net Profit</h3>
+                    <p id="net-profit">Rs.0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Outstanding Payments</h3>
+                    <p id="outstanding-payments">Rs.0.00</p>
+                </div>
+            </section>
+
             <div class="dashboard-container">
                 <div class="shortcuts">
                     <h2>Shortcuts</h2>
                     <ul class="shortcut-options">
                         <li>
-                            <i class='bx bxs-user-plus'></i>
-                            <span class="text">
-                                <h3>Add Customer</h3>
-                            </span>
+                            <a href="./Pages/">
+                                <i class='bx bxs-user-plus'></i>
+                                <span class="text">
+                                    <h3>View Customer</h3>
+                                </span>
+                            </a>
+
                         </li>
                         <li>
-                            <i class='bx bxs-diamond'></i>
-                            <span class="text">
-                                <h3>Add Gem</h3>
-                            </span>
+                            <a href="./Pages/reports/reports.html">
+                                <i class='bx bxs-report'></i>
+                                <span class="text">
+                                    <h3>View Report</h3>
+                                </span>
+                            </a>
                         </li>
                         <li>
-                            <i class='bx bxs-dollar-circle'></i>
-                            <span class="text">
-                                <h3>Add Sales</h3>
-                            </span>
+                            <a href="./Pages/Sales/sales.html">
+                                <i class='bx bxs-dollar-circle'></i>
+                                <span class="text">
+                                    <h3>View Sales</h3>
+                                </span>
+                            </a>
                         </li>
                         <li>
-                            <i class='bx bxs-credit-card'></i>
-                            <span class="text">
-                                <h3>Add Transaction</h3>
-                            </span>
+                            <a href="./Pages/transactions/transactions.html">
+                                <i class='bx bxs-credit-card'></i>
+                                <span class="text">
+                                    <h3>View Transaction</h3>
+                                </span>
+                            </a>
+                            
                         </li>
                     </ul>
-                    <div class="gem-chart">
-                        <h2>Inventory</h2>
-                        <canvas id="gemChart"></canvas> 
-                        <a href="../Partners_Dashboard/Pages/Inventory/inventory.html" class="view-more">View More</a>
+
+                    <div class="chart-container">
+                        <div class="metric">
+                            <h2>Average Bid Price</h2>
+                            <br>
+                            <canvas id="average-bid-chart"></canvas>
+                        </div>
+                        <div class="metric">
+                            <h2>Revenue from Auctions</h2>
+                            <canvas id="auction-revenue-chart"></canvas>
+                        </div>
                     </div>
+                
                     <div class="cash-flow-chart">
                         <h2>Cash Flow</h2>
                         <canvas id="cashFlowChart"></canvas>
@@ -150,16 +198,25 @@
                     </div>
                 </div>
                 
-                <div class="sales-summary">
-                    <h2>Monthly Sales Summary</h2>
-                    <canvas id="salesChart"></canvas>
-                    <a href="../Partners_Dashboard/Pages/Sales/sales.html" class="view-more">View More</a>
+                <div class="right-side">
+                    <div class="sales-summary">
+                        <h2>Monthly Sales Summary</h2>
+                        <canvas id="salesChart"></canvas>
+                        <a href="../Partners_Dashboard/Pages/Sales/sales.html" class="view-more">View More</a>
+                    </div>
+                    <div class="gem-chart">
+                        <h2>Inventory</h2>
+                        <canvas id="gemChart"></canvas> 
+                        <a href="../Partners_Dashboard/Pages/Inventory/inventory.html" class="view-more">View More</a>
+                    </div>
                 </div>
+
             </div>
             
             
         </main>
     </section>
-	<script src="script.js"></script>
+    
+	<script src="./script.js"></script>
 </body>
 </html>

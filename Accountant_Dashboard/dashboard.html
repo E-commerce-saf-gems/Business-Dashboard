@@ -13,7 +13,7 @@
 <body>
     <section id="sidebar">
         <a href="#" class="logo">
-			<img src="/images/logo.png" width="120" height="120" alt="SAF GEMS">
+			<img src="/Images/logo.png" width="120" height="120" alt="SAF GEMS">
         </a>
         <ul class="side-menu">
             <li class="active">
@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li>
-                <a href="/Pages/Sales/sales.html">
+                <a href="Pages/Sales/sales.html">
                     <i class='bx bx-chart' ></i>
                     <span class="text">Sales</span>
                 </a>
@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li>
-                <a href="/Pages/transactions/transactions.html">
+                <a href="Pages/transactions/transactions.html">
                     <i class='bx bx-money' ></i>
                     <span class="text">Transactions</span>
                 </a>
@@ -47,26 +47,26 @@
                 </a>
             </li>
             <li>
-                <a href="/Pages/reports/reports.html">
+                <a href="Pages/reports/reports.html">
                     <i class='bx bx-clipboard' ></i>
                     <span class="text">Reports</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="Pages/invoices/invoice.html">
                     <i class='bx bxs-file' ></i>
                     <span class="text">Invoicing</span>
                 </a>
             </li>
             
             <li>
-                <a href="#">
+                <a href="Pages/expenses/expenses.html">
                     <i class='bx bxs-credit-card'></i>
                     <span class="text">Expense Management</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="Pages/payables/payables.html">
                     <i class='bx bxs-wallet'></i>
                     <span class="text">Receivables & Payables</span>
                 </a>
@@ -90,9 +90,10 @@
                 <i class='bx bxs-bell'></i>
                 <span class="num">8</span>
             </a>
-            <a href="#">
-                <i class='bx bx-user' ></i>
-            </a>
+            <div class="profile">
+                <i class='bx bx-user' id="profile-icon"></i>
+                
+            </div>
         </nav>
         
     
@@ -134,19 +135,19 @@
             <section class="summary-cards">
                 <div class="card">
                     <h3>Total Revenue</h3>
-                    <p id="total-revenue">$0.00</p>
+                    <p id="total-revenue">Rs.0.00</p>
                 </div>
                 <div class="card">
                     <h3>Total Expenses</h3>
-                    <p id="total-expenses">$0.00</p>
+                    <p id="total-expenses">Rs.0.00</p>
                 </div>
                 <div class="card">
                     <h3>Net Profit</h3>
-                    <p id="net-profit">$0.00</p>
+                    <p id="net-profit">Rs.0.00</p>
                 </div>
                 <div class="card">
                     <h3>Outstanding Payments</h3>
-                    <p id="outstanding-payments">$0.00</p>
+                    <p id="outstanding-payments">Rs.0.00</p>
                 </div>
             </section>
 
@@ -156,13 +157,17 @@
                 <div class="sales-summary">
                     <h2>Monthly Sales Summary</h2>
                     <canvas id="salesChart"></canvas> <!-- Canvas for Sales Summary Line Chart -->
-                    <a href="/Pages/Sales/sales.html" class="view-more">View More</a>
+                    <a href="Pages/Sales/sales.html" class="view-more">View More</a>
                 </div>
                 <div class="cash-flow-chart">
                     <h2>Cash Flow</h2>
                     <canvas id="cashFlowChart"></canvas>
-                    <a href="/Pages/Sales/sales.html" class="view-more">View More</a>
+                    <a href="Pages/Sales/sales.html" class="view-more">View More</a>
                 </div>
+                
+                
+
+                
             </section>
 
             <!-- Key Metrics Section -->
@@ -173,8 +178,8 @@
                 
                 <div class="metric top-gem-sales">
                     <h4>Top Gem Sales</h4>
-                    <p id="top-gem-sales">$500.00</p>
-                    <img src="/images/logo.png" alt="Top Gem" class="gem-image">
+                    <p id="top-gem-sales">Rs.500.00</p>
+                    <img src="images/logo.png" alt="Top Gem" class="gem-image">
                     <p class="gem-description">
                         Emerald, 2.5 Carats, known for its vibrant green color.
                     </p>
@@ -183,13 +188,13 @@
 
                 <div class="metric">
                     <h4>Average Bid Price</h4>
-                    <p id="average-bid-price">$1,500</p>
+                    <p id="average-bid-price">Rs.1,500</p>
                     <canvas id="average-bid-chart"></canvas>
                 </div>
 
                 <div class="metric">
                     <h4>Revenue from Auctions</h4>
-                    <p id="revenue-from-auctions">$0.00</p>
+                    <p id="revenue-from-auctions">Rs.0.00</p>
                     <canvas id="auction-revenue-chart"></canvas>
                 </div>
             </section>

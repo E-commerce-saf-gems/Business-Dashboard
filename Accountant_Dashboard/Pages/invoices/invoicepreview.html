@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Invoice</title>
+    <link rel="stylesheet" href="/Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./invoice.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Include jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <!-- Include SheetJS library for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Invoices</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="/Pages/invoices/invoice.html">Home</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="/Pages/invoices/createinvoice.html"> Add Invoice</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Create Invoice Preview</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="invoice-container">
+                <!-- Header Section with Logo -->
+                <div class="invoice-header">
+                    <div class="logo">
+                        <img src="/Images/logo.png" alt="Company Logo" /> <!-- Replace logo.png with your logo file -->
+                    </div>
+                    <div class="company-info">
+                        <h1>SAF Gems Pvt.Ltd.</h1>
+                        <p><em>Earthenware for everyone</em></p>
+                        <p>89 Pacific Ave, San Francisco, CA 45321</p>
+                        <p>Phone: (123) 456-7890 | Fax: (123) 456-7891</p>
+                    </div>
+                    <div class="invoice-info">
+                        <p><strong>Invoice #001</strong></p>
+                        <p>Date: 12/11/24</p>
+                    </div>
+                </div>
+
+                <!-- Billing and Shipping Details -->
+                <div class="billing-shipping">
+                    <div class="bill-to">
+                        <h3>Bill To:</h3>
+                        <p>Mollie Grau</p>
+                        <p>Perfect Places Interior Design</p>
+                        <p>210 Stars Avenue</p>
+                        <p>Berkeley, CA 78910</p>
+                        <p>(123) 987-6543</p>
+                    </div>
+                    <!--<div class="ship-to">
+                        <h3>Ship To:</h3>
+                        <p>Mollie Grau</p>
+                        <p>Perfect Places Interior Design</p>
+                        <p>210 Stars Avenue</p>
+                        <p>Berkeley, CA 78910</p>
+                        <p>(123) 987-6543</p>
+                    </div>-->
+                </div>
+
+                <!-- Special Instructions -->
+                <div class="special-instructions">
+                    <p><strong>Comments or Special Instructions:</strong></p>
+                    <p>Shipment contains fragile goods</p>
+                </div>
+
+                <!-- Invoice Details Table -->
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Salesperson</th>
+                            <th>P.O. Number</th>
+                            <th>Requisitioner</th>
+                            <th>Shipped Via</th>
+                            <th>F.O.B. Point</th>
+                            <th>Terms</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Suman</td>
+                            <td>143</td>
+                            <td>Nathan Rigby</td>
+                            <td>Express Air</td>
+                            <td>Warehouse</td>
+                            <td>Due on Receipt</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Itemized List Table -->
+                <table class="item-table">
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Description</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>100</td>
+                            <td>Decorative clay pottery (LG)</td>
+                            <td>13.00</td>
+                            <td>1300.00</td>
+                        </tr>
+                        <!-- Additional rows can be added here -->
+                    </tbody>
+                </table>
+
+                <!-- Summary Section -->
+                <div class="summary">
+                    <p>Subtotal: $1300.00</p>
+                    <p>Sales Tax: $65.00</p>
+                    <p>Shipping & Handling: $24.99</p>
+                    <p><strong>Total Due: $1389.99</strong></p>
+                </div>
+
+                <!-- Footer Section -->
+                <div class="invoice-footer">
+                    <p>Make all checks payable to SAF Gems Pvt.Ltd.</p>
+                    <p>If you have any questions concerning this invoice, contact: Suman at (123) 456-7890.</p>
+                    <p><strong>Thank you for your business!</strong></p>
+                </div>
+            </div>
+
+            <!-- Export options at the bottom -->
+            <div class="export-options">
+                <button onclick="exportToPDF()" class="export-button">Download as PDF</button>
+                <button onclick="exportToExcel()" class="export-button">Download as Excel</button>
+            </div>
+        </main>
+    </section>
+
+    <script src="/Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="invoice.js"></script>
+</body>
+</html>

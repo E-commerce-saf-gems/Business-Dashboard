@@ -53,7 +53,7 @@ window.addEventListener('resize', function () {
 const salesData = {
 	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	datasets: [{
-		label: "Sales ($)",
+		label: "Sales (Rs.)",
 		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
 		borderColor: "rgba(75, 192, 192, 1)",
 		backgroundColor: "rgba(75, 192, 192, 0.2)",
@@ -86,7 +86,7 @@ const config = {
 			y: {
 				title: {
 					display: true,
-					text: "Sales ($)"
+					text: "Sales (Rs.)"
 				},
 				beginAtZero: true
 			}
@@ -176,7 +176,7 @@ const cashFlowConfig = {
 				beginAtZero: true,
 				title: {
 					display: true,
-					text: 'Amount ($)'
+					text: 'Amount (Rs.)'
 				}
 			},
 			x: {
@@ -220,6 +220,65 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener("click", function (e) {
         if (!profileMenu.contains(e.target)) {
             profileMenu.classList.remove("active");
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Define variables with example values if necessary
+    let auctionRevenue = 1000;
+    let totalRevenue = 3000;
+
+    // Auction Revenue Chart
+    new Chart(document.getElementById('auction-revenue-chart'), {
+        type: 'pie',
+        data: {
+            labels: ['Auction Revenue', 'Other Revenue'],
+            datasets: [{
+                data: [auctionRevenue, totalRevenue - auctionRevenue],
+                backgroundColor: ['rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 0.2)']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    // Average Bid Price Chart
+    const avgBidData = {
+        labels: ['Jul', 'Aug', 'Sep','Oct'],
+        data: [900, 1200, 800,1000]
+    };
+
+    const avgBidCtx = document.getElementById('average-bid-chart').getContext('2d');
+    new Chart(avgBidCtx, {
+        type: 'line',
+        data: {
+            labels: avgBidData.labels,
+            datasets: [{
+                label: 'Average Bid Price',
+                data: avgBidData.data,
+				borderColor: "rgba(75, 192, 192, 1)",
+				backgroundColor: "rgba(75, 192, 192, 0.2)",
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: { display: true, text: 'Average Bid Price ($)' }
+                },
+                x: { title: { display: true, text: 'Months' } }
+            },
+            plugins: { legend: { display: false } }
         }
     });
 });
