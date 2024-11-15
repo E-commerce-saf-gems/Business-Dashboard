@@ -145,9 +145,10 @@ if (!$result) {
     </section>
 
     
-    <script src="../admin.js"></script>
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
+    <script src="../admin.js"></script>
+
 </body>
 </html>
 

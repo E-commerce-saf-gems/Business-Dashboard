@@ -31,7 +31,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../Pages/Admin/Staff/Staff.php">
+                        <a href="../Pages/Admin/Staff/Staff.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Staff</span>
                         </a>
@@ -86,14 +86,15 @@ function updateActiveMenu() {
             li.classList.remove('active');
         }
 
-        item.addEventListener('click', function () {
-            allSideMenu.forEach(i => {
-                i.parentElement.classList.remove('active');
-            });
+        // Ensure clicking links navigates as expected
+        item.addEventListener('click', function (e) {
+            e.stopPropagation();  // Only stop propagation, not default action
+            allSideMenu.forEach(i => i.parentElement.classList.remove('active'));
             li.classList.add('active');
         });
     });
 }
+
 
 // Run the updateActiveMenu function on page load
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
