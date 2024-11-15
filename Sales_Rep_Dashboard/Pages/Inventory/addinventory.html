@@ -33,8 +33,8 @@
             </ul>
           </div>
         </div>
+        
         <div class="edit-sales-container">
-          <form class="edit-sales-form" id="editSalesForm">
             <h2>New Inventory Details</h2>
 
             <!-- <div class="form-group">
@@ -57,39 +57,19 @@
             <!--size Field-->
             <div class="form-group">
               <label for="size">Size</label>
-              <input
-                type="float"
-                id="color"
-                name="size"
-                placeholder="size"
-                required
-              />
+              <input type="number" step="0.01" id="size" name="size" placeholder="Size" required />
             </div>
-
-            <!--shape Feild-->
+  
             <div class="form-group">
               <label for="shape">Shape</label>
-              <input
-                type="text"
-                id="shape"
-                name="shape"
-                placeholder="shape"
-                required
-              />
+              <input type="text" id="shape" name="shape" placeholder="Shape" required />
             </div>
-
-            <!-- Color Field -->
+  
             <div class="form-group">
               <label for="colour">Color</label>
-              <input
-                type="text"
-                id="colour"
-                name="colour"
-                placeholder="Colour"
-                required
-              />
+              <input type="text" id="colour" name="colour" placeholder="Color" required />
             </div>
-
+  
             <div class="form-group">
               <label for="type">Type</label>
               <select id="type" name="type">
@@ -100,102 +80,53 @@
                 <option value="Diamond">Diamond</option>
               </select>
             </div>
-            
-            <!--Weight-->
+  
             <div class="form-group">
               <label for="weight">Weight</label>
-              <input
-                type="float"
-                id="weight"
-                name="weight"
-                placeholder="Weight"
-                required
-              />
+              <input type="number" step="0.01" id="weight" name="weight" placeholder="Weight" required />
             </div>
-
-            <!-- origin Field -->
+  
             <div class="form-group">
               <label for="origin">Origin</label>
-              <input
-                type="text"
-                id="origin"
-                name="origin"
-                placeholder="Origin"
-                required
-              />
+              <input type="text" id="origin" name="origin" placeholder="Origin" required />
             </div>
-
-            <!-- Amount Field -->
+  
             <div class="form-group">
               <label for="amount">Amount ($)</label>
-              <input
-                type="float"
-                id="amount"
-                name="amount"
-                placeholder="Enter Amount"
-                required
-              />
+              <input type="number" step="0.01" id="amount" name="amount" placeholder="Enter Amount" required />
             </div>
-
-            <!-- Image Field-->
-            <label for="image">Image:</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept=".pdf,.jpg,.jpeg,.png,.webp"
-              required
-            />
-
-            <!-- Certificate Field-->
+  
             <div class="form-group">
-            <label for="certificate">Certificate:</label>
-            <input
-              type="file"
-              id="certificate"
-              name="certificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              required
-            />
+              <label for="image">Image:</label>
+              <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png,.webp" required />
             </div>
-            
-            <!--description-->
+  
+            <div class="form-group">
+              <label for="certificate">Certificate:</label>
+              <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" required />
+            </div>
+  
             <div class="form-group">
               <label for="description">Description</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Description"
-                required
-              />
+              <input type="text" id="description" name="description" placeholder="Description" required />
             </div>
-
-            <label for="visibility">Visibility:</label>
-            <select id="visibility">
-              <option value="paid">Show</option>
-              <option value="pending">Hide</option>
-            </select>
-
+  
+            <div class="form-group">
+              <label for="visibility">Visibility:</label>
+              <select id="visibility" name="visibility">
+                <option value="show">Show</option>
+                <option value="hide">Hide</option>
+              </select>
+            </div>
+  
             <div class="form-group">
               <label for="buyer_id">Buyer ID</label>
-              <input
-                type="number"
-                id="buyer_id"
-                name="buyer_id"
-                placeholder="Buyer Id"
-                required
-              />
+              <input type="number" id="buyer_id" name="buyer_id" placeholder="Buyer Id" required />
             </div>
-
-            <!-- Save Button -->
+  
             <div class="form-actions">
-              <div class="form-actions">
-                  <button type="submit" class="btn-save">
-                      <i class='bx bx-save'></i> Save Changes
-                  </button>
-              </div>                        
-          </div>
+              <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save Changes</button>
+            </div>
           </form>
         </div>
       </main>
