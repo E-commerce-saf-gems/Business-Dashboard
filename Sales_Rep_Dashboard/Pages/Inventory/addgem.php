@@ -3,7 +3,6 @@
 include '../../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
 
 // Initialize variables for form inputs
-$date = "";
 $size = "";
 $shape = "";
 $color = "";
@@ -23,7 +22,6 @@ $successMessage = "";
 // Check if form is submitted via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize the input
-    $date = isset($_POST['date']) ? htmlspecialchars(trim($_POST['date'])) : '';
     $size = isset($_POST['size']) ? floatval($_POST['size']) : '';
     $shape = isset($_POST['shape']) ? htmlspecialchars(trim($_POST['shape'])) : '';
     $color = isset($_POST['colour'])? htmlspecialchars(trim($_POST['colour'])) : '';
@@ -38,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $buyer_id = isset($_POST['buyer_id'])? intval($_POST['buyer_id']) : '';
 
     // Basic validation
-    if (empty($date) || empty($size) || empty($shape) || empty($color) || empty($type) || empty($weight) || empty($origin) 
-     || empty($amount) || empty($image) || empty($certificate)  || empty($description) || empty($visibility) || empty($buyer_id) {
+    if (empty($size) || empty($shape) || empty($color) || empty($type) || empty($weight) || empty($origin) 
+     || empty($amount) || empty($image) || empty($certificate)  || empty($description) || empty($visibility) || empty($buyer_id)) {
         $errorMessage = "All information are required.";
     } else {
         // Construct the SQL query
-        $sql = "INSERT INTO inventory (date, size, shape, colour, type, weight, origin, amount, image,  certificate, description, visibility) 
+        $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image,  certificate, description, visibility, buyer_id,) 
                 VALUES ('$date', '$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility','$buyer_id')";
 
         // Execute the query
