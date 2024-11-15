@@ -18,8 +18,8 @@
     <dashboard-component></dashboard-component>
     <section id="content">
       <main>
-        <form id="addgemForm" action="../../../Sales_Rep_Dashboard/Pages/Inventory/addgem.php" method="post">
-        <div class="head-title">
+        <form id="addgemForm" action="../../../Sales_Rep_Dashboard/Pages/Inventory/addgem.php" method="post" enctype="multipart/form-data">
+          <div class="head-title">
           <div class="left">
             <h1>Inventory</h1>
             <ul class="breadcrumb">
@@ -80,12 +80,12 @@
 
             <!-- Color Field -->
             <div class="form-group">
-              <label for="color">Color</label>
+              <label for="colour">Color</label>
               <input
                 type="text"
-                id="color"
-                name="color"
-                placeholder="Color"
+                id="colour"
+                name="colour"
+                placeholder="Colour"
                 required
               />
             </div>

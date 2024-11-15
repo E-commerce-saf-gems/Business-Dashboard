@@ -24,8 +24,7 @@ document.getElementById("addgemForm").addEventListener("submit", function (e) {
     e.preventDefault();
   
     // Form fields for validation
-    const date = document.getElementById("date").value;
-    const size = document.getElementById("color").value;
+    const size = document.getElementById("colour").value;
     const shape = document.getElementById("shape").value;
     const color = document.getElementById("color").value;
     const type = document.getElementById("type").value;
@@ -39,10 +38,9 @@ document.getElementById("addgemForm").addEventListener("submit", function (e) {
   
     // Array of required fields
     const requiredFields = [
-      { field: date, name: "Date" },
       { field: size, name: "Size" },
       { field: shape, name: "Shape" },
-      { field: color, name: "Color" },
+      { field: color, name: "Colour" },
       { field: type, name: "Type" },
       { field: weight, name: "Weight" },
       { field: origin, name: "Origin" },

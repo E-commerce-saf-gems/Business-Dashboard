@@ -55,8 +55,7 @@ if (!$result) {
             </ul>
           </div>
           <a href="../../Pages/Inventory/addinventory.html" class="btn-add"
-            ><i class="bx bx-plus"></i>Add New</a
-          >
+            ><i class="bx bx-plus"></i>Add New</a>
         </div>
         <div class="sales-summary-box">
           <div class="sales-summary-title">

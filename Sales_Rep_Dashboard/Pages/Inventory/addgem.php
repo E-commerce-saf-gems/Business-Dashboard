@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "All information are required.";
     } else {
         // Construct the SQL query
-        $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image,  certificate, description, visibility, buyer_id,) 
+        $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image,  certificate, description, visibility, buyer_id) 
                 VALUES ('$date', '$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility','$buyer_id')";
 
         // Execute the query
