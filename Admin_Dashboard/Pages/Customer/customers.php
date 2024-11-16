@@ -43,7 +43,7 @@ if (!$result) {
                         </li>
 					</ul>
 				</div>
-                <a href="../addnewcustomer.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                <a href="./addnewcustomer.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
 
@@ -111,8 +111,8 @@ if (!$result) {
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['city'] . "</td>";
                                 echo "<td class='actions'>
-                                <a href='./customers.php' class='btn'>
-                                <i class='bx bx-pencil'></i></a>
+                                <a href='./customers.php' class='btn'></a>
+                                <i class='bx bx-pencil'></i>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
                                 echo '</tr>';
