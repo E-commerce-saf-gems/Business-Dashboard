@@ -25,7 +25,7 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Details</title>
-    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="../userStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -111,7 +111,7 @@ if (!$result) {
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['city'] . "</td>";
                                 echo "<td class='actions'>
-                                <a href='./editcustomer.html' class='btn'></a>
+                                <a href='./customers.php' class='btn'></a>
                                 <i class='bx bx-pencil'></i>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
@@ -129,7 +129,7 @@ if (!$result) {
     </section>
 
     
-    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
 
 

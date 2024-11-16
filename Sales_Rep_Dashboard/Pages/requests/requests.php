@@ -2,7 +2,7 @@
 include '../../../database/db.php';
 
 // Fetch data from the 'request' and 'customer' tables using a JOIN
-$sql = "SELECT request.date, customer.firstName AS customer_name, customer.email AS email, request.shape, request.type, 
+$sql = "SELECT request.request_id, request.date, customer.firstName AS customer_name, customer.email AS email, request.shape, request.type, 
                request.weight, request.color, request.requirement, request.status
         FROM request
         JOIN customer ON request.customer_id = customer.customer_id";
@@ -15,7 +15,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Gems</title>
-    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./requests.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -34,6 +34,13 @@ $result = $conn->query($sql);
                     </ul>
                 </div>
             </div>
+
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    Request status updated successfully!
+                </div>
+            <?php endif; ?>
+
 
             <div class="sales-table-container">
                 <div class="table-filters">
@@ -68,8 +75,6 @@ $result = $conn->query($sql);
                             <th>Color</th>
                             <th>Other Requirements</th>
                             <th>Status</th>
-                            <th>Options</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -109,11 +114,17 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['weight'] . "</td>";
                                 echo "<td>" . $row['color'] . "</td>";
                                 echo "<td>" . $row['requirement'] . "</td>";
-                                echo "<td style='$statusColor'>$statusLabel</td>";
-                                echo "<td class='actions'>
-                                <a href='./editRequest' class='btn'><i class='bx bx-pencil'></i></a>
-                                <a class='btn'><i class='bx bx-trash'></i></a>
-                                </td>";
+                                echo "<td>";
+
+                                echo "<form method='POST' action='./updateRequest.php'>";
+                                echo "<input type='hidden' name='request_id' value='" . $row['request_id'] . "'>";
+                                echo "<select name='status' onchange='this.form.submit()'>";
+                                echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
+                                echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
+                                echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
+                                echo "</select>";
+                                echo "</form>";
+                                echo "</td>";
                                 echo '</tr>';
                             }
                         } else {
@@ -126,8 +137,19 @@ $result = $conn->query($sql);
         </main>
     </section>
 
-    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script>
+        setTimeout(function() {
+        const message = document.querySelector(".success-message");
+        if (message) {
+            message.style.display = "none";
+        }
+        }, 5000);
+    </script>
+
+
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="./admin.js"></script>
+    
 </body>
 </html>
 

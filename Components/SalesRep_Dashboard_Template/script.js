@@ -32,7 +32,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Customer/customers.php">
                             <i class='bx bxs-user-detail'></i>
                             <span class="text">Customers</span>
                         </a>
@@ -44,7 +44,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/requests/requests.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
                         </a>

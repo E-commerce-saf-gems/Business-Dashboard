@@ -22,7 +22,7 @@ class Dashboard extends HTMLElement {
                     </li>
 
                     <li>
-                        <a href="../../Pages/Staff/Staff.html">
+                        <a href="../../Pages/Staff/Staff.php">
                             <i class='bx bx-clipboard' ></i>
                             <span class="text">Staff</span>
                         </a>
