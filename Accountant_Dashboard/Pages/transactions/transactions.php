@@ -117,11 +117,12 @@ $result = $conn->query($sql);
                             echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
                             echo "<td style='$statusColor'>$statusLabel</td>";
                             echo "<td class='actions'>
-                                    <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                    <a class='btn'><i class='bx bx-trash'></i></a>
-                                    <a class='btn printBtn'><i class='bx bx-printer'></i></a>
-                                </td>";
+                                <a href='./editTransaction.php?transaction_id=" . $transaction['transaction_id'] . "' class='btn'><i class='bx bx-pencil'></i> Edit</a>
+                                <a href='#' class='btn' onclick='deleteTransaction(" . $transaction['transaction_id'] . ")'><i class='bx bx-trash'></i> Delete</a>
+                                <a href='#' class='btn printBtn' onclick='printTransaction()'><i class='bx bx-printer'></i> Print</a>
+                            </td>";
                             echo "</tr>";
+
                         }
                     } else {
                         echo "<tr><td colspan='9'>No transactions found.</td></tr>";
