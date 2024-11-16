@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="../login.css">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -38,6 +38,6 @@
         </div>
     </div>
 
-    <script src="./login.js"></script>
+    <script src="../login.js"></script>
 </body>
 </html>
