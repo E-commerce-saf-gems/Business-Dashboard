@@ -117,9 +117,8 @@ $result = $conn->query($sql);
                             echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
                             echo "<td style='$statusColor'>$statusLabel</td>";
                             echo "<td class='actions'>
-                                <a href='./editTransaction.php?transaction_id=" . $transaction['transaction_id'] . "' class='btn'><i class='bx bx-pencil'></i> Edit</a>
-                                <a href='#' class='btn' onclick='deleteTransaction(" . $transaction['transaction_id'] . ")'><i class='bx bx-trash'></i> Delete</a>
-                                <a href='#' class='btn printBtn' onclick='printTransaction()'><i class='bx bx-printer'></i> Print</a>
+                                <a href='edittransaction.php?transaction_id=" . htmlspecialchars($row['transaction_id']) . "'>Edit</a>
+                                <a href='deletetransaction.php?transaction_id=" . htmlspecialchars($row['transaction_id']) . "' onclick='return confirm(\"Are you sure you want to delete this transaction?\");'>Delete</a>
                             </td>";
                             echo "</tr>";
 

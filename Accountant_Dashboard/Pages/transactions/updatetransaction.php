@@ -1,7 +1,7 @@
 <?php
-include '../../../database/db.php';// Adjust path as needed
+include '../../../database/db.php'; // Adjust the path as needed
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $transaction_id = $_POST['transaction_id'];
     $date = $_POST['date'];
     $type = $_POST['type'];
@@ -11,20 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $amount = $_POST['amount'];
     $status = $_POST['status'];
 
+    // Validation for Sale and Purchase types
+    if (($type === 'Sale' && empty($customer_id)) || ($type === 'Purchase' && empty($buyer_id))) {
+        echo "Error: Missing required fields for the selected type.";
+        exit();
+    }
+
     // Update query
     $query = "UPDATE transactions SET date = ?, type = ?, stone_id = ?, customer_id = ?, buyer_id = ?, amount = ?, status = ? WHERE transaction_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("sssisssi", $date, $type, $stone_id, $customer_id, $buyer_id, $amount, $status, $transaction_id);
 
     if ($stmt->execute()) {
-        echo "Transaction updated successfully!";
-        header("Location: ../../Pages/transactions/transactions.php?message=Transaction updated successfully");
-        exit;
+        header("Location: transactions.php?message=Transaction updated successfully");
+        exit();
     } else {
-        echo "Error updating transaction: " . $conn->error;
+        echo "Error updating transaction: " . $stmt->error;
     }
+
+    $stmt->close();
 }
-// Close the statement and connection
-$stmt->close();
 $conn->close();
 ?>
+

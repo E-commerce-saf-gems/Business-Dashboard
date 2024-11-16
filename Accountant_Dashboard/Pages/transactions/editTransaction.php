@@ -55,7 +55,7 @@ if (isset($_GET['transaction_id'])) {
 				</div>
 			</div>
             <div class="edit-sales-container">
-            <form class="edit-sales-form" id="editSalesForm" action="updatetransaction.php" method="POST">
+            <form class="edit-sales-form" id="editSalesForm" method="POST" action="updatetransaction.php" >
                 <h2>Edit Transactions Details</h2>
 
                 <!-- Hidden Field for Transaction ID -->
