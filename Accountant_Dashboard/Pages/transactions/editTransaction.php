@@ -33,7 +33,7 @@ if (isset($_GET['transaction_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Transactions Details</title>
     <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./edittransactionstyles.css">   
+    <link rel="stylesheet" href="/edittransactionstyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
