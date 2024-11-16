@@ -38,6 +38,10 @@ body {
     background-color: var(--grey);
 }
 
+img {
+    margin-top: 20px;
+    margin-left: 40px;
+}
 
 /*sidebar*/
 #sidebar{
@@ -420,7 +424,7 @@ body {
 }
 
 /* Sales */
-.Visit-summary {
+.sales-summary {
 	flex: 1 ;
     width: 50%; 
     padding: 20px;
@@ -430,26 +434,26 @@ body {
     position: relative; 
 }
 
-.Visit-summary:hover {
+.sales-summary:hover {
 	transform: translateY(-3px);	
 	transition: 0.3s ease;
 }
 
-.Visit-summary h2 {
+.sales-summary h2 {
 	font-size: 20px;
 	color: var(--dark);
 	margin-bottom: 16px;
 }
 
-#VisitChart {
+#salesChart {
 	width: 100%;
 	height: 30%; 
 }
 
 
 /* inventory */
-.user-chart {
-	width: 60%;
+.gem-chart {
+	width: 50%;
 	height: 250px; 
 	margin-top: 20px;
 	padding: 10px;
@@ -458,12 +462,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.user-chart:hover{
+.gem-chart:hover{
 	transform: translateY(-3px);
     transition: 0.3s ease;
 }
 
-#userChart {
+#gemChart {
 	width: 450px;
 	height: 450px;
 	margin: -40px auto 0;
@@ -471,14 +475,27 @@ body {
 
 /* inventory */
 
-/* staffflow */
-
-/* staff Flow Chart Style */
-#staffFlowChart {
-	width: 450px;
-	height: 450px;
-	margin: -40px auto 0;
+/* cashflow */
+.cash-flow-chart {
+	width: 100%; 
+	margin-top: 20px; 
+	padding: 20px;
+	background: var(--light);
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.cash-flow-chart:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
+}
+
+/* Cash Flow Chart Style */
+#cashFlowChart {
+	width: 100%;
+	height: 200px;
+}
+/* cashflow */
 
 
 @media screen and (max-width: 768px) {
@@ -541,3 +558,102 @@ body {
 }
 
 
+/* Profile dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.profile .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 10;
+}
+
+/* Dropdown menu links */
+.profile .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    transition:  0.3s ease;
+}
+
+.profile .dropdown-menu a:hover {
+    background-color: var(--grey);
+    color: var(--teal);
+}
+
+/* Show dropdown when profile icon is clicked */
+.profile.active .dropdown-menu {
+    display: block;
+}
+
+.Visit-summary {
+	flex: 1 ;
+    width: 50%; 
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}
+
+.Visit-summary:hover {
+	transform: translateY(-3px);	
+	transition: 0.3s ease;
+}
+
+.Visit-summary h2 {
+	font-size: 20px;
+	color: var(--dark);
+	margin-bottom: 16px;
+}
+
+#VisitChart {
+	width: 100%;
+	height: 30%; 
+}
+
+
+.user-chart {
+	width: 60%;
+	height: 250px; 
+	margin-top: 20px;
+	padding: 10px;
+	background: var(--light);
+	border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-chart:hover{
+	transform: translateY(-3px);
+    transition: 0.3s ease;
+}
+
+#userChart {
+	width: 450px;
+	height: 450px;
+	margin: -40px auto 0;
+}
+
+/* inventory */
+
+/* staffflow */
+
+/* staff Flow Chart Style */
+#staffFlowChart {
+	width: 450px;
+	height: 450px;
+	margin: -40px auto 0;
+}

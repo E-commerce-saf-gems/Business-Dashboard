@@ -1,12 +1,9 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, t.type, CONCAT(i.shape, ' ', i.color, ' ', i.type) AS gem_name, c.firstname AS customer_name, 
-               b.name AS buyer_name, t.amount, t.status
-        FROM transactions t
-        JOIN customer c ON t.customer_id = c.customer_id
-        JOIN inventory i ON t.stone_id = i.stone_id
-        JOIN buyer b ON t.buyer_id = b.buyer_id";
+$sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
+        FROM transactions as t
+        JOIN customer as c ON t.customer_id = c.customer_id";
 $result = $conn->query($sql);
 ?>
 
@@ -56,8 +53,18 @@ $result = $conn->query($sql);
             </div>
 
             <div class="addnew">
-                <a href="./addTransaction.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                <a href="./customerType.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
             </div>
+
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    Transaction was recorded successfully!
+                </div>
+            <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
+                <div class="error-message">
+                    An error occured when recording the transaction! Try Again!
+                </div>
+            <?php endif; ?>
             
             <div class="sales-table-container">
                 <div class="table-filters">
@@ -84,11 +91,8 @@ $result = $conn->query($sql);
                             <th>Transaction ID</th>
                             <th>Date</th>
                             <th>Type</th>
-                            <th>Gem Name</th>
-                            <th>Customer Name</th>
-                            <th>Buyer Name</th>
+                            <th>Customer Email</th>
                             <th>Amount</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -97,18 +101,13 @@ $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 // Determine the status label and color
-                                $statusLabel = $row['status'] === 'completed' ? 'Completed' : 'Pending';
-                                $statusColor = $row['status'] === 'completed' ? 'color: green;' : 'color: red;';
-
+                               
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['gem_name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['buyer_name']) . "</td>";
-                                echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
-                                echo "<td style='$statusColor'>$statusLabel</td>";
+                                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                                echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>
                                         <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
                                         <a class='btn'><i class='bx bx-trash'></i></a>
