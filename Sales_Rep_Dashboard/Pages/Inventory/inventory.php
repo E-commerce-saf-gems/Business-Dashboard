@@ -54,7 +54,7 @@ if (!$result) {
               </li>
             </ul>
           </div>
-          <a href="../../Pages/Inventory/addinventory.html" class="btn-add"
+          <a href="./addinventory.html" class="btn-add"
             ><i class="bx bx-plus"></i>Add New</a>
         </div>
         <div class="sales-summary-box">
@@ -171,8 +171,10 @@ if (!$result) {
       </main>
     </section>
 
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
     <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
+
   </body>
 </html>
 
