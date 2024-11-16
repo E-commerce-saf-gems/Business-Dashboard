@@ -35,9 +35,13 @@ $result = $conn->query($sql);
 						</li>
 					</ul>
 				</div>
+                
+
 			</div>
 
+            
             <div class="sales-summary-box">
+                
                 <div class="sales-summary-title">
                     <h2>Monthly Transactions Summary</h2>
                 </div>
@@ -67,7 +71,7 @@ $result = $conn->query($sql);
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="completed">Completed</option>
+                        <option value="paid">Completed</option>
                         <option value="pending">Pending</option>
                     </select>
 
@@ -77,7 +81,7 @@ $result = $conn->query($sql);
                     <button class="btn-filter">Filter</button>
                 </div>
 
-                <!-- Table -->
+                
                 <table class="sales-table">
                     <thead>
                         <tr>
@@ -86,48 +90,53 @@ $result = $conn->query($sql);
                             <th>Type</th>
                             <th>Gem Name</th>
                             <th>Customer Name</th>
-                            <th>Buyer Name</th>
+                            <th>Supplier Name</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                // Determine the status label and color
-                                $statusLabel = $row['status'] === 'completed' ? 'Completed' : 'Pending';
-                                $statusColor = $row['status'] === 'completed' ? 'color: green;' : 'color: red;';
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Trim and normalize the status value
+                            $status = (trim($row['status']));
 
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['type']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['gem_name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['buyer_name']) . "</td>";
-                                echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
-                                echo "<td style='$statusColor'>$statusLabel</td>";
-                                echo "<td class='actions'>
-                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <a class='btn'><i class='bx bx-trash'></i></a>
-                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
-                                      </td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='9'>No transactions found.</td></tr>";
+                            // Determine the status label and color
+                            $statusLabel = $status === 'Completed' ? 'Completed' : 'Pending';
+                            $statusColor = $status === 'Completed' ? 'color: green;' : 'color: red;';
+
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['date']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['gem_name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['buyer_name']) . "</td>";
+                            echo "<td>$" . htmlspecialchars($row['amount']) . "</td>";
+                            echo "<td style='$statusColor'>$statusLabel</td>";
+                            echo "<td class='actions'>
+                                    <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
+                                    <a class='btn'><i class='bx bx-trash'></i></a>
+                                    <a class='btn printBtn'><i class='bx bx-printer'></i></a>
+                                </td>";
+                            echo "</tr>";
                         }
-                        ?>
+                    } else {
+                        echo "<tr><td colspan='9'>No transactions found.</td></tr>";
+                    }
+                    ?>
+
                     </tbody>
                 </table>
             </div>    
         </main>
     </section>
 
+
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="./script.js"></script>
+    <script scr="./script.js"></script>
 </body>
 </html>
 
@@ -135,3 +144,11 @@ $result = $conn->query($sql);
 // Close the database connection
 $conn->close();
 ?>
+
+
+
+
+
+
+
+

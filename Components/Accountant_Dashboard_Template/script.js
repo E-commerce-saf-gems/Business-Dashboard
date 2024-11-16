@@ -13,7 +13,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../Sales/sales.html">
+                        <a href="../../Sales/sales.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
@@ -25,7 +25,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/transactions/transactions.php">
+                        <a href="Business-Dashboard/Accountant_Dashboard/Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
@@ -102,13 +102,12 @@ function updateActiveMenu() {
         const link = item.getAttribute('href');
         const li = item.parentElement;
 
-        if (currentPath.includes(link)){
+        if (currentPath === link) {
             li.classList.add('active');
         } else {
             li.classList.remove('active');
         }
 
-        // Add click event listener to handle navigation
         item.addEventListener('click', function () {
             allSideMenu.forEach(i => {
                 i.parentElement.classList.remove('active');
@@ -120,3 +119,41 @@ function updateActiveMenu() {
 
 // Run the updateActiveMenu function on page load
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
+
+const menuBar = document.querySelector('#content nav .bx.bx-menu');
+const sidebar = document.getElementById('sidebar');
+
+const searchButton = document.querySelector('#content nav form .form-input button');
+const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
+const searchForm = document.querySelector('#content nav form');
+
+searchButton.addEventListener('click', function (e) {
+	if(window.innerWidth < 576) {
+		e.preventDefault();
+		searchForm.classList.toggle('show');
+		if(searchForm.classList.contains('show')) {
+			searchButtonIcon.classList.replace('bx-search', 'bx-x');
+		} else {
+			searchButtonIcon.classList.replace('bx-x', 'bx-search');
+		}
+	}
+})
+
+menuBar.addEventListener('click', function () {
+	sidebar.classList.toggle('hide');
+})
+
+
+if(window.innerWidth < 768) {
+	sidebar.classList.add('hide');
+} else if(window.innerWidth > 576) {
+	searchButtonIcon.classList.replace('bx-x', 'bx-search');
+	searchForm.classList.remove('show');
+}
+
+window.addEventListener('resize', function () {
+	if(this.innerWidth > 576) {
+		searchButtonIcon.classList.replace('bx-x', 'bx-search');
+		searchForm.classList.remove('show');
+	}
+})
