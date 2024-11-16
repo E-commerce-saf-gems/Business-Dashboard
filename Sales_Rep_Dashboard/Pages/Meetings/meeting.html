@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meeting</title>
+    <link
+      rel="stylesheet"
+      href="/Components/SalesRep_Dashboard_Template/styles.css"
+    />
+    <link rel="stylesheet" href="../Sales/salesStyles.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Meetings</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a class="active" href="#">Meetings Summary</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sales-table-container">
+          <div class="table-filters">
+
+            <label for="date-filter">Date:</label>
+            <input type="date" id="date-filter" />
+
+            <label for="status-filter">Time:</label>
+            <input type="time" id="date-filter" />
+
+            <label for="customer-filter">Name:</label>
+            <input type="text" id="customer-filter" placeholder="Search name" />
+
+            <button class="btn-filter">Filter</button>
+          </div>
+
+          <!-- Table -->
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="select-all" /></th>
+                <th>Appointment Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>Online</td>
+                <td>2024-11-04</td>
+                <td>16:00</td>
+                <td>Ashcharya</td>
+                <td>Ash@gmail.com</td>
+                <td>Request Delete</td>
+                <td class="actions">
+                  <a href="./editmeeting.html" class="btn"
+                    ><i class="bx bx-pencil"></i
+                  ></a>
+                  <a class="btn"><i class="bx bx-eye"></i></a>
+                  <a class="btn"><i class="bx bx-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+
+   
+    <script src="/Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script scr="./meeting.js"></script>
+  </body>
+</html>
