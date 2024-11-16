@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirect user to their dashboard based on their role
             if ($user['role'] == 'Partner') {
                 header("Location: ../Partners_Dashboard/dashboard.html");
-            } elseif ($user['role'] == 'admin') {
+            } elseif ($user['role'] == 'Admin') {
                 header("Location: ../Admin_Dashboard/dashboard.html");
-            } elseif ($user['role'] == 'salesrep') {
-                header("Location: ../Salesrep_Dashboard/dashboard.html");
-            } elseif ($user['role'] == 'accountant') {
+            } elseif ($user['role'] == 'SalesRep') {
+                header("Location: ../Sales_Rep_Dashboard/dashboard.html");
+            } elseif ($user['role'] == 'Accountant') {
                 header("Location: ../Accountant_Dashboard/dashboard.html");
             } else {
                 $_SESSION['error'] = "Unknown role!";

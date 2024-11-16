@@ -3,16 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!-- Link to any styles or icons used in your component -->
-    <link rel="stylesheet" href="/Components/Partner_Dashboard_Template/styles.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <!-- Custom Element Usage -->
-    <dashboard-component></dashboard-component>
+    <section id="sidebar">
+        <a href="#" class="logo">
+			<img src="../Admin_Dashboard/logo.png" width="120" height="120" alt="SAF GEMS">
+        </a>
+        <ul class="side-menu">
+            <li class="active">
+                <a href="../Admin_Dashboard/dashboard.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../Pages/Admin/customers.php">
+                    <i class='bx bxs-user-detail' ></i>
+                    <span class="text">Customers</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../Pages/Admin/ManageUserAccess.html">
+                    <i class='bx bxs-user-detail' ></i>
+                    <span class="text">ManageUserAccess</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../Pages/Admin/request.html">
+                    <i class='bx bxs-inbox' ></i>
+                    <span class="text">Request</span>
+                   
+                </a>
+            </li>
+           
+        </ul>
+    </section>
 
-    <!-- JavaScript file that defines the Dashboard component -->
-    <script src="/Components/Partner_Dashboard_Template/script.js"></script>
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu' ></i>
+            <a href="#" class="nav-link">Catergories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search">
+                    <button type="submit" class="search-btn">
+                        <i class='bx bx-search' ></i>
+                    </button>
+                </div>
+            </form>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#">
+                <i class='bx bx-user' ></i>
+            </a>
+        </nav>
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="../Admin_Dashboard/dashboard.html">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>
+			</div>
+            <div class="dashboard-container">
+                <div class="shortcuts">
+                    <h2>Shortcuts</h2>
+                    <ul class="shortcut-options">
+                        <li>
+                            <i class='bx bxs-user-plus'></i>
+                            <span class="text">
+                                <a href="../Pages/Admin/addnewcustomer.html"><h3>Add New Customer</h3></a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class='bx bxs-diamond'></i>
+                            <span class="text">
+                                <a href="../Pages/Admin/editcustomer.html"><h3>Edit Customer</h3></a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class='bx bxs-dollar-circle'></i>
+                            <span class="text">
+                                <a href="../Pages/Admin/onlineusers.html"><h3>Show Online Users</h3></a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class='bx bxs-credit-card'></i>
+                            <span class="text">
+                                <a href="../Pages/Admin/Staff.html"><h3>View Summary of Staff</h3></a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                    <div class="user-chart">
+                        <h2>Users</h2>
+                        <canvas id="userChart"></canvas> 
+                        <a href="../Pages/Admin/customers.html" class="view-more">View More</a>
+                    </div>
+
+                    <div class="user-chart">
+                        <h2>Staff</h2>
+                        <canvas id="staffFlowChart"></canvas>
+                        <a href="../Pages/Admin/staff.html" class="view-more">View More</a>
+                    </div>
+            
+                    <div class="Visit-summary">
+                        <h2>Monthly Users Visit Website</h2>
+                        <canvas id="VisitChart"></canvas> <!-- Canvas for Sales Summary Line Chart -->
+                    </div>
+            </div>    
+        </main>
+    </section>
+
+
+	<script src="script.js"></script>
 </body>
 </html>
