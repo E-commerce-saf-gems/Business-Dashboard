@@ -37,7 +37,7 @@ document.getElementById("AddStaffForm").addEventListener("submit", function (eve
 
     // If all fields are valid, redirect to Staff.html
     if (isValid) {
-        window.location.href = "../../Pages/Admin/Staff/Staff.html";
+        window.location.href = "./Staff.html";
     } else {
         // Show error messages if validation failed
         alert(errorMessage);
@@ -89,7 +89,7 @@ document.getElementById("editStaffForm").addEventListener("submit", function (ev
     // If the form is valid, submit it; otherwise, show the error message
     if (isValid) {
         // Redirect to staff.html only if validation is successful
-        window.location.href = "../../Pages/Admin/Staff/Staff.html";
+        window.location.href = "./Staff.html";
     } else {
         alert(errorMessage); // Display the error messages
     }

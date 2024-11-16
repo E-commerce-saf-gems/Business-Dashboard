@@ -2,7 +2,7 @@
 include '../../../database/db.php';
 
 // Fetch data from the 'request' and 'customer' tables using a JOIN
-$sql = "SELECT request.date, customer.firstName AS customer_name, request.shape, request.type, 
+$sql = "SELECT request.date, customer.firstName AS customer_name, customer.email AS email, request.shape, request.type, 
                request.weight, request.color, request.requirement, request.status
         FROM request
         JOIN customer ON request.customer_id = customer.customer_id";
@@ -60,12 +60,13 @@ $result = $conn->query($sql);
                         <tr>
                             <th><input type="checkbox" class="select-all"></th>
                             <th>Date</th>
-                            <th>Customer Name</th>
+                            <th>Name</th>
+                            <th>Email</th>
                             <th>Shape</th>
                             <th>Type</th>
                             <th>Weight</th>
                             <th>Color</th>
-                            <th>Special Requirements</th>
+                            <th>Other Requirements</th>
                             <th>Status</th>
                             <th>Options</th>
 
@@ -102,6 +103,7 @@ $result = $conn->query($sql);
                                 echo "<td><input type='checkbox'></td>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['customer_name'] . "</td>";
+                                echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['shape'] . "</td>";
                                 echo "<td>" . $row['type'] . "</td>";
                                 echo "<td>" . $row['weight'] . "</td>";
@@ -109,7 +111,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['requirement'] . "</td>";
                                 echo "<td style='$statusColor'>$statusLabel</td>";
                                 echo "<td class='actions'>
-                                <a href='./editSales.html' class='btn'><i class='bx bx-pencil'></i></a>
+                                <a href='./editRequest' class='btn'><i class='bx bx-pencil'></i></a>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
                                 echo '</tr>';

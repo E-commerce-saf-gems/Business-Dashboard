@@ -3,35 +3,29 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../Admin_Dashboard/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../Admin_Dashboard/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="../Admin_Dashboard/dashboard.html">
+                        <a href="../../Admin_Dashboard/dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../Pages/Admin/Customer/customers.php">
+                        <a href="../../Admin_Dashboard/Pages/Customer/customer.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Customers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../Pages/Admin/ManageAccess/ManageUserAccess.html">
+                        <a href="../../Admin_Dashboard/Pages/ManageAccess/ManageUserAccess.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">ManageUserAccess</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../Pages/Admin/Request/request.html">
-                            <i class='bx bx-money'></i>
-                            <span class="text">Request</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../Pages/Admin/Staff/Staff.html">
+                        <a href="../../Admin_Dashboard/Pages/Staff/Staff.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Staff</span>
                         </a>
@@ -59,7 +53,7 @@ class Dashboard extends HTMLElement {
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
                             <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
-                            <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                            <li><a href="../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
                 </nav>

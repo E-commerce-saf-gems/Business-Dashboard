@@ -78,7 +78,7 @@ document.getElementById("AddCustomerForm").addEventListener("submit", function (
 
     // If form is valid, simulate the link click
     if (isValid) {
-        window.location.href = "../../Pages/Admin/Customer/customers.php"; // Redirect to the page
+        window.location.href = "./customers.php"; // Redirect to the page
     } else {
         // If there are validation errors, display them
         alert(errorMessage);
@@ -139,7 +139,7 @@ document.getElementById("editCustomerForm").addEventListener("submit", function 
 
     // If all validations pass, submit the form and redirect
     if (isValid) {
-        window.location.href = "../../Pages/Admin/Customer/customers.php"; // Navigate to the customers page
+        window.location.href = "./customers.php"; // Navigate to the customers page
     } else {
         alert(errorMessage); // Show validation error messages
     }

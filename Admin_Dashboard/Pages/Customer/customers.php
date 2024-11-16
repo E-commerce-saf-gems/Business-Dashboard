@@ -111,7 +111,7 @@ if (!$result) {
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['city'] . "</td>";
                                 echo "<td class='actions'>
-                                <a href='../../Pages/Admin/customers.php' class='btn'>
+                                <a href='./customers.php' class='btn'>
                                 <i class='bx bx-pencil'></i></a>
                                 <a class='btn'><i class='bx bx-trash'></i></a>
                                 </td>";
@@ -121,23 +121,7 @@ if (!$result) {
                             echo "<tr><td colspan='9'>No customers in the inventory.</td></tr>";
                         }
                         ?>
-                        <!-- <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2024-11-01</td>
-                            <td>Chethana</td>
-                            <td>071 4562341</td> 
-                            <td>200267893412</td>
-                            <td>ck@gmail.com</td>
-                            <td>1</td>
-                            <td class="actions">
-                                <a href="./editcustomer.html" class="btn"><i class="bx bx-pencil"></i></a>
-                                <a class="btn"><i class="bx bx-eye"></i></a>
-                                <a class="btn"><i class="bx bx-trash"></i></a>
-                            </td>
-                            <td class="options">
-                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
-                            </td>
-                        </tr> -->
+        
                     </tbody>
                 </table>
             </div>    
@@ -147,7 +131,7 @@ if (!$result) {
     
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
-    <script src="../admin.js"></script>
+
 
 </body>
 </html>
