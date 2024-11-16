@@ -53,11 +53,11 @@ class Dashboard extends HTMLElement {
                         <i class='bx bxs-bell'></i>
                         <span class="num">8</span>
                     </a>
-                    <div class="profile">
+                   <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
                             <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
-                            <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                            <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
                 </nav>
