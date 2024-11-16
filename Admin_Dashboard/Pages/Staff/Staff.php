@@ -100,21 +100,7 @@ if (!$result) {
                             echo "<tr><td colspan='9'>No staff members in the system.</td></tr>";
                         }
                         ?>
-                        <!-- <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2024-11-01</td>
-                            <td>1234</td>
-                            <td>Partner</td> 
-                            <td>077 1654321</td>
-                            <td class="actions">
-                                <a href="./editstaff.html" class="btn"><i class="bx bx-pencil"></i></a>
-                                <a class="btn"><i class="bx bx-eye"></i></a>
-                                <a class="btn"><i class="bx bx-trash"></i></a>
-                            </td>
-                            <td class="options">
-                                <a class="btn printBtn"><i class='bx bx-printer'></i></a>
-                            </td>
-                        </tr> -->
+                        
                     </tbody>
                 </table>
             </div>    
