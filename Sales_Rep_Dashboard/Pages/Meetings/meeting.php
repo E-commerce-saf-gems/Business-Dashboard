@@ -118,10 +118,10 @@ $result = $conn->query($sql);
                         echo "<td>" . $row['email'] . "</td>";
                         echo "<td>";
 
-                        echo "<form method='POST' action='./deleteMeeting.php'>";
+                        echo "<form method='POST' action='./updateMeeting.php'>";
                         echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
                         echo "<select name='status' onchange='this.form.submit()'>";
-                        echo "<option value='p'" . ($row['status'] === 'p' ? " selected" : "") . ">Pending</option>";
+                        echo "<option value='P'" . ($row['status'] === 'p' ? " selected" : "") . ">Pending</option>";
                         echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
                         echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
                         echo "</select>";
@@ -155,31 +155,6 @@ if (message) {
 }
 }, 5000);
 </script>
-
-
-
-
-             <!-- <tr>
-                <td><input type="checkbox" /></td>
-                <td>Online</td>
-                <td>2024-11-04</td>
-                <td>16:00</td>
-                <td>Ashcharya</td>
-                <td>Ash@gmail.com</td>
-                <td>Request Delete</td>
-                <td class="actions">
-                  <a href="./editmeeting.html" class="btn"
-                    ><i class="bx bx-pencil"></i
-                  ></a>
-                  <a class="btn"><i class="bx bx-eye"></i></a>
-                  <a class="btn"><i class="bx bx-trash"></i></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </main>
-    </section> -->
 
    
     <script src="/Components/SalesRep_Dashboard_Template/script.js"></script>
