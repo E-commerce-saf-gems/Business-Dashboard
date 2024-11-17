@@ -92,8 +92,8 @@ body {
 /* Sales Summary Box */
 .sales-summary-box {
     display: flex;
-    justify-content: space-between; /* Distribute the sections evenly */
-    width: 90%; /* Increased width to 90% for a wider box */
+    justify-content: space-between; 
+    width: 90%; 
     margin: 20px auto;
     padding: 20px;
     background: var(--light);
@@ -118,7 +118,7 @@ body {
     color: var(--teal);
 }
 
-/* Sales Table */
+
 .sales-table-container {
     margin-top: 20px;
     background: var(--light);
@@ -162,7 +162,7 @@ body {
     transition: .3s ease;
 }
 
-/* Table Styles */
+/* Table */
 .sales-table {
     width: 100%;
     border-collapse: collapse;
@@ -210,7 +210,7 @@ body {
     justify-content: center;
 }
 
-/* Checkbox and Option Styling */
+/* Checkbox and Option*/
 .sales-table td input[type="checkbox"] {
     transform: scale(1.2);
 }
@@ -228,28 +228,35 @@ body {
     color: var(--teal);
 }
 
-/* Icons for Actions (Print and Share) */
 .sales-table td .options button i {
     margin-right: 5px;
 }
 
-select {
-    width: 100%;
-    padding: 5px;
-    margin: 0;
-    box-sizing: border-box;
+.sales-table select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
+.sales-table select option {
+    padding: 8px;
+    color: #333;
+}
+
+
+/* Success Message Styles */
 .success-message {
-    color: #155724; /* Green text for success */
-    background-color: #d4edda; /* Light green background */
-    border: 1px solid #c3e6cb; /* Green border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 15px; /* Spacing inside the box */
-    margin: 10px 0; /* Space above and below the message */
-    font-size: 14px; /* Font size */
-    font-family: Arial, sans-serif; /* Font family */
-    text-align: center; /* Centered text */
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding in width calculation */
+    background-color: #d4ede9; /* Light green background */
+    color: #449f9f ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
 }
