@@ -1,3 +1,29 @@
+<?php
+include('../../../database/db.php'); // Include your database connection here
+
+// Check if request_id is provided in the URL
+if (isset($_GET['stone_id'])) {
+    $stone_id = $_GET['stone_id'];
+
+    // Fetch the record from the database
+    $sql = "SELECT * FROM inventory WHERE stone_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $stone_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "No record found";
+        exit;
+    }
+} else {
+    echo "No ID specified";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,22 +59,19 @@
           </div>
         </div>
         <div class="edit-sales-container">
-          <form class="edit-sales-form" id="editSalesForm">
-            <h2>New Inventory Details</h2>
+        <form class="edit-sales-form" id="editgemForm" action="./updategem.php" method="POST" enctype="multipart/form-data">
+        <h2>New Inventory Details</h2>
 
-            <!-- <div class="form-group">
-              <label for="date">Date</label>
-              <input type="date" id="date" name="date" required />
-            </div> -->
+           
 
             <!-- stone Id Field -->
             <div class="form-group">
               <label for="stone_id">Stone Id </label>
-              <input
-                type="number"
+              <input type="hidden"  
                 id="stone_id"
                 name="stone_id"
                 placeholder="Enter Stone Id"
+                value="<?php echo $stone_id; ?>"
                 required
               />
             </div>
@@ -58,9 +81,10 @@
               <label for="size">Size</label>
               <input
                 type="text"
-                id="color"
+                id="size"
                 name="size"
                 placeholder="size"
+                value="<?php echo $row['size'];?>"
                 required
               />
             </div>
@@ -73,18 +97,20 @@
                 id="shape"
                 name="shape"
                 placeholder="shape"
+                value="<?php echo $row['shape'];?>"
                 required
               />
             </div>
 
             <!-- Color Field -->
             <div class="form-group">
-              <label for="color">Color</label>
+              <label for="colour">Color</label>
               <input
                 type="text"
-                id="color"
-                name="color"
-                placeholder="Color"
+                id="colour"
+                name="colour"
+                placeholder="Colour"
+                value="<?php echo $row['colour'];?>"
                 required
               />
             </div>
@@ -92,11 +118,11 @@
             <div class="form-group">
               <label for="type">Type</label>
               <select id="type" name="type">
-                <option value="Ruby">Ruby</option>
-                <option value="Emerald">Emerald</option>
-                <option value="Sapphire">Sapphire</option>
-                <option value="Amethyst">Amethyst</option>
-                <option value="Diamond">Diamond</option>
+                <option value="Ruby"  <?php if ($row['type'] === 'Ruby') echo 'selected'; ?>>Ruby</option>
+                <option value="Emerald" <?php if ($row['type'] === 'Emerald') echo 'selected'; ?>>Emerald</option>
+                <option value="Sapphire" <?php if ($row['type'] === 'Sapphire') echo 'selected'; ?>>Sapphire</option>
+                <option value="Amethyst"  <?php if ($row['type'] === 'Amethyst') echo 'selected'; ?>>Amethyst</option>
+                <option value="Diamond"  <?php if ($row['type'] === 'Diamond') echo 'selected'; ?>>Diamond</option>
               </select>
             </div>
 
@@ -109,6 +135,7 @@
                 id="weight"
                 name="weight"
                 placeholder="Weight"
+                value="<?php echo $row['weight'];?>"
                 required
               />
             </div>
@@ -122,6 +149,7 @@
                 id="origin"
                 name="origin"
                 placeholder="Origin"
+                value="<?php echo $row['origin'];?>"
                 required
               />
             </div>
@@ -134,6 +162,7 @@
                 id="amount"
                 name="amount"
                 placeholder="Enter Amount"
+                value="<?php echo $row['amount'];?>"
                 required
               />
             </div>
@@ -145,6 +174,7 @@
               id="image"
               name="image"
               accept=".pdf,.jpg,.jpeg,.png"
+            
               required
             />
 
@@ -168,6 +198,8 @@
                 id="description"
                 name="description"
                 placeholder="Description"
+                value="<?php echo $row['description'];?>"
+
                 required
               />
             </div>
@@ -175,15 +207,15 @@
             <!-- Visibility Field -->
             <label for="visibility">Visibility:</label>
             <select id="visibility">
-              <option value="paid">Show</option>
-              <option value="pending">Hide</option>
+              <option value="show" <?php if ($row['visibilityv'] === 'Ruby') echo 'selected'; ?>>Show</option>
+              <option value="hide" <?php if ($row['visibility'] === 'Ruby') echo 'selected'; ?>>Hide</option>
             </select>
 
             <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
-                <option value="show">available</option>
-                <option value="hide">not Available</option>
+                <option value="availablenot available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
+                <option value="hide" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not Available</option>
               </select>
             </div>
 
@@ -194,6 +226,7 @@
                 id="buyer_id"
                 name="buyer_id"
                 placeholder="Buyer Id"
+                value="<?php echo $row['buyer_id'];?>"
                 required
               />
             </div>
@@ -211,6 +244,17 @@
                 <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php"> <i class="bx bx-save"></i> Save</a>
               </button>
             </div> -->
+            <?php if ($row['availability'] === 'available') { ?>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class='bx bx-save'></i> Save Changes
+                            </button>
+                        </div>
+                    <?php } else { ?>
+                        <script>
+                            document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
+                        </script>
+                    <?php } ?>
           </form>
         </div>
       </main>

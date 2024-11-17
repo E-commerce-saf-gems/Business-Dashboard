@@ -133,6 +133,7 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
+
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
@@ -162,7 +163,7 @@ if (!$result) {
                       
                       // Form for updating availability
                       echo "<td>";
-                      echo "<form method='POST' action='./updategem.php'>";
+                      echo "<form method='POST' action='./updateavailable.php'>";
                       echo "<input type='hidden' name='stone_id' value='" . $row['stone_id'] . "'>";
                       echo "<select name='availability' onchange='this.form.submit()'>";
                       echo "<option value='available'" . ($row['availability'] === 'available' ? " selected" : "") . ">available</option>";
@@ -173,7 +174,7 @@ if (!$result) {
 
                       // Action buttons
                       echo "<td class='actions'>
-                            <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/editInventory.html' class='btn'>
+                            <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/editInventory.php' class='btn'>
                             <i class='bx bx-pencil'></i></a>
                             <a class='btn'><i class='bx bx-trash'></i></a>
                             </td>";
