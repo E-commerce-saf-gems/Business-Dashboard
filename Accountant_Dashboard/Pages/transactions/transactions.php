@@ -3,7 +3,12 @@ include '../../../database/db.php';
 
 $sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
         FROM transactions as t
-        JOIN customer as c ON t.customer_id = c.customer_id";
+        JOIN customer as c ON t.customer_id = c.customer_id
+        UNION ALL
+        SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
+        FROM payments as p
+        JOIN buyer as b ON p.buyer_id = b.buyer_id
+        ORDER BY date DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -56,16 +61,32 @@ $result = $conn->query($sql);
                 <a href="./customerType.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
             </div>
 
-            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+            <?php if (isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 1): ?>
                 <div class="success-message">
-                    Transaction was recorded successfully!
+                    Payment receival was recorded successfully in Transactions and Sales!
                 </div>
-            <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
+            <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 2) : ?>
                 <div class="error-message">
-                    An error occured when recording the transaction! Try Again!
+                    An error occured when recording the payment! Try Again!
                 </div>
+            <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 3) : ?>
+            <div class="error-message">
+                An error occured when updating the sales table! Try Again!
+            </div>
             <?php endif; ?>
             
+
+            <?php if (isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 1): ?>
+                <div class="success-message">
+                    Payment was recorded successfully in Payments and Purchases!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2) : ?>
+                <div class="error-message">
+                    An error occured when recording the payment! Try Again!
+                </div>
+            <?php endif; ?>
+
+
             <div class="sales-table-container">
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>

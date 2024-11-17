@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     stones.forEach(stone => {
                         const option = document.createElement('option');
                         option.value = stone.stone_id;
-                        option.textContent = stone.type;
+                        option.textContent = `${stone.type} (Carats: ${stone.weight}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})` ;
                         stoneDropdown.appendChild(option);
                     });
                 })

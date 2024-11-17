@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Transaction</title>
     <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./styles.css">   
+    <link rel="stylesheet" href="../transactions/edittransactionstyles.css">   
+    <link rel="stylesheet" href="../transactions/styles.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,33 +15,22 @@
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Add Transaction</h1>
+					<h1>Add Invoice</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="../../Pages/transactions/transactions.html">Home</a>
+							<a href="../transactions/transactions.php">Home</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Add New Transaction</a>
+							<a class="active" href="#">Add New Payment Receival</a>
 						</li>
 					</ul>
 				</div>
 			</div>
             
-            <div class="add-transaction-container">
-                <form class="add-transaction-form" id="addTransactionForm" action="./addTransaction.php" method="post">
-                    <h2>New Transaction Details</h2>
-    
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <select id="type" name="type">
-                            <option value="Sale">Sale</option>
-                            <option value="Purchase">Purchase</option>
-                            <option value="Auction">Auction</option>
-                            <option value="Refund">Refund</option>
-                        </select>
-                    </div>
-    
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editsalesform" action="./addTransaction.php" method="post">
+                    <h2>New Payment Receival</h2><br>
                     <div class="form-group">
                         <label for="customer">Customer Email</label>
                         <select id="customer" name="customer_id" required>
@@ -57,7 +47,7 @@
     
                     <div class="form-group">
                         <label for="amount">Amount ($)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="1" required>
                     </div>
                     
                     <div class="form-actions">
