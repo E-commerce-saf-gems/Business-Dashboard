@@ -68,7 +68,7 @@ if (isset($_GET['stone_id'])) {
             <!-- stone Id Field -->
             <div class="form-group">
               <label for="stone_id">Stone Id </label>
-              <input type="hidden"  
+              <input type="text"  
                 id="stone_id"
                 name="stone_id"
                 placeholder="Enter Stone Id"
