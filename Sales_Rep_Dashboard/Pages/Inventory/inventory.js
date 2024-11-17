@@ -31,6 +31,8 @@ document.getElementById("addgemForm").addEventListener("submit", function (e) {
   const image = document.getElementById("image").value;
   const certificate = document.getElementById("certificate").value;
   const description = document.getElementById("description").value;
+  const visibility = document.getElementById("visibility").value;
+  const availability = document.getElementById("availability").value;
   const buyer_id = document.getElementById("buyer_id").value;
 
   // Array of required fields
@@ -45,6 +47,8 @@ document.getElementById("addgemForm").addEventListener("submit", function (e) {
     { field: image, name: "Image" },
     { field: certificate, name: "Certificate" },
     { field: description, name: "Description" },
+    { field: visibility, name: "Visibility" },
+    { field: availability, name: "Availability" },
     { field: buyer_id, name: "Buyer ID" }
   ];
 

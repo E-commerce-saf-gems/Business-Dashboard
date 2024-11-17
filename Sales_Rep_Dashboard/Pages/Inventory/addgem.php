@@ -3,7 +3,7 @@
 include '../../../database/db.php';
 
 // Initialize variables for form inputs
-$size = $shape = $color = $type = $origin = $description = $visibility = "";
+$size = $shape = $color = $type = $origin = $description = $visibility = $availability="";
 $weight = $amount = $buyer_id = 0;
 $image = $certificate = "";
 $errorMessage = "";
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amount = floatval($_POST['amount']);
     $description = htmlspecialchars(trim($_POST['description']));
     $visibility = htmlspecialchars(trim($_POST['visibility']));
+    $availability = htmlspecialchars(trim($_POST['availability']));
     $buyer_id = intval($_POST['buyer_id']);
 
     // Handle file uploads
@@ -42,8 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             move_uploaded_file($_FILES["certificate"]["tmp_name"], $certificatePath)) {
 
             // Prepare SQL query
-            $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image, certificate, description, visibility, buyer_id)
-                    VALUES ('$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$buyer_id')";
+            $sql = $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image, certificate, description, visibility, availability, buyer_id)
+            VALUES ('$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$availability', '$buyer_id')";
+    
 
             // Execute query
             if ($conn->query($sql) === TRUE) {

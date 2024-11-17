@@ -8,11 +8,11 @@ $ssql = "SELECT
             inventory.shape, 
             inventory.colour, 
             inventory.type, 
-            inventory.origin, 
             inventory.amount, 
             inventory.certificate, 
             buyer.name,
-            inventory.visibility 
+            inventory.visibility,
+            inventory.availability
         FROM inventory
         JOIN buyer ON inventory.buyer_id = buyer.buyer_id";
 
@@ -130,10 +130,10 @@ if (!$result) {
                 <th>Shape</th>
                 <th>Color</th>
                 <th>Type</th>
-                <th>Origin</th>
                 <th>Amount</th>
                 <th>Buyer Name</th>
                 <th>Visibility</th>
+                <th>Availability</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -148,12 +148,12 @@ if (!$result) {
                   echo "<td>" . $row['shape'] . "</td>";
                   echo "<td>" . $row['colour'] . "</td>";
                   echo "<td>" . $row['type'] . "</td>";
-                  echo "<td>" . $row['origin'] . "</td>";
                   echo "<td>" . $row['amount'] . "</td>";
                   echo "<td>" . $row['name'] . "</td>";
                   echo "<td>"  . $row['visibility'] . "</td>";
+                  echo "<td>"  . $row['availability'] . "</td>";
                   echo "<td class='actions'>
-                  <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php' class='btn'>
+                  <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/editInventory.html' class='btn'>
                   <i class='bx bx-pencil'></i></a>
                   <a class='btn'><i class='bx bx-trash'></i></a>
                   </td>";
