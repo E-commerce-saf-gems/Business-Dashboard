@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Bids</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./bids.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Bidding System</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Biddings Summary</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+            <!--Boxes Section -->
+            <div class="report-boxes-container">
+                <div class="report-box">
+                    <h2>Bidding Stones Summary</h2>
+                    <a href="./stonessummary.html" class="report-link">View </a>
+                </div>
+
+                <div class="report-box">
+                    <h2>Bids Summary</h2>
+                    <a href="./bidssummary.html" class="report-link">View </a>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./bids.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</body>
+</html>

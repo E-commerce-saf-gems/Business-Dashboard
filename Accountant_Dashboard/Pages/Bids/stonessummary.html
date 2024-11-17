@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Bids</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./bids.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Bidding Stones Summary</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="./bids.html">Home</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Bidding Stones Summary</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="sales-summary-title">
+                <h2>Monthly Bidding Stones Summary</h2>
+            </div>
+            
+            <div class="summary-cards">
+                
+                
+                <div class="card">
+                    <h3>Total Gems Auctioned</h3>
+                    <p style="margin-top: 15px;">20</p>
+                </div>
+                <div class="card">
+                    <h3>Total Sold Gems</h3>
+                    <p style="margin-top: 15px;">18</p>
+                </div>
+                <div class="card">
+                    <h3>Most Popular Gem Type</h3>
+                    <p style="margin-top: 15px;">Ruby</p>
+                </div>
+                <div class="card">
+                    <h3>Highest Bid on a Single Gem</h3>
+                    <p>Rs.40000.00</p>
+                </div>
+            </div>
+
+
+            <div class="addnew">
+                <a href="./createinvoice.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            </div>
+
+            <div class="sales-table-container">
+                <div class="table-filters">
+                    <label for="date-filter">Date:</label>
+                    <input type="date" id="date-filter">
+                    
+                    <label for="customer-filter">Stone:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Stone">
+                    
+                    <button class="btn-filter">Filter</button>
+                </div>
+
+                <!-- Table -->
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Bid No</th>
+                            <th>Stone</th>
+                            <th>Starting Bid</th>
+                            <th>Current Bid</th>
+                            <th>NO.of Cycles</th>
+                            <th>Start Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Red Ruby</td>
+                            <td>Rs.5000.00</td>
+                            <td>Rs.15000.00</td>
+                            <td>3</td>
+                            <td>2024-12-01</td>
+                            <td class="actions">
+                                <a href="#" class="btn"><i class="bx bx-pencil"></i></a>
+                                <a class="btn"><i class="bx bx-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </main>
+    </section>
+
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script scr="bids.js"></script>
+</body>
+</html>
