@@ -610,9 +610,9 @@ body {
 
 /* Gem Info Styling */
 .gem-image {
-    width: 30%;  /* Adjust size as needed */
-    height: 30%;
-    margin: 8px 0;
+    width: 20%;  /* Adjust size as needed */
+    height: 50%;
+    margin: 5px 0;
 }
 
 .gem-description {

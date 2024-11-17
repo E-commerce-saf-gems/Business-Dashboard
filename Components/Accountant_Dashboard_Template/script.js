@@ -3,7 +3,7 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="/Images/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../Images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
@@ -19,7 +19,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Bids/bids.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
