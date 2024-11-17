@@ -75,6 +75,7 @@ $result = $conn->query($sql);
                             <th>Color</th>
                             <th>Other Requirements</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,6 +127,14 @@ $result = $conn->query($sql);
                                 echo "</form>";
                                 echo "</td>";
                                 echo '</tr>';
+
+                                echo "
+                                <td class='actions'>
+                                    <a href='./editSales.html' class='btn'><i class='bx bx-pencil'></i></a>
+                                    <a class='btn'><i class='bx bx-eye'></i></a>
+                                    <a class='btn'><i class='bx bx-trash'></i></a>
+                                </td>
+                                ";
                             }
                         } else {
                             echo "<tr><td colspan='9'>No requests found.</td></tr>";
@@ -154,6 +163,5 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-// Close the database connection
 $conn->close();
 ?>
