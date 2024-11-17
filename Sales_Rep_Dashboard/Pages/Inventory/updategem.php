@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Handle image upload
     $image_name = $_FILES['image']['name'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = "../../../uploads/images/" . basename($image_name);
+    $image_folder = "../../../uploads/" . basename($image_name);
 
     // Handle certificate upload
     $certificate_name = $_FILES['certificate']['name'];
     $certificate_tmp_name = $_FILES['certificate']['tmp_name'];
-    $certificate_folder = "../../../uploads/certificates/" . basename($certificate_name);
+    $certificate_folder = "../../../uploads/" . basename($certificate_name);
 
     // Move uploaded files to their respective directories
     $image_uploaded = move_uploaded_file($image_tmp_name, $image_folder);
