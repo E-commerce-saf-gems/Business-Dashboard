@@ -1,6 +1,7 @@
 <?php
 include('../../../database/db.php'); // Include your database connection here
 
+
 // Check if request_id is provided in the URL
 if (isset($_GET['stone_id'])) {
     $stone_id = $_GET['stone_id'];
@@ -71,7 +72,7 @@ if (isset($_GET['stone_id'])) {
                 id="stone_id"
                 name="stone_id"
                 placeholder="Enter Stone Id"
-                value="<?php echo $stone_id; ?>"
+                value="<?php echo $row['stone_id'];?>"
                 required
               />
             </div>
@@ -174,6 +175,7 @@ if (isset($_GET['stone_id'])) {
               id="image"
               name="image"
               accept=".pdf,.jpg,.jpeg,.png"
+              value="<?php echo $row['image'];?>"
             
               required
             />
@@ -186,6 +188,7 @@ if (isset($_GET['stone_id'])) {
               id="certificate"
               name="certificate"
               accept=".pdf,.jpg,.jpeg,.png"
+              value="<?php echo $row['certification'];?>"
               required
             />
             </div>
@@ -207,15 +210,15 @@ if (isset($_GET['stone_id'])) {
             <!-- Visibility Field -->
             <label for="visibility">Visibility:</label>
             <select id="visibility">
-              <option value="show" <?php if ($row['visibilityv'] === 'Ruby') echo 'selected'; ?>>Show</option>
-              <option value="hide" <?php if ($row['visibility'] === 'Ruby') echo 'selected'; ?>>Hide</option>
+              <option value="show" <?php if ($row['visibilityv'] === 'show') echo 'selected'; ?>>Show</option>
+              <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>Hide</option>
             </select>
 
             <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
-                <option value="availablenot available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
-                <option value="hide" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not Available</option>
+                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
+                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not Available</option>
               </select>
             </div>
 
