@@ -121,7 +121,7 @@ $result = $conn->query($sql);
                         echo "<form method='POST' action='./deleteMeeting.php'>";
                         echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
                         echo "<select name='status' onchange='this.form.submit()'>";
-                        echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
+                        echo "<option value='p'" . ($row['status'] === 'p' ? " selected" : "") . ">Pending</option>";
                         echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
                         echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
                         echo "</select>";
