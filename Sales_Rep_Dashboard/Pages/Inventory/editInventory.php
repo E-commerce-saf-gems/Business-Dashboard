@@ -15,6 +15,7 @@ if (isset($_GET['stone_id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+        header("Location: ./inventory.php") ;
     } else {
         echo "No record found";
         exit;
