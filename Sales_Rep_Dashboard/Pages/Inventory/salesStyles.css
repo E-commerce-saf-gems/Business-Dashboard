@@ -232,3 +232,24 @@ body {
 .sales-table td .options button i {
     margin-right: 5px;
 }
+
+select {
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.success-message {
+    color: #155724; /* Green text for success */
+    background-color: #d4edda; /* Light green background */
+    border: 1px solid #c3e6cb; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Spacing inside the box */
+    margin: 10px 0; /* Space above and below the message */
+    font-size: 14px; /* Font size */
+    font-family: Arial, sans-serif; /* Font family */
+    text-align: center; /* Centered text */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
