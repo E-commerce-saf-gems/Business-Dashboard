@@ -173,11 +173,10 @@ if (!$result) {
                       echo "</td>";
 
                       // Action buttons
-                      echo "<td class='actions'>
-                            <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/editInventory.php' class='btn'>
-                            <i class='bx bx-pencil'></i></a>
-                            <a class='btn'><i class='bx bx-trash'></i></a>
-                            </td>";
+                      echo "<td class='actions'>" ;
+                      echo "<a href='./editInventory.php?stone_id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>" ;
+                      echo "<a class='btn'><i class='bx bx-trash'></i></a>" ;
+                      echo  "</td>";
                       echo "</tr>";
                   }
               } else {
