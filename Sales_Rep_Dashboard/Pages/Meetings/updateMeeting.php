@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $query = "UPDATE meeting SET status = ? WHERE meeting_id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("si", $status, $rmeeting_id);
+    $stmt->bind_param("si", $status, $meeting_id);
 
     if ($stmt->execute()) {
         header("Location: meeting.php?success=1");
         exit();
-    } else {
+    } else { 
         echo "Error updating status: " . $conn->error;
     }
 

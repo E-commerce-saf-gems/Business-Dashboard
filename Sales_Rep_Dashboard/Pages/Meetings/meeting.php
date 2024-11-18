@@ -77,7 +77,7 @@ $result = $conn->query($sql);
                 <th>Name</th>
                 <th>Email Address</th>
                 <th>Status</th>
-                <th>Actions</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -121,19 +121,14 @@ $result = $conn->query($sql);
                         echo "<form method='POST' action='./updateMeeting.php'>";
                         echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
                         echo "<select name='status' onchange='this.form.submit()'>";
-                        echo "<option value='P'" . ($row['status'] === 'p' ? " selected" : "") . ">Pending</option>";
+                        echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
                         echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
                         echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
                         echo "</select>";
                         echo "</form>";
                         echo "</td>";
 
-                        echo "<td class='actions'>";
-                        echo "<a href='./viewMeeting.php?id=" . htmlspecialchars($row['meeting_id']) . "' class='btn' title='View'><i class='bx bx-show'></i></a>";
-                        echo "<a href='./editMeeting.php?id=" . htmlspecialchars($row['meeting_id']) . "' class='btn' title='Edit'><i class='bx bx-pencil'></i></a>";
-                        echo "<a href='./deleteMeeting.php?id=" . htmlspecialchars($row['meeting_id']) . "' class='btn' title='Delete' onclick='return confirm(\"Are you sure you want to delete this meeting?\");'><i class='bx bx-trash'></i></a>";
-                        echo "</td>";
-
+                        
 
                         echo '</tr>';
                     }
