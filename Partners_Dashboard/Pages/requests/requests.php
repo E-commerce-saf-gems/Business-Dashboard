@@ -65,9 +65,7 @@ $result = $conn->query($sql);
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" class="select-all"></th>
                             <th>Date</th>
-                            <th>Name</th>
                             <th>Email</th>
                             <th>Shape</th>
                             <th>Type</th>
@@ -106,9 +104,7 @@ $result = $conn->query($sql);
                                 }
 
                                 echo "<tr>";
-                                echo "<td><input type='checkbox'></td>";
                                 echo "<td>" . $row['date'] . "</td>";
-                                echo "<td>" . $row['customer_name'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['shape'] . "</td>";
                                 echo "<td>" . $row['type'] . "</td>";
@@ -116,7 +112,6 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['color'] . "</td>";
                                 echo "<td>" . $row['requirement'] . "</td>";
                                 echo "<td>";
-
                                 echo "<form method='POST' action='./updateRequest.php'>";
                                 echo "<input type='hidden' name='request_id' value='" . $row['request_id'] . "'>";
                                 echo "<select name='status' onchange='this.form.submit()'>";
@@ -125,16 +120,12 @@ $result = $conn->query($sql);
                                 echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
                                 echo "</select>";
                                 echo "</form>";
-                                echo "</td>";
-                                echo '</tr>';
-
-                                echo "
-                                <td class='actions'>
-                                    <a href='./editSales.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                    <a class='btn'><i class='bx bx-eye'></i></a>
-                                    <a class='btn'><i class='bx bx-trash'></i></a>
-                                </td>
-                                ";
+                                echo "</td>"; // Correctly closing the table cell here
+                                echo "<td class='actions'>"; // Opening the actions cell here
+                                echo "<a onclick='./sendEmail' class='btn'><i class='bx bx-mail-send'></i></a>";
+                                echo "<a class='btn'><i class='bx bx-trash'></i></a>";
+                                echo "</td>"; // Closing the actions cell
+                                echo "</tr>"; // Closing the row                               
                             }
                         } else {
                             echo "<tr><td colspan='9'>No requests found.</td></tr>";
