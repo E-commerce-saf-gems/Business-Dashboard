@@ -174,10 +174,10 @@ if (!$result) {
 
                       // Action buttons
                       echo "<td class='actions'>" ;
-                      echo "<a href='./editInventory.php?stone_id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>" ;
-                      echo "<a class='btn'><i class='bx bx-trash'></i></a>" ;
-                      echo  "</td>";
-                      echo "</tr>";
+                        echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>" ;
+                        echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                    echo "</td>;";
+                    echo "</tr>";
                   }
               } else {
                   echo "<tr><td colspan='9'>No Gems in the inventory.</td></tr>";
