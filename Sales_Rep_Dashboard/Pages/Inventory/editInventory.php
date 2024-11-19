@@ -62,8 +62,7 @@ if (isset($_GET['id'])) {
         <form class="edit-sales-form" id="editgemForm" action="./updategem.php" method="POST" enctype="multipart/form-data">
         <h2>New Inventory Details</h2>
 
-           
-
+        <input type="hidden" name="stone_id" value="<?php echo $stone_id; ?>" />
 
             <!--size Field-->
             <div class="form-group">
@@ -163,7 +162,6 @@ if (isset($_GET['id'])) {
               id="image"
               name="image"
               accept=".pdf,.jpg,.jpeg,.png"
-              value="<?php echo $row['image'];?>"
             
               required
             />
@@ -176,7 +174,6 @@ if (isset($_GET['id'])) {
               id="certificate"
               name="certificate"
               accept=".pdf,.jpg,.jpeg,.png"
-              value="<?php echo $row['certificate'];?>"
               required
             />
             </div>
@@ -196,21 +193,23 @@ if (isset($_GET['id'])) {
             </div>
 
             <!-- Visibility Field -->
+            <div class="form-group">
             <label for="visibility">Visibility:</label>
-            <select id="visibility">
-              <option value="show" <?php if ($row['visibility'] === 'show') echo 'selected'; ?>>Show</option>
-              <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>Hide</option>
+            <select id="visibility" name="visibility">
+              <option value="show" <?php if ($row['visibility'] === 'show') echo 'selected'; ?>>show</option>
+              <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>hide</option>
             </select>
+            </div>
 
             <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
                 <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
-                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not Available</option>
+                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not available</option>
               </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="buyer_id">Buyer ID</label>
               <input
                 type="number"
@@ -220,7 +219,7 @@ if (isset($_GET['id'])) {
                 value="<?php echo $row['buyer_id'];?>"
                 required
               />
-            </div>
+            </div> -->
 
             <!-- Save Button -->
             <!-- <div class="form-actions">

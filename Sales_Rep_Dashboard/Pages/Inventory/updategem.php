@@ -1,76 +1,60 @@
 <?php
-include('../../../database/db.php'); // Include your database connection here
+include('../../../database/db.php');
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Get POST data
-    $stone_id = $_POST['stone_id'];
-    $size = $_POST['size'];
-    $shape = $_POST['shape'];
-    $colour = $_POST['colour'];
-    $type = $_POST['type'];
-    $weight = $_POST['weight'];
-    $origin = $_POST['origin'];
-    $amount = $_POST['amount'];
-    $description = $_POST['description'];
-    $visibility = $_POST['visibility'];
-    $availability = $_POST['availability'];
-    $buyer_id = $_POST['buyer_id'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve and sanitize POST data
+    $stone_id = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
+    $size = isset($_POST['size']) ? $_POST['size'] : null;
+    $shape = isset($_POST['shape']) ? $_POST['shape'] : null;
+    $colour = isset($_POST['colour']) ? $_POST['colour'] : null;
+    $type = isset($_POST['type']) ? $_POST['type'] : null;
+    $origin = isset($_POST['origin']) ? $_POST['origin'] : null;
+    $weight = isset($_POST['weight']) ? $_POST['weight'] : null;
+    $amount = isset($_POST['amount']) ? $_POST['amount'] : null;
+    $description = isset($_POST['description']) ? $_POST['description'] : null;
+    $visibility = isset($_POST['visibility']) ? $_POST['visibility'] : null;
+    $availability = isset($_POST['availability']) ? $_POST['availability'] : null;
 
-    // Handle image upload
-    $image_name = $_FILES['image']['name'];
-    $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = "../../../uploads/" . basename($image_name);
+    // File handling
+    $image_name = null;
+    $certificate_name = null;
 
-    // Handle certificate upload
-    $certificate_name = $_FILES['certificate']['name'];
-    $certificate_tmp_name = $_FILES['certificate']['tmp_name'];
-    $certificate_folder = "../../../uploads/" . basename($certificate_name);
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+        $image_name = $_FILES['image']['name'];
+        $image_tmp_name = $_FILES['image']['tmp_name'];
+        $image_folder = "../../../uploads/" . basename($image_name);
+        move_uploaded_file($image_tmp_name, $image_folder);
+    }
 
-    // Move uploaded files to their respective directories
-    $image_uploaded = move_uploaded_file($image_tmp_name, $image_folder);
-    $certificate_uploaded = move_uploaded_file($certificate_tmp_name, $certificate_folder);
+    if (isset($_FILES['certificate']) && $_FILES['certificate']['error'] == UPLOAD_ERR_OK) {
+        $certificate_name = $_FILES['certificate']['name'];
+        $certificate_tmp_name = $_FILES['certificate']['tmp_name'];
+        $certificate_folder = "../../../uploads/" . basename($certificate_name);
+        move_uploaded_file($certificate_tmp_name, $certificate_folder);
+    }
 
-    if ($image_uploaded && $certificate_uploaded) {
-        // Update the inventory table
-        $sql_inventory = "UPDATE inventory 
-                          SET size = ?, shape = ?, colour = ?, type = ?, weight = ?, origin = ?, 
-                              amount = ?, description = ?, visibility = ?, availability = ?, 
-                              image = ?, certificate = ? 
-                          WHERE stone_id = ?";
-        $stmt_inventory = $conn->prepare($sql_inventory);
-        $stmt_inventory->bind_param("ssssssssssssi", 
-            $size, $shape, $colour, $type, $weight, $origin, $amount, $description, 
-            $visibility, $availability, $image_name, $certificate_name, $stone_id
-        );
+    // Prepare and execute the SQL statement
+    $sql = "UPDATE inventory 
+            SET size=?, shape=?, colour=?, type=?, origin=?, certificate=?, 
+                weight=?, amount=?, image=?, description=?, visibility=?, availability=? 
+            WHERE stone_id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "sssssssssssii", 
+        $size, $shape, $colour, $type, $origin, $certificate_name, 
+        $weight, $amount, $image_name, $description, $visibility, $availability, $stone_id
+    );
 
-        if ($stmt_inventory->execute()) {
-            // Update the buyer table with the new buyer_id
-            $sql_buyer = "UPDATE buyer SET stone_id = ? WHERE buyer_id = ?";
-            $stmt_buyer = $conn->prepare($sql_buyer);
-            $stmt_buyer->bind_param("ii", $stone_id, $buyer_id);
-
-            if ($stmt_buyer->execute()) {
-                // Both updates were successful
-                echo "Record updated successfully.";
-                header("Location: ./inventory.php?editSuccess=1");
-                exit();
-            } else {
-                echo "Error updating buyer record: " . $conn->error;
-                header("Location: ./inventory.php?editSuccess=2");
-            }
-
-            $stmt_buyer->close();
-        } else {
-            echo "Error updating inventory record: " . $conn->error;
-            header("Location: ./inventory.php?editSuccess=2");
-        }
-
-        $stmt_inventory->close();
+    if ($stmt->execute()) {
+        echo "Record updated successfully.";
+        header("Location: ./inventory.php?editSuccess=1");
+        exit();
     } else {
-        echo "Error uploading files.";
+        echo "Error updating record: " . $stmt->error;
         header("Location: ./inventory.php?editSuccess=2");
     }
 
+    $stmt->close();
     $conn->close();
 } else {
     echo "Invalid request method.";
