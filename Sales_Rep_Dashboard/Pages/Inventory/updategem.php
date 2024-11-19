@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $certificate_uploaded = move_uploaded_file($certificate_tmp_name, $certificate_folder);
 
     if ($image_uploaded && $certificate_uploaded) {
-        // Update the `inventory` table
+        // Update the inventory table
         $sql_inventory = "UPDATE inventory 
                           SET size = ?, shape = ?, colour = ?, type = ?, weight = ?, origin = ?, 
                               amount = ?, description = ?, visibility = ?, availability = ?, 
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         );
 
         if ($stmt_inventory->execute()) {
-            // Update the `buyer` table with the new `buyer_id`
+            // Update the buyer table with the new buyer_id
             $sql_buyer = "UPDATE buyer SET stone_id = ? WHERE buyer_id = ?";
             $stmt_buyer = $conn->prepare($sql_buyer);
             $stmt_buyer->bind_param("ii", $stone_id, $buyer_id);

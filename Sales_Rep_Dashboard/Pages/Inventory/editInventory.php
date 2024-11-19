@@ -1,25 +1,28 @@
 <?php
-include('../../../database/db.php');
+include('../../../database/db.php'); // Include your database connection here
 
 
-if (isset($_GET['id'])) {
-  $stone_id = $_GET['id'];
+// Check if request_id is provided in the URL
+if (isset($_GET['stone_id'])) {
+    $stone_id = $_GET['stone_id'];
 
-  $sql = "SELECT * FROM inventory WHERE stone_id = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("i", $stone_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    // Fetch the record from the database
+    $sql = "SELECT * FROM inventory WHERE stone_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $stone_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  if ($result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-  } else {
-      echo "No record found";
-      exit;
-  }
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        header("Location: ./inventory.php") ;
+    } else {
+        echo "No record found";
+        exit;
+    }
 } else {
-  echo "No ID specified";
-  exit;
+    echo "No ID specified";
+    exit;
 }
 ?>
 
@@ -186,7 +189,7 @@ if (isset($_GET['id'])) {
               id="certificate"
               name="certificate"
               accept=".pdf,.jpg,.jpeg,.png"
-              value="<?php echo $row['certificate'];?>"
+              value="<?php echo $row['certification'];?>"
               required
             />
             </div>
@@ -208,7 +211,7 @@ if (isset($_GET['id'])) {
             <!-- Visibility Field -->
             <label for="visibility">Visibility:</label>
             <select id="visibility">
-              <option value="show" <?php if ($row['visibility'] === 'show') echo 'selected'; ?>>Show</option>
+              <option value="show" <?php if ($row['visibilityv'] === 'show') echo 'selected'; ?>>Show</option>
               <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>Hide</option>
             </select>
 
