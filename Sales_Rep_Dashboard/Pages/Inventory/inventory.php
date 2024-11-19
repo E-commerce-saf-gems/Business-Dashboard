@@ -173,10 +173,19 @@ if (!$result) {
                       echo "</td>";
 
                       // Action buttons
-                      echo "<td class='actions'>" ;
-                        echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>" ;
-                        echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
-                    echo "</td>;";
+                      echo "<td class='actions'>";
+
+                      
+                      if ($row['availability'] == 'available' || $row['availability'] == 'Available') {
+                          echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
+                          echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                      }
+
+                      echo "<a href='./viewInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
+
+                      
+                      echo "</td>";
+                      
                     echo "</tr>";
                   }
               } else {
@@ -186,7 +195,6 @@ if (!$result) {
 
             </tbody>
 
-            
           </table>
         </div>
       </main>

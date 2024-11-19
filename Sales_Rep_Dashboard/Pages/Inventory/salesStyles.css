@@ -6,10 +6,6 @@
     box-sizing: border-box ;
 }
 
-a{
-    text-decoration: none ;
-}
-
 li {
     list-style: none ;
 }
@@ -173,6 +169,7 @@ body {
     text-align: center;
 }
 
+
 .sales-table th {
     background: var(--light);
     font-size: 16px;
@@ -198,6 +195,27 @@ body {
     font-size: 14px;
     margin: 0 5px;
 }
+
+/* Action Buttons */
+.actions a {
+    color: #49aaaa;
+    font-size: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.actions a .bx {
+    font-size: 20px;
+}
+
+.actions a:hover {
+    background-color: #e0e0e0;
+    color: #449b9b;
+}
+
 
 .sales-table td .actions button:hover, .sales-table td .options button:hover {
     background: var(--dark-teal);
