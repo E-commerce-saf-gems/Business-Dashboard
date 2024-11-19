@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const stoneDropdown = document.getElementById('stone');
 
     // Fetch customers
-    fetch('./getCustomer.php')
+    fetch('./getCustomers.php')
         .then(response => response.json())
         .then(customers => {
             customers.forEach(customer => {

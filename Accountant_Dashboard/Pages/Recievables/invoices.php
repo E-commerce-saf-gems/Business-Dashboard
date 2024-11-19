@@ -1,7 +1,7 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
+$sql = "SELECT t.transaction_id, t.date, c.email AS email, t.amount
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id";
 $result = $conn->query($sql);
@@ -76,7 +76,6 @@ $result = $conn->query($sql);
                         <tr>
                             <th>Transaction ID</th>
                             <th>Date</th>
-                            <th>Type</th>
                             <th>Customer Email</th>
                             <th>Amount</th>
                             <th>Action</th>
@@ -91,7 +90,6 @@ $result = $conn->query($sql);
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>

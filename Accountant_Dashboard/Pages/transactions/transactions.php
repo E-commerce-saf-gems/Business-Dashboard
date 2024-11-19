@@ -1,10 +1,10 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS email, t.amount AS amount,
+$sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS email, s.amountSettled AS amount,
 
         CASE 
-        WHEN s.total = t.amount THEN 'Completed'
+        WHEN s.total = s.amountSettled THEN 'Completed'
         ELSE 'Pending'
         END AS status
 
@@ -14,9 +14,9 @@ $sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS ema
 
         UNION ALL
 
-        SELECT p.payment_id AS transaction_id , p.date AS date , 'Purchase' AS type, b.email AS email, p.amount AS amount,
+        SELECT p.payment_id AS transaction_id , p.date AS date , 'Purchase' AS type, b.email AS email, r.amountSettled AS amount,
         CASE 
-        WHEN r.total = p.amount THEN 'Completed'
+        WHEN r.total = r.amountSettled THEN 'Completed'
         ELSE 'Pending'
         END AS status
 
