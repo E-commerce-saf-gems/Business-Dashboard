@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $colour = isset($_POST['colour']) ? $_POST['colour'] : null;
     $type = isset($_POST['type']) ? $_POST['type'] : null;
     $origin = isset($_POST['origin']) ? $_POST['origin'] : null;
-    $weight = isset($_POST['weight']) ? $_POST['weight'] : null;
     $amount = isset($_POST['amount']) ? $_POST['amount'] : null;
     $description = isset($_POST['description']) ? $_POST['description'] : null;
     $visibility = isset($_POST['visibility']) ? $_POST['visibility'] : null;
@@ -35,14 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare and execute the SQL statement
     $sql = "UPDATE inventory 
-            SET size=?, shape=?, colour=?, type=?, origin=?, certificate=?, 
-                weight=?, amount=?, image=?, description=?, visibility=?, availability=? 
+            SET size=?, shape=?, colour=?, type=?, origin=?, certificate=?, amount=?, image=?, description=?, visibility=?, availability=? 
             WHERE stone_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "sssssssssssii", 
-        $size, $shape, $colour, $type, $origin, $certificate_name, 
-        $weight, $amount, $image_name, $description, $visibility, $availability, $stone_id
+        "ssssssssssii", 
+        $size, $shape, $colour, $type, $origin, $certificate_name, $amount, $image_name, $description, $visibility, $availability, $stone_id
     );
 
     if ($stmt->execute()) {

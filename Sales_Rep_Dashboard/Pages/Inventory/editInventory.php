@@ -114,10 +114,9 @@ if (isset($_GET['id'])) {
               </select>
             </div>
 
-            
-        
+
               <!--Weight-->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="weight">Weight</label>
               <input
                 type="float"
@@ -127,7 +126,7 @@ if (isset($_GET['id'])) {
                 value="<?php echo $row['weight'];?>"
                 required
               />
-            </div>
+            </div> -->
 
             
             <!-- origin Field -->
@@ -202,13 +201,13 @@ if (isset($_GET['id'])) {
             </select>
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
-                <option value="Available" <?php if ($row['availability'] === 'Available') echo 'selected'; ?>>Available</option>
-                <option value="Sold" <?php if ($row['availability'] === 'Sold') echo 'selected'; ?>>Sold</option>
+                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
+                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not available</option>
               </select>
-            </div> -->
+            </div>
 
             <!-- <div class="form-group">
               <label for="buyer_id">Buyer ID</label>
@@ -223,15 +222,15 @@ if (isset($_GET['id'])) {
             </div> -->
 
             <!-- Save Button -->
-            <div class="form-actions">
+            <!-- <div class="form-actions">
               <div class="form-actions">
                   <button type="submit" class="btn-save">
                       <i class='bx bx-save'></i> Save Changes
                   </button>
               </div>                        
-          </div>
+          </div> -->
           
-            <!-- <?php if ($row['availability'] === 'Available') { ?>
+            <?php if ($row['availability'] === 'Available') { ?>
                         <div class="form-actions">
                             <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
@@ -242,7 +241,7 @@ if (isset($_GET['id'])) {
                             document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
                         </script>
                     <?php } ?>
-          </form> -->
+          </form>
         </div>
       </main>
     </section>
