@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Fetch data from the 'request' and 'customer' tables using a JOIN
-$sql = "SELECT meeting.meeting_id, meeting.type, meeting.date, meeting.time, customer.firstName AS customer_name, meeting.email, meeting.status
+$sql = "SELECT meeting.meeting_id, meeting.type, meeting.date, meeting.time, customer.firstName AS customer_name, customer.email AS email, meeting.status
         FROM meeting
         JOIN customer ON meeting.customer_id = customer.customer_id";
 $result = $conn->query($sql);
@@ -19,10 +19,12 @@ $result = $conn->query($sql);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meeting</title>
-    <link
+
+    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+    <!--<link
       rel="stylesheet"
       href="../../../Components/SalesRep_Dashboard_Template/styles.css"
-    />
+    />-->
     <link rel="stylesheet" href="../Sales/salesStyles.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -152,7 +154,7 @@ if (message) {
 </script>
 
    
-    <script src="/Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script scr="./meeting.js"></script>
   </body>
 </html>
