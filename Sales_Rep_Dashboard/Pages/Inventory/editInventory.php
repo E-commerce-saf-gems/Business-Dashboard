@@ -1,26 +1,41 @@
 <?php
-include('../../../database/db.php'); // Include your database connection here
+include('../../../database/db.php'); 
 
-// Check if request_id is provided in the URL
 if (isset($_GET['id'])) {
-  $stone_id = $_GET['id'];
+    $stone_id = $_GET['id'];
 
-  // Fetch the record from the database
-  $sql = "SELECT * FROM inventory WHERE stone_id = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("i", $stone_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    $sql = "SELECT * FROM inventory WHERE stone_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $stone_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  if ($result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-  } else {
-      echo "No record found";
-      exit;
-  }
+    $buyers_sql = "SELECT buyer_id, email FROM buyer";
+    $buyers_result = $conn->query($buyers_sql);
+
+    $amountSettled = 0; // Initialize amountSettled
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+        $amount_settled_sql = "SELECT amountSettled FROM purchases WHERE stone_id = ? AND buyer_id = ?";
+        $settled_stmt = $conn->prepare($amount_settled_sql);
+        $settled_stmt->bind_param("ii", $stone_id, $row['buyer_id']);
+        $settled_stmt->execute();
+        $settled_result = $settled_stmt->get_result();
+
+        if ($settled_result->num_rows > 0) {
+            $settled_row = $settled_result->fetch_assoc();
+            $amountSettled = $settled_row['amountSettled']; // Assign the fetched value
+        }
+
+    } else {
+        echo "No record found";
+        exit;
+    }
 } else {
-  echo "No ID specified";
-  exit;
+    echo "No ID specified";
+    exit;
 }
 ?>
 
@@ -64,43 +79,19 @@ if (isset($_GET['id'])) {
 
         <input type="hidden" name="stone_id" value="<?php echo $stone_id; ?>" />
 
-            <!--size Field-->
             <div class="form-group">
               <label for="size">Size</label>
-              <input
-                type="text"
-                id="size"
-                name="size"
-                placeholder="size"
-                value="<?php echo $row['size'];?>"
-                required
-              />
+              <input type="text" id="size" name="size" placeholder="size" value="<?php echo $row['size'];?>" required />
             </div>
 
-            <!--shape Feild-->
             <div class="form-group">
               <label for="shape">Shape</label>
-              <input
-                type="text"
-                id="shape"
-                name="shape"
-                placeholder="shape"
-                value="<?php echo $row['shape'];?>"
-                required
-              />
+              <input type="text" id="shape" name="shape" placeholder="shape" value="<?php echo $row['shape'];?>" required />
             </div>
 
-            <!-- Color Field -->
             <div class="form-group">
               <label for="colour">Color</label>
-              <input
-                type="text"
-                id="colour"
-                name="colour"
-                placeholder="Colour"
-                value="<?php echo $row['colour'];?>"
-                required
-              />
+              <input type="text" id="colour" name="colour" placeholder="Colour" value="<?php echo $row['colour'];?>" required />
             </div>
 
             <div class="form-group">
@@ -113,87 +104,52 @@ if (isset($_GET['id'])) {
                 <option value="Diamond"  <?php if ($row['type'] === 'Diamond') echo 'selected'; ?>>Diamond</option>
               </select>
             </div>
-
             
-        
-              <!--Weight-->
-            <div class="form-group">
-              <label for="weight">Weight</label>
-              <input
-                type="float"
-                id="weight"
-                name="weight"
-                placeholder="Weight"
-                value="<?php echo $row['weight'];?>"
-                required
-              />
-            </div>
-
-            
-            <!-- origin Field -->
             <div class="form-group">
               <label for="origin">Origin</label>
-              <input
-                type="text"
-                id="origin"
-                name="origin"
-                placeholder="Origin"
-                value="<?php echo $row['origin'];?>"
-                required
-              />
+              <input type="text" id="origin" name="origin" placeholder="Origin" value="<?php echo $row['origin'];?>" required />
             </div>
 
-            <!-- Amount Field -->
             <div class="form-group">
               <label for="amount">Amount ($)</label>
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                placeholder="Enter Amount"
-                value="<?php echo $row['amount'];?>"
-                required
-              />
+              <input type="number" id="amount" name="amount" placeholder="Enter Amount" value="<?php echo $row['amount'];?>" required />
             </div>
 
-            <!-- Image Field-->
-            <label for="image">Image:</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept=".pdf,.jpg,.jpeg,.png"
-            
-              required
-            />
-
-            <!-- Certificate Field-->
+            <!-- Image Upload Field -->
             <div class="form-group">
-            <label for="certificate">Certificate:</label>
-            <input
-              type="file"
-              id="certificate"
-              name="certificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              required
-            />
+              <label for="image">Image:</label>
+              <?php if (!empty($row['image'])): ?>
+                <div>
+                  <p>Current Image:</p>
+                  <img src="../../../uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Uploaded Image" style="max-width: 200px;" />
+                </div>
+              <?php endif; ?>
+              <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png" />
+              <!-- Hidden field to pass the current image file name -->
+              <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($row['image']); ?>" />
             </div>
 
-               <!--description-->
+            <!-- Certificate Upload Field -->
+            <div class="form-group">
+              <label for="certificate">Certificate:</label>
+              <?php if (!empty($row['certificate'])): ?>
+                <div>
+                  <p>Current Certificate:</p>
+                  <img src="../../../uploads/<?php echo htmlspecialchars($row['certificate']); ?>"/>
+                </div>
+              <?php endif; ?>
+              <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" />
+              <!-- Hidden field to pass the current certificate file name -->
+              <input type="hidden" name="current_certificate" value="<?php echo htmlspecialchars($row['certificate']); ?>" />
+            </div>
+
+
+
             <div class="form-group">
               <label for="description">Description</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Description"
-                value="<?php echo $row['description'];?>"
-
-                required
-              />
+              <input type="text" id="description" name="description" placeholder="Description" value="<?php echo $row['description'];?>" required />
             </div>
 
-            <!-- Visibility Field -->
             <div class="form-group">
             <label for="visibility">Visibility:</label>
             <select id="visibility" name="visibility">
@@ -202,47 +158,39 @@ if (isset($_GET['id'])) {
             </select>
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
-                <option value="Available" <?php if ($row['availability'] === 'Available') echo 'selected'; ?>>Available</option>
-                <option value="Sold" <?php if ($row['availability'] === 'Sold') echo 'selected'; ?>>Sold</option>
+                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
+                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not available</option>
               </select>
-            </div> -->
+            </div>
 
-            <!-- <div class="form-group">
-              <label for="buyer_id">Buyer ID</label>
-              <input
-                type="number"
-                id="buyer_id"
-                name="buyer_id"
-                placeholder="Buyer Id"
-                value="<?php echo $row['buyer_id'];?>"
-                required
-              />
-            </div> -->
+            <div class="form-group">
+                <label for="buyer">Select Buyer:</label>
+                <select id="buyer" name="buyer_id">
+                    <option value="">Select a buyer</option>
+                    <?php
+                    while ($buyer = $buyers_result->fetch_assoc()) {
+                        $selected = ($buyer['buyer_id'] == $row['buyer_id']) ? 'selected' : '';
+                        echo "<option value='{$buyer['buyer_id']}' {$selected}>{$buyer['email']}</option>";
+                    }
+                    ?>
+                </select>
+                <span class="error-message" id="buyer-error"></span>
+            </div>
 
-            <!-- Save Button -->
-            <div class="form-actions">
-              <div class="form-actions">
-                  <button type="submit" class="btn-save">
-                      <i class='bx bx-save'></i> Save Changes
-                  </button>
-              </div>                        
-          </div>
+            <div class="form-group">
+              <label for="amountSettled">Amount Settled:</label>
+              <input type="number" id="amountSettled" name="amountSettled" value="<?php echo $amountSettled; ?>"/>
+            </div>
           
-            <!-- <?php if ($row['availability'] === 'Available') { ?>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">
-                                <i class='bx bx-save'></i> Save Changes
-                            </button>
-                        </div>
-                    <?php } else { ?>
-                        <script>
-                            document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
-                        </script>
-                    <?php } ?>
-          </form> -->
+            <div class="form-actions">
+              <button type="submit" class="btn-save">
+                  <i class='bx bx-save'></i> Save Changes
+              </button>
+            </div>
+          </form>
         </div>
       </main>
     </section>
