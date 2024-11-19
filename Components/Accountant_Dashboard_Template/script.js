@@ -56,7 +56,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/payables/payables.html">
+                        <a href="#">
                             <i class='bx bxs-wallet'></i>
                             <span class="text">Receivables & Payables</span>
                         </a>
