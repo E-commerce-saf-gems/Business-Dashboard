@@ -15,7 +15,8 @@ $ssql = "SELECT
             inventory.visibility,
             inventory.availability
         FROM inventory
-        JOIN buyer ON inventory.buyer_id = buyer.buyer_id";
+        JOIN buyer ON inventory.buyer_id = buyer.buyer_id
+        ORDER BY inventory.date DESC";
 
 $result = $conn->query($ssql);
 
@@ -133,7 +134,6 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
-
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
@@ -173,12 +173,11 @@ if (!$result) {
                       echo "</td>";
 
                       // Action buttons
-                      echo "<td class='actions'>
-                            <a href='../../../Sales_Rep_Dashboard/Pages/Inventory/editInventory.php' class='btn'>
-                            <i class='bx bx-pencil'></i></a>
-                            <a class='btn'><i class='bx bx-trash'></i></a>
-                            </td>";
-                      echo "</tr>";
+                      echo "<td class='actions'>" ;
+                        echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>" ;
+                        echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                    echo "</td>;";
+                    echo "</tr>";
                   }
               } else {
                   echo "<tr><td colspan='9'>No Gems in the inventory.</td></tr>";

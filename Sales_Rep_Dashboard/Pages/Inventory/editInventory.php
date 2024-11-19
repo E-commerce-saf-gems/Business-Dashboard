@@ -1,28 +1,26 @@
 <?php
 include('../../../database/db.php'); // Include your database connection here
 
-
 // Check if request_id is provided in the URL
-if (isset($_GET['stone_id'])) {
-    $stone_id = $_GET['stone_id'];
+if (isset($_GET['id'])) {
+  $stone_id = $_GET['id'];
 
-    // Fetch the record from the database
-    $sql = "SELECT * FROM inventory WHERE stone_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $stone_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+  // Fetch the record from the database
+  $sql = "SELECT * FROM inventory WHERE stone_id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $stone_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        header("Location: ./inventory.php") ;
-    } else {
-        echo "No record found";
-        exit;
-    }
+  if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+  } else {
+      echo "No record found";
+      exit;
+  }
 } else {
-    echo "No ID specified";
-    exit;
+  echo "No ID specified";
+  exit;
 }
 ?>
 
@@ -64,19 +62,7 @@ if (isset($_GET['stone_id'])) {
         <form class="edit-sales-form" id="editgemForm" action="./updategem.php" method="POST" enctype="multipart/form-data">
         <h2>New Inventory Details</h2>
 
-           
-
-            <!-- stone Id Field -->
-            <div class="form-group">
-              <label for="stone_id">Stone Id </label>
-              <input type="text"  
-                id="stone_id"
-                name="stone_id"
-                placeholder="Enter Stone Id"
-                value="<?php echo $row['stone_id'];?>"
-                required
-              />
-            </div>
+        <input type="hidden" name="stone_id" value="<?php echo $stone_id; ?>" />
 
             <!--size Field-->
             <div class="form-group">
@@ -128,7 +114,8 @@ if (isset($_GET['stone_id'])) {
               </select>
             </div>
 
-
+            
+        
               <!--Weight-->
             <div class="form-group">
               <label for="weight">Weight</label>
@@ -176,7 +163,6 @@ if (isset($_GET['stone_id'])) {
               id="image"
               name="image"
               accept=".pdf,.jpg,.jpeg,.png"
-              value="<?php echo $row['image'];?>"
             
               required
             />
@@ -189,7 +175,6 @@ if (isset($_GET['stone_id'])) {
               id="certificate"
               name="certificate"
               accept=".pdf,.jpg,.jpeg,.png"
-              value="<?php echo $row['certification'];?>"
               required
             />
             </div>
@@ -209,21 +194,23 @@ if (isset($_GET['stone_id'])) {
             </div>
 
             <!-- Visibility Field -->
-            <label for="visibility">Visibility:</label>
-            <select id="visibility">
-              <option value="show" <?php if ($row['visibilityv'] === 'show') echo 'selected'; ?>>Show</option>
-              <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>Hide</option>
-            </select>
-
             <div class="form-group">
-              <label for="availability">Availability:</label>
-              <select id="availability" name="availability">
-                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
-                <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not Available</option>
-              </select>
+            <label for="visibility">Visibility:</label>
+            <select id="visibility" name="visibility">
+              <option value="show" <?php if ($row['visibility'] === 'show') echo 'selected'; ?>>show</option>
+              <option value="hide" <?php if ($row['visibility'] === 'hide') echo 'selected'; ?>>hide</option>
+            </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
+              <label for="availability">Availability:</label>
+              <select id="availability" name="availability">
+                <option value="Available" <?php if ($row['availability'] === 'Available') echo 'selected'; ?>>Available</option>
+                <option value="Sold" <?php if ($row['availability'] === 'Sold') echo 'selected'; ?>>Sold</option>
+              </select>
+            </div> -->
+
+            <!-- <div class="form-group">
               <label for="buyer_id">Buyer ID</label>
               <input
                 type="number"
@@ -233,7 +220,7 @@ if (isset($_GET['stone_id'])) {
                 value="<?php echo $row['buyer_id'];?>"
                 required
               />
-            </div>
+            </div> -->
 
             <!-- Save Button -->
             <div class="form-actions">
@@ -243,14 +230,10 @@ if (isset($_GET['stone_id'])) {
                   </button>
               </div>                        
           </div>
-            <!-- <div class="form-actions">
-              <button type="submit" class="btn-save">
-                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php"> <i class="bx bx-save"></i> Save</a>
-              </button>
-            </div> -->
-            <?php if ($row['availability'] === 'available') { ?>
+          
+            <!-- <?php if ($row['availability'] === 'Available') { ?>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
                             </button>
                         </div>
@@ -259,7 +242,7 @@ if (isset($_GET['stone_id'])) {
                             document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
                         </script>
                     <?php } ?>
-          </form>
+          </form> -->
         </div>
       </main>
     </section>
