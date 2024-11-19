@@ -31,9 +31,9 @@ try {
     $stmt = $conn->prepare("
         UPDATE purchases 
         SET amountSettled = amountSettled + ?
-        WHERE buyer_id = ? AND stone_id = ? AND amountSettled < amount
+        WHERE buyer_id = ? AND stone_id = ? AND amountSettled < total
     ");
-    $stmt->bind_param("dii", $amount, $buyer_id, $stone_id);
+    $stmt->bind_param("dii", $amount, $buyer_id, $stone_id , );
 
     if (!$stmt->execute()) {
         throw new Exception("Error updating purchase: " . $stmt->error);

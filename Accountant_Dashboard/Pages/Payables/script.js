@@ -19,31 +19,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const customerDropdown = document.getElementById('customer');
+    const buyerDropdown = document.getElementById('buyer');
     const stoneDropdown = document.getElementById('stone');
 
-    // Fetch customers
-    fetch('./getCustomers.php')
+    // Fetch buyers
+    fetch('./getBuyers.php')
         .then(response => response.json())
-        .then(customers => {
-            customers.forEach(customer => {
+        .then(buyers => {
+            buyers.forEach(buyer => {
                 const option = document.createElement('option');
-                option.value = customer.customer_id;
-                option.textContent = customer.email;
-                customerDropdown.appendChild(option);
+                option.value = buyer.buyer_id;
+                option.textContent = buyer.email;
+                buyerDropdown.appendChild(option);
             });
         })
-        .catch(error => console.error('Error fetching customers:', error));
+        .catch(error => console.error('Error fetching buyers:', error));
 
-    // Fetch stones when a customer is selected
-    customerDropdown.addEventListener('change', function () {
-        const customerId = this.value;
+    // Fetch stones when a buyer is selected
+    buyerDropdown.addEventListener('change', function () {
+        const buyerId = this.value;
 
         // Clear existing stones
         stoneDropdown.innerHTML = '<option value="">Select a Stone</option>';
 
-        if (customerId) {
-            fetch(`./getStones.php?customer_id=${customerId}`)
+        if (buyerId) {
+            fetch(`./getStones.php?buyer_id=${buyerId}`)
                 .then(response => response.json())
                 .then(stones => {
                     stones.forEach(stone => {

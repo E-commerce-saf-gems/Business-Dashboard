@@ -1,7 +1,7 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
+$sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
         FROM payment as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id";
 $result = $conn->query($sql);
@@ -76,7 +76,6 @@ $result = $conn->query($sql);
                         <tr>
                             <th>Payment ID</th>
                             <th>Date</th>
-                            <th>Type</th>
                             <th>Buyer Email</th>
                             <th>Amount</th>
                             <th>Action</th>
@@ -91,7 +90,6 @@ $result = $conn->query($sql);
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['payment_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>

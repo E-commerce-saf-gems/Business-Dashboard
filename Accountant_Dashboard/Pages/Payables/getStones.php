@@ -3,9 +3,9 @@ include('../../../database/db.php'); // Include your database connection
 
 if (isset($_GET['buyer_id'])) {
     $buyer_id = intval($_GET['buyer_id']);
-    $query = "SELECT p.stone_id, st.type , st.weight , (p.amount-p.amountSettled) AS amountToBeSettled FROM purchases p
+    $query = "SELECT p.stone_id, st.type , st.weight , (p.total-p.amountSettled) AS amountToBeSettled FROM purchases p
               JOIN inventory st ON p.stone_id = st.stone_id 
-              WHERE p.buyer_id = ? AND p.amountSettled<p.amount" ;
+              WHERE p.buyer_id = ? AND p.amountSettled<p.total" ;
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $buyer_id);
     $stmt->execute();
