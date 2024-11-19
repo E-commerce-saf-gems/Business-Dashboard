@@ -133,7 +133,6 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
-
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>

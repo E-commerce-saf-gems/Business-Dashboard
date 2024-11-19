@@ -114,7 +114,8 @@ if (isset($_GET['id'])) {
               </select>
             </div>
 
-
+            
+        
               <!--Weight-->
             <div class="form-group">
               <label for="weight">Weight</label>
@@ -201,13 +202,13 @@ if (isset($_GET['id'])) {
             </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
                 <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
                 <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not available</option>
               </select>
-            </div>
+            </div> -->
 
             <!-- <div class="form-group">
               <label for="buyer_id">Buyer ID</label>
@@ -222,15 +223,15 @@ if (isset($_GET['id'])) {
             </div> -->
 
             <!-- Save Button -->
-            <!-- <div class="form-actions">
+            <div class="form-actions">
               <div class="form-actions">
                   <button type="submit" class="btn-save">
                       <i class='bx bx-save'></i> Save Changes
                   </button>
               </div>                        
-          </div> -->
+          </div>
           
-            <?php if ($row['availability'] === 'available') { ?>
+            <!-- <?php if ($row['availability'] === 'available') { ?>
                         <div class="form-actions">
                             <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
@@ -241,7 +242,7 @@ if (isset($_GET['id'])) {
                             document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
                         </script>
                     <?php } ?>
-          </form>
+          </form> -->
         </div>
       </main>
     </section>
