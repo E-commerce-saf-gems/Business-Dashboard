@@ -15,7 +15,8 @@ $ssql = "SELECT
             inventory.visibility,
             inventory.availability
         FROM inventory
-        JOIN buyer ON inventory.buyer_id = buyer.buyer_id";
+        JOIN buyer ON inventory.buyer_id = buyer.buyer_id
+        ORDER BY inventory.date DESC";
 
 $result = $conn->query($ssql);
 

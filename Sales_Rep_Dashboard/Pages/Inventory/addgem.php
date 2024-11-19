@@ -3,15 +3,14 @@
 include '../../../database/db.php';
 
 // Initialize variables for form inputs
-$size = $shape = $color = $type = $origin = $description = $visibility = $availability="";
-$weight = $amount = $buyer_id = 0;
+$shape = $color = $type = $origin = $description = $visibility = $availability = "";
+$weight = $amount = $name = 0;
 $image = $certificate = "";
 $errorMessage = "";
 $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize inputs
-    $size = floatval($_POST['size']);
     $shape = htmlspecialchars(trim($_POST['shape']));
     $color = htmlspecialchars(trim($_POST['colour']));
     $type = htmlspecialchars(trim($_POST['type']));
@@ -20,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amount = floatval($_POST['amount']);
     $description = htmlspecialchars(trim($_POST['description']));
     $visibility = htmlspecialchars(trim($_POST['visibility']));
-    $availability = htmlspecialchars(trim($_POST['availability']));
     $buyer_id = intval($_POST['buyer_id']);
+    $amountSettled = floatval($_POST['amountSettled']);
 
     // Handle file uploads
     if (!empty($_FILES['image']['name']) && !empty($_FILES['certificate']['name'])) {
@@ -42,19 +41,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath) &&
             move_uploaded_file($_FILES["certificate"]["tmp_name"], $certificatePath)) {
 
-            // Prepare SQL query
-            $sql = $sql = "INSERT INTO inventory (size, shape, colour, type, weight, origin, amount, image, certificate, description, visibility, availability, buyer_id)
-            VALUES ('$size', '$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$availability', '$buyer_id')";
-    
+            // Prepare SQL query for inventory table
+            $sql = "INSERT INTO inventory (shape, colour, type, size, origin, amount, image, certificate, description, visibility, buyer_id)
+                    VALUES ('$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$buyer_id')";
 
-            // Execute query
+            // Execute inventory query
             if ($conn->query($sql) === TRUE) {
-                // Redirect to inventory.php upon success
-                header("Location: ../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php");
-                exit();  // Ensure no further code is executed after redirection
+                // Get the last inserted inventory ID
+                $stone_id = $conn->insert_id;
+
+                // Prepare SQL query for purchases table
+                $purchaseSql = "INSERT INTO purchases (stone_id, buyer_id, amount, amountSettled)
+                                VALUES ('$stone_id', '$buyer_id', '$amount', '$amountSettled')";
+
+                // Execute purchases query
+                if ($conn->query($purchaseSql) === TRUE) {
+                    // Redirect to inventory.php upon success
+                    header("Location: ../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php");
+                    exit(); // Ensure no further code is executed after redirection
+                } else {
+                    // Print error if the purchases SQL query fails
+                    $errorMessage = "Error adding purchase record: " . $conn->error;
+                }
             } else {
-                // Print error if the SQL query fails
-                $errorMessage = "Database error: " . $conn->error;
+                // Print error if the inventory SQL query fails
+                $errorMessage = "Error adding inventory record: " . $conn->error;
             }
         } else {
             $errorMessage = "File upload failed. Please check file permissions.";

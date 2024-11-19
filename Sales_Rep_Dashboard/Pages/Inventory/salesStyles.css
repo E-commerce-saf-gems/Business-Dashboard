@@ -240,6 +240,22 @@ select {
     box-sizing: border-box;
 }
 
+.sales-table select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.sales-table select option {
+    padding: 8px;
+    color: #333;
+}
+
 .success-message {
     color: #155724; /* Green text for success */
     background-color: #d4edda; /* Light green background */

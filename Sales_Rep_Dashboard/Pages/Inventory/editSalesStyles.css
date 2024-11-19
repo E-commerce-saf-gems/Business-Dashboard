@@ -103,3 +103,15 @@ a {
 .btn-save i {
     margin-right: 5px;
 }
+
+.btn-save:hover {
+    background-color: var(--black);
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+  }
+  
