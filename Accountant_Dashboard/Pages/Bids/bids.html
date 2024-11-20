@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./bids.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <dashboard-component></dashboard-component>
@@ -36,6 +37,42 @@
                     <a href="./bidssummary.html" class="report-link">View </a>
                 </div>
             </div>
+
+            
+            
+            
+            <div class="chart-slider-container">
+
+                <h1>Bidding Stones  Overview</h1>
+                <div class="chart-slider-wrapper">
+                  <!-- Each chart item with its title -->
+                  <div class="chart-item-wrapper">
+                    <h3 id="title1">Bidding Gemstone Colors <br>Overview</h3>
+                    <canvas id="chart1" class="chart-item"></canvas>
+                  </div>
+                  <div class="chart-item-wrapper">
+                    <h3 id="title2">Bidding Gemstone Shapes <br>Overview</h3>
+                    <canvas id="chart2" class="chart-item"></canvas>
+                  </div>
+                  <div class="chart-item-wrapper">
+                    <h3 id="title3">Bidding Gemstone Types <br>Overview</h3>
+                    <canvas id="chart3" class="chart-item"></canvas>
+                  </div>
+                  <div class="chart-item-wrapper">
+                    <h3 id="title4">Bidding Gemstones from <br>Around the World</h3>
+                    <canvas id="chart4" class="chart-item"></canvas>
+                  </div>
+                </div>
+                <!-- Slider arrows for navigation -->
+                <div class="chart-slider-arrows">
+                  <button id="prev">&larr;</button>
+                  <button id="next">&rarr;</button>
+                </div>
+              </div>
+              
+              
+
+            
         </main>
     </section>
 
@@ -43,6 +80,10 @@
     <script src="./bids.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    
+
+
 
 </body>
 </html>

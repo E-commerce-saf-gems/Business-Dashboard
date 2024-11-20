@@ -321,3 +321,98 @@ body {
 }
 
 
+
+/* Chart Slider Styles */
+.chart-slider-container {
+    position: relative;
+    width: 60%;
+    margin-top: 50px;
+    margin-left: 200px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Chart Wrapper */
+.chart-slider-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-item-wrapper h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+
+/* Individual Chart */
+.chart-slider-wrapper .chart-item {
+    display: none;
+    width: 20%;
+    height: 20%;
+}
+
+.chart-slider-wrapper .chart-item.active {
+    display: block;
+}
+
+/* Navigation Arrows */
+.chart-slider-arrows {
+    position: absolute;
+    top: 60%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.chart-slider-arrows button {
+    background-color: rgb(0, 85, 85);
+    color: var(--teal);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.chart-slider-arrows button:hover {
+    background-color: var(--teal);
+    color: var(--white);
+}
+
+/* Indicator Dots */
+.chart-slider-indicators {
+    display: flex;
+    justify-content: left;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.chart-slider-indicators button {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--grey);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chart-slider-indicators button.active {
+    background-color: var(--teal);
+}
+
+
+
