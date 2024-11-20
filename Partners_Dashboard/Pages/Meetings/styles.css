@@ -1,0 +1,24 @@
+.available-times-container {
+    margin-bottom: 20px;
+}
+
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.time-slot {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.time-slot p {
+    margin: 0;
+    font-size: 14px;
+}

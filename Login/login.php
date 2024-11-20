@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Password is correct, set session variables
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role']; // Assuming a 'role' column exists in your table
+            $_SESSION['user_id'] = $user['user_id'];
 
             // Redirect user to their dashboard based on their role
             if ($user['role'] == 'Partner') {

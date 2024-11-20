@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meeting</title>
+    <link
+      rel="stylesheet"
+      href="../../../Components/SalesRep_Dashboard_Template/styles.css"
+    />
+    <link rel="stylesheet" href="../Sales/salesStyles.css" />
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+      <main>
+        <div class="edit-sales-container">
+            <h2>Add Available Meeting Time</h2>
+            <form action="addAvailableTime.php" method="POST" class="edit-sales-form" id="editSalesForm">
+            <div class="form-group">
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" required />
+            </div>
+
+            <div class="form-group">
+                <label for="time">Select Time:</label>
+                <input type="time" id="time" name="time" required />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-save">
+                        <i class='bx bx-save'></i> Save</a>
+                </button>
+            </div>
+        </div>
+        <!-- Form for adding available date and time -->
+
+      </main>
+    </section>
+
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script src="./meeting.js"></script>
+  </body>
+</html>
