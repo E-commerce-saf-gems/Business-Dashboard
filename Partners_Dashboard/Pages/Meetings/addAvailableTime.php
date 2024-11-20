@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access session variables
+session_start();
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../../Login/login.html");

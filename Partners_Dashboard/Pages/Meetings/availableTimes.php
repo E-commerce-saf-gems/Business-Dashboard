@@ -26,7 +26,7 @@ while ($row = $available_times_result->fetch_assoc()) {
     $available_times[] = $row;
 }
 
-// while ($row = $booked_times_result->fetch_assoc()) {
-//     $booked_times[] = $row;
-// }
+while ($row = $booked_times_result->fetch_assoc()) {
+    $booked_times[] = $row;
+}
 ?>

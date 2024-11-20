@@ -1,47 +1,43 @@
 <?php
-session_start();
+session_start() ;
 include '../../../database/db.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Fetch data from the 'request' and 'customer' tables using a JOIN
 $sql = "SELECT meeting.meeting_id, meeting.type, meeting.date, meeting.time, customer.firstName AS customer_name, customer.email AS email, meeting.status
         FROM meeting
         JOIN customer ON meeting.customer_id = customer.customer_id";
 $result = $conn->query($sql);
 
-// Fetch available times for the current salesRep (using session for user_id)
-$salesRep_id = $_SESSION['user_id']; // Assuming the salesRep_id is stored in the session
+$salesRep_id = $_SESSION['user_id'];
 
 $sql_available_times = "SELECT * FROM availabletimes WHERE salesRep_id = ?"; 
-// $sql_booked_times = "SELECT date, time FROM meeting WHERE salesRep_id = ?";
+$sql_booked_times = "SELECT date, time FROM meeting WHERE salesRep_id = ?";
 
-// Prepare and execute queries
 if ($stmt = $conn->prepare($sql_available_times)) {
     $stmt->bind_param("i", $salesRep_id);
     $stmt->execute();
     $available_times_result = $stmt->get_result();
 }
 
-// if ($stmt = $conn->prepare($sql_booked_times)) {
-//     $stmt->bind_param("i", $salesRep_id);
-//     $stmt->execute();
-//     $booked_times_result = $stmt->get_result();
-// }
+if ($stmt = $conn->prepare($sql_booked_times)) {
+    $stmt->bind_param("i", $salesRep_id);
+    $stmt->execute();
+    $booked_times_result = $stmt->get_result();
+}
 
-// Create arrays to store available and booked times
 $available_times = [];
-// $booked_times = [];
+$booked_times = [];
 
 while ($row = $available_times_result->fetch_assoc()) {
     $available_times[] = $row;
 }
 
-// while ($row = $booked_times_result->fetch_assoc()) {
-//     $booked_times[] = $row;
-// }
+while ($row = $booked_times_result->fetch_assoc()) {
+    $booked_times[] = $row;
+}
 ?>
 
 
@@ -53,10 +49,10 @@ while ($row = $available_times_result->fetch_assoc()) {
     <title>Meeting</title>
 
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
-    <!--<link
+    <!-- <link
       rel="stylesheet"
       href="../../../Components/SalesRep_Dashboard_Template/styles.css"
-    />-->
+    /> -->
     <link rel="stylesheet" href="../Sales/salesStyles.css" />
     <link rel="stylesheet" href="./styles.css">
     <link
@@ -69,7 +65,18 @@ while ($row = $available_times_result->fetch_assoc()) {
 
     <section id="content">
       <main>
-      <div class="available-times-container">
+        <div class="head-title">
+          <div class="left">
+            <h1>Meetings</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a class="active" href="#">Meetings Summary</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="available-times-container">
           <h3>Available Times</h3>
           <div class="time-slots">
 
@@ -93,19 +100,6 @@ while ($row = $available_times_result->fetch_assoc()) {
             ?>
           </div>
         </div>
-        <div class="head-title">
-          <div class="left">
-            <h1>Meetings</h1>
-            <ul class="breadcrumb">
-              <li>
-                <a class="active" href="#">Meetings Summary</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-                <!-- Display Available Times (Boxes) -->
-
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
@@ -128,7 +122,6 @@ while ($row = $available_times_result->fetch_assoc()) {
             <button class="btn-filter">Filter</button>
           </div>
 
-          <!-- Table -->
           <table class="sales-table">
             <thead>
               <tr>
@@ -146,10 +139,8 @@ while ($row = $available_times_result->fetch_assoc()) {
 
 
               <?php
-              // Check if there are results and display each row in the table
               if ($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
-                      // Determine the status label and color
                       $statusLabel = '';
                       $statusColor = '';
 
@@ -189,9 +180,6 @@ while ($row = $available_times_result->fetch_assoc()) {
                         echo "</select>";
                         echo "</form>";
                         echo "</td>";
-
-                        
-
                         echo '</tr>';
                     }
                 } else {
@@ -204,14 +192,14 @@ while ($row = $available_times_result->fetch_assoc()) {
 </main>
 </section>
 
-<script>
-setTimeout(function() {
-const message = document.querySelector(".success-message");
-if (message) {
-    message.style.display = "none";
-}
-}, 5000);
-</script>
+    <script>
+    setTimeout(function() {
+    const message = document.querySelector(".success-message");
+    if (message) {
+        message.style.display = "none";
+    }
+    }, 5000);
+    </script>
 
    
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
@@ -220,6 +208,5 @@ if (message) {
 </html>
 
 <?php
-// Close the database connection
-$conn->close();
+  $conn->close();
 ?>
