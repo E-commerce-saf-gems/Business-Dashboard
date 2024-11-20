@@ -87,6 +87,69 @@ updateSlider();
 
 
 
+/* Function to fetch chart data from the API (PHP backend)
+const fetchChartData = async () => {
+    try {
+      const response = await fetch('get_chart_data.php'); // URL to your PHP endpoint
+      const data = await response.json();
+  
+      // Once the data is fetched, initialize the charts with dynamic data
+      initializeCharts(data);
+    } catch (error) {
+      console.error('Error fetching chart data:', error);
+    }
+  };
+  
+  // Function to initialize the charts
+  const initializeCharts = (chartData) => {
+    // Prepare the data for the charts
+    const colorData = Object.values(chartData.color);
+    const colorLabels = Object.keys(chartData.color);
+  
+    const shapeData = Object.values(chartData.shape);
+    const shapeLabels = Object.keys(chartData.shape);
+  
+    const typeData = Object.values(chartData.type);
+    const typeLabels = Object.keys(chartData.type);
+  
+    const originData = Object.values(chartData.origin);
+    const originLabels = Object.keys(chartData.origin);
+  
+    // Create each chart dynamically using the fetched data
+    createChart('chart1', colorData, colorLabels, 'Bidding Gemstone Colors Overview');
+    createChart('chart2', shapeData, shapeLabels, 'Bidding Gemstone Shapes Overview');
+    createChart('chart3', typeData, typeLabels, 'Bidding Gemstone Types Overview');
+    createChart('chart4', originData, originLabels, 'Bidding Gemstones from Around the World');
+  };
+  
+  // Function to create and display the chart
+  const createChart = (canvasId, data, labels, title) => {
+    new Chart(document.getElementById(canvasId).getContext("2d"), {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: ["teal", "yellow", "orange", "red", "blue", "green"] // Adjust color array if needed
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: false, // Disable title from Chart.js since we handle it separately
+          }
+        }
+      }
+    });
+  };
+  
+  // Fetch chart data and initialize the charts
+  fetchChartData();*/
+  
+
+
+
+
 
 
 
