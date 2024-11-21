@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault(); // Prevent form submission
           }
         });
-      });
+});
+
+
 
 
 

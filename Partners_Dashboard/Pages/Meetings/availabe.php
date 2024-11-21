@@ -76,6 +76,95 @@ $jsonData = json_encode($availableTimes);
             <div class="day-grid" id="dayGrid">
             </div>
         </div>
+
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <div class="success-message">
+            Request status updated successfully!
+        </div>
+        <?php endif; ?>
+
+        <div class="sales-table-container">
+          <div class="table-filters">
+
+            <label for="date-filter">Date:</label>
+            <input type="date" id="date-filter" />
+
+            <label for="status-filter">Time:</label>
+            <input type="time" id="date-filter" />
+
+            <label for="customer-filter">Name:</label>
+            <input type="text" id="customer-filter" placeholder="Search name" />
+
+            <button class="btn-filter">Filter</button>
+          </div>
+
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="select-all" /></th>
+                <th>Appointment Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Status</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <?php
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $statusLabel = '';
+                      $statusColor = '';
+
+                      switch ($row['status']) {
+                          case 'P':
+                              $statusLabel = 'Pending';
+                              $statusColor = 'color: red;';
+                              break;
+                          case 'A':
+                              $statusLabel = 'Approved';
+                              $statusColor = 'color: blue;';
+                              break;
+                          case 'C':
+                              $statusLabel = 'Complete';
+                              $statusColor = 'color: green;';
+                              break;
+                          default:
+                              $statusLabel = 'Unknown';
+                              $statusColor = 'color: black;';
+                      }
+
+                      echo "<tr>";
+                        echo "<td><input type='checkbox'></td>";
+                        echo "<td>" . $row['type'] . "</td>";
+                        echo "<td>" . $row['date'] . "</td>";
+                        echo "<td>" . $row['time'] . "</td>";
+                        echo "<td>" . $row['customer_name'] . "</td>";
+                        echo "<td>" . $row['email'] . "</td>";
+                        echo "<td>";
+
+                        echo "<form method='POST' action='./updateMeeting.php'>";
+                        echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
+                        echo "<select name='status' onchange='this.form.submit()'>";
+                        echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
+                        echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
+                        echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
+                        echo "</select>";
+                        echo "</form>";
+                        echo "</td>";
+                        echo '</tr>';
+                    }
+                } else {
+                    echo "<tr><td colspan='9'>No requests found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>  
     </main>
 </section>
 

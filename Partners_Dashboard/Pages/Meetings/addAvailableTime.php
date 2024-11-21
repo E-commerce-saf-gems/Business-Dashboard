@@ -14,22 +14,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['date'];
     $time = $_POST['time'];
 
-    $sql = "INSERT INTO availabletimes (salesRep_id, date, time) VALUES (?, ?, ?)";
+    $checkSql = "SELECT COUNT(*) as count FROM availabletimes WHERE salesRep_id = ? AND date = ? AND time = ?";
+    $stmt = $conn->prepare($checkSql);
+    $stmt->bind_param("iss", $salesRep_id, $date, $time);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
 
+    if ($count > 0) {
+        header("Location: ./meeting.php?error=duplicate");
+        $conn->close();
+        exit;
+    }
+
+    $sql = "INSERT INTO availabletimes (salesRep_id, date, time) VALUES (?, ?, ?)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("iss", $salesRep_id, $date, $time);
-
         if ($stmt->execute()) {
             header("Location: ./meeting.php?success=1");
         } else {
             header("Location: ./meeting.php?error=1");
         }
-
         $stmt->close();
     } else {
         echo "Error: " . $conn->error;
     }
 
-    $conn->close(); 
+    $conn->close();
 }
+
 ?>

@@ -93,6 +93,9 @@
     color: white;
 }
 
+.time-slot.reserved:hover{
+    background-color: white;
+}
 /* Hide the buttons by default */
 .time-slot-actions {
     display: none;
