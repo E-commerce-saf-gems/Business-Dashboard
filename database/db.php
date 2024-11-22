@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "test";
+$database = "safgems";
 
 // Create the connection
 $conn = new mysqli($servername, $username, $password, $database);
