@@ -10,7 +10,7 @@ $sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS ema
 
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id
-        JOIN sales as s ON t.transaction_id = s.transaction_id
+        JOIN sales as s ON t.sale_id = s.sale_id
 
         UNION ALL
 
@@ -22,7 +22,7 @@ $sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS ema
 
         FROM payment as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id
-        JOIN purchases as r ON p.payment_id = r.payment_id
+        JOIN purchases as r ON p.purchase_id = r.purchase_id
         ORDER BY date DESC";
 $result = $conn->query($sql);
 ?>
