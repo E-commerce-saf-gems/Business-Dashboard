@@ -134,6 +134,7 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
+                <th>ID</th>
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
@@ -153,6 +154,7 @@ if (!$result) {
                   while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
                       echo "<td>" . $row['date'] . "</td>";
+                      echo "<td>" . $row['stone_id'] . "</td>";
                       echo "<td>" . $row['size'] . "</td>";
                       echo "<td>" . $row['shape'] . "</td>";
                       echo "<td>" . $row['colour'] . "</td>";
@@ -200,6 +202,15 @@ if (!$result) {
       </main>
     </section>
 
+    <script>
+    function confirmDelete(stoneId) {
+        const userConfirmed = confirm("Are you sure you want to delete this Gem?");
+        if (userConfirmed) {
+            window.location.href = `./deleteGem.php?id=${stoneId}`;
+        }
+    }
+    </script>
+    
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
     <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
