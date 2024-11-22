@@ -3,7 +3,7 @@ include '../../../database/db.php';
 
 // Corrected SQL query syntax
 $ssql = "SELECT 
-            date,
+            user_id,
             username,
             password,
             role,
@@ -69,8 +69,7 @@ if (!$result) {
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" class="select-all"></th>
-                            <th>Date</th>
+                            <th>UserID</th>
                             <th>Username</th>
                             <th>Passward</th>
                             <th>Role</th>
@@ -84,7 +83,7 @@ if (!$result) {
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()){
                                 echo "<tr>";
-                                echo "<td>" . $row['date'] . "</td>";
+                                echo "<td>" . $row['user_id'] . "</td>";
                                 echo "<td>" . $row['username'] . "</td>";
                                 echo "<td>" . $row['password'] . "</td>";
                                 echo "<td>" . $row['role'] . "</td>";
