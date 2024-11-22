@@ -359,3 +359,25 @@ alerts.forEach(alert => {
     li.textContent = alert;
     alertsList.appendChild(li);
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Activate sidebar menu based on current path
+    updateActiveMenu();
+
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    // Toggle dropdown visibility
+    profileIcon.addEventListener("click", function (e) {
+        e.stopPropagation(); // Prevent click from bubbling up
+        profileMenu.classList.toggle("active");
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener("click", function (e) {
+        if (!profileMenu.contains(e.target)) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
