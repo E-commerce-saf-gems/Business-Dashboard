@@ -134,6 +134,7 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
+                <th>ID</th>
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
@@ -153,6 +154,7 @@ if (!$result) {
                   while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
                       echo "<td>" . $row['date'] . "</td>";
+                      echo "<td>" . $row['stone_id'] . "</td>";
                       echo "<td>" . $row['size'] . "</td>";
                       echo "<td>" . $row['shape'] . "</td>";
                       echo "<td>" . $row['colour'] . "</td>";
