@@ -93,14 +93,17 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>
-                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <a class='btn'><i class='bx bx-trash'></i></a>
-                                        <a class='btn'><i class='bx bx-printer'></i></a>
-                                      </td>";
+                                        <a href='./editPayments.php?payment_id=" . $row['payment_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
+                                        <form action='./deletePayments.php' method='POST' style='display:inline;'>
+                                            <input type='hidden' name='payment_id' value='" . $row['payment_id'] . "'>
+                                            <button type='submit' class='btn'><i class='bx bx-trash'></i></button>
+                                        </form>
+                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
+                                    </td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='9'>No transactions found.</td></tr>";
+                            echo "<tr><td colspan='9'>No Payments found.</td></tr>";
                         }
                         ?>
                     </tbody>
