@@ -53,8 +53,17 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="addnew">
-                <a href="./addTransactions.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            <div class="table-header">
+                    <div class="option-tab">
+                        <a href="../transactions/transactions.php" class="tab-btn"><i ></i>All</a>
+                        <a href="#" class="tab-btn"><i ></i>Invoice</a>
+                        <a href="../Payables/payments.php" class="tab-btn"><i ></i>Payment</a>
+                    </div>
+                    <div class="addnew">
+                        <a href="./addTransactions.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                    </div>
+                    
+                </div>
             </div>
 
 
@@ -93,12 +102,13 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>
+                                        <a href='../Invoices/invoicepreview.php?transaction_id=" . $row['transaction_id'] ."' class='btn'><i class='bx bx-show'></i></a>        
                                         <a href='./editTransactions.php?transaction_id=" . $row['transaction_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
                                         <form action='./deleteTransactions.php' method='POST' style='display:inline;'>
                                             <input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'>
                                             <button type='submit' class='btn'><i class='bx bx-trash'></i></button>
                                         </form>
-                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
+                                        
                                     </td>";
                                 echo "</tr>";
                             }

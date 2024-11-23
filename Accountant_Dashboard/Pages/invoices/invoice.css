@@ -74,282 +74,12 @@ body {
 	pointer-events: none;
 }
 
-.btn-add {
-    background: var(--teal);
-    color: var(--white);
-    margin-top: 50px;
-    padding: 10px 20px;
-    border: none ;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.btn-add:hover {
-    background: var(--black);
-    transition: .3s ease;
-}
-
-/* Sales Summary Box */
-.sales-summary-box {
-    display: flex;
-    justify-content: space-between; /* Distribute the sections evenly */
-    width: 90%; /* Increased width to 90% for a wider box */
-    margin: 20px auto;
-    padding: 20px;
-    background: var(--light);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sales-item {
-    width: 30%;
-    text-align: center;
-}
-
-.sales-item h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: var(--black);
-}
-
-.sales-item p {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--teal);
-}
-
-.addnew{
-    display: flex;
-    justify-content: flex-end; /* Moves content to the right */
-}
-
-/* Sales Table */
-.sales-table-container {
-    margin-top: 20px;
-    background: var(--light);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.table-filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    grid-gap: 20px;
-}
-
-.table-filters label {
-    font-size: 16px;
-    font-family: var(--lato);
-    color: var(--black-grey);
-}
-
-.table-filters input, .table-filters select {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid var(--grey);
-    font-size: 14px;
-}
-
-.table-filters .btn-filter {
-    background: var(--teal);
-    color: var(--white);
-    padding: 6px 20px;
-    border: none ;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.table-filters .btn-filter:hover {
-    background: var(--black);
-    transition: .3s ease;
-}
-
-/* Table Styles */
-.sales-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.sales-table th, .sales-table td {
-    padding: 12px;
-    text-align: center;
-}
-
-.sales-table th {
-    background: var(--light);
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--black);
-}
-
-.sales-table td {
-    font-size: 14px;
-    color: var(--black);
-}
-
-.sales-table tr:nth-child(even) {
-    background: var(--grey-light);
-}
-
-.sales-table td .actions button, .sales-table td .options button {
-    background: var(--teal);
-    color: var(--light);
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    margin: 0 5px;
-}
-
-.sales-table td .actions button:hover, .sales-table td .options button:hover {
-    background: var(--dark-teal);
-}
-
-.sales-table td .options button {
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Checkbox and Option Styling */
-.sales-table td input[type="checkbox"] {
-    transform: scale(1.2);
-}
-
-.sales-table .select-all {
-    transform: scale(1.5);
-}
-
-
-.sales-table td .btn {
-    font-size: 18px;
-    color: var(--black);
-}
-
-.sales-table td .btn:hover{
-    color: var(--teal);
-}
-
-/* Icons for Actions (Print and Share) */
-.sales-table td .options button i {
-    margin-right: 5px;
-}
-
-
-
-
-
-/*CREATE INVOICE*/
-#content main {
-	width: 100%;
-	padding: 36px 24px;
-	font-family: var(--poppins);
-	max-height: calc(100vh - 50px);
-	overflow-y: auto;
-}
-#content main .head-title {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	grid-gap: 16px;
-	flex-wrap: wrap;
-}
-#content main .head-title .left h1 {
-	font-size: 36px;
-	font-weight: 600;
-	margin-bottom: 10px;
-	color: var(--black);
-}
-#content main .head-title .left .breadcrumb {
-	display: flex;
-	align-items: center;
-	grid-gap: 16px;
-}
-#content main .head-title .left .breadcrumb li {
-	color: var(--black);
-}
-#content main .head-title .left .breadcrumb li a {
-	color: var(--black-grey);
-}
 #content main .head-title .left .breadcrumb li a.active {
 	color: var(--teal);
 	pointer-events: unset;
 }
 
-/* Container and Layout */
-.edit-sales-container {
-    width: 100% ;
-    margin-top: 20px;
-    background: var(--light);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-a {
-    text-decoration: none ;
-    color: white ;
-}
-
-/* Form Styling */
-.edit-sales-form .form-group {
-    margin-bottom: 15px;
-}
-
-.edit-sales-form label {
-    font-size: 16px;
-    color: var(--black-grey);
-    display: block;
-    margin-bottom: 5px;
-}
-
-.edit-sales-form input,
-.edit-sales-form select {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid var(--grey);
-    outline: none;
-}
-
-.edit-sales-form input:focus,
-.edit-sales-form select:focus {
-    border-color: var(--teal);
-}
-
-/* Action Buttons */
-.action-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.btn-save {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn-save {
-    background-color: var(--teal);
-    color: var(--light);
-    border: none;
-}
-
-.btn-save i {
-    margin-right: 5px;
-}
 
 
 /*PREVIEW INVOICE*/
@@ -360,6 +90,7 @@ a {
     background-color: #ffffff;
     border: 2px solid #030303;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .invoice-header {
@@ -368,21 +99,31 @@ a {
     border-bottom: 2px solid #333;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
 }
 
 .logo img {
     max-width: 100px;
-    height: auto;
+    display: block;
+    margin: 0 auto;
+    
 }
 
 .company-info {
-    text-align: right;
+    text-align: left;
+    flex: 1;
 }
 
 .info-section {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    text-align: right; /* Align invoice info to the right */
+    flex: 0.5;
+
 }
 
 .bill-to, .ship-to {
@@ -401,14 +142,13 @@ a {
 .invoice-table, .item-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    text-align: center;
 }
 
 .invoice-table th, .invoice-table td, .item-table th, .item-table td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+    padding: 10px;
+    vertical-align: middle;
 }
 
 .invoice-table th, .item-table th {
@@ -456,3 +196,6 @@ a {
 .export-button:hover {
     background-color: var(--teal);
 }
+
+
+  
