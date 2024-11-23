@@ -53,8 +53,17 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="addnew">
-                <a href="./addPayments.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            <div class="table-header">
+                    <div class="option-tab">
+                        <a href="../transactions/transactions.php" class="tab-btn"><i ></i>All</a>
+                        <a href="../Recievables/invoices.php" class="tab-btn"><i ></i>Invoice</a>
+                        <a href="#" class="tab-btn"><i ></i>Payment</a>
+                    </div>
+                    <div class="addnew">
+                        <a href="./addPayments.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                    </div>
+                    
+                </div>
             </div>
 
 

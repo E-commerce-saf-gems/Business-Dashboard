@@ -16,6 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         echo "Payment not found.";
         exit;
     }
+
+
+     // Fetch current buyer email
+     $buyer_id = $payment['buyer_id'];
+     $buyerSQL = "SELECT email FROM buyer WHERE buyer_id = ?";
+     $stmt = $conn->prepare($buyerSQL);
+     $stmt->bind_param("i", $buyer_id);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     $buyer = $result->fetch_assoc();
+     $current_buyer_email = $buyer ? $buyer['email'] : 'Unknown Buyer';
+
+
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $payment_id = $_POST['payment_id'];
     $buyer_id = $_POST['buyer_id'];
@@ -23,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
     $new_amount = $_POST['amount'];
 
     try {
-        // Start payment
+        // Start transaction
         $conn->begin_transaction();
 
         // Fetch original transaction amount
@@ -72,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,17 +104,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
             </div>
 
             <div class="edit-sales-container">
-                <form class="edit-sales-form" method="POST">
+                <form class="edit-sales-form" method="POST" id="editPaymentForm">
                     <input type="hidden" name="payment_id" value="<?= htmlspecialchars($payment['payment_id']) ?>">
 
                     <div class="form-group">
-                        <label for="buyer">Buyer ID</label>
-                        <input type="number" id="buyer" name="buyer_id" value="<?= htmlspecialchars($payment['buyer_id']) ?>" required>
+                        <label for="buyer">Buyer Email</label>
+                        <select id="buyer" name="buyer_id" required>
+                        <option value="">Select a Buyer Email</option> 
+                            <option value="<?= htmlspecialchars($payment['buyer_id']) ?>" selected>
+                                <?= htmlspecialchars($payment['buyer_id']) ?>
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="stone">Stone ID</label>
-                        <input type="number" id="stone" name="stone_id" value="<?= htmlspecialchars($payment['stone_id']) ?>" required>
+                        <label for="stone">Purchased Stones</label>
+                        <select id="stone" name="stone_id" required>
+                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>" selected>
+                                <?= htmlspecialchars($payment['stone_id']) ?>
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -118,6 +139,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         </main>
     </section>
 
-    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buyerDropdown = document.getElementById('buyer');
+            const stoneDropdown = document.getElementById('stone');
+            
+
+            // Fetch buyers
+            fetch('./getBuyers.php')
+                .then(response => response.json())
+                .then(buyers => {
+                    buyers.forEach(buyer => {
+                        const option = document.createElement('option');
+                        option.value = buyer.buyer_id; // Set value as buyer_id
+                        option.textContent = buyer.email; // Show buyer email
+                        buyerDropdown.appendChild(option);
+                    });
+
+                    // Set the current buyer email as selected
+                    Array.from(buyerDropdown.options).forEach(option => {
+                        if (option.textContent === currentBuyerEmail) {
+                            option.selected = true;
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching buyers:', error));
+
+            // Fetch stones when a buyer is selected
+            buyerDropdown.addEventListener('change', function () {
+                const buyerId = this.value;
+
+                // Clear existing stones
+                stoneDropdown.innerHTML = '<option value="">Select a Stone</option>';
+
+                if (buyerId) {
+                    fetch(`./getStones.php?buyer_id=${buyerId}`)
+                        .then(response => response.json())
+                        .then(stones => {
+                            stones.forEach(stone => {
+                                const option = document.createElement('option');
+                                option.value = stone.stone_id;
+                                option.textContent = `${stone.type} (Carats: ${stone.weight}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
+                                stoneDropdown.appendChild(option);
+                            });
+
+                            // Set the current stone as selected
+                            stoneDropdown.value = "<?= htmlspecialchars($payment['stone_id']) ?>";
+                        })
+                        .catch(error => console.error('Error fetching stones:', error));
+                }
+            });
+
+            // Trigger initial stones load for the current buyer
+            buyerDropdown.dispatchEvent(new Event('change'));
+        });
+
+
+        // Hide success message after 5 seconds
+        setTimeout(function () {
+            const message = document.querySelector(".success-message");
+            if (message) {
+                message.style.display = "none";
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
