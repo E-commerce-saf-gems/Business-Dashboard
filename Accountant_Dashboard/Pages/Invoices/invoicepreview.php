@@ -5,10 +5,12 @@ include '../../../database/db.php';
 // Retrieve invoice and customer details (replace `transaction_id` with actual filtering condition, e.g., $_GET['invoice_id'])
 $transaction_id = isset($_GET['transaction_id']) ? intval($_GET['transaction_id']) : 0; // Example transaction ID
 $sql = "SELECT 
-            t.transaction_id, t.description, t.amount,
-            CONCAT(c.firstName,' ',c.lastName) AS customer_name, CONCAT(c.address1,',',c.address2) AS address_name, c.city,c.country, c.postalCode, c.contactNo, c.email
+            t.transaction_id, t.amount,
+            CONCAT(c.firstName,' ',c.lastName) AS customer_name, CONCAT(c.address1,',',c.address2) AS address_name, c.city,c.country, c.postalCode, c.contactNo, c.email,
+            CONCAT(st.colour,' ',st.type,' ',st.weight,' carats') AS description
         FROM transactions t
         JOIN customer c ON t.customer_id = c.customer_id
+        JOIN inventory st ON t.stone_id = st.stone_id
         WHERE t.transaction_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $transaction_id);
