@@ -1,13 +1,15 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount
+$sql = "SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount , CONCAT(st.colour,' ',st.type,' ',st.weight,' ',' carats') AS stone
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id
+        JOIN inventory as st ON t.stone_id = st.stone_id
         UNION ALL
-        SELECT p.payment_id, p.date, 'Purchase' as type, b.email AS email, p.amount
+        SELECT p.payment_id, p.date, 'Purchase' as type, b.email AS email, p.amount, CONCAT(st.colour,' ',st.type,' ',st.weight,' ',' carats') AS stone
         FROM payment as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id
+        JOIN inventory as st ON p.stone_id = st.stone_id
         ORDER BY date DESC";
 $result = $conn->query($sql);
 ?>
@@ -33,7 +35,7 @@ $result = $conn->query($sql);
 					<h1>Transactions</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Transactions Summary</a>
+							<a class="active" href="#">Gem Stone Sales & Purchases Summary</a>
 						</li>
 					</ul>
 				</div>
@@ -102,11 +104,11 @@ $result = $conn->query($sql);
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter">
                     
-                    <label for="status-filter">Status:</label>
+                    <label for="status-filter">Type:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="completed">Completed</option>
-                        <option value="pending">Pending</option>
+                        <option value="sale">Sales</option>
+                        <option value="purchase">Purchase</option>
                     </select>
 
                     <label for="customer-filter">Customer/Buyer:</label>
@@ -122,9 +124,10 @@ $result = $conn->query($sql);
                             <th>Transaction ID</th>
                             <th>Date</th>
                             <th>Type</th>
+                            <th>Stone</th>
                             <th>Email</th>
                             <th>Amount</th>
-                            <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -138,20 +141,20 @@ $result = $conn->query($sql);
                                 // Determine the status label and color
                                 $statusLabel = $status === 'Completed' ? 'Completed' : 'Pending';
                                 $statusColor = $status === 'Completed' ? 'color: green;' : 'color: red;';*/
+
+                                // Get the transaction type and ID from the fetched row
+                                $transactionType = htmlspecialchars($row['type']);
+                                $transactionId = htmlspecialchars($row['transaction_id']);
                                
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['stone']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 //echo "<td style='$statusColor'>$statusLabel</td>";
-                                echo "<td class='actions'>
-                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <a class='btn'><i class='bx bx-trash'></i></a>
-                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
-                                      </td>";
-                                echo "</tr>";
+                                
                             }
                         } else {
                             echo "<tr><td colspan='9'>No transactions found.</td></tr>";

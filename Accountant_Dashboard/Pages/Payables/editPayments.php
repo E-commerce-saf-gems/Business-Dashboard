@@ -17,18 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         exit;
     }
 
-
-     // Fetch current buyer email
-     $buyer_id = $payment['buyer_id'];
-     $buyerSQL = "SELECT email FROM buyer WHERE buyer_id = ?";
-     $stmt = $conn->prepare($buyerSQL);
-     $stmt->bind_param("i", $buyer_id);
-     $stmt->execute();
-     $result = $stmt->get_result();
-     $buyer = $result->fetch_assoc();
-     $current_buyer_email = $buyer ? $buyer['email'] : 'Unknown Buyer';
-
-
+    // Fetch current buyer email
+    $buyer_id = $payment['buyer_id'];
+    $buyerSQL = "SELECT email FROM buyer WHERE buyer_id = ?";
+    $stmt = $conn->prepare($buyerSQL);
+    $stmt->bind_param("i", $buyer_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $buyer = $result->fetch_assoc();
+    $current_buyer_email = $buyer ? $buyer['email'] : 'Unknown Buyer';
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $payment_id = $_POST['payment_id'];
     $buyer_id = $_POST['buyer_id'];
@@ -99,9 +96,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 
     <section id="content">
         <main>
-            <div class="head-title">
-                <h1>Edit Payment</h1>
-            </div>
+        <div class="head-title">
+				<div class="left">
+					<h1>Edit Payment</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="./payments.php">Home</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Edit Payment</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
             <div class="edit-sales-container">
                 <form class="edit-sales-form" method="POST" id="editPaymentForm">
@@ -110,9 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
                     <div class="form-group">
                         <label for="buyer">Buyer Email</label>
                         <select id="buyer" name="buyer_id" required>
-                        <option value="">Select a Buyer Email</option> 
                             <option value="<?= htmlspecialchars($payment['buyer_id']) ?>" selected>
-                                <?= htmlspecialchars($payment['buyer_id']) ?>
+                                <?= htmlspecialchars($current_buyer_email) ?>
                             </option>
                         </select>
                     </div>
@@ -120,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
                     <div class="form-group">
                         <label for="stone">Purchased Stones</label>
                         <select id="stone" name="stone_id" required>
-                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>" selected>
+                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>">
                                 <?= htmlspecialchars($payment['stone_id']) ?>
                             </option>
                         </select>
@@ -143,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         document.addEventListener('DOMContentLoaded', function () {
             const buyerDropdown = document.getElementById('buyer');
             const stoneDropdown = document.getElementById('stone');
-            
 
             // Fetch buyers
             fetch('./getBuyers.php')
@@ -154,13 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
                         option.value = buyer.buyer_id; // Set value as buyer_id
                         option.textContent = buyer.email; // Show buyer email
                         buyerDropdown.appendChild(option);
-                    });
-
-                    // Set the current buyer email as selected
-                    Array.from(buyerDropdown.options).forEach(option => {
-                        if (option.textContent === currentBuyerEmail) {
-                            option.selected = true;
-                        }
                     });
                 })
                 .catch(error => console.error('Error fetching buyers:', error));
@@ -194,7 +193,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
             buyerDropdown.dispatchEvent(new Event('change'));
         });
 
-
         // Hide success message after 5 seconds
         setTimeout(function () {
             const message = document.querySelector(".success-message");
@@ -203,5 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
             }
         }, 5000);
     </script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+
+
 </body>
 </html>
+
