@@ -161,8 +161,15 @@ if (!$result) {
                       echo "<td>" . $row['type'] . "</td>";
                       echo "<td>" . $row['amount'] . "</td>";
                       echo "<td>" . $row['name'] . "</td>";
-                      echo "<td>" . $row['visibility'] . "</td>";
-                      
+                      // echo "<td>" . $row['visibility'] . "</td>";
+                      //form for visibility check
+                      echo "<td>";
+                      echo "<form method='POST' action='./updatevisibility.php'>";
+                      echo "<input type='hidden' name='stone_id' value='" . $row['stone_id'] . "'>";
+                      echo "<select name='visibility' onchange='this.form.submit()'>";
+                      echo "<option value='show'" . ($row['visibility'] === 'show' ? " selected" : "") . ">show</option>";
+                      echo "<option value='hide'" . ($row['visibility'] === 'hide' ? " selected" : "") . ">hide</option>";
+                      echo "</select>";
                       // Form for updating availability
                       echo "<td>";
                       echo "<form method='POST' action='./updateavailable.php'>";
