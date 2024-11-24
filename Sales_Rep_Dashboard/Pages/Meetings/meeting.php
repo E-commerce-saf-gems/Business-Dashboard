@@ -6,9 +6,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Fetch data from the 'request' and 'customer' tables using a JOIN
-$sql = "SELECT meeting.meeting_id, meeting.type, meeting.date, meeting.time, customer.firstName AS customer_name, customer.email AS email, meeting.status
+$sql = "SELECT meeting.meeting_id, meeting.type, availabletimes.date AS date, availabletimes.time AS time, customer.firstName AS customer_name, customer.email AS email, meeting.status
         FROM meeting
-        JOIN customer ON meeting.customer_id = customer.customer_id";
+        JOIN customer ON meeting.customer_id = customer.customer_id  
+        JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id"  
+        ;
 $result = $conn->query($sql);
 ?>
 
