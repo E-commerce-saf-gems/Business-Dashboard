@@ -170,6 +170,9 @@ if (!$result) {
                       echo "<option value='show'" . ($row['visibility'] === 'show' ? " selected" : "") . ">show</option>";
                       echo "<option value='hide'" . ($row['visibility'] === 'hide' ? " selected" : "") . ">hide</option>";
                       echo "</select>";
+                      echo "</form>";
+                      echo "</td>";
+
                       // Form for updating availability
                       echo "<td>";
                       echo "<form method='POST' action='./updateavailable.php'>";
