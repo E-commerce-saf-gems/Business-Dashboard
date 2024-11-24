@@ -18,6 +18,51 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../transactions/styles.css"> 
     <link rel="stylesheet" href="../transactions/edittransactionstyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5); /* Semi-transparent black background */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-actions {
+            gap: 5px;
+            display: flex;
+            justify-content: center;
+            
+        }
+        .modal-actions button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-confirm {
+            background-color: var(--red);
+            color: #fff;
+        }
+        .btn-cancel {
+            background-color: var(--teal);
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <dashboard-component></dashboard-component>
@@ -87,7 +132,9 @@ $result = $conn->query($sql);
                             <th>Date</th>
                             <th>Customer Email</th>
                             <th>Amount</th>
+                            <th>Option</th>
                             <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -104,12 +151,12 @@ $result = $conn->query($sql);
                                 echo "<td class='actions'>
                                         <a href='../Invoices/invoicepreview.php?transaction_id=" . $row['transaction_id'] ."' class='btn'><i class='bx bx-show'></i></a>        
                                         <a href='./editTransactions.php?transaction_id=" . $row['transaction_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <form action='./deleteTransactions.php' method='POST' style='display:inline;'>
-                                            <input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'>
-                                            <button type='submit' class='btn'><i class='bx bx-trash'></i></button>
-                                        </form>
-                                        
+                                        <button class='btn deleteBtn' data-id='" . $row['transaction_id'] . "'><i class='bx bx-trash'></i></button>
                                     </td>";
+                                echo "<td class='actions'>
+                                    <a href='#' class='btn'><i class='bx bx-printer'></i></a>        
+                                    <a href='#' class='btn'><i class='bx bx-send'></i></a>
+                                </td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -118,9 +165,50 @@ $result = $conn->query($sql);
                         ?>
                     </tbody>
                 </table>
+
+                <!-- Modal for Delete Confirmation -->
+                <div class="modal" id="confirmationModal">
+                    <div class="modal-content">
+                        <p>Are you sure you want to delete this invoice?</p>
+                        <div class="modal-actions">
+                            <button class="btn-cancel" id="cancelDelete">Cancel</button>
+                            <form id="deleteForm" action="./deleteInvoices.php" method="POST">
+                                <input type="hidden" name="transaction_id" id="transaction_id">
+                                <button type="submit" class="btn-confirm">Yes, Delete</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>    
         </main>
     </section>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.deleteBtn');
+        const modal = document.getElementById('confirmationModal');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const invoiceIdInput = document.getElementById('transaction_id');
+        const deleteForm = document.getElementById('deleteForm');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const invoiceId = button.getAttribute('data-id');
+                invoiceIdInput.value = invoiceId;
+                modal.style.display = 'block';
+            });
+        });
+
+        cancelDelete.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', event => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="./script.js"></script>
