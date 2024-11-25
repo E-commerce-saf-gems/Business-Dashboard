@@ -91,7 +91,6 @@ $result = $conn->query($sql);
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Amount Settled</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,9 +105,6 @@ $result = $conn->query($sql);
                                 echo "<td>Rs. " . number_format($row['total'], 0, '.', ',') . "</td>";
                                 echo "<td>" . $row['status'] . "</td>";
                                 echo "<td>Rs. " . number_format($row['amountSettled'], 0, '.', ',') . "</td>";
-                                echo "<td class='actions'>";
-                                echo "<a class='btn printBtn'><i class='bx bx-printer'></i></a>";
-                                echo "<a class='btn'><i class='bx bx-trash'></i></a>";
                                 echo "</td>";
                                 echo "</tr>";
                             }

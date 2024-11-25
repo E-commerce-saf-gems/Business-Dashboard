@@ -1,3 +1,18 @@
+<?php
+include '../../../database/db.php';
+
+$sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
+        FROM transactions as t
+        JOIN customer as c ON t.customer_id = c.customer_id
+        UNION ALL
+        SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
+        FROM payments as p
+        JOIN buyer as b ON p.buyer_id = b.buyer_id
+        ORDER BY date DESC";
+$result = $conn->query($sql);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +37,9 @@
 						</li>
 					</ul>
 				</div>
-                
-
 			</div>
 
-            
             <div class="sales-summary-box">
-                
                 <div class="sales-summary-title">
                     <h2>Monthly Transactions Summary</h2>
                 </div>
@@ -45,7 +56,11 @@
                     <p>Rs. 408900</p>
                 </div>
             </div>
-            
+
+            <!-- <div class="addnew">
+                <a href="./customerType.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            </div> -->
+
             <div class="sales-table-container">
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>
@@ -54,7 +69,7 @@
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Paid</option>
+                        <option value="completed">Completed</option>
                         <option value="pending">Pending</option>
                     </select>
 
@@ -64,46 +79,49 @@
                     <button class="btn-filter">Filter</button>
                 </div>
 
-                <!-- Table -->
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th>Transaction No</th>
+                            <th>Transaction ID</th>
                             <th>Date</th>
                             <th>Type</th>
-                            <th>Gem ID</th>
-                            <th>Customer ID</th>
+                            <th>Customer Email</th>
                             <th>Amount</th>
-                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>0001</td>
-                            <td>2024-11-01</td>
-                            <td>Gem Sale</td>
-                            <td>1234</td>
-                            <td>5678</td>
-                            <td>Rs. 50000</td>
-                            <td>Paid</td>
-                            
-                        </tr>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['date']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                                echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
+                                echo "<td class='actions'>
+                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
+                                        <a class='btn'><i class='bx bx-trash'></i></a>
+                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
+                                      </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='9'>No transactions found.</td></tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>    
         </main>
     </section>
 
-
     <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
-    <script scr="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
 
-
-
-
-
-
-
-
+<?php
+$conn->close();
+?>

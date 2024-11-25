@@ -19,40 +19,29 @@ class Dashboard extends HTMLElement {
                             <span class="text">Sales</span>
                         </a>
                     </li>
+                    </li>
                     <li>
-                        <a href="../../Pages/Bids/">
-                            <i class='bx bx-dollar-circle'></i>
-                            <span class="text">Bids</span>
+                        <a href="../../Pages/Purchases/purchases.php">
+                            <i class='bx bx-calendar'></i>
+                            <span class="text">Purchases</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/transactions/transactions.html">
+                        <a href="../../Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Inventory/inventory.html">
+                        <a href="../../Pages/Inventory/inventory.php">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            <i class='bx bxs-user-detail'></i>
-                            <span class="text">Customers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-calendar'></i>
-                            <span class="text">Meetings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../Pages/requests/requests.php">
-                            <i class='bx bxs-dashboard'></i>
-                            <span class="text">Requests</span>
+                        <a href="../../Pages/Bids/bids.html">
+                            <i class='bx bx-dollar-circle'></i>
+                            <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
@@ -85,7 +74,7 @@ class Dashboard extends HTMLElement {
                             <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
                             <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
-                    </div>
+                    </div>
                 </nav>
             </section>
         `;
@@ -139,7 +128,28 @@ searchButton.addEventListener('click', function (e) {
 			searchButtonIcon.classList.replace('bx-x', 'bx-search');
 		}
 	}
-})
+}) ;
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Activate sidebar menu based on current path
+    updateActiveMenu();
+
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    // Toggle dropdown visibility
+    profileIcon.addEventListener("click", function (e) {
+        e.stopPropagation(); // Prevent click from bubbling up
+        profileMenu.classList.toggle("active");
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener("click", function (e) {
+        if (!profileMenu.contains(e.target)) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
 
 menuBar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
@@ -159,7 +169,3 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
-
-
-
-CC

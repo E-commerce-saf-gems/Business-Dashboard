@@ -610,9 +610,9 @@ body {
 
 /* Gem Info Styling */
 .gem-image {
-    width: 30%;  /* Adjust size as needed */
-    height: 30%;
-    margin: 8px 0;
+    width: 20%;  /* Adjust size as needed */
+    height: 50%;
+    margin: 5px 0;
 }
 
 .gem-description {
@@ -738,3 +738,107 @@ th {
 		min-width: 420px;
 	}
 }
+
+
+
+@media screen and (max-width: 768px) {
+	#sidebar {
+		width: 200px;
+	}
+
+	#content {
+		width: calc(100% - 60px);
+	}
+
+	#content nav .nav-link {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	#content nav form .form-input input {
+		display: none;
+	}
+
+	#content nav form .form-input button {
+		width: auto;
+		height: auto;
+		background: transparent;
+		border-radius: none;
+		color: var(--black);
+	}
+
+	#content nav form.show .form-input input {
+		display: block;
+		width: 100%;
+	}
+	#content nav form.show .form-input button {
+		width: 36px;
+		height: 100%;
+		border-radius: 0 36px 36px 0;
+		color: var(--light);
+		background: var(--red);
+	}
+
+	#content nav form.show ~ .notification,
+	#content nav form.show ~ .profile {
+		display: none;
+	}
+
+	#content main .box-info {
+		grid-template-columns: 1fr;
+	}
+
+	#content main .table-data .head {
+		min-width: 420px;
+	}
+	#content main .table-data .order table {
+		min-width: 420px;
+	}
+	#content main .table-data .todo .todo-list {
+		min-width: 420px;
+	}
+}
+
+/* Profile dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.profile .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 10;
+}
+
+/* Dropdown menu links */
+.profile .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.profile .dropdown-menu a:hover {
+    background-color: var(--grey);
+    color: var(--teal);
+}
+
+/* Show dropdown when profile icon is clicked */
+.profile.active .dropdown-menu {
+    display: block;
+}
+
+

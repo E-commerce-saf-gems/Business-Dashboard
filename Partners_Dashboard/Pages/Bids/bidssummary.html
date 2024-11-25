@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Bids</title>
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./bids.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Bids Summary</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="./bids.html">Home</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Bids Summary</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="sales-summary-title">
+                <h2>Monthly Bidding Summary</h2>
+            </div>
+            
+            <div class="summary-cards">
+                
+                
+                <div class="card">
+                    <h3>Total Bids Placed</h3>
+                    <p>10</p>
+                </div>
+                <div class="card">
+                    <h3>Total Bids Revenue</h3>
+                    <p>Rs.1000000.00</p>
+                </div>
+                <div class="card">
+                    <h3>Successful Bids</h3>
+                    <p>8</p>
+                </div>
+                <div class="card">
+                    <h3>Average Bid Value</h3>
+                    <p>Rs.40000.00</p>
+                </div>
+            </div>
+
+
+            
+
+            <div class="sales-table-container">
+                <div class="table-filters">
+                    <label for="date-filter">Date:</label>
+                    <input type="date" id="date-filter">
+                    
+                    <label for="customer-filter">Customer:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Customer">
+                    
+                    <button class="btn-filter">Filter</button>
+                </div>
+
+                <!-- Table -->
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Bid No</th>
+                            <th>Cycle No</th>
+                            <th>Email</th>
+                            <th>Bid Amount</th>
+                            <th>Date</th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0001</td>
+                            <td>3</td>
+                            <td>rgnravindu456@gmail.com</td>
+                            <td>$5000</td>
+                            <td>2024-12-01</td>
+                            
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </main>
+    </section>
+
+
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script scr="bids.js"></script>
+</body>
+</html>

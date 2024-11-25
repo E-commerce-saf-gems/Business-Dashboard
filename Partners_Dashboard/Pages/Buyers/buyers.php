@@ -55,6 +55,10 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
+            <div class="addnew">
+                <a href="./addBuyer.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            </div>
+
             <div class="sales-table-container">
                 <div class="table-filters">
                     <label for="name-filter">Name:</label>
@@ -90,7 +94,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['contact_no'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td class='actions'>";
-                                echo "<a class='btn editBtn'><i class='bx bx-edit'></i></a>";
+                                echo "<a class='btn editBtn'><i onclick='./editBuyer.html' class='bx bx-edit'></i></a>";
                                 echo "<a class='btn'><i class='bx bx-trash'></i></a>";
                                 echo "</td>";
                                 echo "</tr>";

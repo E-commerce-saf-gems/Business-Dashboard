@@ -245,8 +245,106 @@ body {
 
 
 
+/* Container for all report boxes */
+.report-boxes-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+/* Styling for each report box */
+.report-box {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for the boxes */
+.report-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+.report-box h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Description text */
+.report-box p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Styling for the report link */
+.report-link {
+    text-decoration: none;
+    background-color: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Styling for Generate Report Button */
+#generateReportBtn {
+    background-color: #449f9f ; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the text */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    margin-top: 30px;
+}
+
+/* Hover effect */
+#generateReportBtn:hover {
+    background-color: rgb(1, 108, 108); /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Active effect for click */
+#generateReportBtn:active {
+    transform: scale(1); /* Reset scale on click */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+}
 
 
+.report-link:hover {
+    background-color: rgb(1, 101, 101);
+}
 
 
+.success-message {
+    background-color: #d4ede9; 
+    color: #449f9f ; 
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
 
+.error-message {
+    background-color: #d4ede9; 
+    color: #9f4444 ; 
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}

@@ -178,46 +178,51 @@ $jsonData = json_encode($availableTimes);
     const daysPerPage = 5;
 
     function renderDays() {
-        dayGrid.innerHTML = '';
+    dayGrid.innerHTML = '';
 
-        const dates = Object.keys(availableTimes).sort(); 
-        const visibleDates = dates.slice(currentStartIndex, currentStartIndex + daysPerPage);
+    const dates = Object.keys(availableTimes).sort(); 
+    const visibleDates = dates.slice(currentStartIndex, currentStartIndex + daysPerPage);
 
-        visibleDates.forEach(date => {
-            const timeSlots = availableTimes[date];
-            const dayBox = document.createElement('div');
-            dayBox.classList.add('day-box');
+    visibleDates.forEach(date => {
+        const timeSlots = availableTimes[date];
+        const dayBox = document.createElement('div');
+        dayBox.classList.add('day-box');
 
-            const dayTitle = document.createElement('h4');
-            dayTitle.textContent = new Date(date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                month: 'short',
-                day: 'numeric'
+        const dayTitle = document.createElement('h4');
+        dayTitle.textContent = new Date(date).toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'short',
+            day: 'numeric'
+        });
+        dayBox.appendChild(dayTitle);
+
+        const slotsContainer = document.createElement('div');
+        slotsContainer.classList.add('time-slots');
+        
+        timeSlots.forEach(slot => {
+            const timeSlot = document.createElement('div');
+            timeSlot.classList.add('time-slot', slot.availability);
+
+            const timeText = document.createElement('span');
+            timeText.textContent = new Date(`1970-01-01T${slot.time}`).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
             });
-            dayBox.appendChild(dayTitle);
+            timeSlot.appendChild(timeText);
 
-            const slotsContainer = document.createElement('div');
-            slotsContainer.classList.add('time-slots');
-            timeSlots.forEach(slot => {
-                const timeSlot = document.createElement('div');
-                timeSlot.classList.add('time-slot', slot.availability);
-
-                const timeText = document.createElement('span');
-                timeText.textContent = new Date(`1970-01-01T${slot.time}`).toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                timeSlot.appendChild(timeText);
-
+            // Check if the slot availability is 'available'
+            if (slot.availability === 'available') {
                 const actions = document.createElement('div');
                 actions.classList.add('time-slot-actions');
 
+                // Create edit icon
                 const editIcon = document.createElement('i');
                 editIcon.classList.add('bx', 'bx-edit');
                 editIcon.addEventListener('click', () => {
                     window.location.href = `./editAvailableTime.php?date=${date}&time=${slot.time}`;
                 });
 
+                // Create delete icon
                 const deleteIcon = document.createElement('i');
                 deleteIcon.classList.add('bx', 'bx-trash');
                 deleteIcon.addEventListener('click', () => {
@@ -227,17 +232,20 @@ $jsonData = json_encode($availableTimes);
                 actions.appendChild(editIcon);
                 actions.appendChild(deleteIcon);
 
+                // Append actions to the timeSlot
                 timeSlot.appendChild(actions);
-                slotsContainer.appendChild(timeSlot);
-            });
+            }
 
-            dayBox.appendChild(slotsContainer);
-            dayGrid.appendChild(dayBox);
+            slotsContainer.appendChild(timeSlot);
         });
 
-        prevBtn.disabled = currentStartIndex === 0;
-        nextBtn.disabled = currentStartIndex + daysPerPage >= dates.length;
-    }
+        dayBox.appendChild(slotsContainer);
+        dayGrid.appendChild(dayBox);
+    });
+
+    prevBtn.disabled = currentStartIndex === 0;
+    nextBtn.disabled = currentStartIndex + daysPerPage >= dates.length;
+}
 
     prevBtn.addEventListener('click', () => {
         currentStartIndex = Math.max(0, currentStartIndex - daysPerPage);

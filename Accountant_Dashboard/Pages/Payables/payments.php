@@ -1,8 +1,8 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
-        FROM payments as p
+$sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
+        FROM payment as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id";
 $result = $conn->query($sql);
 ?>
@@ -13,9 +13,10 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountant Dashboard</title>
-    <link rel="stylesheet" href="../../../../Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./styles.css">   
+    <title>Accountant Transactions</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../transactions/styles.css"> 
+       
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -25,18 +26,18 @@ $result = $conn->query($sql);
         <main>
             <div class="head-title">
 				<div class="left">
-					<h1>Transactions</h1>
+					<h1>Payments</h1>
 					<ul class="breadcrumb">
-						<li>
-							<a class="active" href="#">Transactions Summary</a>
-						</li>
+						<li><a class="active" href="../transactions/transactions.php">Home</a></li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li><a class="active" href="#">Payments Summary</a></li>
 					</ul>
 				</div>
 			</div>
 
             <div class="sales-summary-box">
                 <div class="sales-summary-title">
-                    <h2>Monthly Transactions Summary</h2>
+                    <h2>Monthly Payments Summary</h2>
                 </div>
                 <div class="sales-item">
                     <h3>This Month</h3>
@@ -53,7 +54,7 @@ $result = $conn->query($sql);
             </div>
 
             <div class="addnew">
-                <a href="./customerType.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                <a href="./addPayments.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
             </div>
 
 
@@ -64,7 +65,7 @@ $result = $conn->query($sql);
                     <input type="date" id="date-filter">
                     
                     <label for="customer-filter">Email:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer">
+                    <input type="text" id="customer-filter" placeholder="Search Buyer">
                     
                     <button class="btn-filter">Filter</button>
                 </div>
@@ -75,8 +76,7 @@ $result = $conn->query($sql);
                         <tr>
                             <th>Payment ID</th>
                             <th>Date</th>
-                            <th>Type</th>
-                            <th>Customer Email</th>
+                            <th>Buyer Email</th>
                             <th>Amount</th>
                             <th>Action</th>
                         </tr>
@@ -90,18 +90,20 @@ $result = $conn->query($sql);
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['payment_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
                                 echo "<td class='actions'>
-                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <a class='btn'><i class='bx bx-trash'></i></a>
+                                        <a href='./editPayments.php?payment_id=" . $row['payment_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
+                                        <form action='./deletePayments.php' method='POST' style='display:inline;'>
+                                            <input type='hidden' name='payment_id' value='" . $row['payment_id'] . "'>
+                                            <button type='submit' class='btn'><i class='bx bx-trash'></i></button>
+                                        </form>
                                         <a class='btn printBtn'><i class='bx bx-printer'></i></a>
-                                      </td>";
+                                    </td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='9'>No transactions found.</td></tr>";
+                            echo "<tr><td colspan='9'>No Payments found.</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -110,7 +112,7 @@ $result = $conn->query($sql);
         </main>
     </section>
 
-    <script src="../../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

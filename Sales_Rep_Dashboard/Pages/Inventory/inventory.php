@@ -202,6 +202,15 @@ if (!$result) {
       </main>
     </section>
 
+    <script>
+    function confirmDelete(stoneId) {
+        const userConfirmed = confirm("Are you sure you want to delete this Gem?");
+        if (userConfirmed) {
+            window.location.href = `./deleteGem.php?id=${stoneId}`;
+        }
+    }
+    </script>
+    
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
     <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
