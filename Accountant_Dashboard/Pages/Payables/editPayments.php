@@ -50,6 +50,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 
         $original_amount = $original_payment['amount'];
 
+        // Calculate amountToBeSettled using total and amountSettled from the purchases table
+        $getPurchaseSQL = "SELECT total, amountSettled FROM purchases WHERE buyer_id = ? AND stone_id = ?";
+        $stmt = $conn->prepare($getPurchaseSQL);
+        $stmt->bind_param("ii", $buyer_id, $stone_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $purchase = $result->fetch_assoc();
+
+        if (!$purchase) {
+            throw new Exception("Purchase record not found for the selected buyer and stone.");
+        }
+
+        $amountToBeSettled = $purchase['total'] - $purchase['amountSettled'];
+
+        // Validate the new amount
+        if ($new_amount < 0) {
+            throw new Exception("Amount cannot be less than 0."); // Validate that the amount is not negative
+        }
+
+        if ($new_amount > $amountToBeSettled) {
+            throw new Exception("Amount exceeds the remaining amount to be settled."); // Validate that the amount does not exceed the amountToBeSettled
+        }
+
         // Update the payment table
         $updatePaymentSQL = "UPDATE payment SET amount = ?, buyer_id = ?, stone_id = ? WHERE payment_id = ?";
         $stmt = $conn->prepare($updatePaymentSQL);
@@ -127,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
                     <div class="form-group">
                         <label for="stone">Purchased Stones</label>
                         <select id="stone" name="stone_id" required>
-                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>">
+                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>" selected>
                                 <?= htmlspecialchars($payment['stone_id']) ?>
                             </option>
                         </select>
@@ -178,7 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
                             stones.forEach(stone => {
                                 const option = document.createElement('option');
                                 option.value = stone.stone_id;
-                                option.textContent = `${stone.type} (Carats: ${stone.weight}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
+                                const isFullySettled = stone.amountToBeSettled === 0;
+                                option.textContent = `${stone.type} (Carats: ${stone.weight}) 
+                                                    ${isFullySettled ? '(Fully Settled)' : `(Amount To Be Settled: Rs.${stone.amountToBeSettled})`}`;
                                 stoneDropdown.appendChild(option);
                             });
 

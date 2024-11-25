@@ -405,10 +405,7 @@ body {
     outline: none;
 }
 
-.edit-sales-form input:focus,
-.edit-sales-form select:focus {
-    border-color: var(--teal);
-}
+
 
 
 /* Action Buttons */
@@ -477,6 +474,32 @@ body {
 .btn-cancel {
     background-color: #3498db;
     color: #fff;
+}
+
+
+/* Error message styling */
+.error-message {
+    color: red; /* Text color for error */
+    display: none; /* Hide the error message initially */
+    background-color: transparent; /* Remove any default background */
+    border: none;
+    font-size: 0.9em; /* Slightly smaller font size */
+    margin-top: 5px; /* Space between the input and the error message */
+    position: relative; /* Position relative to its container */
+}
+
+/* Ensure the input and error message stack correctly */
+.form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack the input and error message vertically */
+}
+
+
+
+/* Show error message when input is invalid (dynamic handling required for custom logic) */
+input:invalid + .error-message {
+    display: block; /* Show error message below the input */
 }
 
 
