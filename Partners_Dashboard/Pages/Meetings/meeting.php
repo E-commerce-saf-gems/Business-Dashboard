@@ -124,6 +124,7 @@ $jsonData = json_encode($availableTimes);
                         <th>Name</th>
                         <th>Email Address</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -165,10 +166,27 @@ $jsonData = json_encode($availableTimes);
                             echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
                             echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
                             echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
+                            echo "<option value='R'" . ($row['status'] === 'R' ? " selected" : "") . ">Request To Delete</option>";
                             echo "</select>";
                             echo "</form>";
                             echo "</td>";
-                            echo '</tr>';
+
+
+                            // Add a Delete button only if the status is "Request To Delete"
+echo "<td>";
+if ($row['status'] === 'R') { // 'R' is the code for "Request To Delete"
+    echo "<form method='POST' action='./deleteMeeting.php'>";
+    echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
+    echo "<button type='submit' class='btn-delete' onclick='return confirm(\"Are you sure you want to delete this meeting?\")'>Delete</button>";
+    echo "</form>";
+} else {
+    echo "-"; // Placeholder or leave blank if no action needed
+}
+echo "</td>";
+
+
+            echo "</tr>";
+                            
                         }
                     } else {
                         echo "<tr><td colspan='9'>No requests found.</td></tr>";
