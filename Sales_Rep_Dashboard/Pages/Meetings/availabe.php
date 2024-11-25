@@ -9,18 +9,14 @@ if (!isset($_SESSION['user_id'])) {
 
 $salesRep_id = $_SESSION['user_id'];
 
-// Fetch available times for the logged-in sales representative
-$sql_available_times = "SELECT date, time, availability 
-                        FROM availabletimes 
-                        WHERE salesRep_id = ? 
-                        ORDER BY date, time";
-$stmt = $conn->prepare($sql_available_times);
+$sql = "SELECT date, time, availability FROM availabletimes WHERE salesRep_id = ? ORDER BY date, time";
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $salesRep_id);
 $stmt->execute();
-$availableTimesResult = $stmt->get_result();
+$result = $stmt->get_result();
 
 $availableTimes = [];
-while ($row = $availableTimesResult->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) {
     $date = $row['date'];
     $time = $row['time'];
     $availability = $row['availability'];
@@ -30,23 +26,6 @@ while ($row = $availableTimesResult->fetch_assoc()) {
     }
     $availableTimes[$date][] = ['time' => $time, 'availability' => $availability];
 }
-
-$stmt->close();
-
-// Fetch meetings for the logged-in sales representative
-$sql_meetings = "SELECT m.meeting_id, m.type, a.date, a.time, 
-                        c.firstName AS customer_name, c.email AS email, 
-                        m.status 
-                 FROM meeting AS m
-                 JOIN customer AS c ON m.customer_id = c.customer_id
-                 JOIN availabletimes AS a ON m.availableTimes_id = a.availableTimes_id
-                 WHERE a.salesRep_id = ?
-                 ORDER BY a.date, a.time";
-
-$stmt = $conn->prepare($sql_meetings);
-$stmt->bind_param("i", $salesRep_id);
-$stmt->execute();
-$meetingsResult = $stmt->get_result();
 
 $stmt->close();
 $conn->close();
@@ -59,11 +38,15 @@ $jsonData = json_encode($availableTimes);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meetings</title>
+    <title>Meeting</title>
+
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="../Sales/salesStyles.css" />
     <link rel="stylesheet" href="./styles.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+
+    </style>
 </head>
 <body>
 <dashboard-component></dashboard-component>
@@ -93,7 +76,7 @@ $jsonData = json_encode($availableTimes);
             <div class="day-grid" id="dayGrid">
             </div>
         </div>
-        
+
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
             Request status updated successfully!
@@ -101,100 +84,87 @@ $jsonData = json_encode($availableTimes);
         <?php endif; ?>
 
         <div class="sales-table-container">
-            <div class="table-filters">
-                <label for="date-filter">Date:</label>
-                <input type="date" id="date-filter" />
+          <div class="table-filters">
 
-                <label for="status-filter">Time:</label>
-                <input type="time" id="time-filter" />
+            <label for="date-filter">Date:</label>
+            <input type="date" id="date-filter" />
 
-                <label for="customer-filter">Name:</label>
-                <input type="text" id="customer-filter" placeholder="Search name" />
+            <label for="status-filter">Time:</label>
+            <input type="time" id="date-filter" />
 
-                <button class="btn-filter">Filter</button>
-            </div>
+            <label for="customer-filter">Name:</label>
+            <input type="text" id="customer-filter" placeholder="Search name" />
 
-            <table class="sales-table">
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" class="select-all" /></th>
-                        <th>Appointment Type</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Name</th>
-                        <th>Email Address</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($meetingsResult->num_rows > 0) {
-                        while ($row = $meetingsResult->fetch_assoc()) {
-                            $statusLabel = '';
-                            $statusColor = '';
+            <button class="btn-filter">Filter</button>
+          </div>
 
-                            switch ($row['status']) {
-                                case 'P':
-                                    $statusLabel = 'Pending';
-                                    $statusColor = 'color: red;';
-                                    break;
-                                case 'A':
-                                    $statusLabel = 'Approved';
-                                    $statusColor = 'color: blue;';
-                                    break;
-                                case 'C':
-                                    $statusLabel = 'Complete';
-                                    $statusColor = 'color: green;';
-                                    break;
-                                default:
-                                    $statusLabel = 'Unknown';
-                                    $statusColor = 'color: black;';
-                            }
-
-                            echo "<tr>";
-                            echo "<td><input type='checkbox'></td>";
-                            echo "<td>" . $row['type'] . "</td>";
-                            echo "<td>" . $row['date'] . "</td>";
-                            echo "<td>" . $row['time'] . "</td>";
-                            echo "<td>" . $row['customer_name'] . "</td>";
-                            echo "<td>" . $row['email'] . "</td>";
-                            echo "<td>";
-                            echo "<form method='POST' action='./updateMeeting.php'>";
-                            echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
-                            echo "<select name='status' onchange='this.form.submit()'>";
-                            echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
-                            echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
-                            echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
-                            echo "<option value='R'" . ($row['status'] === 'R' ? " selected" : "") . ">Request To Delete</option>";
-                            echo "</select>";
-                            echo "</form>";
-                            echo "</td>";
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="select-all" /></th>
+                <th>Appointment Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Status</th>
+                
+              </tr>
+            </thead>
+            <tbody>
 
 
-                            // Add a Delete button only if the status is "Request To Delete"
-echo "<td>";
-if ($row['status'] === 'R') { // 'R' is the code for "Request To Delete"
-    echo "<form method='POST' action='./deleteMeeting.php'>";
-    echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
-    echo "<button type='submit' class='btn-delete' onclick='return confirm(\"Are you sure you want to delete this meeting?\")'>Delete</button>";
-    echo "</form>";
-} else {
-    echo "-"; // Placeholder or leave blank if no action needed
-}
-echo "</td>";
+              <?php
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $statusLabel = '';
+                      $statusColor = '';
 
+                      switch ($row['status']) {
+                          case 'P':
+                              $statusLabel = 'Pending';
+                              $statusColor = 'color: red;';
+                              break;
+                          case 'A':
+                              $statusLabel = 'Approved';
+                              $statusColor = 'color: blue;';
+                              break;
+                          case 'C':
+                              $statusLabel = 'Complete';
+                              $statusColor = 'color: green;';
+                              break;
+                          default:
+                              $statusLabel = 'Unknown';
+                              $statusColor = 'color: black;';
+                      }
 
-            echo "</tr>";
-                            
-                        }
-                    } else {
-                        echo "<tr><td colspan='9'>No requests found.</td></tr>";
+                      echo "<tr>";
+                        echo "<td><input type='checkbox'></td>";
+                        echo "<td>" . $row['type'] . "</td>";
+                        echo "<td>" . $row['date'] . "</td>";
+                        echo "<td>" . $row['time'] . "</td>";
+                        echo "<td>" . $row['customer_name'] . "</td>";
+                        echo "<td>" . $row['email'] . "</td>";
+                        echo "<td>";
+
+                        echo "<form method='POST' action='./updateMeeting.php'>";
+                        echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
+                        echo "<select name='status' onchange='this.form.submit()'>";
+                        echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
+                        echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
+                        echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
+                        echo "</select>";
+                        echo "</form>";
+                        echo "</td>";
+                        echo '</tr>';
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                } else {
+                    echo "<tr><td colspan='9'>No requests found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>  
     </main>
 </section>
 

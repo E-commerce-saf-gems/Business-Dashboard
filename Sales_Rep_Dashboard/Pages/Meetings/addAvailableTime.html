@@ -9,7 +9,7 @@
       href="../../../Components/SalesRep_Dashboard_Template/styles.css"
     />
     <link rel="stylesheet" href="../Sales/salesStyles.css" />
-    <link rel="stylesheet" href="../Sales/editSalesStyles.css">
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -21,25 +21,35 @@
     <section id="content">
       <main>
         <div class="edit-sales-container">
-            <h2>Add Available Meeting Time</h2>
-            <form action="addAvailableTime.php" method="POST" class="edit-sales-form" id="editSalesForm">
+          <h2>Add Available Meeting Time</h2>
+          <form
+            action="addAvailableTime.php"
+            method="POST"
+            class="edit-sales-form"
+            id="editSalesForm"
+          >
+            <!-- Date Input -->
             <div class="form-group">
-                <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date" required />
+              <label for="date">Select Date:</label>
+              <input type="date" id="date" name="date" required />
+              <span id="dateError" class="error-message">Please select a future date.</span>
             </div>
 
+            <!-- Time Input -->
             <div class="form-group">
-                <label for="time">Select Time:</label>
-                <input type="time" id="time" name="time" required />
+              <label for="time">Select Time:</label>
+              <input type="time" id="time" name="time" required />
+              <span id="timeError" class="error-message">Please select a valid future time.</span>
             </div>
+
+            <!-- Submit Button -->
             <div class="form-actions">
-                <button type="submit" class="btn-save">
-                        <i class='bx bx-save'></i> Save</a>
-                </button>
+              <button type="submit" class="btn-save">
+                <i class="bx bx-save"></i> Save
+              </button>
             </div>
+          </form>
         </div>
-        <!-- Form for adding available date and time -->
-
       </main>
     </section>
 
