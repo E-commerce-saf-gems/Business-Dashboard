@@ -17,6 +17,30 @@ $date = $_GET['date'];
 $time = $_GET['time'];
 $error = '';
 
+// Fetch the availability status for the given date and time
+$sql_check = "SELECT availability FROM availabletimes WHERE date = ? AND time = ?";
+$stmt = $conn->prepare($sql_check);
+$stmt->bind_param("ss", $date, $time);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $availabilityData = $result->fetch_assoc();
+    $availability = $availabilityData['availability'];
+} else {
+    // Redirect if the date and time do not exist in the database
+    $conn->close();
+    header("Location: ./meeting.php?error=InvalidDateTime");
+    exit;
+}
+
+// Only allow edit if the availability status is "available"
+if ($availability !== 'available') {
+    $conn->close();
+    header("Location: ./meeting.php?error=NotEditable");
+    exit;
+}
+
 // Handle form submission for updating date and time
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newDate = $_POST['date'];
@@ -51,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

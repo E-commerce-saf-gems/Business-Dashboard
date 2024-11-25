@@ -38,12 +38,12 @@ $availability = $row['availability'];
 
 $stmt->close();
 
-/*if ($availability !== 'available') {
+if ($availability !== 'available') {
     // Only allow deletion if the availability status is Pending
     $conn->close();
     header("Location: ./meeting.php?error=NotDeletable");
     exit;
-}*/
+}
 
 // Proceed to delete the time slot
 $sql_delete = "DELETE FROM availabletimes 
