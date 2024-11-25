@@ -159,7 +159,7 @@ $result = $conn->query($sql);
                         <label for="customer-filter">Customer/Buyer:</label>
                         <input type="text" id="customer-filter"  name="customer" placeholder="Search Customer/Buyer" value="<?php echo htmlspecialchars($customerFilter); ?>">
                     
-                        <button class="btn-filter" type="submit">Filter</button>
+                        <button class="btn-filter" type="submit" onclick="filterTransactions()">Filter</button>
                         <button><a href="transactions.php" class="btn-clear">Clear</a></button>
                     </form>
                 </div>

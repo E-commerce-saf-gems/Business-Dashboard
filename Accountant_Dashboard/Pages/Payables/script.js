@@ -100,7 +100,7 @@ setTimeout(function() {
     }
 }, 5000);
 
-//******FILTER********
+//*******FILTER********
 function filterTransactions() {
     const date = document.getElementById('date-filter').value;
     const customer = document.getElementById('customer-filter').value;

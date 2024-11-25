@@ -142,7 +142,7 @@ $result = $conn->query($sql);
                         <label for="customer-filter">Email:</label>
                         <input type="text" id="customer-filter" name="customer" placeholder="Search Customer" value="<?php echo htmlspecialchars($customerFilter); ?>">
                         
-                        <button class="btn-filter" type="submit">Filter</button>
+                        <button class="btn-filter" type="submit" onclick="filterTransactions()">Filter</button>
                         <button><a href="invoices.php" class="btn-clear">Clear</a></button>
                     </form>
                 </div>
