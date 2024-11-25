@@ -1,28 +1,13 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date AS date , 'Sale' AS type, c.email AS email, s.amountSettled AS amount,
-
-        CASE 
-        WHEN s.total = s.amountSettled THEN 'Completed'
-        ELSE 'Pending'
-        END AS status
-
+$sql = "SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id
-        JOIN sales as s ON t.sale_id = s.sale_id
-
         UNION ALL
-
-        SELECT p.payment_id AS transaction_id , p.date AS date , 'Purchase' AS type, b.email AS email, r.amountSettled AS amount,
-        CASE 
-        WHEN r.total = r.amountSettled THEN 'Completed'
-        ELSE 'Pending'
-        END AS status
-
-        FROM payment as p
+        SELECT p.payment_id, p.date, 'Purchase' as type, b.email AS email, p.amount
+        FROM payments as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id
-        JOIN purchases as r ON p.purchase_id = r.purchase_id
         ORDER BY date DESC";
 $result = $conn->query($sql);
 ?>
@@ -72,9 +57,19 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="addnew">
-                <a href="./customerType.php" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+            <div class="table-header">
+                    <div class="option-tab">
+                        <a href="#" class="tab-btn"><i ></i>All</a>
+                        <a href="../Recievables/invoices.php" class="tab-btn"><i ></i>Invoice</a>
+                        <a href="../Payables/payments.php" class="tab-btn"><i ></i>Payment</a>
+                    </div>
+                    <div class="addnew">
+                        <a href="./customerType.php" class="btn-add"><i class='bx bx-plus'></i>Add New Trader</a>
+                    </div>
+                    
+                </div>
             </div>
+
 
             <?php if (isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 1): ?>
                 <div class="success-message">
@@ -129,7 +124,6 @@ $result = $conn->query($sql);
                             <th>Type</th>
                             <th>Email</th>
                             <th>Amount</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -138,12 +132,12 @@ $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 
-                                // Trim and normalize the status value
+                                /*Trim and normalize the status value
                                 $status = htmlspecialchars($row['status']);
 
                                 // Determine the status label and color
                                 $statusLabel = $status === 'Completed' ? 'Completed' : 'Pending';
-                                $statusColor = $status === 'Completed' ? 'color: green;' : 'color: red;';
+                                $statusColor = $status === 'Completed' ? 'color: green;' : 'color: red;';*/
                                
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['transaction_id']) . "</td>";
@@ -151,7 +145,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
-                                echo "<td style='$statusColor'>$statusLabel</td>";
+                                //echo "<td style='$statusColor'>$statusLabel</td>";
                                 echo "<td class='actions'>
                                         <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
                                         <a class='btn'><i class='bx bx-trash'></i></a>

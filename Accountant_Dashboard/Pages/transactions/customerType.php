@@ -24,7 +24,22 @@ $result = $conn->query($sql);
     <dashboard-component></dashboard-component>
 
     <section id="content">
-        <main>  
+        <main> 
+        <div class="head-title">
+				<div class="left">
+					<h1>Add Transaction</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="../transactions/transactions.php">Home</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Add New Trader</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
             <div class="report-boxes-container">
                 <div class="report-box">
                     <h2>New <br> Customer</h2>
@@ -34,11 +49,6 @@ $result = $conn->query($sql);
                 <div class="report-box">
                     <h2>New <br> Buyer</h2>
                     <a href="../Buyer/addBuyer.html" class="report-link">Add Buyer</a>
-                </div>
-
-                <div class="report-box">
-                    <h2>Existing <br> Customer/Buyer</h2>
-                    <a href="./transactionType.html" class="report-link">Create Transaction</a>
                 </div>
             </div>
 
@@ -50,7 +60,7 @@ $result = $conn->query($sql);
                     <label for="customer-filter">Buyer:</label>
                     <input type="text" id="customer-filter" placeholder="Search Buyer">
                     
-                    <button class="btn-filter">Filter</button>
+                    <button class="btn-filter">Search</button>
                 </div>
 
                 <!-- Table -->
