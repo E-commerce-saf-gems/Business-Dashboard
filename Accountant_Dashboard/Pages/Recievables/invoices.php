@@ -1,9 +1,27 @@
 <?php
 include '../../../database/db.php';
 
+// Get filter values from GET request
+$dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
+$customerFilter = isset($_GET['customer']) ? $_GET['customer'] : '';
+
 $sql = "SELECT t.transaction_id, t.date, c.email AS email, t.amount
         FROM transactions as t
-        JOIN customer as c ON t.customer_id = c.customer_id";
+        JOIN customer as c ON t.customer_id = c.customer_id
+        WHERE 1";
+
+// Apply the date filter for transactions
+if ($dateFilter) {
+    $sql .= " AND DATE(t.date) = '" . $conn->real_escape_string($dateFilter) . "'";
+}
+
+// Apply the customer filter for transactions
+if ($customerFilter) {
+    $sql .= " AND c.email LIKE '%" . $conn->real_escape_string($customerFilter) . "%'";
+}
+$sql .= " ORDER BY t.date DESC";  // Order by the date column
+
+
 $result = $conn->query($sql);
 ?>
 
@@ -63,6 +81,8 @@ $result = $conn->query($sql);
             color: #fff;
         }
     </style>
+
+    
 </head>
 <body>
     <dashboard-component></dashboard-component>
@@ -115,13 +135,16 @@ $result = $conn->query($sql);
             
             <div class="sales-table-container">
                 <div class="table-filters">
-                    <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
-                    
-                    <label for="customer-filter">Email:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer">
-                    
-                    <button class="btn-filter">Filter</button>
+                    <form method="GET" action="invoices.php">
+                        <label for="date-filter">Date:</label>
+                        <input type="date" id="date-filter" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">
+                        
+                        <label for="customer-filter">Email:</label>
+                        <input type="text" id="customer-filter" name="customer" placeholder="Search Customer" value="<?php echo htmlspecialchars($customerFilter); ?>">
+                        
+                        <button class="btn-filter" type="submit">Filter</button>
+                        <button><a href="invoices.php" class="btn-clear">Clear</a></button>
+                    </form>
                 </div>
 
                 <!-- Table -->
@@ -139,7 +162,7 @@ $result = $conn->query($sql);
                     </thead>
                     <tbody>
                         <?php
-                        if ($result->num_rows > 0) {
+                        if ( $result && $result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 // Determine the status label and color
                                
@@ -172,7 +195,7 @@ $result = $conn->query($sql);
                         <p>Are you sure you want to delete this invoice?</p>
                         <div class="modal-actions">
                             <button class="btn-cancel" id="cancelDelete">Cancel</button>
-                            <form id="deleteForm" action="./deleteInvoices.php" method="POST">
+                            <form id="deleteForm" action="./deleteTransactions.php" method="POST">
                                 <input type="hidden" name="transaction_id" id="transaction_id">
                                 <button type="submit" class="btn-confirm">Yes, Delete</button>
                             </form>

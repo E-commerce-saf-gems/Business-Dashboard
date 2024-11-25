@@ -186,7 +186,7 @@ body {
     font-size: 14px;
 }
 
-.table-filters .btn-filter {
+.table-filters .btn-filter, .btn-clear{
     background: var(--teal);
     color: var(--white);
     padding: 6px 20px;
@@ -196,7 +196,7 @@ body {
     font-size: 16px;
 }
 
-.table-filters .btn-filter:hover {
+.table-filters .btn-filter:hover ,.btn-clear:hover {
     background: var(--black);
     transition: .3s ease;
 }

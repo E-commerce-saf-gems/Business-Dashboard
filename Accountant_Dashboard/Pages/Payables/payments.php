@@ -3,7 +3,19 @@ include '../../../database/db.php';
 
 $sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
         FROM payment as p
-        JOIN buyer as b ON p.buyer_id = b.buyer_id";
+        JOIN buyer as b ON p.buyer_id = b.buyer_id
+        WHERE 1";
+// Apply the date filter for transactions
+if ($dateFilter) {
+    $sql .= " AND DATE(t.date) = '" . $conn->real_escape_string($dateFilter) . "'";
+}
+
+// Apply the customer filter for transactions
+if ($buyerFilter) {
+    $sql .= " AND c.email LIKE '%" . $conn->real_escape_string($buyerFilter) . "%'";
+}
+$sql .= " ORDER BY t.date DESC";  // Order by the date column
+    
 $result = $conn->query($sql);
 ?>
 
@@ -115,6 +127,7 @@ $result = $conn->query($sql);
                     <input type="text" id="customer-filter" placeholder="Search Buyer">
                     
                     <button class="btn-filter">Filter</button>
+                    <button><a href="transactions.php" class="btn-clear">Clear</a></button>
                 </div>
 
                 <!-- Table -->
