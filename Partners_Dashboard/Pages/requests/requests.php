@@ -4,7 +4,8 @@ include '../../../database/db.php';
 $sql = "SELECT request.request_id, request.date, customer.firstName AS customer_name, customer.email AS email, request.shape, request.type, 
                request.weight, request.color, request.requirement, request.status, request.declineReason
         FROM request
-        JOIN customer ON request.customer_id = customer.customer_id";
+        JOIN customer ON request.customer_id = customer.customer_id
+        ORDER BY request.date DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -31,6 +32,28 @@ $result = $conn->query($sql);
                             <a class="active" href="#">Request Summary</a>
                         </li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="sales-summary-box">
+                <div class="sales-summary-title">
+                    <h2>Monthly Requests Summary</h2>
+                </div>
+                <div class="sales-item">
+                    <h3>Pending</h3>
+                    <p style="color: orange">2</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Completed</h3>
+                    <p style="color: green">4</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Declined</h3>
+                    <p style="color: red">2</p>
+                </div>
+                <div class="sales-item">
+                    <h3>Approved</h3>
+                    <p style="color:light-blue">3</p>
                 </div>
             </div>
 
@@ -78,27 +101,6 @@ $result = $conn->query($sql);
                         <?php
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                $statusLabel = '';
-                                $statusColor = '';
-
-                                switch ($row['status']) {
-                                    case 'P':
-                                        $statusLabel = 'Pending';
-                                        $statusColor = 'color: red;';
-                                        break;
-                                    case 'A':
-                                        $statusLabel = 'Approved';
-                                        $statusColor = 'color: blue;';
-                                        break;
-                                    case 'C':
-                                        $statusLabel = 'Complete';
-                                        $statusColor = 'color: green;';
-                                        break;
-                                    default:
-                                        $statusLabel = 'Unknown';
-                                        $statusColor = 'color: black;';
-                                }
-
                                 echo "<tr>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
@@ -107,6 +109,7 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['weight'] . "</td>";
                                 echo "<td>" . $row['color'] . "</td>";
                                 echo "<td>" . $row['requirement'] . "</td>";
+
                                 echo "<td>";
                                 echo "<form method='POST' action='./updateRequest.php' onsubmit='return handleStatusChange(this)'>"; 
                                 echo "<input type='hidden' name='request_id' value='" . $row['request_id'] . "'>";
@@ -120,6 +123,7 @@ $result = $conn->query($sql);
                                 echo "<button id='update_btn_" . $row['request_id'] . "' type='submit' style='display: none;'>Update</button>";
                                 echo "</form>";
                                 echo "</td>";  
+                                
                                 echo "<td>" . $row['declineReason'] . "</td>";
                                 echo "</tr>"; 
                             }

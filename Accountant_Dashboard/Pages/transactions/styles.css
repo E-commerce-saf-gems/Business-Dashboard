@@ -186,7 +186,7 @@ body {
     font-size: 14px;
 }
 
-.table-filters .btn-filter {
+.table-filters .btn-filter, .btn-clear{
     background: var(--teal);
     color: var(--white);
     padding: 6px 20px;
@@ -196,7 +196,7 @@ body {
     font-size: 16px;
 }
 
-.table-filters .btn-filter:hover {
+.table-filters .btn-filter:hover ,.btn-clear:hover {
     background: var(--black);
     transition: .3s ease;
 }
@@ -262,6 +262,8 @@ body {
 .sales-table td .btn {
     font-size: 18px;
     color: var(--black);
+    background: none;
+    border: none;
 
 }
 
@@ -403,10 +405,7 @@ body {
     outline: none;
 }
 
-.edit-sales-form input:focus,
-.edit-sales-form select:focus {
-    border-color: var(--teal);
-}
+
 
 
 /* Action Buttons */
@@ -436,6 +435,75 @@ body {
 .btn-save i {
     margin-right: 5px;
 }
+
+/*Delete Confirmation Modal*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); 
+}
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.modal-actions {
+    margin-top: 20px;
+}
+.modal-actions button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-confirm {
+    background-color: #e74c3c;
+    color: #fff;
+}
+.btn-cancel {
+    background-color: #3498db;
+    color: #fff;
+}
+
+
+/* Error message styling */
+.error-message {
+    color: red; /* Text color for error */
+    display: none; /* Hide the error message initially */
+    background-color: transparent; /* Remove any default background */
+    border: none;
+    font-size: 0.9em; /* Slightly smaller font size */
+    margin-top: 5px; /* Space between the input and the error message */
+    position: relative; /* Position relative to its container */
+}
+
+/* Ensure the input and error message stack correctly */
+.form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack the input and error message vertically */
+}
+
+
+
+/* Show error message when input is invalid (dynamic handling required for custom logic) */
+input:invalid + .error-message {
+    display: block; /* Show error message below the input */
+}
+
+
+
 
 
 
