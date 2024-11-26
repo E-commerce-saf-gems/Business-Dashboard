@@ -28,13 +28,6 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
 
-                    <li>
-                        <a href="../../Pages/ManageAccess/ManageUserAccess.html">
-                            <i class='bx bx-clipboard' ></i>
-                            <span class="text">Manage Access</span>
-                        </a>
-                    </li>
-
                 </ul>
             </section>
 
