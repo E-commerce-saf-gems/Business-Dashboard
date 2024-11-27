@@ -690,3 +690,47 @@ img {
 }
 
 
+/* Payables Chart */
+.payables-chart {
+	width: 50%;
+	height: 250px;
+	margin-top: 20px;
+	padding: 10px;
+	background: var(--light);
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payables-chart:hover {
+	transform: translateY(-3px);
+	transition: 0.3s ease;
+  }
+  
+  #payablesChart {
+	width: 450px;
+	height: 450px;
+	margin: -40px auto 0;
+  }
+  
+  /* Receivables Chart */
+  .receivables-chart {
+	width: 50%;
+	height: 250px;
+	margin-top: 20px;
+	padding: 10px;
+	background: var(--light);
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .receivables-chart:hover {
+	transform: translateY(-3px);
+	transition: 0.3s ease;
+  }
+  
+  #receivablesChart {
+	width: 450px;
+	height: 450px;
+	margin: -40px auto 0;
+  }
+  
