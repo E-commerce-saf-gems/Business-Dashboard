@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Inventory Details</title>
+    <link
+      rel="stylesheet"
+      href="../../Pages/Inventory/styles.css"
+    />
+    <link rel="stylesheet" href="../../Pages/Inventory/editSalesStyles.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Inventory</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">Inventory Summary</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li>
+                <a class="active" href="#">Add Inventory</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="edit-sales-container">
+          <form class="edit-sales-form" id="editSalesForm">
+            <h2>New Inventory Details</h2>
+
+            <!-- <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+            </div> -->
+
+            <!-- stone Id Field -->
+            <div class="form-group">
+              <label for="stone_id">Stone Id </label>
+              <input
+                type="number"
+                id="stone_id"
+                name="stone_id"
+                placeholder="Enter Stone Id"
+                required
+              />
+            </div>
+
+            <!--size Field-->
+            <div class="form-group">
+              <label for="size">Size</label>
+              <input
+                type="text"
+                id="color"
+                name="size"
+                placeholder="size"
+                required
+              />
+            </div>
+
+            <!--shape Feild-->
+            <div class="form-group">
+              <label for="shape">Shape</label>
+              <input
+                type="text"
+                id="shape"
+                name="shape"
+                placeholder="shape"
+                required
+              />
+            </div>
+
+            <!-- Color Field -->
+            <div class="form-group">
+              <label for="color">Color</label>
+              <input
+                type="text"
+                id="color"
+                name="color"
+                placeholder="Color"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select id="type" name="type">
+                <option value="Ruby">Ruby</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Sapphire">Sapphire</option>
+                <option value="Amethyst">Amethyst</option>
+                <option value="Diamond">Diamond</option>
+              </select>
+            </div>
+                        
+            <!-- origin Field -->
+            <div class="form-group">
+              <label for="origin">Origin</label>
+              <input
+                type="text"
+                id="origin"
+                name="origin"
+                placeholder="Origin"
+                required
+              />
+            </div>
+
+            <!-- Amount Field -->
+            <div class="form-group">
+              <label for="amount">Amount ($)</label>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                placeholder="Enter Amount"
+                required
+              />
+            </div>
+
+            <!-- Image Field-->
+            <label for="image">Image:</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept=".pdf,.jpg,.jpeg,.png"
+              required
+            />
+
+            <!-- Certificate Field-->
+            <div class="form-group">
+            <label for="certificate">Certificate:</label>
+            <input
+              type="file"
+              id="certificate"
+              name="certificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              required
+            />
+            </div>
+
+               <!--description-->
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+
+            <!-- Visibility Field -->
+            <label for="visibility">Visibility:</label>
+            <select id="visibility">
+              <option value="paid">Show</option>
+              <option value="pending">Hide</option>
+            </select>
+
+            <div class="form-group">
+              <label for="buyer_id">Buyer ID</label>
+              <input
+                type="number"
+                id="buyer_id"
+                name="buyer_id"
+                placeholder="Buyer Id"
+                required
+              />
+            </div>
+
+            <!-- Save Button -->
+            <div class="form-actions">
+              <div class="form-actions">
+                  <button type="submit" class="btn-save">
+                      <i class='bx bx-save'></i> Save Changes
+                  </button>
+              </div>                        
+          </div>
+            <!-- <div class="form-actions">
+              <button type="submit" class="btn-save">
+                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php"> <i class="bx bx-save"></i> Save</a>
+              </button>
+            </div> -->
+          </form>
+        </div>
+      </main>
+    </section>
+
+    <script src="../../Pages/Inventory/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
+  </body>
+</html>
