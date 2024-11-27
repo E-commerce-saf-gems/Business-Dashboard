@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./profile.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>User Profile</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="#">Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <h2>Profile Information</h2>
+                <div class="profile-details">
+                    <!-- Display Name -->
+                    <div class="profile-item">
+                        <label>Name:</label>
+                        <span id="profile-name">Kamal</span>
+                    </div>
+
+                    <!-- Display Email -->
+                    <div class="profile-item">
+                        <label>Email:</label>
+                        <span id="profile-email">kamal@gmail.com</span>
+                    </div>
+
+                    <!-- Display Role -->
+                    <div class="profile-item">
+                        <label>Role:</label>
+                        <span id="profile-role">Sales Rep</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="../Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="./profile.js"></script>
+</body>
+</html>
