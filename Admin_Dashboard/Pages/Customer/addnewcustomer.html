@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Customer Details</title>
+    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../editCustomerStyles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Customers</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="#">Add New Customer</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="AddCustomerForm" action="./addCustomer.php" method="POST" >
+                    <h2>Add Customer Details</h2>
+
+                     <!-- NIC Field -->
+                     <div class="form-group">
+                        <label for="NIC">NIC Number</label>
+                        <input type="text" id="NIC" name="NIC" placeholder="NIC Number" required>
+                    </div>
+
+                    <!-- Title Field -->
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">First Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactNo">Contact Number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Contact Number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png,.webp" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pdf">PDF</label>
+                        <input type="file" id="pdf" name="pdf" accept=".pdf,.jpg,.jpeg,.png,.webp" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input type="char" id="status" name="status" placeholder="Status" required>
+                    </div>
+
+                    
+                    <!-- Email Field -->
+                     <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address1">Address Line 1</label>
+                        <input type="text" id="address1" name="address1" placeholder="Address Line 1" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="address2">Address Line 2</label>
+                        <input type="text" id="address2" name="address2" placeholder="Address Line 2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="city" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Country" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="DOB">DOB</label>
+                        <input type="date" id="DOB" name="DOB" placeholder="DOB" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="token">Token</label>
+                        <input type="text" id="token" name="token" placeholder="Token" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verificationStatus">Verification Status</label>
+                        <input type="text" id="verificationStatus" name="verificationStatus" 
+                        placeholder="Verification Status" required>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">
+                                <i class='bx bx-save'></i> Save Changes
+                            </button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
+    <script src="../../../Admin_Dashboard/script.js"></script>
+
+
+
+    
+
+</body>
+</html>
