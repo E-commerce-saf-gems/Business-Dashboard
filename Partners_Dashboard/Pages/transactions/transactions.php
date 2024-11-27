@@ -1,12 +1,12 @@
 <?php
 include '../../../database/db.php';
 
-$sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
+$sql = "SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id
         UNION ALL
-        SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
-        FROM payments as p
+        SELECT p.payment_id, p.date, 'Purchase' as type, b.email AS email, p.amount
+        FROM payment as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id
         ORDER BY date DESC";
 $result = $conn->query($sql);
