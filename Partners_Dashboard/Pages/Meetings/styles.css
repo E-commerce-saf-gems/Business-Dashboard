@@ -1,0 +1,163 @@
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+    --white: #FFFFFF ;
+	--blue: #3C91E6;
+    --black: #000000 ;
+    --teal: #46939d ;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--black-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+}
+
+
+/* Add styles for the calendar-like grid of days */
+.edit-availability-container {
+    width: 100%;
+    margin-top: 20px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+    margin-top: 20px;
+}
+
+.day-box {
+    background: var(--grey);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.day-box h4 {
+    font-size: 16px;
+    color: var(--teal);
+    margin-bottom: 10px;
+}
+
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.time-slot {
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    width: 60px;
+}
+
+.time-slot.available {
+    background-color: #449f9f;
+    color: white;
+}
+
+.time-slot.available:hover {
+    background-color:  white ;
+}
+
+.time-slot.booked {
+    background-color: #da0f0f;
+    color: white;
+}
+
+.time-slot.booked:hover {
+    background-color: white ;
+} 
+
+
+.time-slot.reserved {
+    background-color: #fcb500;
+    color: white;
+}
+
+.time-slot.reserved:hover{
+    background-color: white;
+}
+/* Hide the buttons by default */
+.time-slot-actions {
+    display: none;
+    position: absolute; /* Position relative to the time slot */
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    gap: 10px; /* Space between icons */
+}
+
+/* Parent container styles */
+.time-slot {
+    position: relative; /* Required for positioning child elements */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+/* Show the buttons on hover */
+.time-slot:hover .time-slot-actions {
+    display: flex; /* Display buttons as a flex container */
+}
+
+/* Button styles */
+.time-slot-actions i {
+    font-size: 1.2rem;
+    color: #555;
+    transition: color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.time-slot-actions i:hover {
+    color: red; /* Change to highlight color on hover */
+    transform: scale(1.2); /* Slight zoom effect */
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+  }
+
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn-nav {
+    padding: 10px 20px;
+    background-color: #449f9f;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-nav:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
