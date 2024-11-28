@@ -43,12 +43,12 @@ $result = $conn->query($sql);
             <div class="report-boxes-container">
                 <div class="report-box">
                     <h2>New <br> Customer</h2>
-                    <a href="../Customer/addCustomer.html" class="report-link">Add Customer</a>
+                    <a href="../../../../Group-Project-ECommerce/pages/RegisterPage/register.html" class="report-link">Add Customer</a>
                 </div>
 
                 <div class="report-box">
                     <h2>New <br> Buyer</h2>
-                    <a href="../Buyer/addBuyer.html" class="report-link">Add Buyer</a>
+                    <a href="../../../Partners_Dashboard\Pages\Buyers\addBuyer.html" class="report-link">Add Buyer</a>
                 </div>
             </div>
 

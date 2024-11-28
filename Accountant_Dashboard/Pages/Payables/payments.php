@@ -2,7 +2,7 @@
 include '../../../database/db.php';
 
 $sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
-        FROM payment as p
+        FROM payments as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id";
 $result = $conn->query($sql);
 ?>

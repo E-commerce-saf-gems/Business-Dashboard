@@ -36,6 +36,7 @@
                         <select id="customer" name="customer_id" required>
                             <option value="">Select a Customer</option>
                         </select>
+                        
                     </div>
                     
                     <div class="form-group">
@@ -43,12 +44,15 @@
                         <select id="stone" name="stone_id" required>
                             <option value="">Select a Stone</option>
                         </select>
+                        
                     </div>
     
                     <div class="form-group">
                         <label for="amount">Amount (Rs.)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="1" required>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="0" step="100" required>
+                        
                     </div>
+                    <div id="amount-error" class="error-message"></div>
                     
                     <div class="form-actions">
                         <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save</button>
