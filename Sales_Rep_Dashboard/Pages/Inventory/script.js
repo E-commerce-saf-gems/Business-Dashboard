@@ -3,17 +3,17 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../images/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="../../dashboard.html">
+                        <a href="/Sales_Rep_Dashboard/dashboard.html">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="/Sales_Rep_Dashboard/Pages/Sales/sales.html">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
@@ -26,7 +26,7 @@ class Dashboard extends HTMLElement {
                     </li>
                    
                     <li>
-                        <a href="../../Pages/Inventory/inventory.php">
+                        <a href="../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
@@ -38,13 +38,13 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Meetings/meeting.php">
+                        <a href="/Sales_Rep_Dashboard/Pages/Meetings/meeting.html">
                             <i class='bx bx-calendar'></i>
                             <span class="text">Meetings</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/requests/requests.php"">
+                        <a href="#">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
                         </a>
@@ -144,3 +144,4 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+
