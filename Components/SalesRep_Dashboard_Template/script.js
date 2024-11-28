@@ -19,7 +19,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Bids/bids.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>

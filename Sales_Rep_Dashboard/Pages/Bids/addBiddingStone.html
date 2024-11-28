@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add New Bidding Stone</title>
+<link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+<link rel="stylesheet" href="../transactions/styles.css">
+   
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+<dashboard-component></dashboard-component>
+<section id="content">
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Add New Bidding Stone</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a class="active" href="./stonessummary.php">Home</a>
+                    </li>
+                    <li><i class='bx bx-chevron-right' ></i></li>
+                    <li>
+                        <a class="active" href="#">Add New Stone</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="edit-sales-container">
+            <form class="edit-sales-form" id="addBiddingStoneForm" action="./addBiddingStone.php" method="post">
+                <h2>New Bidding Stone Details</h2><br>
+
+                
+                <div class="form-group">
+                    <label for="stone">Available Stones for Bid</label>
+                    <select id="stone" name="stone_id" required>
+                        <option value="">Select a Stone</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startingBid">Starting Bid Value (Rs.)</label>
+                    <input type="number" id="startingBid" name="startingBid" required />
+                </div>
+                <div class="form-group">
+                    <label for="no_of_Cycles">Number of Cycles</label>
+                    <input type="number" id="no_of_Cycles" name="no_of_Cycles" required />
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date and Time</label>
+                    <input type="datetime-local" id="startDate" name="startDate" required />
+                </div>
+                <div class="form-group">
+                    <label for="finishDate">Finish Date and Time</label>
+                    <input type="datetime-local" id="finishDate" name="finishDate" required />
+                </div>
+                <button type="submit" class="btn-save"><i class='bx bx-save'></i>Add to Bidding</button>   
+                
+                
+            </form>
+        </div>
+    </main>
+</section>
+
+<script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+<script src="./bids.js"></script>
+</body>
+</html>

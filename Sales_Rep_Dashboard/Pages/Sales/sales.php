@@ -43,6 +43,9 @@ $result = $conn->query($sql);
                         </li>
                     </ul>
                 </div>
+                <a href="./addSales.html" class="btn-add">
+                <i class="bx bx-plus"></i>Add New
+            </a>
             </div>
 
             <div class="sales-summary-box">
