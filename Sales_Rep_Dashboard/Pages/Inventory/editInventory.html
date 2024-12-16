@@ -6,9 +6,9 @@
     <title>Edit Inventory Details</title>
     <link
       rel="stylesheet"
-      href="../../Pages/Inventory/styles.css"
+      href="/Components/SalesRep_Dashboard_Template/styles.css"
     />
-    <link rel="stylesheet" href="../../Pages/Inventory/editSalesStyles.css" />
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -23,7 +23,7 @@
             <h1>Inventory</h1>
             <ul class="breadcrumb">
               <li>
-                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">Inventory Summary</a>
+                <a href="./inventory.html">Inventory Summary</a>
               </li>
               <li><i class="bx bx-chevron-right"></i></li>
               <li>
@@ -36,10 +36,10 @@
           <form class="edit-sales-form" id="editSalesForm">
             <h2>New Inventory Details</h2>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="date">Date</label>
               <input type="date" id="date" name="date" required />
-            </div> -->
+            </div>
 
             <!-- stone Id Field -->
             <div class="form-group">
@@ -99,7 +99,7 @@
                 <option value="Diamond">Diamond</option>
               </select>
             </div>
-                        
+
             <!-- origin Field -->
             <div class="form-group">
               <label for="origin">Origin</label>
@@ -135,7 +135,6 @@
             />
 
             <!-- Certificate Field-->
-            <div class="form-group">
             <label for="certificate">Certificate:</label>
             <input
               type="file"
@@ -144,23 +143,9 @@
               accept=".pdf,.jpg,.jpeg,.png"
               required
             />
-            </div>
 
-               <!--description-->
-            <div class="form-group">
-              <label for="description">Description</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Description"
-                required
-              />
-            </div>
-
-            <!-- Visibility Field -->
-            <label for="visibility">Visibility:</label>
-            <select id="visibility">
+            <label for="viisibility">Visibility:</label>
+            <select id="viisibility">
               <option value="paid">Show</option>
               <option value="pending">Hide</option>
             </select>
@@ -178,23 +163,15 @@
 
             <!-- Save Button -->
             <div class="form-actions">
-              <div class="form-actions">
-                  <button type="submit" class="btn-save">
-                      <i class='bx bx-save'></i> Save Changes
-                  </button>
-              </div>                        
-          </div>
-            <!-- <div class="form-actions">
               <button type="submit" class="btn-save">
-                <a href="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.php"> <i class="bx bx-save"></i> Save</a>
+                <a href="./inventory.html"> <i class="bx bx-save"></i> Save</a>
               </button>
-            </div> -->
+            </div>
           </form>
         </div>
       </main>
     </section>
 
-    <script src="../../Pages/Inventory/script.js"></script>
-    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
+    <script src="/Components/SalesRep_Dashboard_Template/script.js"></script>
   </body>
 </html>

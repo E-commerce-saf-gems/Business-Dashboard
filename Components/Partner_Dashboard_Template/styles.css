@@ -345,3 +345,66 @@ img {
 .profile.active .dropdown-menu {
     display: block;
 }
+
+/* Notification icon styling */
+.notification {
+    position: relative;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.5rem;
+    display: inline-block;
+}
+
+.notification .num {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Dropdown styling */
+.notification-dropdown {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 40px; /* Adjust to position the dropdown below the icon */
+    right: 0; /* Align to the right edge */
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px;
+    z-index: 1000;
+}
+
+.notification-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.notification-dropdown li:last-child {
+    border-bottom: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notification-dropdown li:hover {
+    background: #f5f5f5;
+}
+
+/* Show the dropdown when the notification is active */
+.notification.active + .notification-dropdown {
+    display: block;
+}

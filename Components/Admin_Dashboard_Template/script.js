@@ -27,14 +27,6 @@ class Dashboard extends HTMLElement {
                             <span class="text">Staff</span>
                         </a>
                     </li>
-
-                    <li>
-                        <a href="../../Pages/ManageAccess/ManageUserAccess.html">
-                            <i class='bx bx-clipboard' ></i>
-                            <span class="text">Manage Access</span>
-                        </a>
-                    </li>
-
                 </ul>
             </section>
 
@@ -56,7 +48,7 @@ class Dashboard extends HTMLElement {
                    <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
-                            <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
+                            <li><a href="../../Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
                             <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>

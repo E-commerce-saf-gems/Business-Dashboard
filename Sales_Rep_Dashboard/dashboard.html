@@ -16,12 +16,7 @@
   <body>
     <section id="sidebar">
       <a href="#" class="logo">
-        <img
-          src="../images/logo.png"
-          width="90"
-          height="90"
-          alt="SAF GEMS"
-        />
+        <img src="../images/logo.png" width="90" height="90" alt="SAF GEMS" />
       </a>
       <ul class="side-menu">
         <li class="active">
@@ -31,38 +26,38 @@
           </a>
         </li>
         <li>
-          <a href="./Pages/Sales/sales.html">
+          <a href="../Sales_Rep_Dashboard/Pages/Sales/sales.php">
             <i class="bx bx-chart"></i>
             <span class="text">Sales</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="../Sales_Rep_Dashboard/Pages/Bids/bids.html">
             <i class="bx bx-dollar-circle"></i>
             <span class="text">Bids</span>
           </a>
         </li>
 
         <li>
-          <a href="./Pages/Inventory/inventory.html">
+          <a href="../Sales_Rep_Dashboard/Pages/Inventory/inventory.php">
             <i class="bx bxs-inbox"></i>
             <span class="text">Inventory</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="../Sales_Rep_Dashboard/Pages/Customer/customers.php">
             <i class="bx bxs-user-detail"></i>
             <span class="text">Customers</span>
           </a>
         </li>
         <li>
-          <a href="/Pages/Meetings/meeting.html">
+          <a href="../Sales_Rep_Dashboard/Pages/Meetings/meeting.php">
             <i class="bx bx-calendar"></i>
             <span class="text">Meetings</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="../Sales_Rep_Dashboard/Pages/requests/requests.php">
             <i class="bx bxs-dashboard"></i>
             <span class="text">Requests</span>
           </a>
@@ -104,15 +99,12 @@
               </li>
             </ul>
           </div>
-          <a href="#" class="btn-download">
-            <i class="bx bxs-download"></i>
-            <span class="text">Download PDF</span>
-          </a>
         </div>
         <div class="dashboard-container">
           <div class="shortcuts">
             <h2>Shortcuts</h2>
             <ul class="shortcut-options">
+              
               <li>
                 <i class="bx bxs-user-plus"></i>
                 <span class="text">
@@ -141,25 +133,12 @@
             <div class="gem-chart">
               <h2>Inventory</h2>
               <canvas id="gemChart"></canvas>
-              <a href="./Pages/Sales/sales.html" class="view-more">View More</a>
-            </div>
-            <!-- Payables Chart -->
-            <div class="payables-chart">
-              <h2>Payables</h2>
-              <canvas id="payablesChart"></canvas>
-              <a href="./Pages/Sales/sales.html" class="view-more">View More</a>
-            </div>
-
-            <!-- Receivables Chart -->
-            <div class="receivables-chart">
-              <h2>Receivables</h2>
-              <canvas id="receivablesChart"></canvas>
-              <a href="./Pages/Sales/sales.html" class="view-more">View More</a>
+              <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
             </div>
             <div class="cash-flow-chart">
               <h2>Cash Flow</h2>
               <canvas id="cashFlowChart"></canvas>
-              <a href="./Pages/Sales/sales.html" class="view-more">View More</a>
+              <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
             </div>
           </div>
 
@@ -169,12 +148,13 @@
             <!-- Canvas for Sales Summary Line Chart -->
 
             <!-- View More as an underlined text link -->
-            <a href="./Pages/Sales/sales.html" class="view-more">View More</a>
+            <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
           </div>
         </div>
       </main>
     </section>
 
     <script src="../Partners_Dashboard/script.js"></script>
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
   </body>
 </html>

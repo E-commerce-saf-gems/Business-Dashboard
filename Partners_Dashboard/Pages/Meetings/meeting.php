@@ -85,7 +85,7 @@ $jsonData = json_encode($availableTimes);
         </div>
 
         <div class="edit-availability-container">
-            <h3>Available Times</h3>
+            <h3>My Calender </h3>
             <div class="navigation-buttons">
                 <button id="prevBtn" class="btn-nav" disabled>&laquo; Previous</button>
                 <button id="nextBtn" class="btn-nav">Next &raquo;</button>

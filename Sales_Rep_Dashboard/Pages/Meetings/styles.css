@@ -161,3 +161,40 @@
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+/* Legend styles */
+/* Center the legend */
+.legend {
+    display: flex;
+    gap: 20px; /* Space between items */
+    margin-bottom: 20px; /* Space below the legend */
+    align-items: center;
+    justify-content: center; /* Center the legend horizontally */
+}
+
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between square and text */
+}
+
+.legend-item .status-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    display: inline-block; /* Ensure it appears next to text */
+}
+
+/* Use existing color classes */
+.status-indicator.available {
+    background-color: #449f9f;
+}
+
+.status-indicator.reserved {
+    background-color: #fcb500;
+}
+
+.status-indicator.booked {
+    background-color: #da0f0f;
+}

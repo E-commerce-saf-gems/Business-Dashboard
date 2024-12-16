@@ -3,7 +3,7 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="/Images/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
@@ -13,54 +13,50 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="../../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
+                      <li>
+                        <a href="../../Pages/Purchases/purchases.php">
+                            <i class='bx bx-chart' ></i>
+                            <span class="text">Purchases</span>
+                        </a>
+                    </li>
+
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Bids/bids.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/transactions/transactions.html">
+                        <a href="../../Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Inventory/inventory.php">
                             <i class='bx bxs-package'></i>
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
                         <a href="../../Pages/reports/reports.html">
-                            <i class='bx bxs-clipboard'></i>
+                            <i class='bx bx-clipboard' ></i>
                             <span class="text">Reports</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="../../Pages/invoices/invoice.html">
-                            <i class='bx bxs-file'></i>
-                            <span class="text">Invoicing</span>
-                        </a>
-                    </li>
-                    
+                   
                     <li>
                         <a href="../../Pages/expenses/expenses.html">
                             <i class='bx bxs-credit-card'></i>
                             <span class="text">Expense Management</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="../../Pages/payables/payables.html">
-                            <i class='bx bxs-wallet'></i>
-                            <span class="text">Receivables & Payables</span>
-                        </a>
-                    </li>
+                   
                 </ul>
             </section>
 

@@ -14,7 +14,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="../../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
@@ -66,8 +66,16 @@ class Dashboard extends HTMLElement {
                     </form>
                     <a href="#" class="notification">
                         <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
+                        <span class="num">4</span>
                     </a>
+                    <div class="notification-dropdown">
+                        <ul>
+                            <li>New Sales Update</li>
+                            <li>Chamath Settled a payment</li>
+                            <li>Your payment is due</li>
+                            <li>View this months profite and loss</li>
+                        </ul>
+                    </div>
                     <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
@@ -169,3 +177,18 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+
+document.querySelector('.notification').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default link behavior
+    const dropdown = document.querySelector('.notification-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+// Close the dropdown if clicking outside
+document.addEventListener('click', function (e) {
+    const notification = document.querySelector('.notification');
+    const dropdown = document.querySelector('.notification-dropdown');
+    if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});

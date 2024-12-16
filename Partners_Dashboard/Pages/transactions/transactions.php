@@ -87,7 +87,6 @@ $result = $conn->query($sql);
                             <th>Type</th>
                             <th>Customer Email</th>
                             <th>Amount</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,11 +99,6 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
-                                echo "<td class='actions'>
-                                        <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <a class='btn'><i class='bx bx-trash'></i></a>
-                                        <a class='btn printBtn'><i class='bx bx-printer'></i></a>
-                                      </td>";
                                 echo "</tr>";
                             }
                         } else {

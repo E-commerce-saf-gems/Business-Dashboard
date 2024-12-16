@@ -95,7 +95,6 @@ if (!$result) {
                             <th>City</th>
                             <!-- <th>Total Purchases</th> -->
                             <th>Actions</th>
-                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
