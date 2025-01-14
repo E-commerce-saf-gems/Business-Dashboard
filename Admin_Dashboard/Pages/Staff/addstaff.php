@@ -23,7 +23,7 @@ if ($conn->query($sql) === TRUE) {
     $user_id = $conn->insert_id;
 
     // Redirect to inventory.php upon success
-    header("Location: ../../../Admin_Dashboard/Pages/Staff/addstaff.php");
+    header("Location: ../../../Admin_Dashboard/Pages/Staff/Staff.php");
     exit(); // Ensure no further code is executed after redirection
 } else {
     // Print error if the purchases SQL query fails

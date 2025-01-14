@@ -34,11 +34,13 @@
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" required>
+                        <span class="error-message" id="username-error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required>
+                        <span class="error-message" id="password-error"></span>
                     </div>
     
                     <!-- Status Field -->
@@ -50,21 +52,25 @@
                             <option value="Acc">Accountant</option>
                         </select>
                     </div>
+                    <span class="error-message" id="role-error"></span>
                     
 
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
                     </div>
                     
                     <div>
                         <label for="contactNo">Phone Number</label>
                         <input type="number" id="contactNo" name="contactNo" placeholder="Phone Number" required>
+                        <span class="error-message" id="contactNo-error"></span>
                     </div>
                     <!-- Save Button -->
                     <div class="form-actions">
@@ -81,6 +87,7 @@
 
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
+    <script src="./staff.js"></script>
 
     
 </body>
