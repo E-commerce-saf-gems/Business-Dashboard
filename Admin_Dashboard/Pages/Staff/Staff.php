@@ -45,6 +45,11 @@ if (!$result) {
                 <a href="./addnewstaff.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    Staff member updated successfully!
+                </div>
+        <?php endif; ?>
 
             <div class="sales-table-container">
                 <div class="table-filters">
@@ -77,29 +82,27 @@ if (!$result) {
                             <th>Options</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        // Check if there are results and display each row in the table
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()){
-                                echo "<tr>";
-                                echo "<td>" . $row['user_id'] . "</td>";
-                                echo "<td>" . $row['username'] . "</td>";
-                                echo "<td>" . $row['password'] . "</td>";
-                                echo "<td>" . $row['role'] . "</td>";
-                                echo "<td>" . $row['contactNo'] . "</td>";
-                                echo "<td class='actions'>
-                                <a href='./editstaff.html' class='btn'></a>
-                                <i class='bx bx-pencil'></i>
-                                <a class='btn'><i class='bx bx-trash'></i></a>
-                                </td>";
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo "<tr><td colspan='9'>No staff members in the system.</td></tr>";
-                        }
-                        ?>
-                        
+                   <tbody>
+                <?php
+                // Check if there are results and display each row in the table
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['user_id'] . "</td>";
+                        echo "<td>" . $row['username'] . "</td>";
+                        echo "<td>" . $row['password'] . "</td>";
+                        echo "<td>" . $row['role'] . "</td>";
+                        echo "<td>" . $row['contactNo'] . "</td>";
+                        echo "<td class='actions'>";
+                        echo "<a href='./editstaff.php?id=" . $row['user_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
+                        echo "<a class='btn'><i class='bx bx-trash'></i></a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='9'>No ones in the company.</td></tr>";
+                }
+                ?>
                     </tbody>
                 </table>
             </div>    
@@ -108,7 +111,7 @@ if (!$result) {
 
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
-    
+    <script src="../staff.js"></script>
 </body>
 </html>
 

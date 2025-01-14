@@ -1,3 +1,28 @@
+<?php
+include('../../../database/db.php'); 
+
+if (isset($_GET['id'])) {
+    $user_id = $_GET['id'];
+
+    $sql = "SELECT * FROM user WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+    } else {
+        echo "No record found";
+        exit;
+    }
+} else {
+    echo "No ID specified";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,48 +48,46 @@
 				</div>
 			</div>
             <div class="edit-sales-container">
-                <form class="edit-sales-form" id="editStaffForm">
+                <form class="edit-sales-form" id="editStaffForm" action="./updatestaff.php" method="POST" enctype="multipart/form-data">
                     <h2>Edit Staff Details</h2>
 
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-    
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
+
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username" value="<?php echo $row['username'];?>"required>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" value="<?php echo $row['password'];?>" required>
                     </div>
     
                     <!-- Status Field -->
                     <div class="form-group">
                         <label for="role">Role</label>
                         <select id="role" name="role">
-                            <option value="Partner">Partner</option>
-                            <option value="Sales">Sales Res.</option>
-                            <option value="Acc">Accountant</option>
+                            <option value="Partner" <?php if ($row['role'] === 'Partner') echo 'selected'; ?>>Partner</option>
+                            <option value="SalesRep" <?php if ($row['role'] === 'SalesRep') echo 'selected'; ?>>Sales Res.</option>
+                            <option value="Accounatnt" <?php if ($row['role'] === 'Accounatnt') echo 'selected'; ?>>Accountant</option>
                         </select>
                     </div>
                     
 
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" value="<?php echo $row['name'];?>"required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" required>
+                        <input type="text" id="email" name="email" value="<?php echo $row['email'];?>"required>
                     </div>
                     
                     <div>
                         <label for="contactNo">Phone Number</label>
-                        <input type="number" id="contactNo" name="contactNo" placeholder="Phone Number" required>
+                        <input type="number" id="contactNo" name="contactNo" placeholder="Phone Number" 
+                        value="<?php echo $row['contactNo'];?>"required>
                     </div>
                     
                     <!-- Save Button -->
