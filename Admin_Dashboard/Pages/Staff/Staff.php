@@ -6,7 +6,9 @@ $ssql = "SELECT
             user_id,
             username,
             password,
+            name,
             role,
+            email,
             contactNo
         FROM user";
 
@@ -76,8 +78,10 @@ if (!$result) {
                         <tr>
                             <th>UserID</th>
                             <th>Username</th>
-                            <th>Passward</th>
+                            <th>Password</th>
+                            <th>Name</th>
                             <th>Role</th>
+                            <th>Email</th>
                             <th>Contact Number</th>
                             <th>Options</th>
                         </tr>
@@ -91,7 +95,9 @@ if (!$result) {
                         echo "<td>" . $row['user_id'] . "</td>";
                         echo "<td>" . $row['username'] . "</td>";
                         echo "<td>" . $row['password'] . "</td>";
+                        echo "<td>" . $row['name'] . "</td>";
                         echo "<td>" . $row['role'] . "</td>";
+                        echo "<td>" . $row['email'] . "</td>";
                         echo "<td>" . $row['contactNo'] . "</td>";
                         echo "<td class='actions'>";
                         echo "<a href='./editstaff.php?id=" . $row['user_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";

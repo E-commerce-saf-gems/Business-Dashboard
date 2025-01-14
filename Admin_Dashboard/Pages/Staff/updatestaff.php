@@ -6,20 +6,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
     $username = isset($_POST['username']) ? $_POST['username'] : null;
     $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $name = isset($_POST['name']) ? $_POST['name'] : null;
     $role = isset($_POST['role']) ? $_POST['role'] : null;
     $email = isset($_POST['email']) ? $_POST['email'] : null;
     $contactNo = isset($_POST['contactNo']) ? $_POST['contactNo'] : null;
 
  
     // Prepare and execute the inventory update
-    $sql = "UPDATE user 
-            SET  username=?, password=?, role=?, email=?, contactNo=? 
-            WHERE user_id=?";
+    $sql = "UPDATE user SET username = ?, password = ?, role = ?, name = ?, email = ?, contactNo = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param(
-        "sssiii", 
-        $username, $password, $role, $email, $contactNo , $user_id
-    );
+    $stmt->bind_param("sssssii", $username, $password, $role, $name, $email, $contactNo, $user_id);
+    
 
     if ($stmt->execute()) {
        

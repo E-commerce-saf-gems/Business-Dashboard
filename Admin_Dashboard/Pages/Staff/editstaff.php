@@ -76,13 +76,13 @@ if (isset($_GET['id'])) {
 
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" value="<?php echo $row['name'];?>"required>
-                    </div>
+                        <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" required>
+                        </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" value="<?php echo $row['email'];?>"required>
-                    </div>
+                        <input type="text" id="email" name="email" value="<?php echo $row['email']; ?>" required>
+                        </div>
                     
                     <div>
                         <label for="contactNo">Phone Number</label>
