@@ -13,9 +13,15 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="../../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../Pages/Purchases/purchases.php">
+                            <i class='bx bx-chart'></i>
+                            <span class="text">Purchases</span>
                         </a>
                     </li>
                     <li>
@@ -38,7 +44,7 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
                         <a href="../../Pages/reports/reports.html">
-                            <i class='bx bxs-clipboard'></i>
+                            <i class='bx bx-clipboard'></i>
                             <span class="text">Reports</span>
                         </a>
                     </li>
