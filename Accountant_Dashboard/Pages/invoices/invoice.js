@@ -17,66 +17,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById("download-pdf").addEventListener("click", function () {
+//EXPORT OPTION
+// Function to export as PDF
+function exportToPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const invoice = document.querySelector(".invoice-content");
-
-    // Generate PDF
-    doc.html(invoice, {
-        callback: function (doc) {
-            const pdfBlob = doc.output("blob");
-
-            // Auto-download the PDF
-            doc.save("invoice.pdf");
-
-            // Attach to email form
-            const formData = new FormData();
-            formData.append("invoice", pdfBlob, "invoice.pdf");
-
-            // Prepare the email form
-            document.getElementById("email-form").onsubmit = function (event) {
-                event.preventDefault(); // Prevent default form submission
-                fetch("send_invoice.php", {
-                    method: "POST",
-                    body: formData
-                })
-                    .then((response) => response.text())
-                    .then((data) => alert(data))
-                    .catch((error) => console.error("Error:", error));
-            };
+    // Adjust position if needed
+    doc.html(document.querySelector('.invoice-container'), {
+        callback: function (pdf) {
+            pdf.save("invoice.pdf");
         },
         x: 10,
-        y: 10
+        y: 10,
+        width: 180, // width in mm
+        windowWidth: 800 // larger windowWidth for better rendering
     });
-});
+}
 
-    // Export PDF and Attach to Form
-    function attachPDFToForm() {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-    
-        // Render the invoice to PDF
-        const invoice = document.getElementById("invoice-content");
-        pdf.html(invoice, {
-        callback: function (pdf) {
-            const pdfBlob = pdf.output("blob");
-    
-            // Create a File object for the form input
-            const fileInput = document.getElementById("invoice-upload");
-            const file = new File([pdfBlob], "Invoice_0043.pdf", { type: "application/pdf" });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            fileInput.files = dataTransfer.files; // Attach the file to the input
-        },
-        });
-    }
-    
-    // Trigger PDF Attachment when Modal Opens
-    emailPopupButton.addEventListener("click", attachPDFToForm);
-  
+// Function to export as Excel
+function exportToExcel() {
+    const table = document.querySelector('.invoice-container');
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Invoice");
 
-    
-
-
+    // Export to Excel file
+    XLSX.writeFile(workbook, "invoice.xlsx");
+}

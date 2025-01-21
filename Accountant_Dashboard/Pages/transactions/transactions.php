@@ -19,7 +19,7 @@ $customerFilter = isset($_GET['customer']) ? $_GET['customer'] : '';
 
 // Start building the SQL query
 $sql = "
-    (SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount, CONCAT(st.colour, ' ', st.type, ' ', st.weight, ' carats') AS stone
+    (SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount, CONCAT(st.colour, ' ', st.type, ' ', st.size, ' carats') AS stone
      FROM transactions AS t
      JOIN customer AS c ON t.customer_id = c.customer_id
      JOIN inventory AS st ON t.stone_id = st.stone_id
@@ -38,8 +38,8 @@ if ($customerFilter) {
 $sql .= ") UNION ALL ";
 
 $sql .= "
-    (SELECT p.payment_id AS transaction_id, p.date, 'Purchase' AS type, b.email AS email, p.amount, CONCAT(st.colour, ' ', st.type, ' ', st.weight, ' carats') AS stone
-     FROM payment AS p
+    (SELECT p.payment_id AS transaction_id, p.date, 'Purchase' AS type, b.email AS email, p.amount, CONCAT(st.colour, ' ', st.type, ' ', st.size, ' carats') AS stone
+     FROM payments AS p
      JOIN buyer AS b ON p.buyer_id = b.buyer_id
      JOIN inventory AS st ON p.stone_id = st.stone_id
      WHERE 1";  // Same placeholder for WHERE condition
@@ -159,7 +159,7 @@ $result = $conn->query($sql);
                         <label for="customer-filter">Customer/Buyer:</label>
                         <input type="text" id="customer-filter"  name="customer" placeholder="Search Customer/Buyer" value="<?php echo htmlspecialchars($customerFilter); ?>">
                     
-                        <button class="btn-filter" type="submit" onclick="filterTransactions()">Filter</button>
+                        <button class="btn-filter" type="submit">Filter</button>
                         <button><a href="transactions.php" class="btn-clear">Clear</a></button>
                     </form>
                 </div>

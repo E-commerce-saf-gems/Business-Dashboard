@@ -32,11 +32,9 @@ if (!$result) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory</title>
-    <link
-      rel="stylesheet"
-      href="../../Pages/Inventory/styles.css"
-    />
-    <link rel="stylesheet" href="../../Pages/Inventory/inventory.css" />
+    <link rel="stylesheet" href="../../Pages/Inventory/styles.css" />
+    <link rel="stylesheet" href="../../Pages/Inventory/salesStyles.css" />
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -56,8 +54,6 @@ if (!$result) {
               </li>
             </ul>
           </div>
-          <a href="./addinventory.html" class="btn-add"
-            ><i class="bx bx-plus"></i>Add New</a>
         </div>
         <div class="sales-summary-box">
           <div class="sales-summary-title">
@@ -85,11 +81,6 @@ if (!$result) {
           </div>
         </div>
 
-        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-                <div class="success-message">
-                    Gem availability updated successfully!
-                </div>
-        <?php endif; ?>
 
         <div class="sales-table-container">
           <div class="table-filters">
@@ -134,6 +125,7 @@ if (!$result) {
             <thead>
               <tr>
                 <th>Date</th>
+                <th>ID</th>
                 <th>Size</th>
                 <th>Shape</th>
                 <th>Color</th>
@@ -153,6 +145,7 @@ if (!$result) {
                   while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
                       echo "<td>" . $row['date'] . "</td>";
+                      echo "<td>" . $row['stone_id'] . "</td>";
                       echo "<td>" . $row['size'] . "</td>";
                       echo "<td>" . $row['shape'] . "</td>";
                       echo "<td>" . $row['colour'] . "</td>";
@@ -174,18 +167,8 @@ if (!$result) {
 
                       // Action buttons
                       echo "<td class='actions'>";
-
-                      
-                      if ($row['availability'] == 'available' || $row['availability'] == 'Available') {
-                          echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
-                          echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
-                      }
-
                       echo "<a href='./viewInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
-
-                      
                       echo "</td>";
-                      
                     echo "</tr>";
                   }
               } else {
@@ -200,10 +183,17 @@ if (!$result) {
       </main>
     </section>
 
-    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script>
+    function confirmDelete(stoneId) {
+        const userConfirmed = confirm("Are you sure you want to delete this Gem?");
+        if (userConfirmed) {
+            window.location.href = `./deleteGem.php?id=${stoneId}`;
+        }
+    }
+    </script>
+    
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
-    <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
-
   </body>
 </html>
 

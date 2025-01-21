@@ -1,48 +1,62 @@
 <?php
 
-include("../../../database/db.php");
+include '../../../database/db.php';
 
-$buyer_id = $_POST['buyer_id'];
-$amount = $_POST['amount'];
-$stone_id = $_POST['stone_id'];
+var_dump($_POST);
+
+// Get POST data
+$buyer_id = isset($_POST['buyer_id']) ? $_POST['buyer_id'] : null;
+$amount = isset($_POST['amount']) ? $_POST['amount'] : null;
+$stone_id = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
+
+if (!$buyer_id || !$amount || !$stone_id) {
+    echo "Error: Missing required fields";
+    exit();
+}
+
+$conn->begin_transaction();
 
 try {
-    // Begin transaction
-    $conn->begin_transaction();
-
-    // Insert into transactions
+    // Insert the payment
     $stmt = $conn->prepare("INSERT INTO payment (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
     $stmt->bind_param("idi", $buyer_id, $amount, $stone_id);
 
     if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?PaymentSuccess=2") ;
+        throw new Exception("Error inserting payment: " . $stmt->error);
     }
 
-    // Update the sales table
+    $stmt->close();
+
+    // Update the purchases table
     $stmt = $conn->prepare("
-        UPDATE purchases
+        UPDATE purchases 
         SET amountSettled = amountSettled + ?
-        WHERE buyer_id = ? AND stone_id = ? AND amountSettled + ? <= total
+        WHERE buyer_id = ? AND stone_id = ? AND amountSettled < total
     ");
-    $stmt->bind_param("didi", $amount, $buyer_id, $stone_id, $amount);
+    $stmt->bind_param("dii", $amount, $buyer_id, $stone_id , );
 
     if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?PaymentSuccess=2") ;
+        throw new Exception("Error updating purchase: " . $stmt->error);
     }
 
-    // Commit transaction
-    $conn->commit();
-    echo "Payment and purchases update completed successfully!";
-    header("Location: ../transactions/transactions.php?PaymentSuccess=1") ;
+    $stmt->close();
 
-    
+    // Commit the transaction
+    $conn->commit();
+
+    // Redirect on success
+    header("Location: ../transactions/transactions.php?PaymentSuccess=1");
+    exit();
+
 } catch (Exception $e) {
-    // Rollback transaction on failure
+    // Rollback the transaction on error
     $conn->rollback();
-    echo "Error: " . $e->getMessage();
+
+    // Log the error (optional) and redirect with an error
+    error_log("Transaction failed: " . $e->getMessage());
+    header("Location: ../transactions/transactions.php?PaymentSuccess=2");
+    exit();
 }
 
-// Close the prepared statement
-$stmt->close();
-$conn->close();
+// Close the connection
 ?>

@@ -6,7 +6,7 @@ $dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
 $customerFilter = isset($_GET['customer']) ? $_GET['customer'] : '';
 
 $sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
-        FROM payment as p
+        FROM payments as p
         JOIN buyer as b ON p.buyer_id = b.buyer_id
         WHERE 1";
 

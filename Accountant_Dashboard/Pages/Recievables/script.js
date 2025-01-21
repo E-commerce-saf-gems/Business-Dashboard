@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     stones.forEach(stone => {
                         const option = document.createElement('option');
                         option.value = stone.stone_id;
-                        option.textContent = `${stone.type} (Carats: ${stone.weight}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
+                        option.textContent = `${stone.type} (Carats: ${stone.size}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
                         option.dataset.amountToBeSettled = stone.amountToBeSettled; // Store the value in a dataset
                         stoneDropdown.appendChild(option);
                     });

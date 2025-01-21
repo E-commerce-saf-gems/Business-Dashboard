@@ -184,3 +184,5 @@ document.getElementById("editgemForm").addEventListener("submit", function (e) {
     alert("Please fill in all required fields: " + emptyFields.map(item => item.name).join(", "));
   }
 });
+
+

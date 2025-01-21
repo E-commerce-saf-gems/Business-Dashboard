@@ -16,16 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         echo "Payment not found.";
         exit;
     }
-
-    // Fetch current buyer email
-    $buyer_id = $payment['buyer_id'];
-    $buyerSQL = "SELECT email FROM buyer WHERE buyer_id = ?";
-    $stmt = $conn->prepare($buyerSQL);
-    $stmt->bind_param("i", $buyer_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $buyer = $result->fetch_assoc();
-    $current_buyer_email = $buyer ? $buyer['email'] : 'Unknown Buyer';
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $payment_id = $_POST['payment_id'];
     $buyer_id = $_POST['buyer_id'];
@@ -33,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
     $new_amount = $_POST['amount'];
 
     try {
-        // Start transaction
+        // Start payment
         $conn->begin_transaction();
 
         // Fetch original transaction amount
@@ -49,29 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         }
 
         $original_amount = $original_payment['amount'];
-
-        // Calculate amountToBeSettled using total and amountSettled from the purchases table
-        $getPurchaseSQL = "SELECT total, amountSettled FROM purchases WHERE buyer_id = ? AND stone_id = ?";
-        $stmt = $conn->prepare($getPurchaseSQL);
-        $stmt->bind_param("ii", $buyer_id, $stone_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $purchase = $result->fetch_assoc();
-
-        if (!$purchase) {
-            throw new Exception("Purchase record not found for the selected buyer and stone.");
-        }
-
-        $amountToBeSettled = $purchase['total'] - $purchase['amountSettled'];
-
-        // Validate the new amount
-        if ($new_amount < 0) {
-            throw new Exception("Amount cannot be less than 0."); // Validate that the amount is not negative
-        }
-
-        if ($new_amount > $amountToBeSettled) {
-            throw new Exception("Amount exceeds the remaining amount to be settled."); // Validate that the amount does not exceed the amountToBeSettled
-        }
 
         // Update the payment table
         $updatePaymentSQL = "UPDATE payment SET amount = ?, buyer_id = ?, stone_id = ? WHERE payment_id = ?";
@@ -105,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,41 +87,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 
     <section id="content">
         <main>
-        <div class="head-title">
-				<div class="left">
-					<h1>Edit Payment</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a class="active" href="./payments.php">Home</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Edit Payment</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+            <div class="head-title">
+                <h1>Edit Payment</h1>
+            </div>
 
             <div class="edit-sales-container">
-                <form class="edit-sales-form" method="POST" id="editPaymentForm">
+                <form class="edit-sales-form" method="POST">
                     <input type="hidden" name="payment_id" value="<?= htmlspecialchars($payment['payment_id']) ?>">
 
                     <div class="form-group">
-                        <label for="buyer">Buyer Email</label>
-                        <select id="buyer" name="buyer_id" required>
-                            <option value="<?= htmlspecialchars($payment['buyer_id']) ?>" selected>
-                                <?= htmlspecialchars($current_buyer_email) ?>
-                            </option>
-                        </select>
+                        <label for="buyer">Buyer ID</label>
+                        <input type="number" id="buyer" name="buyer_id" value="<?= htmlspecialchars($payment['buyer_id']) ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="stone">Purchased Stones</label>
-                        <select id="stone" name="stone_id" required>
-                            <option value="<?= htmlspecialchars($payment['stone_id']) ?>" selected>
-                                <?= htmlspecialchars($payment['stone_id']) ?>
-                            </option>
-                        </select>
+                        <label for="stone">Stone ID</label>
+                        <input type="number" id="stone" name="stone_id" value="<?= htmlspecialchars($payment['stone_id']) ?>" required>
                     </div>
 
                     <div class="form-group">
@@ -169,66 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         </main>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buyerDropdown = document.getElementById('buyer');
-            const stoneDropdown = document.getElementById('stone');
-
-            // Fetch buyers
-            fetch('./getBuyers.php')
-                .then(response => response.json())
-                .then(buyers => {
-                    buyers.forEach(buyer => {
-                        const option = document.createElement('option');
-                        option.value = buyer.buyer_id; // Set value as buyer_id
-                        option.textContent = buyer.email; // Show buyer email
-                        buyerDropdown.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching buyers:', error));
-
-            // Fetch stones when a buyer is selected
-            buyerDropdown.addEventListener('change', function () {
-                const buyerId = this.value;
-
-                // Clear existing stones
-                stoneDropdown.innerHTML = '<option value="">Select a Stone</option>';
-
-                if (buyerId) {
-                    fetch(`./getStones.php?buyer_id=${buyerId}`)
-                        .then(response => response.json())
-                        .then(stones => {
-                            stones.forEach(stone => {
-                                const option = document.createElement('option');
-                                option.value = stone.stone_id;
-                                const isFullySettled = stone.amountToBeSettled === 0;
-                                option.textContent = `${stone.type} (Carats: ${stone.weight}) 
-                                                    ${isFullySettled ? '(Fully Settled)' : `(Amount To Be Settled: Rs.${stone.amountToBeSettled})`}`;
-                                stoneDropdown.appendChild(option);
-                            });
-
-                            // Set the current stone as selected
-                            stoneDropdown.value = "<?= htmlspecialchars($payment['stone_id']) ?>";
-                        })
-                        .catch(error => console.error('Error fetching stones:', error));
-                }
-            });
-
-            // Trigger initial stones load for the current buyer
-            buyerDropdown.dispatchEvent(new Event('change'));
-        });
-
-        // Hide success message after 5 seconds
-        setTimeout(function () {
-            const message = document.querySelector(".success-message");
-            if (message) {
-                message.style.display = "none";
-            }
-        }, 5000);
-    </script>
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-
-
 </body>
 </html>
-
