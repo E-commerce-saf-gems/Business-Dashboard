@@ -1,48 +1,59 @@
 <?php
 
-include("../../../database/db.php");
+include '../../../database/db.php';
 
-$buyer_id = $_POST['buyer_id'];
-$amount = $_POST['amount'];
-$stone_id = $_POST['stone_id'];
+// Ensure data is received
+if (empty($_POST)) {
+    die("Error: No data received.");
+}
+
+// Debugging: Print received data
+var_dump($_POST);
+
+// Retrieve POST data with correct field mapping
+$type = !empty($_POST['type']) ? $_POST['type'] : null;  // 'type' is the expense category
+$description = !empty($_POST['description']) ? $_POST['description'] : null;  // 'description' describes the expense
+$amount = !empty($_POST['amount']) ? $_POST['amount'] : null;
+$status = !empty($_POST['status']) ? $_POST['status'] : null;
+
+// Debugging: Print values before inserting
+echo "Type: $type, Description: $description, Amount: $amount, Status: $status<br>";
+
+// Check if any required field is missing
+if (!$type || !$description || !$amount || !$status) {
+    die("Error: Missing required fields.");
+}
+
+// Start transaction
+$conn->begin_transaction();
 
 try {
-    // Begin transaction
-    $conn->begin_transaction();
-
-    // Insert into transactions
-    $stmt = $conn->prepare("INSERT INTO payment (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
-    $stmt->bind_param("idi", $buyer_id, $amount, $stone_id);
+    // Insert the expense into the expenses table
+    $stmt = $conn->prepare("INSERT INTO expenses (type, description, amount, status) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssds", $type, $description, $amount, $status);
 
     if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?PaymentSuccess=2") ;
+        throw new Exception("Error inserting expense: " . $stmt->error);
     }
 
-    // Update the sales table
-    $stmt = $conn->prepare("
-        UPDATE purchases
-        SET amountSettled = amountSettled + ?
-        WHERE buyer_id = ? AND stone_id = ? AND amountSettled + ? <= total
-    ");
-    $stmt->bind_param("didi", $amount, $buyer_id, $stone_id, $amount);
-
-    if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?PaymentSuccess=2") ;
-    }
+    $stmt->close();
 
     // Commit transaction
     $conn->commit();
-    echo "Payment and purchases update completed successfully!";
-    header("Location: ../transactions/transactions.php?PaymentSuccess=1") ;
 
-    
+    // Redirect on success
+    header("Location: ../expenses/expenseType.php?ExpenseAdded=1");
+    exit();
+
 } catch (Exception $e) {
-    // Rollback transaction on failure
+    // Rollback transaction on error
     $conn->rollback();
-    echo "Error: " . $e->getMessage();
+
+    // Log the error (optional) and redirect with an error
+    error_log("Transaction failed: " . $e->getMessage());
+    header("Location: ../expenses/expenseType.php?ExpenseAdded=2");
+    exit();
 }
 
-// Close the prepared statement
-$stmt->close();
-$conn->close();
 ?>
+
