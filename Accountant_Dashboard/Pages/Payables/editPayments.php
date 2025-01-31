@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
     $payment_id = $_GET['payment_id'];
 
     // Fetch payment details
-    $sql = "SELECT * FROM payment WHERE payment_id = ?";
+    $sql = "SELECT * FROM payments WHERE payment_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $payment_id);
     $stmt->execute();
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         $conn->begin_transaction();
 
         // Fetch original transaction amount
-        $getOriginalSQL = "SELECT amount FROM payment WHERE payment_id = ?";
+        $getOriginalSQL = "SELECT amount FROM payments WHERE payment_id = ?";
         $stmt = $conn->prepare($getOriginalSQL);
         $stmt->bind_param("i", $payment_id);
         $stmt->execute();
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         $original_amount = $original_payment['amount'];
 
         // Update the payment table
-        $updatePaymentSQL = "UPDATE payment SET amount = ?, buyer_id = ?, stone_id = ? WHERE payment_id = ?";
+        $updatePaymentSQL = "UPDATE payments SET amount = ?, buyer_id = ?, stone_id = ? WHERE payment_id = ?";
         $stmt = $conn->prepare($updatePaymentSQL);
         $stmt->bind_param("diii", $new_amount, $buyer_id, $stone_id, $payment_id);
 
@@ -88,8 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
     <section id="content">
         <main>
             <div class="head-title">
-                <h1>Edit Payment</h1>
-            </div>
+				<div class="left">
+					<h1>Edit Payment</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="./payments.php">Home</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Edit Payment</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
             <div class="edit-sales-container">
                 <form class="edit-sales-form" method="POST">

@@ -18,7 +18,7 @@ $conn->begin_transaction();
 
 try {
     // Insert the payment
-    $stmt = $conn->prepare("INSERT INTO payment (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO payments (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
     $stmt->bind_param("idi", $buyer_id, $amount, $stone_id);
 
     if (!$stmt->execute()) {
