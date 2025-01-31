@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Get filter values from GET request
 $dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
 $customerFilter = isset($_GET['customer']) ? $_GET['customer'] : '';
 
@@ -10,16 +9,14 @@ $sql = "SELECT p.payment_id, p.date, b.email AS email, p.amount
         JOIN buyer as b ON p.buyer_id = b.buyer_id
         WHERE 1";
 
-// Apply the date filter for transactions
 if ($dateFilter) {
     $sql .= " AND DATE(p.date) = '" . $conn->real_escape_string($dateFilter) . "'";
 }
 
-// Apply the customer filter for transactions
 if ($customerFilter) {
     $sql .= " AND b.email LIKE '%" . $conn->real_escape_string($customerFilter) . "%'";
 }
-$sql .= " ORDER BY p.date DESC";  // Order by the date column
+$sql .= " ORDER BY p.date DESC";  
 
 
 $result = $conn->query($sql);
@@ -38,9 +35,8 @@ $result = $conn->query($sql);
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     <style>
-        /* Modal Styles */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed; 
             z-index: 1000; 
             left: 0;
