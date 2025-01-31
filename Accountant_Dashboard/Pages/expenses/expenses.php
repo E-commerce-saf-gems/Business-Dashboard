@@ -78,10 +78,11 @@ $result = $conn->query($sql);
                     <select id="status-filter">
                         <option value="">--All--</option>
                         <option value="pending">Purchasing Row Materials</option>
+                        <option value="paid">Cutting & Pollishing</option>
                         <option value="pending">Salleries</option>
                         <option value="paid">Marketing</option>
                         <option value="pending">Logistics</option>
-                        <option value="paid">Rent & Utitlities</option>
+                        
                     </select>
 
                     
