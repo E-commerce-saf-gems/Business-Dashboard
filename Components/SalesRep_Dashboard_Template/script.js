@@ -44,11 +44,17 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/requests/requests.php"">
+                        <a href="../../Pages/requests/requests.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
                         </a>
                     </li>
+                    <li>
+          <a href="../../Pages/Inquries/inquries.php">
+            <i class="bx bxs-phone-call"></i>
+            <span class="text">Inquries</span>
+          </a>
+        </li>
                 </ul>
             </section>
 
