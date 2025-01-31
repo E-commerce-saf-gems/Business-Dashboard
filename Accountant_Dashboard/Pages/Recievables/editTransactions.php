@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['transaction_id'])) {
 
     <section id="content">
         <main>
-        <div class="head-title">
+            <div class="head-title">
 				<div class="left">
 					<h1>Edit Invoice</h1>
 					<ul class="breadcrumb">
