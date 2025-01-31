@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['expense_id'])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="amount">Amount (Rs.)</label>
+                        <label for="amount">Cost (Rs.)</label>
                         <input type="number" id="amount" name="amount" value="<?= htmlspecialchars($expense['amount']) ?>" required>
                     </div>
 

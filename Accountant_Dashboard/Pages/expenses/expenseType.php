@@ -1,10 +1,29 @@
 <?php
 include '../../../database/db.php';
 
+// Get filter values from GET request
+$dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
+$categoryFilter = isset($_GET['type']) ? $_GET['type'] : '';
+
 $sql = "SELECT expense_id, date, type, description, amount, status 
-        FROM expenses;";
+        FROM expenses
+        WHERE 1";
+
+// Apply the date filter for transactions
+if ($dateFilter) {
+    $sql .= " AND DATE(date) = '" . $conn->real_escape_string($dateFilter) . "'";
+}
+
+// Apply the category filter for transactions
+if ($categoryFilter) {
+    $sql .= " AND type LIKE '%" . $conn->real_escape_string($categoryFilter) . "%'";
+}
+
+$sql .= " ORDER BY date DESC";  // Order by the date column
+
 $result = $conn->query($sql);
 ?>
+
 
 
 <!DOCTYPE html>
@@ -108,40 +127,55 @@ $result = $conn->query($sql);
 			</div>
 
             <div class="report-boxes-container">
-                
-                <div class="report-box">
-                    <h2>Cutting & Pollishing </h2>
-                    <a href="./addExpenses.html" class="report-link">Add</a>
-                </div>
+                <button class="report-box" onclick="location.href='./addExpenses.html'">
+                    Cutting and Polishing
+                </button>
 
-                <div class="report-box">
-                    <h2>Certifications </h2>
-                    <a href="./addExpenses.html" class="report-link">Add</a>
-                </div>
+                <button class="report-box" onclick="location.href='./addExpenses.html'">
+                    Certifications
+                </button>
 
-                <div class="report-box">
-                    <h2>Marketing</h2>
-                    <a href="./addExpenses.html" class="report-link">Add </a>
-                </div>
+                <button class="report-box" onclick="location.href='./addExpenses.html'">
+                    Marketing
+                </button>
 
-                <div class="report-box">
-                    <h2>Logistics</h2>
-                    <a href="./addExpenses.html" class="report-link">Add</a>
-                </div>
+                <button class="report-box" onclick="location.href='./addExpenses.html'">
+                    Logistics
+                </button>
 
-                <div class="report-box">
-                    <h2>Other</h2>
-                    <a href="./addExpenses.html" class="report-link">Add</a>
-                </div>
+                <button class="report-box" onclick="location.href='./addExpenses.html'">
+                    Other
+                </button>
             </div>
+
 
             <div class="sales-table-container">
                 <div class="table-filters">
-                    <label for="customer-filter">Category:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Category">
-                    
-                    <button class="btn-filter">Search</button>
+                    <form method="GET" action="expenseType.php">
+                        <!-- Date Filter -->
+                        <label for="date-filter">Date:</label>
+                        <input type="date" id="date-filter" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">
+
+                        <!-- Category Filter (Dropdown) -->
+                        <label for="category-filter">Type:</label>
+                        <select id="category-filter" name="type">
+                            <option value="">Select Type</option>
+                            <option value="Cutting and Polishing" <?php echo ($categoryFilter == 'Cutting and Polishing') ? 'selected' : ''; ?>>Cutting and Polishing</option>
+                            <option value="Certifications" <?php echo ($categoryFilter == 'Certifications') ? 'selected' : ''; ?>>Certifications</option>
+                            <option value="Marketing" <?php echo ($categoryFilter == 'Marketing') ? 'selected' : ''; ?>>Marketing</option>
+                            <option value="Logistics" <?php echo ($categoryFilter == 'Logistics') ? 'selected' : ''; ?>>Logistics</option>
+                            <option value="Other" <?php echo ($categoryFilter == 'Other') ? 'selected' : ''; ?>>Other</option>
+                            <!-- Add more categories as needed -->
+                        </select>
+
+                        <!-- Filter Button -->
+                        <button class="btn-filter" type="submit">Filter</button>
+
+                        <!-- Clear Button (Redirect to clear filters) -->
+                        <button><a href="expenseType.php" class="btn-clear">Clear</a></button>
+                    </form>
                 </div>
+   
 
                 <!-- Table -->
                 <table class="sales-table">
