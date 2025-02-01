@@ -1,7 +1,7 @@
-// Data storage for report details
+/*
 let reportDetails = [];
 
-// Show the selected report form and hide others
+
 function showReportForm() {
     const reportType = document.getElementById("reportType").value;
     document.getElementById("profitLossForm").style.display = "none";
@@ -237,7 +237,122 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     }
     
+});*/
+
+
+//Profit & Loss Report
+//*******reports.js fetches data from fetch_financial_report.php and updates the report********
+document.addEventListener("DOMContentLoaded", function() {
+    fetchReportData();
 });
+
+function fetchReportData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate') || '2024-01-01';
+    const endDate = urlParams.get('endDate') || '2024-01-31';
+
+    fetch(`fetch_financial_report.php?startDate=${startDate}&endDate=${endDate}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("dateRange").innerText = `${startDate} to ${endDate}`;
+            document.getElementById("totalSalesRevenue").innerText = `$${data.totalSalesRevenue.toFixed(2)}`;
+            document.getElementById("otherIncome").innerText = `$${data.otherIncome.toFixed(2)}`;
+            document.getElementById("totalRevenue").innerText = `$${(data.totalSalesRevenue + data.otherIncome).toFixed(2)}`;
+
+            document.getElementById("inventoryOpening").innerText = `$${data.inventoryOpening.toFixed(2)}`;
+            document.getElementById("purchases").innerText = `$${data.purchases.toFixed(2)}`;
+            document.getElementById("inventoryAvailable").innerText = `$${(data.inventoryOpening + data.purchases).toFixed(2)}`;
+            document.getElementById("inventoryClosing").innerText = `$${data.inventoryClosing.toFixed(2)}`;
+            document.getElementById("costOfGoodsSold").innerText = `$${(data.inventoryOpening + data.purchases - data.inventoryClosing).toFixed(2)}`;
+
+            document.getElementById("grossProfit").innerText = `$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing)).toFixed(2)}`;
+
+            document.getElementById("salaries").innerText = `$${data.salaries.toFixed(2)}`;
+            document.getElementById("rentUtilities").innerText = `$${data.rentUtilities.toFixed(2)}`;
+            document.getElementById("marketing").innerText = `$${data.marketing.toFixed(2)}`;
+            document.getElementById("adminExpenses").innerText = `$${data.adminExpenses.toFixed(2)}`;
+            document.getElementById("totalExpenses").innerText = `$${(data.salaries + data.rentUtilities + data.marketing + data.adminExpenses).toFixed(2)}`;
+
+            document.getElementById("netOperatingProfit").innerText = `$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.salaries + data.rentUtilities + data.marketing + data.adminExpenses)).toFixed(2)}`;
+
+            document.getElementById("netProfit").innerText = `$${((data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.salaries + data.rentUtilities + data.marketing + data.adminExpenses)) + data.otherIncome).toFixed(2)}`;
+        })
+        .catch(error => console.error("Error fetching report data:", error));
+}
+
+//Inventory Report
+document.addEventListener("DOMContentLoaded", function() {
+    fetchReportData();
+});
+
+function fetchReportData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate') || '2024-01-01';
+    const endDate = urlParams.get('endDate') || '2024-01-31';
+
+    fetch(`fetch_financial_report.php?startDate=${startDate}&endDate=${endDate}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("totalSalesRevenue").innerText = `$${data.totalSalesRevenue.toFixed(2)}`;
+            document.getElementById("purchases").innerText = `$${data.purchases.toFixed(2)}`;
+            document.getElementById("totalExpenses").innerText = `$${data.totalExpenses.toFixed(2)}`;
+
+            document.getElementById("totalInventoryValue").innerText = `$${data.totalInventoryValue.toFixed(2)}`;
+            document.getElementById("currentQuantity").innerText = data.currentQuantity;
+            document.getElementById("valuePerGemType").innerText = `$${data.valuePerGemType.toFixed(2)}`;
+            document.getElementById("itemsSold").innerText = data.itemsSold;
+
+            document.getElementById("percentOlder30").innerText = `${data.percentOlder30.toFixed(2)}%`;
+            document.getElementById("percentOlder60").innerText = `${data.percentOlder60.toFixed(2)}%`;
+            document.getElementById("percentOlder90").innerText = `${data.percentOlder90.toFixed(2)}%`;
+            document.getElementById("avgDaysInventory").innerText = `${data.avgDaysInventory.toFixed(0)} days`;
+
+            document.getElementById("newAcquisitions").innerText = data.newAcquisitions;
+
+            let gemBreakdown = JSON.parse(data.gemTypeBreakdown);
+            document.getElementById("gemTypeBreakdown").innerText = Object.entries(gemBreakdown)
+                .map(([type, count]) => `${type}: ${count}`)
+                .join(", ");
+        })
+        .catch(error => console.error("Error fetching report data:", error));
+}
+
+
+
+//Sales Reprot
+document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const dateFrom = urlParams.get("date_from");
+    const dateTo = urlParams.get("date_to");
+
+    if (dateFrom && dateTo) {
+        fetchSalesReport(dateFrom, dateTo);
+    }
+});
+
+function fetchSalesReport(dateFrom, dateTo) {
+    fetch(`fetch_sales_report.php?date_from=${dateFrom}&date_to=${dateTo}`)
+        .then(response => response.json())
+        .then(data => updateSalesReport(data))
+        .catch(error => console.error("Error fetching sales report:", error));
+}
+
+function updateSalesReport(data) {
+    document.getElementById("totalSales").textContent = data.totalSales;
+    document.getElementById("totalRevenue").textContent = `$${data.totalRevenue.toFixed(2)}`;
+    document.getElementById("avgSaleAmount").textContent = `$${data.avgSaleAmount.toFixed(2)}`;
+    document.getElementById("unitsSold").textContent = data.unitsSold;
+    document.getElementById("auctionRevenue").textContent = `$${data.auctionRevenue.toFixed(2)}`;
+    document.getElementById("regularRevenue").textContent = `$${data.regularRevenue.toFixed(2)}`;
+    document.getElementById("totalRevenueByType").textContent = `$${(data.auctionRevenue + data.regularRevenue).toFixed(2)}`;
+    document.getElementById("newCustomerSales").textContent = data.newCustomerSales;
+    document.getElementById("repeatCustomerSales").textContent = data.repeatCustomerSales;
+    document.getElementById("totalCustomerSales").textContent = data.newCustomerSales + data.repeatCustomerSales;
+    document.getElementById("avgSalesNew").textContent = `$${data.avgSalesNew.toFixed(2)}`;
+    document.getElementById("avgSalesRepeat").textContent = `$${data.avgSalesRepeat.toFixed(2)}`;
+}
+
+
 
 
 
