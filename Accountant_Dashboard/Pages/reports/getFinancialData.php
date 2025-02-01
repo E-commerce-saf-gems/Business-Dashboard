@@ -1,7 +1,19 @@
 <?php
 include('../../../database/db.php'); // Adjust based on your project structure
 
-// Initialize response array
+/*// Ensure startDate and endDate are correctly received from the request
+$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
+$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;// Initialize response array
+
+// Fallback to defaults if not provided
+if (!$startDate || !$endDate) {
+    die(json_encode(["error" => "Missing startDate or endDate"]));
+}
+
+// Debugging: Log startDate and endDate to check if they are received correctly
+error_log("Received startDate: " . $startDate);
+error_log("Received endDate: " . $endDate);
+
 $response = [
     'totalSalesRevenue' => 0,
     'inventoryOpening' => 0,
@@ -13,10 +25,6 @@ $response = [
     'adminExpenses' => 0,
     'otherIncome' => 0
 ];
-
-// Define time period (modify as needed)
-$startDate = $_GET['startDate'] ?? date('Y-m-01');  // Start of current month
-$endDate = $_GET['endDate'] ?? date('Y-m-t'); // End of current month
 
 // Fetch Total Sales Revenue from payments table
 $salesQuery = "SELECT SUM(amount) AS totalSalesRevenue FROM payments WHERE date BETWEEN '$startDate' AND '$endDate'";
@@ -69,5 +77,49 @@ while ($row = $result->fetch_assoc()) {
 
 // Return JSON response
 header('Content-Type: application/json');
-echo json_encode($response);
+echo json_encode($response);*/
 ?>
+
+<?php
+header("Content-Type: application/json");
+
+if (isset($_GET['startDate']) && isset($_GET['endDate'])) {
+    $startDate = $_GET['startDate'];
+    $endDate = $_GET['endDate'];
+
+    // Validate date input
+    if (!validateDate($startDate) || !validateDate($endDate)) {
+        echo json_encode(["error" => "Invalid date format"]);
+        exit;
+    }
+
+    // Sample data
+    $data = [
+        "totalSalesRevenue" => 25000.00,
+        "otherIncome" => 1500.00,
+        "inventoryOpening" => 5000.00,
+        "purchases" => 8000.00,
+        "inventoryClosing" => 6000.00,
+        "grossProfit" => 19000.00,
+        "salaries" => 3000.00,
+        "rentUtilities" => 2000.00,
+        "marketing" => 500.00,
+        "adminExpenses" => 1000.00,
+        "totalExpenses" => 6500.00,
+        "netOperatingProfit" => 12500.00,
+        "netProfit" => 14000.00
+    ];
+
+    echo json_encode($data);
+} else {
+    echo json_encode(["error" => "Missing parameters"]);
+}
+
+function validateDate($date, $format = 'Y-m-d') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}
+?>
+
+
+

@@ -1,8 +1,14 @@
 <?php
 require_once('../../../database/db.php');
 
-$startDate = $_GET['startDate'] ?? '2024-01-01';
-$endDate = $_GET['endDate'] ?? '2024-01-31';
+// Ensure startDate and endDate are correctly received from the request
+$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
+$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;// Initialize response array
+
+// Fallback to defaults if not provided
+if (!$startDate || !$endDate) {
+    die(json_encode(["error" => "Missing startDate or endDate"]));
+}
 
 $response = [];
 

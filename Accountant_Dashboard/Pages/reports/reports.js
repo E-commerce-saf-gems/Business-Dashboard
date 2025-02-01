@@ -1,356 +1,96 @@
-/*
-let reportDetails = [];
+let selectedReportType = '';
 
-
-function showReportForm() {
-    const reportType = document.getElementById("reportType").value;
-    document.getElementById("profitLossForm").style.display = "none";
-    document.getElementById("salesForm").style.display = "none";
-    document.getElementById("inventoryForm").style.display = "none";
-
-    if (reportType === "profit-loss") {
-        document.getElementById("profitLossForm").style.display = "block";
-    } else if (reportType === "sales") {
-        document.getElementById("salesForm").style.display = "block";
-    } else if (reportType === "inventory") {
-        document.getElementById("inventoryForm").style.display = "block";
-    }
+// Open modal for the selected report type
+function openModal(reportType) {
+    selectedReportType = reportType;
+    document.getElementById('reportModal').style.display = 'block';
 }
 
-// Function to open report in a new window and pass data via localStorage
-function openReportInNewWindow(reportType) {
-    let previewPage;
-    if (reportType === "profit-loss") {
-        previewPage = "profitpreview.html";
-    } else if (reportType === "sales") {
-        previewPage = "salespreview.html";
-    } else if (reportType === "inventory") {
-        previewPage = "inventorypreview.html";
-    }
-    localStorage.setItem("reportType", reportType);
-    window.open(previewPage);
+// Close the modal
+function closeModal() {
+    document.getElementById('reportModal').style.display = 'none';
 }
 
+// Show/hide custom date range inputs and month/year selectors based on the selected period
+document.getElementById('time-period').addEventListener('change', function () {
+    const period = this.value;
+    const monthOptions = document.getElementById('month-options');
+    const yearOptions = document.getElementById('year-options');
+    const customDateRange = document.getElementById('custom-date-range');
 
-// Generate Profit and Loss Report and open in new window
-function generateProfitLossReport() {
-    const reportData = {
-        dateRange: `${document.getElementById("plStartDate").value} to ${document.getElementById("plEndDate").value}`,
-        totalSalesRevenue: parseFloat(document.getElementById("totalSalesRevenue").value) || 0,
-        otherIncome: parseFloat(document.getElementById("otherIncome").value) || 0,
-        inventoryOpening: parseFloat(document.getElementById("inventoryOpening").value) || 0,
-        purchases: parseFloat(document.getElementById("purchases").value) || 0,
-        inventoryClosing: parseFloat(document.getElementById("inventoryClosing").value) || 0,
-        salaries: parseFloat(document.getElementById("salaries").value) || 0,
-        rentUtilities: parseFloat(document.getElementById("rentUtilities").value) || 0,
-        marketing: parseFloat(document.getElementById("marketing").value) || 0,
-        adminExpenses: parseFloat(document.getElementById("adminExpenses").value) || 0
-    };
+    // Hide all options initially
+    monthOptions.style.display = 'none';
+    yearOptions.style.display = 'none';
+    customDateRange.style.display = 'none';
 
-    // Store data in localStorage
-    localStorage.setItem("profitLossReportData", JSON.stringify(reportData));
-    openReportInNewWindow("profit-loss");
-}
-
-// Generate Sales Report and open in new window
-function generateSalesReport() {
-    const reportData = {
-        dateRange: `${document.getElementById("salesStartDate").value} to ${document.getElementById("salesEndDate").value}`,
-        gemType: document.getElementById("gemType").value || "All Types",
-        totalSales: parseInt(document.getElementById("totalSales").value) || 0,
-        totalRevenue: parseFloat(document.getElementById("totalRevenue").value) || 0,
-        avgSaleAmount: parseFloat(document.getElementById("avgSaleAmount").value) || 0,
-        unitsSold: parseInt(document.getElementById("unitsSold").value) || 0,
-        revenueByType: parseFloat(document.getElementById("revenueByType").value) || 0,
-        auctionUnits: parseInt(document.getElementById("auctionUnits").value) || 0,
-        auctionRevenue: parseFloat(document.getElementById("auctionRevenue").value) || 0,
-        regularUnits: parseInt(document.getElementById("regularUnits").value) || 0,
-        regularRevenue: parseFloat(document.getElementById("regularRevenue").value) || 0,
-        newCustomerSales: parseInt(document.getElementById("newCustomerSales").value) || 0,
-        repeatCustomerSales: parseInt(document.getElementById("repeatCustomerSales").value) || 0,
-        avgSalesNew: parseFloat(document.getElementById("avgSalesNew").value) || 0,
-        avgSalesRepeat: parseFloat(document.getElementById("avgSalesRepeat").value) || 0
-    };
-
-    // Store data in localStorage
-    localStorage.setItem("salesReportData", JSON.stringify(reportData));
-    openReportInNewWindow("sales");
-}
-
-// Generate Inventory Report and open in new window
-function generateInventoryReport() {
-    const reportData = {
-        reportDate: document.getElementById("inventoryDate").value,
-        totalInventoryValue: parseFloat(document.getElementById("totalInventoryValue").value) || 0,
-        gemTypeBreakdown: document.getElementById("gemTypeBreakdown").value || "Various Types",
-        currentQuantity: parseInt(document.getElementById("currentQuantity").value) || 0,
-        valuePerGemType: parseFloat(document.getElementById("valuePerGemType").value) || 0,
-        itemsSold: parseInt(document.getElementById("itemsSold").value) || 0,
-        newAcquisitions: parseInt(document.getElementById("newAcquisitions").value) || 0,
-        avgDaysInventory: parseInt(document.getElementById("avgDaysInventory").value) || 0,
-        percentOlder30: parseFloat(document.getElementById("percentOlder30").value) || 0,
-        percentOlder60: parseFloat(document.getElementById("percentOlder60").value) || 0,
-        percentOlder90: parseFloat(document.getElementById("percentOlder90").value) || 0
-    };
-
-    // Store data in localStorage
-    localStorage.setItem("inventoryReportData", JSON.stringify(reportData));
-    openReportInNewWindow("inventory");
-}
-
-
-
-//report preview logic
-document.addEventListener("DOMContentLoaded", function () {
-    const reportType = localStorage.getItem("reportType");
-    const reportTemplate = document.getElementById("reportTemplate");
-
-    if (reportType === "profit-loss") {
-        const data = JSON.parse(localStorage.getItem("profitLossReportData"));
-        
-        reportTemplate.innerHTML = `
-        <div class="report-container">
-            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
-            <p class="company-name">SAF Gems</p>
-            <h3 class="report-title">Profit & Loss Report</h3>
-            <p><strong>Prepared by:</strong> Quinn Campbell</p>
-            <p><strong>Period:</strong> ${data.dateRange}</p>
-            <p class="financial-details">Financial statements in Sri Lankan Rupees</p>
-
-            <table class="report-table">
-                <!-- Revenue Section -->
-                <tr class="section-header"><th colspan="2">REVENUE</th></tr>
-                <tr><td>Total Sales Revenue</td><td>$${data.totalSalesRevenue.toFixed(2)}</td></tr>
-                <tr><td>Add: Other Income</td><td>$0.00</td></tr> <!-- Placeholder for sales returns -->
-                <tr class="section-total"><td>Total Revenue</td><td>$${data.totalSalesRevenue.toFixed(2)}</td></tr>
-                
-                <!-- Cost of Goods Sold Section -->
-                <tr class="section-header"><th colspan="2">COST OF GOODS SOLD</th></tr>
-                <tr><td>Inventory Opening Value</td><td>$${data.inventoryOpening.toFixed(2)}</td></tr>
-                <tr><td>Add: Purchases</td><td>$${data.purchases.toFixed(2)}</td></tr>
-                <tr><td>Inventory Available</td><td>$${(data.inventoryOpening + data.purchases).toFixed(2)}</td></tr>
-                <tr><td>Less: Inventory Closing Value</td><td>$${data.inventoryClosing.toFixed(2)}</td></tr>
-                <tr class="section-total"><td>Cost of Goods Sold</td><td>$${(data.inventoryOpening + data.purchases - data.inventoryClosing).toFixed(2)}</td></tr>
-                
-                <!-- Gross Profit Section -->
-                <tr class="section-total"><td>Gross Profit</td><td>$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing)).toFixed(2)}</td></tr>
-                
-                <!-- Expenses Section -->
-                <tr class="section-header"><th colspan="2">EXPENSES</th></tr>
-                <tr><td>Salaries & Wages</td><td>$${data.salaries.toFixed(2)}</td></tr>
-                <tr><td>Rent & Utilities</td><td>$${data.rentUtilities.toFixed(2)}</td></tr>
-                <tr><td>Advertising & Marketing</td><td>$${data.marketing.toFixed(2)}</td></tr>
-                <tr><td>Administrative Expenses</td><td>$${data.adminExpenses.toFixed(2)}</td></tr>
-                <tr class="section-total"><td>Total Expenses</td><td>$${(data.marketing + data.salaries + data.adminExpenses + data.rentUtilities).toFixed(2)}</td></tr>
-                
-                <!-- Net Operating Income Section -->
-                <tr class="section-total"><td>Net Operating Profit</td><td>$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.marketing + data.salaries + data.adminExpenses)).toFixed(2)}</td></tr>
-                
-                <!-- Net Income Section -->
-                <tr class="section-header"><th colspan="2">NET INCOME</th></tr>
-                <tr class="section-total"><td>Net Profit (or Loss)</td><td>$${((data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.marketing + data.salaries + data.adminExpenses)) + data.otherIncome).toFixed(2)}</td></tr>
-            </table>
-        </div>
-        `;
-    } 
-    else if (reportType === "sales") {
-        const data = JSON.parse(localStorage.getItem("salesReportData"));
-    
-        reportTemplate.innerHTML = `
-        <div class="report-container">
-            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
-            <p class="company-name">SAF Gems</p>
-            <h3 class="report-title">Sales Report</h3>
-            <p><strong>Prepared by:</strong> Quinn Campbell</p>
-            <p><strong>Period:</strong> ${data.dateRange}</p>
-            <p class="financial-details">Sales details for the selected period</p>
-    
-            <table class="report-table">
-                <!-- Sales Summary Section -->
-                <tr class="section-header"><th colspan="2">SALES SUMMARY</th></tr>
-                <tr><td>Total Sales</td><td>$${data.totalSales.toFixed(2)}</td></tr>
-                <tr><td>Total Revenue</td><td>$${data.totalRevenue.toFixed(2)}</td></tr>
-                <tr><td>Average Sale Amount</td><td>$${data.avgSaleAmount.toFixed(2)}</td></tr>
-                <tr><td>Units Sold</td><td>${data.unitsSold}</td></tr>
-                <tr class="section-total"><td>Total Revenue</td><td>$${data.totalRevenue.toFixed(2)}</td></tr>
-                
-                <!-- Revenue by Type Section -->
-                <tr class="section-header"><th colspan="2">REVENUE BY TYPE</th></tr>
-                <tr><td>Revenue from Auction Sales</td><td>$${data.auctionRevenue.toFixed(2)}</td></tr>
-                <tr><td>Revenue from Regular Sales</td><td>$${data.regularRevenue.toFixed(2)}</td></tr>
-                <tr class="section-total"><td>Total Revenue by Type</td><td>$${(data.auctionRevenue + data.regularRevenue).toFixed(2)}</td></tr>
-                
-                <!-- Customer Sales Section -->
-                <tr class="section-header"><th colspan="2">CUSTOMER SALES</th></tr>
-                <tr><td>New Customer Sales</td><td>${data.newCustomerSales}</td></tr>
-                <tr><td>Repeat Customer Sales</td><td>${data.repeatCustomerSales}</td></tr>
-                <tr class="section-total"><td>Total Customer Sales</td><td>${(data.newCustomerSales + data.repeatCustomerSales)}</td></tr>
-                
-                <!-- Average Sales per Customer -->
-                <tr class="section-header"><th colspan="2">AVERAGE SALES</th></tr>
-                <tr><td>Average Sale (New Customers)</td><td>$${data.avgSalesNew.toFixed(2)}</td></tr>
-                <tr><td>Average Sale (Repeat Customers)</td><td>$${data.avgSalesRepeat.toFixed(2)}</td></tr>
-            </table>
-        </div>
-        `;
-    }
-    
-
-    else if (reportType === "inventory") {
-        const data = JSON.parse(localStorage.getItem("inventoryReportData"));
-    
-        reportTemplate.innerHTML = `
-        <div class="report-container">
-            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
-            <p class="company-name">SAF Gems</p>
-            <h3 class="report-title">Inventory Report</h3>
-            <p><strong>Prepared by:</strong> Quinn Campbell</p>
-            <p><strong>Report Date:</strong> ${data.reportDate}</p>
-            <p class="financial-details">Inventory status and breakdown for the selected period</p>
-    
-            <table class="report-table">
-                <!-- Inventory Summary Section -->
-                <tr class="section-header"><th colspan="2">INVENTORY SUMMARY</th></tr>
-                <tr><td>Total Inventory Value</td><td>$${data.totalInventoryValue.toFixed(2)}</td></tr>
-                <tr><td>Current Quantity</td><td>${data.currentQuantity}</td></tr>
-                <tr><td>Value per Gem Type</td><td>$${data.valuePerGemType.toFixed(2)}</td></tr>
-                <tr><td>Items Sold</td><td>${data.itemsSold}</td></tr>
-                <tr class="section-total"><td>Total Inventory Value</td><td>$${data.totalInventoryValue.toFixed(2)}</td></tr>
-    
-                <!-- Acquisition and Breakdown Section -->
-                <tr class="section-header"><th colspan="2">ACQUISITION & BREAKDOWN</th></tr>
-                <tr><td>New Acquisitions</td><td>${data.newAcquisitions}</td></tr>
-                <tr><td>Gem Type Breakdown</td><td>${data.gemTypeBreakdown}</td></tr>
-    
-                <!-- Inventory Ageing Section -->
-                <tr class="section-header"><th colspan="2">INVENTORY AGEING</th></tr>
-                <tr><td>Inventory Older than 30 Days</td><td>${data.percentOlder30}%</td></tr>
-                <tr><td>Inventory Older than 60 Days</td><td>${data.percentOlder60}%</td></tr>
-                <tr><td>Inventory Older than 90 Days</td><td>${data.percentOlder90}%</td></tr>
-    
-                <!-- Average Days in Inventory -->
-                <tr class="section-header"><th colspan="2">INVENTORY AGE DETAILS</th></tr>
-                <tr><td>Average Days in Inventory</td><td>${data.avgDaysInventory} days</td></tr>
-            </table>
-            
-        </div>
-        `;
-    }
-    
-});*/
-
-
-//Profit & Loss Report
-//*******reports.js fetches data from fetch_financial_report.php and updates the report********
-document.addEventListener("DOMContentLoaded", function() {
-    fetchReportData();
-});
-
-function fetchReportData() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const startDate = urlParams.get('startDate') || '2024-01-01';
-    const endDate = urlParams.get('endDate') || '2024-01-31';
-
-    fetch(`fetch_financial_report.php?startDate=${startDate}&endDate=${endDate}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("dateRange").innerText = `${startDate} to ${endDate}`;
-            document.getElementById("totalSalesRevenue").innerText = `$${data.totalSalesRevenue.toFixed(2)}`;
-            document.getElementById("otherIncome").innerText = `$${data.otherIncome.toFixed(2)}`;
-            document.getElementById("totalRevenue").innerText = `$${(data.totalSalesRevenue + data.otherIncome).toFixed(2)}`;
-
-            document.getElementById("inventoryOpening").innerText = `$${data.inventoryOpening.toFixed(2)}`;
-            document.getElementById("purchases").innerText = `$${data.purchases.toFixed(2)}`;
-            document.getElementById("inventoryAvailable").innerText = `$${(data.inventoryOpening + data.purchases).toFixed(2)}`;
-            document.getElementById("inventoryClosing").innerText = `$${data.inventoryClosing.toFixed(2)}`;
-            document.getElementById("costOfGoodsSold").innerText = `$${(data.inventoryOpening + data.purchases - data.inventoryClosing).toFixed(2)}`;
-
-            document.getElementById("grossProfit").innerText = `$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing)).toFixed(2)}`;
-
-            document.getElementById("salaries").innerText = `$${data.salaries.toFixed(2)}`;
-            document.getElementById("rentUtilities").innerText = `$${data.rentUtilities.toFixed(2)}`;
-            document.getElementById("marketing").innerText = `$${data.marketing.toFixed(2)}`;
-            document.getElementById("adminExpenses").innerText = `$${data.adminExpenses.toFixed(2)}`;
-            document.getElementById("totalExpenses").innerText = `$${(data.salaries + data.rentUtilities + data.marketing + data.adminExpenses).toFixed(2)}`;
-
-            document.getElementById("netOperatingProfit").innerText = `$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.salaries + data.rentUtilities + data.marketing + data.adminExpenses)).toFixed(2)}`;
-
-            document.getElementById("netProfit").innerText = `$${((data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.salaries + data.rentUtilities + data.marketing + data.adminExpenses)) + data.otherIncome).toFixed(2)}`;
-        })
-        .catch(error => console.error("Error fetching report data:", error));
-}
-
-//Inventory Report
-document.addEventListener("DOMContentLoaded", function() {
-    fetchReportData();
-});
-
-function fetchReportData() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const startDate = urlParams.get('startDate') || '2024-01-01';
-    const endDate = urlParams.get('endDate') || '2024-01-31';
-
-    fetch(`fetch_financial_report.php?startDate=${startDate}&endDate=${endDate}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("totalSalesRevenue").innerText = `$${data.totalSalesRevenue.toFixed(2)}`;
-            document.getElementById("purchases").innerText = `$${data.purchases.toFixed(2)}`;
-            document.getElementById("totalExpenses").innerText = `$${data.totalExpenses.toFixed(2)}`;
-
-            document.getElementById("totalInventoryValue").innerText = `$${data.totalInventoryValue.toFixed(2)}`;
-            document.getElementById("currentQuantity").innerText = data.currentQuantity;
-            document.getElementById("valuePerGemType").innerText = `$${data.valuePerGemType.toFixed(2)}`;
-            document.getElementById("itemsSold").innerText = data.itemsSold;
-
-            document.getElementById("percentOlder30").innerText = `${data.percentOlder30.toFixed(2)}%`;
-            document.getElementById("percentOlder60").innerText = `${data.percentOlder60.toFixed(2)}%`;
-            document.getElementById("percentOlder90").innerText = `${data.percentOlder90.toFixed(2)}%`;
-            document.getElementById("avgDaysInventory").innerText = `${data.avgDaysInventory.toFixed(0)} days`;
-
-            document.getElementById("newAcquisitions").innerText = data.newAcquisitions;
-
-            let gemBreakdown = JSON.parse(data.gemTypeBreakdown);
-            document.getElementById("gemTypeBreakdown").innerText = Object.entries(gemBreakdown)
-                .map(([type, count]) => `${type}: ${count}`)
-                .join(", ");
-        })
-        .catch(error => console.error("Error fetching report data:", error));
-}
-
-
-
-//Sales Reprot
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const dateFrom = urlParams.get("date_from");
-    const dateTo = urlParams.get("date_to");
-
-    if (dateFrom && dateTo) {
-        fetchSalesReport(dateFrom, dateTo);
+    // Show options based on selected period
+    if (period === 'monthly') {
+        monthOptions.style.display = 'block';
+        yearOptions.style.display = 'block'; // Show year selector for monthly
+        populateYears();  // Populate the years dropdown
+    } else if (period === 'yearly') {
+        yearOptions.style.display = 'block';
+        populateYears();  // Populate the years dropdown
+    } else if (period === 'custom') {
+        customDateRange.style.display = 'block';
     }
 });
 
-function fetchSalesReport(dateFrom, dateTo) {
-    fetch(`fetch_sales_report.php?date_from=${dateFrom}&date_to=${dateTo}`)
-        .then(response => response.json())
-        .then(data => updateSalesReport(data))
-        .catch(error => console.error("Error fetching sales report:", error));
+// Function to populate the years dropdown with the last 10 years
+function populateYears() {
+    const currentYear = new Date().getFullYear();
+    const yearDropdown = document.getElementById('year');
+    yearDropdown.innerHTML = ''; // Clear existing options
+
+    for (let i = currentYear - 10; i <= currentYear; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        yearDropdown.appendChild(option);
+    }
 }
 
-function updateSalesReport(data) {
-    document.getElementById("totalSales").textContent = data.totalSales;
-    document.getElementById("totalRevenue").textContent = `$${data.totalRevenue.toFixed(2)}`;
-    document.getElementById("avgSaleAmount").textContent = `$${data.avgSaleAmount.toFixed(2)}`;
-    document.getElementById("unitsSold").textContent = data.unitsSold;
-    document.getElementById("auctionRevenue").textContent = `$${data.auctionRevenue.toFixed(2)}`;
-    document.getElementById("regularRevenue").textContent = `$${data.regularRevenue.toFixed(2)}`;
-    document.getElementById("totalRevenueByType").textContent = `$${(data.auctionRevenue + data.regularRevenue).toFixed(2)}`;
-    document.getElementById("newCustomerSales").textContent = data.newCustomerSales;
-    document.getElementById("repeatCustomerSales").textContent = data.repeatCustomerSales;
-    document.getElementById("totalCustomerSales").textContent = data.newCustomerSales + data.repeatCustomerSales;
-    document.getElementById("avgSalesNew").textContent = `$${data.avgSalesNew.toFixed(2)}`;
-    document.getElementById("avgSalesRepeat").textContent = `$${data.avgSalesRepeat.toFixed(2)}`;
+// Generate the report and redirect to the preview page
+function generateReport() {
+    const period = document.getElementById('time-period').value;
+    const today = new Date();
+    let startDate = '';
+    let endDate = today.toISOString().split('T')[0]; // Default end date as today's date
+
+    // Calculate start and end dates based on the period
+    if (period === 'daily') {
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        startDate = yesterday.toISOString().split('T')[0];
+    } else if (period === 'weekly') {
+        const lastWeek = new Date();
+        lastWeek.setDate(today.getDate() - 7);
+        startDate = lastWeek.toISOString().split('T')[0];
+    } else if (period === 'monthly') {
+        const selectedMonth = document.getElementById('month').value;
+        const selectedYear = document.getElementById('year').value;
+        startDate = `${selectedYear}-${selectedMonth}-01`; // Start date as the first day of the selected month
+        endDate = new Date(selectedYear, selectedMonth, 0).toISOString().split('T')[0]; // Last day of the selected month
+    } else if (period === 'yearly') {
+        const selectedYear = document.getElementById('year').value;
+        startDate = `${selectedYear}-01-01`; // Start date as the first day of the selected year
+        endDate = `${selectedYear}-12-31`; // End date as the last day of the selected year
+    } else if (period === 'custom') {
+        startDate = document.getElementById('start-date').value;
+        endDate = document.getElementById('end-date').value;
+    }
+
+    // Construct the URL with parameters
+    const url = `./${selectedReportType}preview.html?period=${period}&start=${startDate}&end=${endDate}`;
+
+    // Redirect to the preview page
+    window.location.href = url;
 }
+
+
+
+
+
 
 
 

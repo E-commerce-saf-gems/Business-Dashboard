@@ -1,8 +1,14 @@
 <?php
 include '../../../db_connection.php';
 
-$dateFrom = $_GET['date_from'] ?? null;
-$dateTo = $_GET['date_to'] ?? null;
+// Ensure startDate and endDate are correctly received from the request
+$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
+$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;// Initialize response array
+
+// Fallback to defaults if not provided
+if (!$startDate || !$endDate) {
+    die(json_encode(["error" => "Missing startDate or endDate"]));
+}
 
 $response = [
     'totalSales' => 0,

@@ -43,7 +43,7 @@ $result = $conn->query($sql);
         }
 
         .modal-content {
-            background: #fff;
+            background: rgb(235, 235, 235);
             margin: 10% auto;
             padding: 30px;
             border-radius: 15px;  /* Increased border-radius for a smoother corner */
@@ -77,22 +77,22 @@ $result = $conn->query($sql);
 
         /* Button for 'Generate' report - Green color */
         button:nth-child(1) {
-            background-color: teal; 
+            background-color: rgb(0, 128, 128); 
             color: white;
         }
 
         button:nth-child(1):hover {
-            background-color: teal;  
+            background-color: rgb(0, 71, 71);  
         }
 
         /* Button for 'Cancel' - Light Red color */
         button:nth-child(2) {
-            background-color:rgb(247, 36, 21);  /* Red */
+            background-color:rgb(247, 36, 21);
             color: white;
         }
 
         button:nth-child(2):hover {
-            background-color:rgb(163, 36, 34);  /* Darker red on hover */
+            background-color:rgb(163, 36, 34);  
         }
 
         /* Style for the 'Select Period' and 'Custom Date Range' Inputs */
@@ -140,11 +140,10 @@ $result = $conn->query($sql);
                     <a href="#" class="report-link">Generate Report</a>
                 </div>
             </div>
-
-            
         </main>
     </section>
 
+    
     <!-- Report Time Period Modal -->
     <div id="reportModal" class="modal">
         <div class="modal-content">
@@ -158,6 +157,31 @@ $result = $conn->query($sql);
                 <option value="custom">Custom Date Range</option>
             </select>
             
+            <div id="month-options" style="display: none; margin-top: 10px;">
+                <label for="month">Select Month:</label>
+                <select id="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+
+            <div id="year-options" style="display: none; margin-top: 10px;">
+                <label for="year">Select Year:</label>
+                <select id="year">
+                    <!-- Year options will be dynamically added -->
+                </select>
+            </div>
+
             <div id="custom-date-range" style="display: none; margin-top: 10px;">
                 <label>From: <input type="date" id="start-date"></label>
                 <label>To: <input type="date" id="end-date"></label>
@@ -169,47 +193,7 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
-
-    <script>
-        let selectedReportType = '';
-
-        function openModal(reportType) {
-            selectedReportType = reportType;
-            document.getElementById('reportModal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('reportModal').style.display = 'none';
-        }
-
-        document.getElementById('time-period').addEventListener('change', function() {
-            if (this.value === 'custom') {
-                document.getElementById('custom-date-range').style.display = 'block';
-            } else {
-                document.getElementById('custom-date-range').style.display = 'none';
-            }
-        });
-
-        function generateReport() {
-            let period = document.getElementById('time-period').value;
-            let url = '';
-            
-            // Check for custom date range
-            if (period === 'custom') {
-                let startDate = document.getElementById('start-date').value;
-                let endDate = document.getElementById('end-date').value;
-                // Pass the dates in the URL for custom report
-                url = `./${selectedReportType}preview.html?period=custom&start=${startDate}&end=${endDate}`;
-            } else {
-                // For non-custom reports, just pass the period
-                url = `./${selectedReportType}preview.html?period=${period}`;
-            }
-
-            // Redirect to the corresponding report form
-            window.location.href = url;
-        }
-    </script>
-
+    
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="./reports.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -220,6 +204,7 @@ $result = $conn->query($sql);
 <?php
 $conn->close();
 ?>
+
 
 
 

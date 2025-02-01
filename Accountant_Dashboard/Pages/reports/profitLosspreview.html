@@ -37,39 +37,79 @@
                 <p><strong>Prepared by:</strong> Quinn Campbell</p>
                 <p><strong>Period:</strong> <span id="dateRange"></span></p>
                 <p class="financial-details">Financial statements in Sri Lankan Rupees</p>
-
+            
                 <table class="report-table">
                     <tr class="section-header"><th colspan="2">REVENUE</th></tr>
-                    <tr><td>Total Sales Revenue</td><td id="totalSalesRevenue"></td></tr>
+                    <tr><td>Total Sales Revenue</td><td id="totalSalesRevenue">$0.00</td></tr>
                     <tr><td>Add: Other Income</td><td id="otherIncome">$0.00</td></tr>
-                    <tr class="section-total"><td>Total Revenue</td><td id="totalRevenue"></td></tr>
-
+                    <tr class="section-total"><td>Total Revenue</td><td id="totalRevenue">$0.00</td></tr>
+            
                     <tr class="section-header"><th colspan="2">COST OF GOODS SOLD</th></tr>
-                    <tr><td>Inventory Opening Value</td><td id="inventoryOpening"></td></tr>
-                    <tr><td>Add: Purchases</td><td id="purchases"></td></tr>
-                    <tr><td>Inventory Available</td><td id="inventoryAvailable"></td></tr>
-                    <tr><td>Less: Inventory Closing Value</td><td id="inventoryClosing"></td></tr>
-                    <tr class="section-total"><td>Cost of Goods Sold</td><td id="costOfGoodsSold"></td></tr>
-
-                    <tr class="section-total"><td>Gross Profit</td><td id="grossProfit"></td></tr>
-
+                    <tr><td>Inventory Opening Value</td><td id="inventoryOpening">$0.00</td></tr>
+                    <tr><td>Add: Purchases</td><td id="purchases">$0.00</td></tr>
+                    <tr><td>Inventory Available</td><td id="inventoryAvailable">$0.00</td></tr>
+                    <tr><td>Less: Inventory Closing Value</td><td id="inventoryClosing">$0.00</td></tr>
+                    <tr class="section-total"><td>Cost of Goods Sold</td><td id="costOfGoodsSold">$0.00</td></tr>
+            
+                    <tr class="section-total"><td>Gross Profit</td><td id="grossProfit">$0.00</td></tr>
+            
                     <tr class="section-header"><th colspan="2">EXPENSES</th></tr>
-                    <tr><td>Salaries & Wages</td><td id="salaries"></td></tr>
-                    <tr><td>Rent & Utilities</td><td id="rentUtilities"></td></tr>
-                    <tr><td>Advertising & Marketing</td><td id="marketing"></td></tr>
-                    <tr><td>Administrative Expenses</td><td id="adminExpenses"></td></tr>
-                    <tr class="section-total"><td>Total Expenses</td><td id="totalExpenses"></td></tr>
-
-                    <tr class="section-total"><td>Net Operating Profit</td><td id="netOperatingProfit"></td></tr>
-
+                    <tr><td>Salaries & Wages</td><td id="salaries">$0.00</td></tr>
+                    <tr><td>Rent & Utilities</td><td id="rentUtilities">$0.00</td></tr>
+                    <tr><td>Advertising & Marketing</td><td id="marketing">$0.00</td></tr>
+                    <tr><td>Administrative Expenses</td><td id="adminExpenses">$0.00</td></tr>
+                    <tr class="section-total"><td>Total Expenses</td><td id="totalExpenses">$0.00</td></tr>
+            
+                    <tr class="section-total"><td>Net Operating Profit</td><td id="netOperatingProfit">$0.00</td></tr>
+            
                     <tr class="section-header"><th colspan="2">NET INCOME</th></tr>
-                    <tr class="section-total"><td>Net Profit (or Loss)</td><td id="netProfit"></td></tr>
+                    <tr class="section-total"><td>Net Profit (or Loss)</td><td id="netProfit">$0.00</td></tr>
                 </table>
             </div>
+            
         </main>
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const period = urlParams.get("period");
+            let startDate = urlParams.get("start"); // YYYY-MM-DD
+            let endDate = urlParams.get("end"); // YYYY-MM-DD
+    
+            // Display period and calculate the correct date range
+            const dateRangeElement = document.getElementById('dateRange');
+            
+            if (period === 'monthly') {
+            const selectedMonth = new Date(startDate).toLocaleString('default', { month: 'long' });
+            const selectedYear = new Date(startDate).getFullYear();
+            dateRangeElement.textContent = `Month of ${selectedMonth} ${selectedYear}`;
+            } else if (period === 'yearly') {
+                const selectedYear = new Date(startDate).getFullYear();
+                dateRangeElement.textContent = `Year ${selectedYear}`;
+            } else if (period === 'weekly') {
+                const startOfWeek = new Date(startDate);
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6); // Add 6 days to get the end of the week
+                dateRangeElement.textContent = `From ${formatDate(startOfWeek)} to ${formatDate(endOfWeek)}`;
+            } else if (period === 'custom') {
+                dateRangeElement.textContent = `From ${formatDate(startDate)} to ${formatDate(endDate)}`;
+            } else {
+                dateRangeElement.textContent = `For ${formatDate(startDate)}`;
+            }
+
+    
+            // Your existing fetchFinancialReport logic...
+        });
+    
+        // Helper function to format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+    </script>
+
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="./reports.js"></script>
+    <script src="reports.js"></script>
 </body>
 </html>

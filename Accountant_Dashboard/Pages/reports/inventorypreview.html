@@ -35,7 +35,7 @@
                 <p class="company-name">SAF Gems</p>
                 <h3 class="report-title">Inventory Report</h3>
                 <p><strong>Prepared by:</strong> Quinn Campbell</p>
-                <p><strong>Report Date:</strong> ${data.reportDate}</p>
+                <p><strong>Period:</strong> <span id="dateRange"></span></p>
                 <p class="financial-details">Inventory status and breakdown for the selected period</p>
 
                 <table class="report-table">
@@ -67,7 +67,45 @@
         </main>
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const period = urlParams.get("period");
+            let startDate = urlParams.get("start"); // YYYY-MM-DD
+            let endDate = urlParams.get("end"); // YYYY-MM-DD
+    
+            // Display period and calculate the correct date range
+            const dateRangeElement = document.getElementById('dateRange');
+            if (period === 'monthly') {
+            const selectedMonth = new Date(startDate).toLocaleString('default', { month: 'long' });
+            const selectedYear = new Date(startDate).getFullYear();
+            dateRangeElement.textContent = `Month of ${selectedMonth} ${selectedYear}`;
+            } else if (period === 'yearly') {
+                const selectedYear = new Date(startDate).getFullYear();
+                dateRangeElement.textContent = `Year ${selectedYear}`;
+            } else if (period === 'weekly') {
+                const startOfWeek = new Date(startDate);
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6); // Add 6 days to get the end of the week
+                dateRangeElement.textContent = `From ${formatDate(startOfWeek)} to ${formatDate(endOfWeek)}`;
+            } else if (period === 'custom') {
+                dateRangeElement.textContent = `From ${formatDate(startDate)} to ${formatDate(endDate)}`;
+            } else {
+                dateRangeElement.textContent = `For ${formatDate(startDate)}`;
+            }
+
+    
+            // Your existing fetchFinancialReport logic...
+        });
+    
+        // Helper function to format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+    </script>
+
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="#"></script>
+    <script src="reports.js"></script>
 </body>
 </html>
