@@ -31,7 +31,7 @@
             </div>
 
             <div class="report-container">
-                <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+                <img src="../../../Images/logo.png" alt="Company Logo" class="company-logo">
                 <p class="company-name">SAF Gems</p>
                 <h3 class="report-title">Sales Report</h3>
                 <p><strong>Prepared by:</strong> Quinn Campbell</p>
@@ -40,26 +40,29 @@
     
                 <table class="report-table">
                     <tr class="section-header"><th colspan="2">SALES SUMMARY</th></tr>
-                    <tr><td>Total Sales</td><td>$${data.totalSales.toFixed(2)}</td></tr>
-                    <tr><td>Total Revenue</td><td>$${data.totalRevenue.toFixed(2)}</td></tr>
-                    <tr><td>Average Sale Amount</td><td>$${data.avgSaleAmount.toFixed(2)}</td></tr>
-                    <tr><td>Units Sold</td><td>${data.unitsSold}</td></tr>
-                    <tr class="section-total"><td>Total Revenue</td><td>$${data.totalRevenue.toFixed(2)}</td></tr>
-                    
+                    <tr><td>Total Sales</td><td id="totalSales"></td></tr>
+                    <tr><td>Total Revenue</td><td id="totalRevenue"></td></tr>
+                    <tr><td>Average Sale Amount</td><td id="avgSaleAmount"></td></tr>
+                    <tr><td>Units Sold</td><td id="unitsSold"></td></tr>
+                    <tr class="section-total"><td>Total Revenue</td><td id="totalRevenueSummary"></td></tr>
+                
                     <tr class="section-header"><th colspan="2">REVENUE BY TYPE</th></tr>
-                    <tr><td>Revenue from Auction Sales</td><td>$${data.auctionRevenue.toFixed(2)}</td></tr>
-                    <tr><td>Revenue from Regular Sales</td><td>$${data.regularRevenue.toFixed(2)}</td></tr>
-                    <tr class="section-total"><td>Total Revenue by Type</td><td>$${(data.auctionRevenue + data.regularRevenue).toFixed(2)}</td></tr>
-                    
+                    <tr><td>Revenue from Auction Sales</td><td id="auctionRevenue"></td></tr>
+                    <tr><td>Revenue from Regular Sales</td><td id="regularRevenue"></td></tr>
+                    <tr class="section-total"><td>Total Revenue by Type</td><td id="totalRevenueByType"></td></tr>
+                
                     <tr class="section-header"><th colspan="2">CUSTOMER SALES</th></tr>
-                    <tr><td>New Customer Sales</td><td>${data.newCustomerSales}</td></tr>
-                    <tr><td>Repeat Customer Sales</td><td>${data.repeatCustomerSales}</td></tr>
-                    <tr class="section-total"><td>Total Customer Sales</td><td>${(data.newCustomerSales + data.repeatCustomerSales)}</td></tr>
-                    
+                    <tr><td>New Customer Sales</td><td id="newCustomerSales"></td></tr>
+                    <tr><td>Repeat Customer Sales</td><td id="repeatCustomerSales"></td></tr>
+                    <tr class="section-total"><td>Total Customer Sales</td><td id="totalCustomerSales"></td></tr>
+                
                     <tr class="section-header"><th colspan="2">AVERAGE SALES</th></tr>
-                    <tr><td>Average Sale (New Customers)</td><td>$${data.avgSalesNew.toFixed(2)}</td></tr>
-                    <tr><td>Average Sale (Repeat Customers)</td><td>$${data.avgSalesRepeat.toFixed(2)}</td></tr>
+                    <tr><td>Average Sale (New Customers)</td><td id="avgSalesNew"></td></tr>
+                    <tr><td>Average Sale (Repeat Customers)</td><td id="avgSalesRepeat"></td></tr>
                 </table>
+                
+                <script src="reports.js"></script>
+                
             </div>
         </main>
     </section>

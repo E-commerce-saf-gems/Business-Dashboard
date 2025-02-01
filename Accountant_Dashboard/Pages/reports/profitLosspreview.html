@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
+
     <dashboard-component></dashboard-component>
 
     <section id="content">
@@ -31,45 +31,45 @@
             </div>
 
             <div class="report-container">
-                <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+                <img src="../../../Images/logo.png" alt="Company Logo" class="company-logo">
                 <p class="company-name">SAF Gems</p>
                 <h3 class="report-title">Profit & Loss Report</h3>
                 <p><strong>Prepared by:</strong> Quinn Campbell</p>
-                <p><strong>Period:</strong> ${data.dateRange}</p>
+                <p><strong>Period:</strong> <span id="dateRange"></span></p>
                 <p class="financial-details">Financial statements in Sri Lankan Rupees</p>
 
                 <table class="report-table">
                     <tr class="section-header"><th colspan="2">REVENUE</th></tr>
-                    <tr><td>Total Sales Revenue</td><td>$${data.totalSalesRevenue.toFixed(2)}</td></tr>
-                    <tr><td>Add: Other Income</td><td>$0.00</td></tr>
-                    <tr class="section-total"><td>Total Revenue</td><td>$${data.totalSalesRevenue.toFixed(2)}</td></tr>
-                    
+                    <tr><td>Total Sales Revenue</td><td id="totalSalesRevenue"></td></tr>
+                    <tr><td>Add: Other Income</td><td id="otherIncome">$0.00</td></tr>
+                    <tr class="section-total"><td>Total Revenue</td><td id="totalRevenue"></td></tr>
+
                     <tr class="section-header"><th colspan="2">COST OF GOODS SOLD</th></tr>
-                    <tr><td>Inventory Opening Value</td><td>$${data.inventoryOpening.toFixed(2)}</td></tr>
-                    <tr><td>Add: Purchases</td><td>$${data.purchases.toFixed(2)}</td></tr>
-                    <tr><td>Inventory Available</td><td>$${(data.inventoryOpening + data.purchases).toFixed(2)}</td></tr>
-                    <tr><td>Less: Inventory Closing Value</td><td>$${data.inventoryClosing.toFixed(2)}</td></tr>
-                    <tr class="section-total"><td>Cost of Goods Sold</td><td>$${(data.inventoryOpening + data.purchases - data.inventoryClosing).toFixed(2)}</td></tr>
-                    
-                    <tr class="section-total"><td>Gross Profit</td><td>$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing)).toFixed(2)}</td></tr>
-                    
+                    <tr><td>Inventory Opening Value</td><td id="inventoryOpening"></td></tr>
+                    <tr><td>Add: Purchases</td><td id="purchases"></td></tr>
+                    <tr><td>Inventory Available</td><td id="inventoryAvailable"></td></tr>
+                    <tr><td>Less: Inventory Closing Value</td><td id="inventoryClosing"></td></tr>
+                    <tr class="section-total"><td>Cost of Goods Sold</td><td id="costOfGoodsSold"></td></tr>
+
+                    <tr class="section-total"><td>Gross Profit</td><td id="grossProfit"></td></tr>
+
                     <tr class="section-header"><th colspan="2">EXPENSES</th></tr>
-                    <tr><td>Salaries & Wages</td><td>$${data.salaries.toFixed(2)}</td></tr>
-                    <tr><td>Rent & Utilities</td><td>$${data.rentUtilities.toFixed(2)}</td></tr>
-                    <tr><td>Advertising & Marketing</td><td>$${data.marketing.toFixed(2)}</td></tr>
-                    <tr><td>Administrative Expenses</td><td>$${data.adminExpenses.toFixed(2)}</td></tr>
-                    <tr class="section-total"><td>Total Expenses</td><td>$${(data.marketing + data.salaries + data.adminExpenses + data.rentUtilities).toFixed(2)}</td></tr>
-                    
-                    <tr class="section-total"><td>Net Operating Profit</td><td>$${(data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.marketing + data.salaries + data.adminExpenses)).toFixed(2)}</td></tr>
-                    
+                    <tr><td>Salaries & Wages</td><td id="salaries"></td></tr>
+                    <tr><td>Rent & Utilities</td><td id="rentUtilities"></td></tr>
+                    <tr><td>Advertising & Marketing</td><td id="marketing"></td></tr>
+                    <tr><td>Administrative Expenses</td><td id="adminExpenses"></td></tr>
+                    <tr class="section-total"><td>Total Expenses</td><td id="totalExpenses"></td></tr>
+
+                    <tr class="section-total"><td>Net Operating Profit</td><td id="netOperatingProfit"></td></tr>
+
                     <tr class="section-header"><th colspan="2">NET INCOME</th></tr>
-                    <tr class="section-total"><td>Net Profit (or Loss)</td><td>$${((data.totalSalesRevenue - (data.inventoryOpening + data.purchases - data.inventoryClosing) - (data.marketing + data.salaries + data.adminExpenses)) + data.otherIncome).toFixed(2)}</td></tr>
+                    <tr class="section-total"><td>Net Profit (or Loss)</td><td id="netProfit"></td></tr>
                 </table>
             </div>
         </main>
     </section>
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="#"></script>
+    <script src="./reports.js"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@
             </div>
 
             <div class="report-container">
-                <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+                <img src="../../../Images/logo.png" alt="Company Logo" class="company-logo">
                 <p class="company-name">SAF Gems</p>
                 <h3 class="report-title">Inventory Report</h3>
                 <p><strong>Prepared by:</strong> Quinn Campbell</p>
@@ -41,27 +41,28 @@
                 <table class="report-table">
                     <!-- Inventory Summary Section -->
                     <tr class="section-header"><th colspan="2">INVENTORY SUMMARY</th></tr>
-                    <tr><td>Total Inventory Value</td><td>$${data.totalInventoryValue.toFixed(2)}</td></tr>
-                    <tr><td>Current Quantity</td><td>${data.currentQuantity}</td></tr>
-                    <tr><td>Value per Gem Type</td><td>$${data.valuePerGemType.toFixed(2)}</td></tr>
-                    <tr><td>Items Sold</td><td>${data.itemsSold}</td></tr>
-                    <tr class="section-total"><td>Total Inventory Value</td><td>$${data.totalInventoryValue.toFixed(2)}</td></tr>
-
+                    <tr><td>Total Inventory Value</td><td id="totalInventoryValue"></td></tr>
+                    <tr><td>Current Quantity</td><td id="currentQuantity"></td></tr>
+                    <tr><td>Value per Gem Type</td><td id="valuePerGemType"></td></tr>
+                    <tr><td>Items Sold</td><td id="itemsSold"></td></tr>
+                    <tr class="section-total"><td>Total Inventory Value</td><td id="totalInventoryValueSummary"></td></tr>
+                
                     <!-- Acquisition and Breakdown Section -->
                     <tr class="section-header"><th colspan="2">ACQUISITION & BREAKDOWN</th></tr>
-                    <tr><td>New Acquisitions</td><td>${data.newAcquisitions}</td></tr>
-                    <tr><td>Gem Type Breakdown</td><td>${data.gemTypeBreakdown}</td></tr>
-
+                    <tr><td>New Acquisitions</td><td id="newAcquisitions"></td></tr>
+                    <tr><td>Gem Type Breakdown</td><td id="gemTypeBreakdown"></td></tr>
+                
                     <!-- Inventory Ageing Section -->
                     <tr class="section-header"><th colspan="2">INVENTORY AGEING</th></tr>
-                    <tr><td>Inventory Older than 30 Days</td><td>${data.percentOlder30}%</td></tr>
-                    <tr><td>Inventory Older than 60 Days</td><td>${data.percentOlder60}%</td></tr>
-                    <tr><td>Inventory Older than 90 Days</td><td>${data.percentOlder90}%</td></tr>
-
+                    <tr><td>Inventory Older than 30 Days</td><td id="percentOlder30"></td></tr>
+                    <tr><td>Inventory Older than 60 Days</td><td id="percentOlder60"></td></tr>
+                    <tr><td>Inventory Older than 90 Days</td><td id="percentOlder90"></td></tr>
+                
                     <!-- Average Days in Inventory -->
                     <tr class="section-header"><th colspan="2">INVENTORY AGE DETAILS</th></tr>
-                    <tr><td>Average Days in Inventory</td><td>${data.avgDaysInventory} days</td></tr>
+                    <tr><td>Average Days in Inventory</td><td id="avgDaysInventory"></td></tr>
                 </table>
+                
             </div>
         </main>
     </section>
