@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amount = floatval($_POST['amount']);
     $description = htmlspecialchars(trim($_POST['description']));
     $visibility = htmlspecialchars(trim($_POST['visibility']));
+    $availability = htmlspecialchars(trim($_POST['availability']));
     $buyer_id = intval($_POST['buyer_id']);
     $amountSettled = floatval($_POST['amountSettled']);
 
@@ -42,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             move_uploaded_file($_FILES["certificate"]["tmp_name"], $certificatePath)) {
 
             // Prepare SQL query for inventory table
-            $sql = "INSERT INTO inventory (shape, colour, type, size, origin, amount, image, certificate, description, visibility, buyer_id)
-                    VALUES ('$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$buyer_id')";
+            $sql = "INSERT INTO inventory (shape, colour, type, size, origin, amount, image, certificate, description, visibility, availability, buyer_id)
+                    VALUES ('$shape', '$color', '$type', '$weight', '$origin', '$amount', '$image', '$certificate', '$description', '$visibility', '$availability','$buyer_id')";
 
             // Execute inventory query
             if ($conn->query($sql) === TRUE) {

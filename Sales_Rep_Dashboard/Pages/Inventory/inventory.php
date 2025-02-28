@@ -162,6 +162,8 @@ if (!$result) {
                       echo "<td>" . $row['amount'] . "</td>";
                       echo "<td>" . $row['name'] . "</td>";
                       // echo "<td>" . $row['visibility'] . "</td>";
+                      // echo "<td>" . $row['availability'] . "</td>";
+
                       //form for visibility check
                       echo "<td>";
                       echo "<form method='POST' action='./updatevisibility.php'>";
@@ -190,7 +192,7 @@ if (!$result) {
                       
                       if ($row['availability'] == 'available' || $row['availability'] == 'Available') {
                           echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
-                          echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                          echo "<a href='./deleteGem.php' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
                       }
 
                       echo "<a href='./viewInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";

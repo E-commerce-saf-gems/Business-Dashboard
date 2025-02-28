@@ -48,19 +48,19 @@ if (isset($_GET['id'])) {
 				</div>
 			</div>
             <div class="edit-sales-container">
-                <form class="edit-sales-form" id="editStaffForm" action="./updatestaff.php" method="POST" enctype="multipart/form-data">
+                <form class="edit-sales-form" id="EditStaffForm" action="./updatestaff.php" method="POST" enctype="multipart/form-data">
                     <h2>Edit Staff Details</h2>
 
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
 
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value="<?php echo $row['username'];?>"required>
+                        <input type="text" id="username" name="username" value="<?php echo $row['username'];?>"required readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" value="<?php echo $row['password'];?>" required>
+                        <input type="password" id="password" name="password" value="<?php echo $row['password'];?>" required readonly>
                     </div>
     
                     <!-- Status Field -->
@@ -105,6 +105,7 @@ if (isset($_GET['id'])) {
 
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
-    <script src="./staff.js"></script>
+    <script src="./Editstaff.js"></script>
+    <!-- <script src="./staff.js"></script> -->
 </body>
 </html>

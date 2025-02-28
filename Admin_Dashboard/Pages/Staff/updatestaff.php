@@ -13,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
  
     // Prepare and execute the inventory update
-    $sql = "UPDATE user SET username = ?, password = ?, role = ?, name = ?, email = ?, contactNo = ? WHERE user_id = ?";
+    $sql = "UPDATE user SET role = ?, name = ?, email = ?, contactNo = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssii", $username, $password, $role, $name, $email, $contactNo, $user_id);
+    $stmt->bind_param("sssii", $role, $name, $email, $contactNo, $user_id);
     
 
     if ($stmt->execute()) {

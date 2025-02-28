@@ -142,47 +142,110 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-document.getElementById("editgemForm").addEventListener("submit", function (e) {
-  // Form fields for validation
-  const size = document.getElementById("size").value;
-  const shape = document.getElementById("shape").value;
-  const color = document.getElementById("colour").value;
-  const type = document.getElementById("type").value;
-  const weight = document.getElementById("weight").value;
-  const origin = document.getElementById("origin").value;
-  const amount = document.getElementById("amount").value;
-  const image = document.getElementById("image").value;
-  const certificate = document.getElementById("certificate").value;
-  const description = document.getElementById("description").value;
-  const visibility = document.getElementById("visibility").value;
-  const availability = document.getElementById("availability").value;
-  const buyer_id = document.getElementById("buyer_id").value;
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("editgemForm");
 
-  // Array of required fields
-  const requiredFields = [
-    { field: size, name: "Size" },
-    { field: shape, name: "Shape" },
-    { field: color, name: "Colour" },
-    { field: type, name: "Type" },
-    { field: weight, name: "Weight" },
-    { field: origin, name: "Origin" },
-    { field: amount, name: "Amount" },
-    { field: image, name: "Image" },
-    { field: certificate, name: "Certificate" },
-    { field: description, name: "Description" },
-    { field: visibility, name: "Visibility" },
-    { field: availability, name: "Availability" },
-    { field: buyer_id, name: "Buyer ID" }
-  ];
+  if (!form) return;
 
-  // Check if any required field is empty
-  const emptyFields = requiredFields.filter(item => item.field === "");
+  form.addEventListener("submit", function (e) {
+    let isValid = true;
 
-  if (emptyFields.length > 0) {
-    // Prevent form submission and alert if there are empty fields
-    e.preventDefault();
-    alert("Please fill in all required fields: " + emptyFields.map(item => item.name).join(", "));
-  }
+    // Form fields for validation
+    const size = document.getElementById("size").value.trim();
+    const shape = document.getElementById("shape").value.trim();
+    const colour = document.getElementById("colour").value.trim();
+    const type = document.getElementById("type").value.trim();
+    const weightElement = document.getElementById("weight");
+    const origin = document.getElementById("origin").value.trim();
+    const amountElement = document.getElementById("amount");
+    const image = document.getElementById("image").value.trim();
+    const certificate = document.getElementById("certificate").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const visibility = document.getElementById("visibility").value.trim();
+    const availability = document.getElementById("availability").value.trim();
+    const buyer_id = document.getElementById("buyer").value.trim();
+
+    const weight = weightElement ? parseFloat(weightElement.value.trim()) : NaN;
+    const amount = amountElement ? parseFloat(amountElement.value.trim()) : NaN;
+
+    // Array of required fields
+    const requiredFields = [
+      { field: size, id: "size", name: "Size" },
+      { field: shape, id: "shape", name: "Shape" },
+      { field: colour, id: "colour", name: "Colour" },
+      { field: type, id: "type", name: "Type" },
+      { field: origin, id: "origin", name: "Origin" },
+      { field: description, id: "description", name: "Description" },
+      { field: visibility, id: "visibility", name: "Visibility" },
+      { field: availability, id: "availability", name: "Availability" },
+      { field: buyer_id, id: "buyer", name: "Buyer ID" }
+    ];
+
+    requiredFields.forEach(({ field, id, name }) => {
+      if (!field) {
+        setError(id, `${name} is required.`);
+        isValid = false;
+      } else {
+        clearError(id);
+      }
+    });
+
+    if (!isNaN(weight) && weight <= 0) {
+      setError("weight", "Weight must be greater than 0.");
+      isValid = false;
+    } else {
+      clearError("weight");
+    }
+
+    if (!isNaN(amount) && amount <= 0) {
+      setError("amount", "Amount must be greater than 0.");
+      isValid = false;
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(shape)) {
+      setError("shape", "Shape must contain only letters.");
+      isValid = false;
+    } else {
+      clearError("shape");
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(colour)) {
+      setError("colour", "Colour must contain only letters.");
+      isValid = false;
+    } else {
+      clearError("colour");
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(origin)) {
+      setError("origin", "Origin must contain only letters.");
+      isValid = false;
+    } else {
+      clearError("origin");
+    }
+
+    if (!isValid) {
+      e.preventDefault();
+    }
+  });
+
+  function setError(inputId, errorMessage) {
+    let errorElement = document.getElementById(`${inputId}-error`);
+    if (!errorElement) {
+        errorElement = document.createElement("span");
+        errorElement.id = `${inputId}-error`;
+        errorElement.style.color = "red";
+        errorElement.style.fontSize = "12px";
+        document.getElementById(inputId).after(errorElement);
+    }
+    errorElement.textContent = errorMessage;
+}
+
+// Helper function to clear error messages
+function clearError(inputId) {
+    const errorElement = document.getElementById(`${inputId}-error`);
+    if (errorElement) {
+        errorElement.textContent = "";
+    }
+}
+  
 });
-
-
