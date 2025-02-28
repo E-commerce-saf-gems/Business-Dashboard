@@ -101,7 +101,8 @@ if (!$result) {
                         echo "<td>" . $row['contactNo'] . "</td>";
                         echo "<td class='actions'>";
                         echo "<a href='./editstaff.php?id=" . $row['user_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
-                        echo "<a class='btn'><i class='bx bx-trash'></i></a>";
+                        echo "<a href='#' onclick='confirmDelete(" . $row['user_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                        // echo "<a class='btn'><i class='bx bx-trash'></i></a>";
                         echo "</td>";
                         echo "</tr>";
                     }
@@ -114,10 +115,21 @@ if (!$result) {
             </div>    
         </main>
     </section>
+    <script>
+        function confirmDelete(userId) {
+        const userConfirmed = confirm("Are you sure you want to delete this user?");
+        if (userConfirmed) {
+            window.location.href = `./deleteStaff.php?id=${userId}`;
+        }
+        }
+    </script>   
 
+
+    <script src="../../../Components/Admin_Dashboard_Template/Dashboard.js"></script>
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
-    <script src="../staff.js"></script>
+    <script src="./staff.js"></script>
+    <script src="./EditStaff.js"></script>
 </body>
 </html>
 
