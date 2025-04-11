@@ -49,7 +49,7 @@ if (!$result) {
 
             <div class="sales-summary-box">
                 <div class="sales-summary-title">
-                    <h2>Monthly Users Visit Website</h2>
+                    <h2>Summary of Customers</h2>
                 </div>
                 <div class="sales-item">
                     <h3>This Month</h3>
@@ -59,10 +59,10 @@ if (!$result) {
                     <h3>Last Month</h3>
                     <p>600</p>
                 </div>
-                <div class="sales-item">
+                <!-- <div class="sales-item">
                     <h3>Last Two Months</h3>
                     <p>1200</p>
-                </div>
+                </div> -->
             </div>
             <div class="sales-table-container">
                 <div class="table-filters">
