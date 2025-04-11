@@ -7,6 +7,7 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <title>Admin Dashboard</title>
 </head>
@@ -98,7 +99,7 @@
                         <li>
                             <i class='bx bxs-diamond'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/Customer/editcustomer.html">
+                                <a href="../Admin_Dashboard/Pages/Customer/customers.php">
                                 <h3>Edit Customer</h3></a>
                             </span>
                         </li>
@@ -107,8 +108,8 @@
                         <li>
                             <i class='bx bxs-dollar-circle'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/OnlineUsers/onlineusers.html">
-                                <h3>Show Online Users</h3></a>
+                                <a href="../Admin_Dashboard/Pages/Customer/customers.php">
+                                <h3>View Customers</h3></a>
                             </span>
                         </li>
 
@@ -117,20 +118,19 @@
                             <i class='bx bxs-credit-card'></i>
                             <span class="text">
                                 <a href="../Admin_Dashboard/Pages/Staff/Staff.php">
-                                <h3>View Staff</h3></a>
+                                <h3>View Staff Members</h3></a>
                             </span>
                         </li>
                     </ul>
 
 
                     <div class="user-chart">
-                        <h2>Users</h2>
-                        <canvas id="userChart"></canvas> 
-                        <!-- <a href="../Admin_Dashboard/Pages/Customer/customers.php" class="view-more">View More</a> -->
+                        <h2>No of Users Registered in Last 4 months</h2>
+                        <canvas id="userChart" width="400" height="400"></canvas>                        <!-- <a href="../Admin_Dashboard/Pages/Customer/customers.php" class="view-more">View More</a> -->
                     </div>
                     <div class="user-chart">
-                        <h2>Staff</h2>
-                        <canvas id="staffFlowChart"></canvas>
+                        <h2>No of Staff Members</h2>
+                        <canvas id="staffFlowChart" width="900" height="900"></canvas>
                         <!-- <a href="../Admin_Dashboard/Pages/Staff/Staff.html" class="view-more">View More</a> -->
                     </div>
                 </div>

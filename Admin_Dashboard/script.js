@@ -144,45 +144,72 @@ const userChart = new Chart(
 	userConfig
 );
 
-// Sample data for users
-const staffData = {
-	labels: ["Partners", "Sales Res.", "Accountants", "Admin"],
-	datasets: [{
-		data: [3, 2, 1, 1], // Sample quantities for each gemstone type
-		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Partners color
-			"rgba(75, 192, 192, 0.6)", // Sales Res color
-			"rgba(54, 162, 235, 0.6)", // Accountant color
-			"rgba(153, 102, 255, 0.6)", // Admin color
-			
-		],
-		borderColor: [
-			"rgba(255, 99, 132, 1)",
-			"rgba(75, 192, 192, 1)",
-			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)"
-		],
-		borderWidth: 1
-	}]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch staff data from the backend
+    fetch('getStaffData.php')
+        .then(response => response.json())
+        .then(data => {
+            // Extract labels (roles) and data (counts) from the response
+            const labels = data.map(item => item.role); // e.g., ["Partners", "Sales Res.", "Accountants", "Admin"]
+            const counts = data.map(item => item.count); // e.g., [3, 2, 1, 1]
 
-// Configuration for the gemstone types pie chart
-const staffConfig = {
-	type: "pie",
-	data: staffData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "right" // Position legend on the right
-			}
-		}
-	}
-};
+            // Update the chart data
+            const staffData = {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)", // Partners color
+                        "rgba(75, 192, 192, 0.6)", // Sales Res color
+                        "rgba(54, 162, 235, 0.6)", // Accountant color
+                        "rgba(153, 102, 255, 0.6)"  // Admin color
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(153, 102, 255, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            };
 
-// Render the pie chart in the canvas with id 'gemChart'
+            // Configuration for the chart
+            const staffConfig = {
+                type: "pie",
+                data: staffData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "right"
+                        },
+                        datalabels: {
+                            color: "#000", // Text color
+                            font: {
+                                size: 14, // Font size
+                                weight: "bold"
+                            },
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage
+                                return `${percentage}%`; // Display percentage
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels] // Enable the Datalabels plugin
+            };
+
+            // Render the chart
+            new Chart(document.getElementById("staffFlowChart"), staffConfig);
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
+});
+
+// Render the pie chart in the canvas with id 'staffFlowChart'
 const staffChart = new Chart(
-	document.getElementById("staffFlowChart"),
-	staffConfig
+    document.getElementById("staffFlowChart"),
+    staffConfig
 );
