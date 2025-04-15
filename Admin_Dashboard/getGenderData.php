@@ -15,13 +15,11 @@ try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Query to get the last 4 months of registered users
+    // Query to get gender-wise totals
     $stmt = $pdo->prepare("
-        SELECT DATE_FORMAT(date, '%b') AS month, COUNT(*) AS count
+        SELECT gender, COUNT(*) AS count
         FROM customer
-        WHERE date >= DATE_SUB(CURDATE(), INTERVAL 4 MONTH)
-        GROUP BY month
-        ORDER BY date ASC
+        GROUP BY gender
     ");
     $stmt->execute();
 
