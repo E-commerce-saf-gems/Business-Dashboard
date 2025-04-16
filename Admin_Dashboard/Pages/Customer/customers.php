@@ -72,8 +72,8 @@ if (!$result) {
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
-                        <option value="paid">Online Registered</option>
-                        <option value="pending">Walking Customers</option>
+                        <option value="paid">Male</option>
+                        <option value="pending">Female</option>
                     </select>
 
                     <label for="customer-filter">Customer Name</label>

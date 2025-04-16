@@ -100,6 +100,46 @@ const monthlyuserChart = new Chart(
 	config
 );
 
+document.addEventListener("DOMContentLoaded", function () {
+    const searchButton = document.getElementById("searchButton");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+
+    // Handle search button click
+    searchButton.addEventListener("click", function () {
+        const query = searchInput.value.trim().toLowerCase(); // Get the search query
+        searchResults.innerHTML = ""; // Clear previous results
+
+        if (query === "") {
+            searchResults.innerHTML = "<p>Please enter a search term.</p>";
+            return;
+        }
+
+        // Get all text content from the webpage
+        const bodyText = document.body.innerText.toLowerCase();
+
+        // Check if the query exists in the webpage text
+        if (bodyText.includes(query)) {
+            searchResults.innerHTML = `<p>Found: "<span class="highlight">${query}</span>"</p>`;
+            highlightText(query); // Highlight the matching text
+        } else {
+            searchResults.innerHTML = `<p>No results found for "<span class="highlight">${query}</span>".</p>`;
+        }
+    });
+
+    // Function to highlight matching text on the webpage
+    function highlightText(query) {
+        const elements = document.querySelectorAll("body *:not(script):not(style)");
+
+        elements.forEach(element => {
+            if (element.children.length === 0 && element.innerText) {
+                const regex = new RegExp(`(${query})`, "gi");
+                element.innerHTML = element.innerHTML.replace(regex, `<span class="highlight">$1</span>`);
+            }
+        });
+    }
+});
+
 
 // Sample data for users
 document.addEventListener("DOMContentLoaded", function () {
@@ -305,3 +345,4 @@ const staffChart = new Chart(
     document.getElementById("staffFlowChart"),
     staffConfig
 );
+
