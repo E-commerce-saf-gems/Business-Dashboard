@@ -1,6 +1,30 @@
 <?php
 include '../../../database/db.php';
 
+// Get the current month and year
+$currentMonth = date('m');
+$currentYear = date('Y');
+
+// Get the last month and year
+$lastMonth = $currentMonth - 1;
+$lastMonthYear = $currentYear;
+
+// Handle year transition (e.g., January -> December of the previous year)
+if ($lastMonth == 0) {
+    $lastMonth = 12;
+    $lastMonthYear = $currentYear - 1;
+}
+
+// Query to get the count of customers registered this month
+$thisMonthQuery = "SELECT COUNT(*) AS thisMonthCount FROM customer WHERE MONTH(date) = $currentMonth AND YEAR(date) = $currentYear";
+$thisMonthResult = $conn->query($thisMonthQuery);
+$thisMonthCount = $thisMonthResult->fetch_assoc()['thisMonthCount'] ?? 0;
+
+// Query to get the count of customers registered last month
+$lastMonthQuery = "SELECT COUNT(*) AS lastMonthCount FROM customer WHERE MONTH(date) = $lastMonth AND YEAR(date) = $lastMonthYear";
+$lastMonthResult = $conn->query($lastMonthQuery);
+$lastMonthCount = $lastMonthResult->fetch_assoc()['lastMonthCount'] ?? 0;
+
 // Corrected SQL query syntax
 $ssql = "SELECT 
             customer.date, 
@@ -8,8 +32,27 @@ $ssql = "SELECT
             customer.contactNo, 
             customer.NIC, 
             customer.email, 
-            customer.city
-        FROM customer";
+            customer.city,
+            customer.gender
+        FROM customer 
+        WHERE 1=1"; // Use 1=1 to simplify appending conditions
+
+//Apply filters
+if (isset($_GET['date']) && !empty($_GET['date'])) {
+    $date = $conn->real_escape_string($_GET['date']);
+    $ssql .= " AND DATE(date) = '$date'"; // Use DATE() to extract the date part from the timestamp
+}
+
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $status = $conn->real_escape_string($_GET['status']);
+    $ssql .= " AND gender = '$status'";
+}
+
+
+if (isset($_GET['customer-name']) && !empty($_GET['customer-name'])) {
+    $customerName = $conn->real_escape_string($_GET['customer-name']);
+    $ssql .= " AND firstName LIKE '%$customerName%'";
+}
 
 $result = $conn->query($ssql);
 
@@ -53,35 +96,37 @@ if (!$result) {
                 </div>
                 <div class="sales-item">
                     <h3>This Month</h3>
-                    <p>750</p>
-                </div>
+                    <p><?php echo $thisMonthCount; ?></p>
+                    </div>
                 <div class="sales-item">
                     <h3>Last Month</h3>
-                    <p>600</p>
-                </div>
+                    <p><?php echo $lastMonthCount; ?></p>
+                    </div>
                 <!-- <div class="sales-item">
                     <h3>Last Two Months</h3>
                     <p>1200</p>
                 </div> -->
             </div>
             <div class="sales-table-container">
-                <div class="table-filters">
+            <div class="table-filters">
+                <form method="GET" id="filter-form">
                     <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
-                    
+                    <input type="date" id="date-filter" name="date" value="<?= isset($_GET['date']) ? htmlspecialchars($_GET['date']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
+
                     <label for="status-filter">Status:</label>
-                    <select id="status-filter">
+                    <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
                         <option value="">All</option>
-                        <option value="paid">Male</option>
-                        <option value="pending">Female</option>
+                        <option value="M" <?= (isset($_GET['status']) && $_GET['status'] == 'M') ? 'selected' : ''; ?>>Male</option>
+                        <option value="F" <?= (isset($_GET['status']) && $_GET['status'] == 'F') ? 'selected' : ''; ?>>Female</option>
                     </select>
 
-                    <label for="customer-filter">Customer Name</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer Name">
-                    
-                    <button class="btn-filter">Filter</button>
-                </div>
+                    <label for="customer-filter">Customer Name:</label>
+                    <input type="text" id="customer-filter" name="customer-name" placeholder="Search Customer Name" value="<?= isset($_GET['customer-name']) ? htmlspecialchars($_GET['customer-name']) : ''; ?>" oninput="document.getElementById('filter-form').submit();">
 
+                    <!-- <button type="submit" class="btn-filter">Filter</button> -->
+                    <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
+                </form>
+        </div>
                 <!-- Table -->
                 <table class="sales-table">
                     <thead>
@@ -130,6 +175,7 @@ if (!$result) {
     
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
+    <script src="../customer.js"></script>
 
 
 </body>
