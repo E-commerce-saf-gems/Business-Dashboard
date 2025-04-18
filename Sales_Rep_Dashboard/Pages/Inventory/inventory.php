@@ -98,26 +98,28 @@ if (!$result) {
 
             <label for="type-filter">Type:</label>
             <select id="type-filter">
-              <option value="">All</option>
-              <option value="paid">Ruby</option>
-              <option value="pending">Emerald</option>
-              <option value="pending">Sapphire</option>
-              <option value="pending">Amethyst</option>
-              <option value="pending">Diamond</option>
-            </select>
+  <option value="">All</option>
+  <option value="ruby">Ruby</option>
+  <option value="emerald">Emerald</option>
+  <option value="sapphire">Sapphire</option>
+  <option value="amethyst">Amethyst</option>
+  <option value="diamond">Diamond</option>
+</select>
+
 
             <label for="shape-filter">shape:</label>
             <select id="shape-filter">
-              <option value="">All</option>
-              <option value="paid">Round</option>
-              <option value="pending">Oval</option>
-              <option value="pending">Princess</option>
-              <option value="pending">Cushion</option>
-              <option value="pending">Emerald</option>
-              <option value="pending">Marquise</option>
-              <option value="pending">Pear</option>
-              <option value="pending">Heart</option>
-            </select>
+  <option value="">All</option>
+  <option value="round">Round</option>
+  <option value="oval">Oval</option>
+  <option value="princess">Princess</option>
+  <option value="cushion">Cushion</option>
+  <option value="emerald">Emerald</option>
+  <option value="marquise">Marquise</option>
+  <option value="pear">Pear</option>
+  <option value="heart">Heart</option>
+</select>
+
 
             <label for="customer-filter">color:</label>
             <input
@@ -220,6 +222,44 @@ if (!$result) {
         }
     }
     </script>
+
+<script>
+document.querySelector(".btn-filter").addEventListener("click", () => {
+    const dateFilter = document.getElementById("date-filter").value;
+    const typeFilter = document.getElementById("type-filter").value.toLowerCase();
+    const shapeFilter = document.getElementById("shape-filter").value.toLowerCase();
+    const colorFilter = document.getElementById("customer-filter").value.toLowerCase();
+
+    const rows = document.querySelectorAll(".sales-table tbody tr");
+
+    rows.forEach(row => {
+        const date = row.children[0].textContent.trim();
+        const type = row.children[5].textContent.toLowerCase().trim();
+        const shape = row.children[3].textContent.toLowerCase().trim();
+        const color = row.children[4].textContent.toLowerCase().trim();
+
+        let isVisible = true;
+
+        if (dateFilter && date !== dateFilter) {
+            isVisible = false;
+        }
+
+        if (typeFilter && !type.includes(typeFilter)) {
+            isVisible = false;
+        }
+
+        if (shapeFilter && !shape.includes(shapeFilter)) {
+            isVisible = false;
+        }
+
+        if (colorFilter && !color.includes(colorFilter)) {
+            isVisible = false;
+        }
+
+        row.style.display = isVisible ? "" : "none";
+    });
+});
+</script>
     
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>

@@ -130,6 +130,39 @@ $result = $conn->query($sql);
         }, 5000);
     </script>
 
+<script>
+document.querySelector(".btn-filter").addEventListener("click", () => {
+    const dateFilter = document.getElementById("date-filter").value;
+    const statusFilter = document.getElementById("status-filter").value.toLowerCase();
+    const customerFilter = document.getElementById("customer-filter").value.toLowerCase();
+
+    const rows = document.querySelectorAll(".sales-table tbody tr");
+
+    rows.forEach(row => {
+        const date = row.children[0].textContent.trim();
+        const status = row.children[4].textContent.toLowerCase().trim();
+        const customer = row.children[1].textContent.toLowerCase().trim();
+
+        let isVisible = true;
+
+        if (dateFilter && date !== dateFilter) {
+            isVisible = false;
+        }
+
+        if (statusFilter && !status.includes(statusFilter)) {
+            isVisible = false;
+        }
+
+        if (customerFilter && !customer.includes(customerFilter)) {
+            isVisible = false;
+        }
+
+        row.style.display = isVisible ? "" : "none";
+    });
+});
+</script>
+
+
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="./sales.js"></script>
 </body>

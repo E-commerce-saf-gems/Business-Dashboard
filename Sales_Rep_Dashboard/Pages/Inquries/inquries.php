@@ -147,6 +147,39 @@ include '../../../database/db.php';
             });
         });
     </script>
+    <script>
+        // filtering data
+document.querySelector(".btn-filter").addEventListener("click", () => {
+    const emailFilter = document.getElementById("email-filter").value;
+    const phoneFilter = document.getElementById("phone-filter").value;
+    const nameFilter = document.getElementById("name-filter").value.toLowerCase();
+
+    const rows = document.querySelectorAll(".sales-table tbody tr");
+
+    rows.forEach(row => {
+        const email = row.children[1].textContent.trim();   // Email column
+        const phone = row.children[2].textContent.trim();   // phone column
+        const name = row.children[3].textContent.toLowerCase().trim(); // Name column
+
+        let isVisible = true;
+
+        if (emailFilter && email !== emailFilter) {
+            isVisible = false;
+        }
+
+        if (phoneFilter && phone !== phoneFilter) {
+            isVisible = false;
+        }
+
+        if (nameFilter && !name.includes(nameFilter)) {
+            isVisible = false;
+        }
+
+        row.style.display = isVisible ? "" : "none";
+    });
+});
+</script>
+
 
     <style>
         /* Modal Styles */

@@ -146,8 +146,40 @@ $result = $conn->query($sql);
         }, 5000);
     </script>
 
+<!--filter data-->
+<script>
+document.querySelector(".btn-filter").addEventListener("click", () => {
+    const dateFilter = document.getElementById("date-filter").value;
+    const statusFilter = document.getElementById("status-filter").value;
+    const typeFilter = document.getElementById("customer-filter").value.toLowerCase();
 
+    const rows = document.querySelectorAll(".sales-table tbody tr");
 
+    rows.forEach(row => {
+        const date = row.children[1].textContent.trim();               // Correct index for date
+        const type = row.children[5].textContent.toLowerCase().trim(); // Correct index for type
+        const statusSelect = row.children[9].querySelector('select');  // Grab the select element
+        const status = statusSelect ? statusSelect.value : "";         // Get selected status value
+
+        let isVisible = true;
+
+        if (dateFilter && date !== dateFilter) {
+            isVisible = false;
+        }
+
+        if (statusFilter && status !== statusFilter) {
+            isVisible = false;
+        }
+
+        if (typeFilter && !type.includes(typeFilter)) {
+            isVisible = false;
+        }
+
+        row.style.display = isVisible ? "" : "none";
+    });
+});
+
+</script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="./admin.js"></script>
 </body>

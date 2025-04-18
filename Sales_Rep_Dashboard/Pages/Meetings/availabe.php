@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $salesRep_id = $_SESSION['user_id'];
 
-$sql = "SELECT date, time, availability FROM availabletimes WHERE salesRep_id = ? ORDER BY date, time";
+$sql = "SELECT date, time, availability FROM availabletimes WHERE salesRep_id = ? AND CONCAT(date, ' ', time) >= NOW() ORDER BY date, time";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $salesRep_id);
 $stmt->execute();
