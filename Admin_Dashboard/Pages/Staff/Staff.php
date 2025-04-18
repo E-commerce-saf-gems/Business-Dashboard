@@ -10,7 +10,24 @@ $ssql = "SELECT
             role,
             email,
             contactNo
-        FROM user";
+        FROM user WHERE 1=1";
+
+
+// Apply filters
+if (isset($_GET['staff-id']) && !empty($_GET['staff-id'])) {
+    $staffId = $conn->real_escape_string($_GET['staff-id']);
+    $ssql .= " AND user_id LIKE '%$staffId%'"; // Use LIKE for partial matches
+}
+
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $status = $conn->real_escape_string($_GET['status']);
+    $ssql .= " AND role = '$status'";
+}
+
+if (isset($_GET['staff-name']) && !empty($_GET['staff-name'])) {
+    $staffName = $conn->real_escape_string($_GET['staff-name']);
+    $ssql .= " AND name LIKE '%$staffName%'";
+}
 
 $result = $conn->query($ssql);
 
@@ -54,23 +71,23 @@ if (!$result) {
         <?php endif; ?>
 
             <div class="sales-table-container">
-                <div class="table-filters">
-                    <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
-                    
-                    <label for="status-filter">Status:</label>
-                    <select id="status-filter">
+            <div class="table-filters">
+                <form method="GET" id="filter-form">
+                <label for="id-filter">Staff Id</label>
+                <input type="text" id="staff-id-filter" name="staff-id" placeholder="Search by Staff ID" value="<?= isset($_GET['staff-id']) ? htmlspecialchars($_GET['staff-id']) : ''; ?>" oninput="document.getElementById('filter-form').submit();">                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
                         <option value="">All</option>
-                        <option value="paid">Accountant</option>
-                        <option value="pending">Partners</option>
-                        <option value="pending">Sales Res.</option>
+                        <option value="Accountant" <?= (isset($_GET['status']) && $_GET['status'] == 'Accountant') ? 'selected' : ''; ?>>Accountant</option>
+                        <option value="Partners" <?= (isset($_GET['status']) && $_GET['status'] == 'Partners') ? 'selected' : ''; ?>>Partners</option>
+                        <option value="Sales Res." <?= (isset($_GET['status']) && $_GET['status'] == 'Sales Res.') ? 'selected' : ''; ?>>Sales Res.</option>
                     </select>
 
                     <label for="customer-filter">Staff Member:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Member">
-                    
-                    <button class="btn-filter">Filter</button>
-                </div>
+                    <input type="text" id="customer-filter" name="staff-name" placeholder="Search Member" value="<?= isset($_GET['staff-name']) ? htmlspecialchars($_GET['staff-name']) : ''; ?>" oninput="document.getElementById('filter-form').submit();">
+
+                    <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
+                </form>
+            </div>
 
                 <!-- Table -->
                 <table class="sales-table">
