@@ -7,7 +7,7 @@ class Dashboard extends HTMLElement {
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="../../dashboard.html">
+                        <a href="../../dashboard.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
