@@ -3,22 +3,35 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
+<<<<<<< Updated upstream
                     <img src="../../../Images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
                         <a href="../../dashboard.html">
+=======
+                    <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
+                </a>
+                <ul class="side-menu">
+                    <li>
+                        <a href="/Accoutant_Dashboard/dashboard.html">
+>>>>>>> Stashed changes
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../../Pages/Sales/sales.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../../Pages/Purchases/purchases.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Purchases</span>
@@ -26,23 +39,35 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
                         <a href="../../Pages/Bids/bids.html">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../../Pages/transactions/transactions.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
+<<<<<<< Updated upstream
                             <i class='bx bxs-package'></i>
+=======
+                            <i class='bx bxs-inbox'></i>
+>>>>>>> Stashed changes
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../../Pages/reports/reports.php">
                             <i class='bx bx-clipboard'></i>
                             <span class="text">Reports</span>
@@ -55,6 +80,13 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     
+=======
+                        <a href="#">
+                            <i class='bx bxs-report'></i>
+                            <span class="text">Reports</span>
+                        </a>
+                    </li>
+>>>>>>> Stashed changes
                 </ul>
             </section>
 
@@ -74,6 +106,7 @@ class Dashboard extends HTMLElement {
                         <i class='bx bxs-bell'></i>
                         <span class="num">8</span>
                     </a>
+<<<<<<< Updated upstream
                     <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
@@ -81,6 +114,11 @@ class Dashboard extends HTMLElement {
                             <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
+=======
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                    </a>
+>>>>>>> Stashed changes
                 </nav>
             </section>
         `;
@@ -116,6 +154,7 @@ function updateActiveMenu() {
 }
 
 // Run the updateActiveMenu function on page load
+<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
@@ -176,3 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+=======
+window.addEventListener('DOMContentLoaded', updateActiveMenu);
+>>>>>>> Stashed changes
