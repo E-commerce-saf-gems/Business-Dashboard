@@ -6,6 +6,7 @@
     <title>Accountant Bids</title>
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./bids.css">   
+    <link rel="stylesheet" href="../../styles.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -34,8 +35,6 @@
             </div>
             
             <div class="summary-cards">
-                
-                
                 <div class="card">
                     <h3>Total Bids Placed</h3>
                     <p>10</p>
@@ -54,46 +53,292 @@
                 </div>
             </div>
 
-
-            
-
             <div class="sales-table-container">
-                <div class="table-filters">
-                    <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
-                    
-                    <label for="customer-filter">Customer:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Customer">
-                    
-                    <button class="btn-filter">Filter</button>
+                <div class="sales-summary-title active-bids-title">
+                    <ul>
+                        <li>
+                            <h2><span class="red-dot"></span>Active Bids</h2>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Table -->
                 <table class="sales-table">
                     <thead>
                         <tr>
+                            <th>Stone</th>
                             <th>Bid No</th>
+                            <th>Starting Bid</th>
+                            <th>Current Highest Bid</th>
                             <th>Cycle No</th>
-                            <th>Email</th>
-                            <th>Bid Amount</th>
-                            <th>Date Time</th>
-                            
-
+                            <th>Time Left</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>0001</td>
-                            <td>3</td>
-                            <td>rgnravindu456@gmail.com</td>
+                            <td>
+                                <div class="stone-img-wrapper">
+                                    <img src="../../../../Group-Project-ECommerce/assets/images/stone13.jpg" alt="Stone">
+                                </div>
+                            </td>
+                            <td>20</td>
+                            <td>$300</td>
                             <td>$5000</td>
-                            <td>2024-12-01  11:20 AM </td>
-                            
-                            
+                            <td>3/5</td>
+                            <td>12 Hrs 12 Min</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="stone-img-wrapper">
+                                    <img src="../../../../Group-Project-ECommerce/assets/images/stone13.jpg" alt="Stone">
+                                </div>
+                            </td>
+                            <td>20</td>
+                            <td>$300</td>
+                            <td>$5000</td>
+                            <td>3/5</td>
+                            <td>12 Hrs 12 Min</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="stone-img-wrapper">
+                                    <img src="../../../../Group-Project-ECommerce/assets/images/stone13.jpg" alt="Stone">
+                                </div>
+                            </td>
+                            <td>20</td>
+                            <td>$300</td>
+                            <td>$5000</td>
+                            <td>3/5</td>
+                            <td>12 Hrs 12 Min</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="stone-img-wrapper">
+                                    <img src="../../../../Group-Project-ECommerce/assets/images/stone13.jpg" alt="Stone">
+                                </div>
+                            </td>
+                            <td>20</td>
+                            <td>$300</td>
+                            <td>$5000</td>
+                            <td>3/5</td>
+                            <td>12 Hrs 12 Min</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="stone-img-wrapper">
+                                    <img src="../../../../Group-Project-ECommerce/assets/images/stone13.jpg" alt="Stone">
+                                </div>
+                            </td>
+                            <td>20</td>
+                            <td>$300</td>
+                            <td>$5000</td>
+                            <td>3/5</td>
+                            <td>12 Hrs 12 Min</td>
                         </tr>
                     </tbody>
                 </table>
             </div>    
+            <div class="bids-dual-container">
+                <!-- Completed Bids -->
+                <div class="bid-box completed-bids">
+                    <div class="header">
+                        <h2><span class="dot green-dot"></span>Completed Bids</h2>
+                    </div>
+                    <div class="bids-table-wrapper">
+                        <table class="bids-table">
+                            <thead>
+                                <tr>
+                                    <th>Stone</th>
+                                    <th>Starting Bid</th>
+                                    <th>Highest Bid</th>
+                                    <th>End Date</th>
+                                    <th>Purchase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$300</td>
+                                    <td>$5000</td>
+                                    <td>2025-04-15</td>
+                                    <td>Purchased</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="stone-img-wrapper-other">
+                                        <a href="../Inventory/viewInventory.php?id=1">
+                                            <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                        </a>
+                                    </div>
+                                    </td>
+                                    <td>$400</td>
+                                    <td>$5100</td>
+                                    <td>2025-03-12</td>
+                                    <td>Not Purchased</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$400</td>
+                                    <td>$5100</td>
+                                    <td>2025-03-12</td>
+                                    <td>Purchased</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$400</td>
+                                    <td>$5100</td>
+                                    <td>2025-03-12</td>
+                                    <td>Purchased</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$400</td>
+                                    <td>$5100</td>
+                                    <td>2025-03-12</td>
+                                    <td>Not Purchased</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$400</td>
+                                    <td>$5100</td>
+                                    <td>2025-03-12</td>
+                                    <td>Not Purchased</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+                <!-- Upcoming Bids -->
+                <div class="bid-box upcoming-bids">
+                    <div class="header">
+                        <h2><span class="dot yellow-dot "></span>Upcoming Bids</h2>
+                        <a href="./addBiddingStone.html" class="add-new-btn">+ Add New</a>
+                    </div>
+                    <div>
+                        <div class="bids-table-wrapper">
+                            <table class="bids-table">
+                                <tr>
+                                    <th>Stone</th>
+                                    <th>Starting Bid</th>
+                                    <th>Start Date</th>
+                                    <th>Cycles</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone6.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$350</td>
+                                    <td>2025-04-20</td>
+                                    <td>5</td>
+                                    <td>2025-04-25</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$280</td>
+                                    <td>2025-04-22</td>
+                                    <td>3</td>
+                                    <td>2025-04-24</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$280</td>
+                                    <td>2025-04-22</td>
+                                    <td>3</td>
+                                    <td>2025-04-24</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$280</td>
+                                    <td>2025-04-22</td>
+                                    <td>3</td>
+                                    <td>2025-04-24</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$280</td>
+                                    <td>2025-04-22</td>
+                                    <td>3</td>
+                                    <td>2025-04-24</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stone-img-wrapper-other">
+                                            <a href="../Inventory/viewInventory.php?id=1">
+                                                <img src="../../../../Group-Project-ECommerce/assets/images/stone5.jpg" alt="Stone">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>$280</td>
+                                    <td>2025-04-22</td>
+                                    <td>3</td>
+                                    <td>2025-04-24</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
 

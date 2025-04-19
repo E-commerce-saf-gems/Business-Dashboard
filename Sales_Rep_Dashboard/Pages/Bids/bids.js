@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-/* *************** */
-
 document.addEventListener('DOMContentLoaded', function () {
   fetch('./getAvailableStones.php')
       .then(response => {
