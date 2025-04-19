@@ -251,3 +251,13 @@
 .extra-info-box div {
 margin-bottom: 10px;
 }
+
+.add-new-btn {
+    background-color: #449b9b;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
