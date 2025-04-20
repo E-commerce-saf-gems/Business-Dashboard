@@ -13,31 +13,31 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../Pages/Bids/bids.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../Pages/Inventory/inventory.php">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../Pages/reports/reports.php">
                             <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
                         </a>
