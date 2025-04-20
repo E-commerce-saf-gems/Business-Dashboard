@@ -4,6 +4,7 @@ class Dashboard extends HTMLElement {
             <section id="sidebar">
                 <a href="#" class="logo">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
 
@@ -11,11 +12,16 @@ class Dashboard extends HTMLElement {
                     <li>
                         <a href="../../dashboard.html">
 =======
+=======
+>>>>>>> Stashed changes
                     <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
                         <a href="/Partners_Dashboard/dashboard.html">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
@@ -23,7 +29,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../../Pages/Sales/sales.php">
+=======
+                        <a href="/Pages/Sales/sales.html">
+>>>>>>> Stashed changes
 =======
                         <a href="/Pages/Sales/sales.html">
 >>>>>>> Stashed changes
@@ -31,6 +41,7 @@ class Dashboard extends HTMLElement {
                             <span class="text">Sales</span>
                         </a>
                     </li>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                     </li>
                     <li>
@@ -57,16 +68,23 @@ class Dashboard extends HTMLElement {
                     <li>
                         <a href="#">
 >>>>>>> Stashed changes
+=======
+                    <li>
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../../Pages/reports/reports.html">
                             <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
 =======
+=======
+>>>>>>> Stashed changes
                         <a href="#">
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
@@ -94,6 +112,9 @@ class Dashboard extends HTMLElement {
                         <a href="#">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                         </a>
                     </li>
@@ -104,6 +125,10 @@ class Dashboard extends HTMLElement {
                 <nav>
                     <i class='bx bx-menu'></i>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+                    <a href="#" class="nav-link">Categories</a>
+>>>>>>> Stashed changes
 =======
                     <a href="#" class="nav-link">Categories</a>
 >>>>>>> Stashed changes
@@ -117,6 +142,7 @@ class Dashboard extends HTMLElement {
                     </form>
                     <a href="#" class="notification">
                         <i class='bx bxs-bell'></i>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                         <span class="num">4</span>
                     </a>
@@ -136,11 +162,16 @@ class Dashboard extends HTMLElement {
                         </ul>
                     </div>
 =======
+=======
+>>>>>>> Stashed changes
                         <span class="num">8</span>
                     </a>
                     <a href="#">
                         <i class='bx bx-user'></i>
                     </a>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 </nav>
             </section>
@@ -176,6 +207,7 @@ function updateActiveMenu() {
 }
 
 // Run the updateActiveMenu function on page load
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
@@ -252,6 +284,9 @@ document.addEventListener('click', function (e) {
         dropdown.style.display = 'none';
     }
 });
+=======
+window.addEventListener('DOMContentLoaded', updateActiveMenu);
+>>>>>>> Stashed changes
 =======
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 >>>>>>> Stashed changes

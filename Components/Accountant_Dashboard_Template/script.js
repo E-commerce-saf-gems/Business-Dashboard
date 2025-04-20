@@ -14,7 +14,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../Pages/Sales/sales.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
 =======
                         <a href="#">
 >>>>>>> Stashed changes
@@ -24,7 +28,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../Pages/Bids/bids.html">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
 =======
                         <a href="#">
 >>>>>>> Stashed changes
@@ -34,7 +42,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../Pages/transactions/transactions.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
 =======
                         <a href="#">
 >>>>>>> Stashed changes
@@ -44,7 +56,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../Pages/Inventory/inventory.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
 =======
                         <a href="#">
 >>>>>>> Stashed changes
@@ -54,7 +70,11 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <a href="../Pages/reports/reports.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
 =======
                         <a href="#">
 >>>>>>> Stashed changes
@@ -120,7 +140,11 @@ function updateActiveMenu() {
 
 // Run the updateActiveMenu function on page load
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
+=======
+window.addEventListener('DOMContentLoaded', updateActiveMenu);
+>>>>>>> Stashed changes
 =======
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 >>>>>>> Stashed changes
