@@ -16,8 +16,8 @@ $dateNow = date("Y-m-d");
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $endDate = $row['finishDate'];
-        $startDate = $row['startDate'];
+        $endDate = date("Y-m-d", strtotime($row['finishDate']));
+        $startDate = date("Y-m-d", strtotime($row['startDate']));
 
         if ($dateNow < $startDate) {
             $upcomingBids[] = $row;
@@ -112,7 +112,8 @@ setInterval(updateCountdowns, 1000);
                             <td>$<?= number_format($bid['startingBid']) ?></td>
                             <td>$<?= number_format($bid['currentBid']) ?></td>
                             <td><?= $bid['cycle_no_completed'] ?>/<?= $bid['no_of_Cycles'] ?></td>
-                            <td class="countdown" data-end="<?= $bid['end_date'] ?>" id="countdown-<?= $bid['id'] ?>">Loading...</td>
+                            <td class="countdown" data-end="<?= $bid['finishDate'] ?>" id="countdown-<?= $bid['biddingStone_id'] ?>">Loading...</td>
+
                             
                         </tr>
                     <?php endforeach; ?>
@@ -139,7 +140,7 @@ setInterval(updateCountdowns, 1000);
                                     </td>
                                     <td>$<?= number_format($bid['startingBid']) ?></td>
                                     <td>$<?= number_format($bid['currentBid']) ?></td>
-                                    <td><?= $bid['finishDate'] ?></td>
+                                    <td><?= date("Y-m-d", strtotime($bid['finishDate'])) ?></td>
                                     <td><?= $bid['currentBid'] > 0 ? 'Purchased' : 'Not Purchased' ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -168,9 +169,9 @@ setInterval(updateCountdowns, 1000);
                                         </div>
                                     </td>
                                     <td>$<?= number_format($bid['startingBid']) ?></td>
-                                    <td><?= $bid['startDate'] ?></td>
+                                    <td><?= date("Y-m-d", strtotime($bid['startDate'])) ?></td>
                                     <td><?= $bid['no_of_Cycles'] ?></td>
-                                    <td><?= $bid['finishDate'] ?></td>
+                                    <td><?= date("Y-m-d", strtotime($bid['finishDate'])) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
