@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
+}
+
+a{
+    text-decoration: none ;
+}
+
+li {
+    list-style: none ;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+    --white: #FFFFFF ;
+	--blue: #3C91E6;
+    --black: #000000 ;
+    --teal: #46939d ;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--black-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+}
+
+body {
+    background-color: var(--grey);
+}
+
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	font-family: var(--poppins);
+	max-height: calc(100vh - 56px);
+	overflow-y: auto;
+}
+
+
+#content main .head-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	grid-gap: 16px;
+	flex-wrap: wrap;
+}
+#content main .head-title .left h1 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+}
+#content main .head-title .left .breadcrumb li {
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb li a {
+	color: var(--black-grey);
+	pointer-events: none;
+}
+
+.btn-add {
+    background: var(--teal);
+    color: var(--white);
+    margin-top: 50px;
+    padding: 10px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-add:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Sales Summary Box */
+.sales-summary-box {
+    display: flex;
+    justify-content: space-between; 
+    width: 90%; 
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sales-item {
+    width: 30%;
+    text-align: center;
+}
+
+.sales-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--black);
+}
+
+.sales-item p {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--teal);
+}
+
+
+.sales-table-container {
+    margin-top: 20px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    grid-gap: 20px;
+}
+
+.table-filters label {
+    font-size: 16px;
+    font-family: var(--lato);
+    color: var(--black-grey);
+}
+
+.table-filters input, .table-filters select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--grey);
+    font-size: 14px;
+}
+
+.table-filters .btn-filter {
+    background: var(--teal);
+    color: var(--white);
+    padding: 6px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.table-filters .btn-filter:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Table */
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th, .sales-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.sales-table th {
+    background: var(--light);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.sales-table td {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.sales-table tr:nth-child(even) {
+    background: var(--grey-light);
+}
+
+.sales-table td .actions button, .sales-table td .options button {
+    background: var(--teal);
+    color: var(--light);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.sales-table td .actions button:hover, .sales-table td .options button:hover {
+    background: var(--dark-teal);
+}
+
+.sales-table td .options button {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checkbox and Option*/
+.sales-table td input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+.sales-table .select-all {
+    transform: scale(1.5);
+}
+
+
+.sales-table td .btn {
+    font-size: 18px;
+}
+
+.sales-table td .btn:hover{
+    color: var(--teal);
+}
+
+.sales-table td .options button i {
+    margin-right: 5px;
+}
+
+.sales-table select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.sales-table select option {
+    padding: 8px;
+    color: #333;
+}
+
+
+/* Success Message Styles */
+.success-message {
+    background-color: #d4ede9; /* Light green background */
+    color: #449f9f ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Modal styles */
+
+/* Modal Container */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 999; /* Above other elements */
+    left: 0;
+    top: 0;
+    width: 100%;
+    font-family: var(--poppins);
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    margin: 15% auto; /* Center vertically and horizontally */
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(126, 126, 126, 0.2);
+    text-align: center;
+}
+
+/* Text Area */
+#prompt-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ffffff;
+    font-family: var(--lato);
+    border-radius: 5px;
+    resize: none;
+}
+
+/* Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--lato);
+    font-size: 16px;
+}
+
+#prompt-ok {
+    background-color: #449f9f; /* Green */
+    color: white;
+}
+
+#prompt-cancel {
+    background-color: #d11c1c; /* Red */
+    color: white;
+}
+
+.modal-buttons button:hover {
+    background-color: #000000;
+}
+
+
+/* Button styling */
+button {
+    background-color: #449f9f; /* Your desired color */
+    color: white;
+    padding: 5px 5px;
+    margin-top: 5px ;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #358d8d; /* Slightly darker shade on hover */
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.status-pending {
+    color: orange;
+}
+.status-approved {
+    color: blue;
+}
+.status-complete {
+    color: green;
+}
+.status-declined {
+    color: red;
+}

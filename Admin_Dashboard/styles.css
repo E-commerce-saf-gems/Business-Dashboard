@@ -586,7 +586,7 @@ img {
     color: var(--black);
     text-decoration: none;
     font-size: 14px;
-    transition:  0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .profile .dropdown-menu a:hover {

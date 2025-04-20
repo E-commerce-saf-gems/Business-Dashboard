@@ -3,7 +3,7 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../images/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
@@ -13,26 +13,26 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Sales/sales.html">
+                        <a href="../../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Bids/bids.html">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                    
                     <li>
-                        <a href="../../Pages/Inventory/inventory.html">
+                        <a href="../../Pages/Inventory/inventory.php">
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Customer/customers.php">
                             <i class='bx bxs-user-detail'></i>
                             <span class="text">Customers</span>
                         </a>
@@ -44,7 +44,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/requests/requests.php"">
+                        <a href="../../Pages/requests/requests.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
                         </a>

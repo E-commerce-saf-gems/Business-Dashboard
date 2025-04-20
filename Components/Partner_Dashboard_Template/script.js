@@ -3,35 +3,22 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-<<<<<<< Updated upstream
                 <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
 
                 <ul class="side-menu">
                     <li>
                         <a href="../../dashboard.html">
-=======
-                    <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
-                </a>
-                <ul class="side-menu">
-                    <li>
-                        <a href="/Partners_Dashboard/dashboard.html">
->>>>>>> Stashed changes
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
-                        <a href="../../Pages/Sales/sales.html">
-=======
-                        <a href="/Pages/Sales/sales.html">
->>>>>>> Stashed changes
+                        <a href="../../Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
-<<<<<<< Updated upstream
                     </li>
                     <li>
                         <a href="../../Pages/Purchases/purchases.php">
@@ -53,48 +40,14 @@ class Dashboard extends HTMLElement {
                     </li>
                     <li>
                         <a href="../../Pages/Bids/bids.html">
-=======
-                    <li>
-                        <a href="#">
->>>>>>> Stashed changes
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
                         <a href="../../Pages/reports/reports.html">
                             <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
-=======
-                        <a href="#">
-                            <i class='bx bx-money'></i>
-                            <span class="text">Transactions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-inbox'></i>
-                            <span class="text">Inventory</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-user-detail'></i>
-                            <span class="text">Customers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-calendar'></i>
-                            <span class="text">Meetings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-dashboard'></i>
-                            <span class="text">Requests</span>
->>>>>>> Stashed changes
                         </a>
                     </li>
                 </ul>
@@ -103,10 +56,6 @@ class Dashboard extends HTMLElement {
             <section id="content">
                 <nav>
                     <i class='bx bx-menu'></i>
-<<<<<<< Updated upstream
-=======
-                    <a href="#" class="nav-link">Categories</a>
->>>>>>> Stashed changes
                     <form action="#">
                         <div class="form-input">
                             <input type="search" placeholder="Search">
@@ -117,9 +66,16 @@ class Dashboard extends HTMLElement {
                     </form>
                     <a href="#" class="notification">
                         <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
+                        <span class="num">4</span>
                     </a>
-<<<<<<< Updated upstream
+                    <div class="notification-dropdown">
+                        <ul>
+                            <li>New Sales Update</li>
+                            <li>Chamath Settled a payment</li>
+                            <li>Your payment is due</li>
+                            <li>View this months profite and loss</li>
+                        </ul>
+                    </div>
                     <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
@@ -127,11 +83,6 @@ class Dashboard extends HTMLElement {
                             <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
-=======
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                    </a>
->>>>>>> Stashed changes
                 </nav>
             </section>
         `;
@@ -166,7 +117,6 @@ function updateActiveMenu() {
 }
 
 // Run the updateActiveMenu function on page load
-<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
@@ -227,6 +177,18 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
-=======
-window.addEventListener('DOMContentLoaded', updateActiveMenu);
->>>>>>> Stashed changes
+
+document.querySelector('.notification').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default link behavior
+    const dropdown = document.querySelector('.notification-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+// Close the dropdown if clicking outside
+document.addEventListener('click', function (e) {
+    const notification = document.querySelector('.notification');
+    const dropdown = document.querySelector('.notification-dropdown');
+    if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});
