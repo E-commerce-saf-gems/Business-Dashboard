@@ -103,7 +103,7 @@ $result = $conn->query($sql);
                 <table class="sales-table">
                     <thead>
                         <tr>
-                            <th>Stone</th>
+                            <th>Stone Details</th>
                             <th>Starting Bid</th>
                             <th>Current Bid</th>
                             <th>NO.of Cycles</th>
@@ -113,30 +113,43 @@ $result = $conn->query($sql);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        if ( $result && $result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                // Determine the status label and color
-                               
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['stone']) . "</td>";
-                                echo "<td>Rs." . htmlspecialchars($row['startingBid']) . "</td>";
-                                echo "<td>Rs." . htmlspecialchars($row['currentBid']) . "</td>";
-                                echo "<td> " . htmlspecialchars($row['no_of_Cycles']) . "</td>";
-                                echo "<td> " . htmlspecialchars($row['startDate']) . "</td>";
-                                echo "<td> " . htmlspecialchars($row['finishDate']) . "</td>";
-                                
-                                echo "<td class='actions'>
-                                        <a href='./editTransactions.php?biddingstone_id=" . $row['biddingstone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
-                                        <button class='btn deleteBtn' data-id='" . $row['biddingstone_id'] . "'><i class='bx bx-trash'></i></button>
-                                    </td>";
-                                
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='7'>No transactions found.</td></tr>";
+                    <?php
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $startDate = new DateTime($row['startDate']);
+                            $finishDate = clone $startDate;
+                            $finishDate->modify('+1 day');
+                            $formattedFinishDate = $finishDate->format('Y-m-d');
+
+                            // Update finishDate in the database
+                            $biddingstone_id = $row['biddingstone_id'];
+                            $updateQuery = "UPDATE biddingstone SET finishDate = ? WHERE biddingstone_id = ?";
+                            $stmt = $conn->prepare($updateQuery);
+                            $stmt->bind_param("si", $formattedFinishDate, $biddingstone_id);
+                            $stmt->execute();
+
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['stone']) . "</td>";
+                            echo "<td>Rs." . htmlspecialchars($row['startingBid']) . "</td>";
+                            echo "<td>Rs." . htmlspecialchars($row['currentBid']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['no_of_Cycles']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['startDate']) . "</td>";
+                            echo "<td>" . $formattedFinishDate . "</td>";
+
+                            // Edit and Delete buttons
+                            echo "<td class='actions'>
+                                <a href='./editBiddingStone.php?biddingstone_id=$biddingstone_id' class='btn'><i class='bx bx-pencil'></i></a>
+                                <form method='POST' action='' onsubmit='return confirm(\"Are you sure to delete this record?\");' style='display:inline;'>
+                                    <input type='hidden' name='delete_id' value='$biddingstone_id'>
+                                    <button type='submit' name='delete' class='btn'><i class='bx bx-trash'></i></button>
+                                </form>
+                            </td>";
+                            echo "</tr>";
                         }
-                        ?>
+                    } else {
+                        echo "<tr><td colspan='7'>No transactions found.</td></tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>    

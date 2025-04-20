@@ -21,7 +21,7 @@
                     </li>
                     <li><i class='bx bx-chevron-right' ></i></li>
                     <li>
-                        <a class="active" href="#">Add New Stone</a>
+                        <a class="active" href="#">Add New Bidding Stone</a>
                     </li>
                 </ul>
             </div>
@@ -47,12 +47,21 @@
                     <input type="number" id="no_of_Cycles" name="no_of_Cycles" required />
                 </div>
                 <div class="form-group">
-                    <label for="startDate">Start Date and Time</label>
-                    <input type="datetime-local" id="startDate" name="startDate" required />
+                    <label for="duration">Cycle Duration (in hours)</label>
+                    <input 
+                        type="number" 
+                        id="duration" 
+                        name="duration" 
+                        min="5" 
+                        step="1" 
+                        required 
+                        placeholder="Enter duration in hours" 
+                        title="Enter duration in hours (minimum 5 hours)"
+                    />
                 </div>
                 <div class="form-group">
-                    <label for="finishDate">Finish Date and Time</label>
-                    <input type="datetime-local" id="finishDate" name="finishDate" required />
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" name="startDate" required />
                 </div>
                 <button type="submit" class="btn-save"><i class='bx bx-save'></i>Add to Bidding</button>   
                 
