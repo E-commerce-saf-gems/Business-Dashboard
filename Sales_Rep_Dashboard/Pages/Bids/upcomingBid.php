@@ -3,11 +3,11 @@
 include '../../../database/db.php'; // adjust the path if needed
 
 // Get stone_id from query
-$stoneId = isset($_GET['biddingStone_id']) ? intval($_GET['biddingStone_id']) : 0;
+$biddingStoneId = isset($_GET['biddingStone_id']) ? intval($_GET['biddingStone_id']) : 0;
 
 // Fetch bid info
 $bidQuery = $conn->prepare("SELECT * FROM biddingstone WHERE biddingStone_id = ?");
-$bidQuery->bind_param("i", $stoneId);
+$bidQuery->bind_param("i", $biddingStoneId);
 $bidQuery->execute();
 $bidResult = $bidQuery->get_result();
 $bid = $bidResult->fetch_assoc();
@@ -41,6 +41,16 @@ $usersInterested = 7; // dummy number
   <dashboard-component></dashboard-component>
   <section id="content">
     <main>
+      <div class="head-title">
+                <div class="left">
+                    <h1>Upcoming Bidding Stone</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="#">Upcoming Bidding Stone Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
       <div class="bid-details-container">
         <div class="bid-details-box">
           <div class="bid-header">
@@ -71,8 +81,10 @@ $usersInterested = 7; // dummy number
               <div><strong>Time Left:</strong> <span class="info-value"><?= $timeLeft ?></span></div>
               <div><strong>No Of Users Interested:</strong> <span class="info-value"><?= $usersInterested ?></span></div>
               <div>
-                <a href="./editBid.php?stone_id=<?= $bid['stone_id'] ?>" class="add-new-btn">Edit</a>
-                <a href="./deleteBid.php?stone_id=<?= $bid['stone_id'] ?>" class="add-new-btn">Delete</a>
+                <a href="./editBid.php?biddingStone_id=<?= $bid['biddingStone_id'] ?>" class="add-new-btn">Edit</a>
+                <a href="deleteBid.php?biddingStone_id=<?= $bid['biddingStone_id'] ?>" class="add-new-btn" onclick="return confirm('Are you sure you want to delete this bid?');">
+                    Delete
+                </a>
               </div>
             </div>
           </div>
@@ -80,6 +92,10 @@ $usersInterested = 7; // dummy number
       </div>
     </main>
   </section>
+  
+  <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+  <script src="./bids.js"></script>
+
 </body>
 </html>
 

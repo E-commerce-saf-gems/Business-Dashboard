@@ -2,12 +2,12 @@
 include '../../../database/db.php';
 
 // Get stone_id from URL
-$stoneId = isset($_GET['biddingStone_id']) ? intval($_GET['biddingStone_id']) : 0;
+$biddingStoneId = isset($_GET['biddingStone_id']) ? intval($_GET['biddingStone_id']) : 0;
 
 $bid = null;
-if ($stoneId > 0) {
+if ($biddingStoneId > 0) {
     $stmt = $conn->prepare("SELECT * FROM biddingstone WHERE biddingStone_id = ?");
-    $stmt->bind_param("i", $stoneId);
+    $stmt->bind_param("i", $biddingStoneId);
     $stmt->execute();
     $result = $stmt->get_result();
     $bid = $result->fetch_assoc();
@@ -48,7 +48,7 @@ if ($stoneId > 0) {
                 <form class="edit-sales-form" id="editBiddingStoneForm" action="updateBid.php" method="post">
                     <h2>Edit Bidding Stone Details</h2><br>
                     
-                    <input type="hidden" name="stone_id" value="<?= $bid['stone_id'] ?>">
+                    <input type="hidden" name="biddingStone_id" value="<?= $bid['biddingStone_id'] ?>">
 
                     <div class="form-group">
                         <label for="startingBid">Starting Bid Value (Rs.)</label>
@@ -78,7 +78,7 @@ if ($stoneId > 0) {
                     <button type="submit" class="btn-save"><i class='bx bx-save'></i>Confirm</button>
                 </form>
             <?php else: ?>
-                <p style="color: red;">Bid not found for Stone ID <?= htmlspecialchars($stoneId) ?>.</p>
+                <p style="color: red;">Bid not found for Stone ID <?= htmlspecialchars($biddingStoneId) ?>.</p>
             <?php endif; ?>
         </div>
     </main>

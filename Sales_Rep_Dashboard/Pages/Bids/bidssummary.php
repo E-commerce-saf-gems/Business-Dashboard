@@ -134,7 +134,7 @@ setInterval(updateCountdowns, 1000);
                                 <tr>
                                     <td>
                                         <div class="stone-img-wrapper-other">
-                                            <a href="../Inventory/viewInventory.php?id=<?= $bid['stone_id'] ?>">
+                                            <a href="../Inventory/viewInventory.php?id=<?= $bid['biddingStone_id'] ?>">
                                                 <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
                                             </a>
                                         </div>
@@ -172,7 +172,7 @@ setInterval(updateCountdowns, 1000);
                     <tr>
                         <td>
                         <div class="stone-img-wrapper-other">
-                            <a href="./upcomingBid.php?biddingStone_id=<?= $bid['stone_id'] ?>">
+                            <a href="./upcomingBid.php?biddingStone_id=<?= $bid['biddingStone_id'] ?>">
                             <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
                             </a>
                         </div>
