@@ -157,7 +157,7 @@ $conn->close();
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="../Sales_Rep_Dashboard/Pages/Customer/customers.php">
             <i class="bx bxs-user-detail"></i>
             <span class="text">Customers</span>
           </a>

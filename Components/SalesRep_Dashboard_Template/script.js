@@ -32,7 +32,7 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Pages/Customer/customers.php"">
                             <i class='bx bxs-user-detail'></i>
                             <span class="text">Customers</span>
                         </a>
