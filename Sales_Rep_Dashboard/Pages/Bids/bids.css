@@ -204,7 +204,6 @@
     justify-content: center;
 }
 
-/* Checkbox and Option Styling */
 .sales-table td input[type="checkbox"] {
     transform: scale(1.2);
 }
@@ -223,14 +222,12 @@
     color: var(--teal);
 }
 
-/* Icons for Actions (Print and Share) */
 .sales-table td .options button i {
     margin-right: 5px;
 }
 
 
 
-/* Chart Slider Styles */
 .chart-slider-container {
     position: relative;
     width: 60%;
@@ -243,7 +240,6 @@
     overflow: hidden;
 }
 
-/* Chart Wrapper */
 .chart-slider-wrapper {
     position: relative;
     display: flex;
@@ -262,7 +258,6 @@
   }
   
 
-/* Individual Chart */
 .chart-slider-wrapper .chart-item {
     display: none;
     width: 20%;
@@ -273,7 +268,6 @@
     display: block;
 }
 
-/* Navigation Arrows */
 .chart-slider-arrows {
     position: absolute;
     top: 60%;
@@ -300,7 +294,6 @@
     color: var(--white);
 }
 
-/* Indicator Dots */
 .chart-slider-indicators {
     display: flex;
     justify-content: left;
@@ -323,7 +316,6 @@
 }
 
 
-/* Active Bids Title Red with Dot */
 .active-bids-title h2 {
     color: #FF4C4C;
     display: flex;
@@ -339,7 +331,9 @@
     display: inline-block;
 }
 
-/* Stone Image Styling */
+
+
+
 .stone-img-wrapper {
     width: 50px;
     height: 50px;
@@ -351,23 +345,11 @@
     object-fit: cover;
 }
 
-/* Scrollable Table - Max 5 Rows */
 .sales-table-container {
-    max-height: 270px; /* Adjust based on your row height */
+    max-height: 270px; 
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
-}
-
-.sales-table-container .bids-dual-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.sales-table-container .bids-dual-container::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
 }
 
 .bids-dual-container {
@@ -451,8 +433,6 @@
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
 }
 
 .stone-img-wrapper-other a {
@@ -468,14 +448,4 @@
     height: 100%;
     object-fit: cover;
     display: block; /* removes space below image */
-}
-
-/* Optional: Webkit Scroll Styling */
-.bids-table-wrapper::-webkit-scrollbar {
-    width: 6px;
-}
-
-.bids-table-wrapper::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
 }
