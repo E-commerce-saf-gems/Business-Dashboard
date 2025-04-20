@@ -27,6 +27,7 @@ $lastMonthCount = $lastMonthResult->fetch_assoc()['lastMonthCount'] ?? 0;
 
 // Corrected SQL query syntax
 $ssql = "SELECT 
+            customer.customer_id,
             customer.date, 
             customer.firstName, 
             customer.contactNo, 
@@ -133,6 +134,7 @@ if (!$result) {
                         <tr>
                             <!-- <th><input type="checkbox" class="select-all"></th> -->
                             <th>Date</th>
+                            <th>Customer Id</th>
                             <th>Customer Name</th>
                             <th>Telephone No</th>
                             <th>NIC</th>
@@ -149,20 +151,21 @@ if (!$result) {
                             while ($row = $result->fetch_assoc()){
                                 echo "<tr>";
                                 echo "<td>" . $row['date'] . "</td>";
+                                echo "<td>" . $row['customer_id'] . "</td>";
                                 echo "<td>" . $row['firstName'] . "</td>";
                                 echo "<td>" . $row['contactNo'] . "</td>";
                                 echo "<td>" . $row['NIC'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['city'] . "</td>";
-                                echo "<td class='actions'>
-                                <a href='./editcustomer.html' class='btn'></a>
-                                <i class='bx bx-pencil'></i>
-                                <a class='btn'><i class='bx bx-trash'></i></a>
-                                </td>";
-                                echo '</tr>';
+                                echo "<td class='actions'>";
+                                echo "<a href='./viewcustomer.php?id=" . $row['customer_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
+                                echo "<a href='./deletecustomer.php' onclick='confirmDelete(" . $row['customer_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                                // echo "<a class='btn'><i class='bx bx-trash'></i></a>";
+                                echo "</td>";
+                                echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='9'>No customers in the inventory.</td></tr>";
+                            echo "<tr><td colspan='9'>No customers in the database.</td></tr>";
                         }
                         ?>
         
@@ -172,6 +175,14 @@ if (!$result) {
         </main>
     </section>
 
+    <script>
+        function confirmDelete(customerId) {
+        const userConfirmed = confirm("Are you sure you want to delete this customer?");
+        if (userConfirmed) {
+            window.location.href = `./deletecustomer.php?id=${customerId}`;
+        }
+        }
+    </script>  
     
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
