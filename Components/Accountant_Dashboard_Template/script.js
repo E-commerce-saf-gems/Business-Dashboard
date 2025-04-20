@@ -3,90 +3,45 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-<<<<<<< Updated upstream
-                    <img src="../../../Images/logo.png" width="90" height="90" alt="SAF GEMS">
-                </a>
-                <ul class="side-menu">
-                    <li>
-                        <a href="../../dashboard.html">
-=======
                     <img src="/images/logo.png" width="90" height="90" alt="SAF GEMS">
                 </a>
                 <ul class="side-menu">
                     <li>
                         <a href="/Accoutant_Dashboard/dashboard.html">
->>>>>>> Stashed changes
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
-                        <a href="../../Pages/Sales/sales.php">
-=======
                         <a href="#">
->>>>>>> Stashed changes
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
-                        <a href="../../Pages/Purchases/purchases.php">
-                            <i class='bx bx-chart'></i>
-                            <span class="text">Purchases</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../Pages/Bids/bids.html">
-=======
                         <a href="#">
->>>>>>> Stashed changes
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
-                        <a href="../../Pages/transactions/transactions.php">
-=======
                         <a href="#">
->>>>>>> Stashed changes
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-<<<<<<< Updated upstream
-                            <i class='bx bxs-package'></i>
-=======
                             <i class='bx bxs-inbox'></i>
->>>>>>> Stashed changes
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
-<<<<<<< Updated upstream
-                        <a href="../../Pages/reports/reports.php">
-                            <i class='bx bx-clipboard'></i>
-                            <span class="text">Reports</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../Pages/expenses/expenseType.php">
-                            <i class='bx bxs-credit-card'></i>
-                            <span class="text">Expense Management</span>
-                        </a>
-                    </li>
-                    
-=======
                         <a href="#">
                             <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
                         </a>
                     </li>
->>>>>>> Stashed changes
                 </ul>
             </section>
 
@@ -106,19 +61,9 @@ class Dashboard extends HTMLElement {
                         <i class='bx bxs-bell'></i>
                         <span class="num">8</span>
                     </a>
-<<<<<<< Updated upstream
-                    <div class="profile">
-                        <i class='bx bx-user' id="profile-icon"></i>
-                        <ul class="dropdown-menu">
-                            <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
-                            <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
-                        </ul>
-                    </div>
-=======
                     <a href="#">
                         <i class='bx bx-user'></i>
                     </a>
->>>>>>> Stashed changes
                 </nav>
             </section>
         `;
@@ -154,67 +99,4 @@ function updateActiveMenu() {
 }
 
 // Run the updateActiveMenu function on page load
-<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
-
-const menuBar = document.querySelector('#content nav .bx.bx-menu');
-const sidebar = document.getElementById('sidebar');
-
-const searchButton = document.querySelector('#content nav form .form-input button');
-const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
-const searchForm = document.querySelector('#content nav form');
-
-searchButton.addEventListener('click', function (e) {
-	if(window.innerWidth < 576) {
-		e.preventDefault();
-		searchForm.classList.toggle('show');
-		if(searchForm.classList.contains('show')) {
-			searchButtonIcon.classList.replace('bx-search', 'bx-x');
-		} else {
-			searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		}
-	}
-})
-
-menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
-})
-
-
-if(window.innerWidth < 768) {
-	sidebar.classList.add('hide');
-} else if(window.innerWidth > 576) {
-	searchButtonIcon.classList.replace('bx-x', 'bx-search');
-	searchForm.classList.remove('show');
-}
-
-window.addEventListener('resize', function () {
-	if(this.innerWidth > 576) {
-		searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		searchForm.classList.remove('show');
-	}
-})
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Activate sidebar menu based on current path
-    updateActiveMenu();
-
-    const profileIcon = document.getElementById("profile-icon");
-    const profileMenu = document.querySelector(".profile");
-
-    // Toggle dropdown visibility
-    profileIcon.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent click from bubbling up
-        profileMenu.classList.toggle("active");
-    });
-
-    // Close dropdown if clicking outside
-    document.addEventListener("click", function (e) {
-        if (!profileMenu.contains(e.target)) {
-            profileMenu.classList.remove("active");
-        }
-    });
-});
-=======
-window.addEventListener('DOMContentLoaded', updateActiveMenu);
->>>>>>> Stashed changes
