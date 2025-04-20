@@ -114,7 +114,7 @@ setInterval(updateCountdowns, 1000);
                             <td>$<?= number_format($bid['startingBid']) ?></td>
                             <td>$<?= number_format($bid['currentBid']) ?></td>
                             <td><?= $bid['cycle_no_completed'] ?>/<?= $bid['no_of_Cycles'] ?></td>
-                            <td class="countdown" data-end="<?= $bid['end_date'] ?>" id="countdown-<?= $bid['id'] ?>">Loading...</td>
+                            <td class="countdown" data-end="<?= $bid['finishdate'] ?>" id="countdown-<?= $bid['id'] ?>">Loading...</td>
                             
                         </tr>
                     <?php endforeach; ?>
@@ -152,33 +152,42 @@ setInterval(updateCountdowns, 1000);
 
             <!-- UPCOMING BIDS -->
             <div class="bid-box upcoming-bids">
-                <div class="header">
-                    <h2><span class="dot yellow-dot"></span>Upcoming Bids</h2>
-                    <a href="./addBiddingStone.html" class="add-new-btn">+ Add New</a>
-                </div>
-                <div class="bids-table-wrapper">
-                    <table class="bids-table">
-                        <thead><tr><th>Stone</th><th>Starting Bid</th><th>Start Date</th><th>Cycles</th><th>End Date</th></tr></thead>
-                        <tbody>
-                            <?php foreach ($upcomingBids as $bid): ?>
-                                <tr>
-                                    <td>
-                                        <div class="stone-img-wrapper-other">
-                                            <a href="../Inventory/viewInventory.php?id=<?= $bid['stone_id'] ?>">
-                                                <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>$<?= number_format($bid['startingBid']) ?></td>
-                                    <td><?= $bid['startDate'] ?></td>
-                                    <td><?= $bid['no_of_Cycles'] ?></td>
-                                    <td><?= $bid['finishDate'] ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="header">
+                <h2><span class="dot yellow-dot"></span>Upcoming Bids</h2>
+                <a href="./addBiddingStone.html" class="add-new-btn">+ Add New</a>
             </div>
+            <div class="bids-table-wrapper">
+                <table class="bids-table">
+                <thead>
+                    <tr>
+                    <th>Stone</th>
+                    <th>Starting Bid</th>
+                    <th>Start Date</th>
+                    <th>Cycles</th>
+                    <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($upcomingBids as $bid): ?>
+                    <tr>
+                        <td>
+                        <div class="stone-img-wrapper-other">
+                            <a href="./upcomingBid.php?biddingStone_id=<?= $bid['stone_id'] ?>">
+                            <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
+                            </a>
+                        </div>
+                        </td>
+                        <td>$<?= number_format($bid['startingBid']) ?></td>
+                        <td><?= date('Y-m-d', strtotime($bid['startDate'])) ?></td>
+                        <td><?= $bid['no_of_Cycles'] ?></td>
+                        <td><?= date('Y-m-d', strtotime($bid['finishDate'])) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                </table>
+            </div>
+            </div>
+
         </div>
     </main>
 </section>
