@@ -87,7 +87,7 @@ if (!$result) {
                         </li>
 					</ul>
 				</div>
-                <a href="./addnewcustomer.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
+                <a href="../../../../Group-Project-ECommerce/pages/RegisterPage/register.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
 
 			</div>
 
