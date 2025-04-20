@@ -4,8 +4,18 @@ include("../../../database/db.php");
 $stone_id = $_POST['stone_id'];
 $startingBid = $_POST['startingBid'];
 $no_of_Cycles = $_POST['no_of_Cycles'];
-$startDate = str_replace('T', ' ', $_POST['startDate']);
-$finishDate = str_replace('T', ' ', $_POST['finishDate']);
+$cycleDuration = $_POST['duration']; 
+$startDate = str_replace('T', ' ', $_POST['startDate']); 
+
+$start = new DateTime($startDate);
+$totalCycleMinutes = $no_of_Cycles * $cycleDuration * 60;
+$totalBreakMinutes = ($no_of_Cycles- 1) * 5;
+$totalMinutes = $totalCycleMinutes + $totalBreakMinutes;
+$interval = new DateInterval('PT' . $totalMinutes . 'M'); 
+$start->add($interval);
+
+$finishDate = $start->format('Y-m-d H:i:s');
+
 
 try {
     $conn->begin_transaction();
@@ -37,4 +47,3 @@ try {
 $stmt->close();
 $conn->close();
 ?>
-
