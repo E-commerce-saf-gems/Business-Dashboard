@@ -15,7 +15,11 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Gems</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+=======
+    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+>>>>>>> Dev
     <link rel="stylesheet" href="./requests.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -207,7 +211,11 @@ $result = $conn->query($sql);
 }
 
     </script>
+<<<<<<< HEAD
     <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+=======
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+>>>>>>> Dev
     <script src="./admin.js"></script>
 </body>
 </html>

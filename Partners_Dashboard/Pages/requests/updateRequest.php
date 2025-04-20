@@ -5,7 +5,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+<<<<<<< HEAD
 require '../../../../Group-Project-ECommerce/vendor/autoload.php';
+=======
+require '../../../vendor/autoload.php';
+>>>>>>> Dev
 
 function sendApprovalEmail($first_name, $email, $date, $shape, $type, $weight, $color, $requirement) {
     $mail = new PHPMailer(true);

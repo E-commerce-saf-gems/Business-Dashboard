@@ -7,10 +7,17 @@ $sql = "SELECT
             p.date, 
             b.email AS buyer_email, 
             i.type AS stone_type, 
+<<<<<<< HEAD
             p.total, 
             p.amountSettled,
             CASE 
                 WHEN p.amountSettled = p.total THEN 'Paid'
+=======
+            p.amount, 
+            p.amountSettled,
+            CASE 
+                WHEN p.amountSettled = p.amount THEN 'Paid'
+>>>>>>> Dev
                 ELSE 'Pending'
             END AS status
         FROM purchases p
@@ -103,7 +110,11 @@ $result = $conn->query($sql);
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['buyer_email'] . "</td>";
                                 echo "<td>" . $row['stone_type'] . "</td>";
+<<<<<<< HEAD
                                 echo "<td>Rs. " . number_format($row['total'], 0, '.', ',') . "</td>";
+=======
+                                echo "<td>Rs. " . number_format($row['amount'], 0, '.', ',') . "</td>";
+>>>>>>> Dev
                                 echo "<td>" . $row['status'] . "</td>";
                                 echo "<td>Rs. " . number_format($row['amountSettled'], 0, '.', ',') . "</td>";
                                 echo "<td class='actions'>";

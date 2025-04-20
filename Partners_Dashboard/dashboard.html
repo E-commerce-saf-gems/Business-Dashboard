@@ -75,6 +75,7 @@
             </form>
             <a href="#" class="notification">
                 <i class='bx bxs-bell'></i>
+<<<<<<< HEAD
                 <span class="num">8</span>
             </a>
             <div class="profile">
@@ -82,6 +83,26 @@
                 <ul class="dropdown-menu">
                     <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
                     <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+=======
+                <span class="num">4</span>
+            </a>
+            
+            <!-- Notification Dropdown -->
+            <div class="notification-dropdown">
+                <ul>
+                    <li>New Sales Update</li>
+                    <li>Chamath Settled a payment</li>
+                    <li>Your payment is due</li>
+                    <li>View this months profite and loss</li>
+                </ul>
+            </div>
+            
+            <div class="profile">
+                <i class='bx bx-user' id="profile-icon"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="./Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+>>>>>>> Dev
                 </ul>
             </div>
         </nav>
@@ -202,10 +223,14 @@
                         <a href="../Partners_Dashboard/Pages/Inventory/inventory.html" class="view-more">View More</a>
                     </div>
                 </div>
+<<<<<<< HEAD
 
             </div>
             
             
+=======
+            </div>  
+>>>>>>> Dev
         </main>
     </section>
     <script>
@@ -224,6 +249,24 @@
                     profileMenu.classList.remove("active");
                 }
             });
+<<<<<<< HEAD
+=======
+            document.querySelector('.notification').addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                const dropdown = document.querySelector('.notification-dropdown');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicking outside
+            document.addEventListener('click', function (e) {
+                const notification = document.querySelector('.notification');
+                const dropdown = document.querySelector('.notification-dropdown');
+                if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+>>>>>>> Dev
     </script>
 	<script src="./script.js"></script>
 </body>

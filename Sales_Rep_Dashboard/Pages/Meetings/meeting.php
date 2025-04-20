@@ -85,6 +85,7 @@ $jsonData = json_encode($availableTimes);
         </div>
 
         <div class="edit-availability-container">
+<<<<<<< HEAD
             <h3>Available Times</h3>
             <div class="navigation-buttons">
                 <button id="prevBtn" class="btn-nav" disabled>&laquo; Previous</button>
@@ -93,6 +94,38 @@ $jsonData = json_encode($availableTimes);
             <div class="day-grid" id="dayGrid">
             </div>
         </div>
+=======
+    <h3>My Calendar</h3>
+
+    <!-- Legend Section -->
+    <div class="legend">
+        <div class="legend-item">
+            <div class="status-indicator available"></div>
+            <span>Available</span>
+        </div>
+        <div class="legend-item">
+            <div class="status-indicator reserved"></div>
+            <span>Reserved</span>
+        </div>
+        <div class="legend-item">
+            <div class="status-indicator booked"></div>
+            <span>Booked</span>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button id="prevBtn" class="btn-nav" disabled>&laquo; Previous</button>
+        <button id="nextBtn" class="btn-nav">Next &raquo;</button>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="day-grid" id="dayGrid">
+        <!-- Day boxes go here -->
+    </div>
+</div>
+
+>>>>>>> Dev
         
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">

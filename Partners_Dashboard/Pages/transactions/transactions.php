@@ -1,12 +1,21 @@
 <?php
 include '../../../database/db.php';
 
+<<<<<<< HEAD
 $sql = "SELECT t.transaction_id, t.date, 'Sales' as type, c.email AS email, t.amount
         FROM transactions as t
         JOIN customer as c ON t.customer_id = c.customer_id
         UNION ALL
         SELECT p.payment_id, p.date, 'Purchase' as type, b.email AS email, p.amount
         FROM payment as p
+=======
+$sql = "SELECT t.transaction_id, t.date, t.type, c.email AS email, t.amount
+        FROM transactions as t
+        JOIN customer as c ON t.customer_id = c.customer_id
+        UNION ALL
+        SELECT p.payment_id, p.date, p.type, b.email AS email, p.amount
+        FROM payments as p
+>>>>>>> Dev
         JOIN buyer as b ON p.buyer_id = b.buyer_id
         ORDER BY date DESC";
 $result = $conn->query($sql);
@@ -87,7 +96,10 @@ $result = $conn->query($sql);
                             <th>Type</th>
                             <th>Customer Email</th>
                             <th>Amount</th>
+<<<<<<< HEAD
                             <th>Action</th>
+=======
+>>>>>>> Dev
                         </tr>
                     </thead>
                     <tbody>
@@ -100,11 +112,14 @@ $result = $conn->query($sql);
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>Rs. " . htmlspecialchars($row['amount']) . "</td>";
+<<<<<<< HEAD
                                 echo "<td class='actions'>
                                         <a href='./editTransaction.html' class='btn'><i class='bx bx-pencil'></i></a>
                                         <a class='btn'><i class='bx bx-trash'></i></a>
                                         <a class='btn printBtn'><i class='bx bx-printer'></i></a>
                                       </td>";
+=======
+>>>>>>> Dev
                                 echo "</tr>";
                             }
                         } else {

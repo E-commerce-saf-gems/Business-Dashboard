@@ -22,4 +22,8 @@ if (isset($_GET['id'])) {
     // Redirect if ID is not set
     header("Location: ./inventory.php");
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> Dev

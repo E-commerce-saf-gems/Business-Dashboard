@@ -115,7 +115,10 @@ if (isset($_GET['id'])) {
               <input type="number" id="amount" name="amount" placeholder="Enter Amount" value="<?php echo $row['amount'];?>" required />
             </div>
 
+<<<<<<< HEAD
             <!-- Image Upload Field -->
+=======
+>>>>>>> Dev
             <div class="form-group">
               <label for="image">Image:</label>
               <?php if (!empty($row['image'])): ?>
@@ -125,11 +128,17 @@ if (isset($_GET['id'])) {
                 </div>
               <?php endif; ?>
               <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png" />
+<<<<<<< HEAD
               <!-- Hidden field to pass the current image file name -->
               <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($row['image']); ?>" />
             </div>
 
             <!-- Certificate Upload Field -->
+=======
+              <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($row['image']); ?>" />
+            </div>
+
+>>>>>>> Dev
             <div class="form-group">
               <label for="certificate">Certificate:</label>
               <?php if (!empty($row['certificate'])): ?>
@@ -139,7 +148,10 @@ if (isset($_GET['id'])) {
                 </div>
               <?php endif; ?>
               <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" />
+<<<<<<< HEAD
               <!-- Hidden field to pass the current certificate file name -->
+=======
+>>>>>>> Dev
               <input type="hidden" name="current_certificate" value="<?php echo htmlspecialchars($row['certificate']); ?>" />
             </div>
 
@@ -158,6 +170,7 @@ if (isset($_GET['id'])) {
             </select>
             </div>
 
+<<<<<<< HEAD
             <div class="form-group">
               <label for="availability">Availability:</label>
               <select id="availability" name="availability">
@@ -165,6 +178,15 @@ if (isset($_GET['id'])) {
                 <option value="not available" <?php if ($row['availability'] === 'not available') echo 'selected'; ?>>not available</option>
               </select>
             </div>
+=======
+            <!-- <div class="form-group">
+              <label for="availability">Availability:</label>
+              <select id="availability" name="availability">
+                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
+                <option value="not available" <?php if ($row['availability'] === 'notavailable') echo 'selected'; ?>>not available</option>
+              </select>
+            </div> -->
+>>>>>>> Dev
 
             <div class="form-group">
                 <label for="buyer">Select Buyer:</label>
