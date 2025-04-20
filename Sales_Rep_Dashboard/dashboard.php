@@ -186,7 +186,7 @@ $conn->close();
     <section id="content">
       <nav>
         <i class="bx bx-menu"></i>
-        <a href="#" class="nav-link">Catergories</a>
+        
         <form action="#">
           <div class="form-input">
             <input type="search" placeholder="Search" />
@@ -195,14 +195,21 @@ $conn->close();
             </button>
           </div>
         </form>
-        <a href="#" class="notification">
-          <i class="bx bxs-bell"></i>
-          <span class="num">8</span>
-        </a>
-        <a href="#">
-          <i class="bx bx-user"></i>
-        </a>
+        
+ <!-- profile Dropdown -->
+ 
+
+            <div class="profile">
+                <i class='bx bx-user' id="profile-icon"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="./Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                </ul>
+            </div>
+
       </nav>
+</section>
+<section id="content">
       <main>
         <div class="head-title">
           <div class="left">
@@ -217,10 +224,7 @@ $conn->close();
               </li>
             </ul>
           </div>
-          <a href="#" class="btn-download">
-            <i class="bx bxs-download"></i>
-            <span class="text">Download PDF</span>
-          </a>
+          
         </div>
         <div class="dashboard-container">
           <div class="shortcuts">
@@ -484,6 +488,40 @@ $conn->close();
   });
 </script>
 
+
+<!-- profile and notification on nav bar-->
+<script>
+            const profileIcon = document.getElementById("profile-icon");
+            const profileMenu = document.querySelector(".profile");
+
+            // Toggle dropdown visibility
+            profileIcon.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent click from bubbling up
+                profileMenu.classList.toggle("active");
+            });
+
+            // Close dropdown if clicking outside
+            document.addEventListener("click", function (e) {
+                if (!profileMenu.contains(e.target)) {
+                    profileMenu.classList.remove("active");
+                }
+            });
+            document.querySelector('.notification').addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                const dropdown = document.querySelector('.notification-dropdown');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicking outside
+            document.addEventListener('click', function (e) {
+                const notification = document.querySelector('.notification');
+                const dropdown = document.querySelector('.notification-dropdown');
+                if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+    </script>
 
 
     <script src="../Partners_Dashboard/script.js"></script>

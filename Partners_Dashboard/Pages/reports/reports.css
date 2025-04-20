@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
+}
+
+a{
+    text-decoration: none ;
+}
+
+li {
+    list-style: none ;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+    --white: #FFFFFF ;
+	--blue: #3C91E6;
+    --black: #000000 ;
+    --teal: #46939d ;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--black-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+}
+
+body {
+    background-color: var(--grey);
+}
+
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	font-family: var(--poppins);
+	max-height: calc(100vh - 56px);
+	overflow-y: auto;
+}
+
+#content main .head-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	grid-gap: 16px;
+	flex-wrap: wrap;
+}
+#content main .head-title .left h1 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+}
+#content main .head-title .left .breadcrumb li {
+	color: var(--black);
+}
+#content main .head-title .left .breadcrumb li a {
+	color: var(--black-grey);
+}
+#content main .head-title .left .breadcrumb li a.active {
+	color: var(--teal);
+	pointer-events: unset;
+}
+
+
+
+/* Container for all report boxes */
+.report-boxes-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+/* Styling for each report box */
+.report-box {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for the boxes */
+.report-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+.report-box h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Description text */
+.report-box p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Styling for the report link */
+.report-link {
+    text-decoration: none;
+    background-color: var(--teal);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Styling for Generate Report Button */
+#generateReportBtn {
+    background-color: var(--teal); /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the text */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    margin-top: 30px;
+}
+
+/* Hover effect */
+#generateReportBtn:hover {
+    background-color: rgb(1, 108, 108); /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Active effect for click */
+#generateReportBtn:active {
+    transform: scale(1); /* Reset scale on click */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+}
+
+
+.report-link:hover {
+    background-color: rgb(1, 101, 101);
+}
+
+/* Sales Table */
+.sales-table-container {
+    margin-top: 20px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    grid-gap: 20px;
+}
+
+.table-filters label {
+    font-size: 16px;
+    font-family: var(--lato);
+    color: var(--black-grey);
+}
+
+.table-filters input, .table-filters select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--grey);
+    font-size: 14px;
+}
+
+.table-filters .btn-filter {
+    background: var(--teal);
+    color: var(--white);
+    padding: 6px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.table-filters .btn-filter:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Table Styles */
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th, .sales-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.sales-table th {
+    background: var(--light);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.sales-table td {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.sales-table tr:nth-child(even) {
+    background: var(--grey-light);
+}
+
+.sales-table td .actions button, .sales-table td .options button {
+    background: var(--teal);
+    color: var(--light);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.sales-table td .actions button:hover, .sales-table td .options button:hover {
+    background: var(--dark-teal);
+}
+
+.sales-table td .options button {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checkbox and Option Styling */
+.sales-table td input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+.sales-table .select-all {
+    transform: scale(1.5);
+}
+
+
+.sales-table td .btn {
+    font-size: 18px;
+    color: var(--dark-teal);
+
+}
+
+.sales-table td .btn:hover{
+    color: var(--teal);
+}
+
+/* Icons for Actions (Print and Share) */
+.sales-table td .options button i {
+    margin-right: 5px;
+}
+
+
+
+
+/* Styles for Report Page */
+.reports-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+.reports-header, .report-details, .report-preview, .export-options, .report-form {
+    margin-bottom: 20px;
+}
+.reports-header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+.report-type-dropdown select {
+    padding: 5px;
+}
+#reportDetailsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+#reportDetailsTable th, #reportDetailsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#reportDetailsTable th {
+    background-color: #f2f2f2;
+}
+.export-options button, .report-preview button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* Styles for Report Page */
+
+.report-form label, .report-form button {
+    display: block;
+    margin: 10px 0;
+}
+#reportTemplate ul {
+    list-style: none;
+    padding: 0;
+}
+#reportTemplate ul li {
+    margin: 5px 0;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*styles for preview of profit report adding tables
+
+/* Styling for the report table */
+.report-container {
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    background-color: #fdfdfd;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.company-logo {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 100px; /* Adjust as necessary */
+}
+
+.report-title {
+    text-align: center;
+    font-size: 24px;
+    color: var(--teal);
+    margin-top: 0;
+}
+
+.company-name, .financial-details {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.report-table th, .report-table td {
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.report-table .section-header {
+    background-color: rgba(75, 192, 192, 0.2);
+    color: #333;
+    font-weight: bold;
+}
+
+.report-table .section-total {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.report-table th {
+    border-bottom: 1px solid #ddd;
+}
+
+.report-table td {
+    border-bottom: 1px solid #f3f3f3;
+}
+
+/* Title Styling */
+h2 {
+    color: var(--teal);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 12px;
+    color: #666;
+    margin: 4px 0;
+}
+
+

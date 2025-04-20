@@ -242,7 +242,50 @@ body {
 
 /*nav-bar*/
 
-/* main */     /*
+/* Profile dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.profile .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 10;
+}
+
+/* Dropdown menu links */
+.profile .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.profile .dropdown-menu a:hover {
+    background-color: var(--grey);
+    color: var(--teal);
+}
+
+/* Show dropdown when profile icon is clicked */
+.profile.active .dropdown-menu {
+    display: block;
+}
+
+
+
+/* main */     
 #content main {
 	width: 100%;
 	padding: 36px 24px;
@@ -327,7 +370,7 @@ body {
 
 /* main */
 
-/* common */ /*
+/* common */ 
 .dashboard-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -338,7 +381,7 @@ body {
 	align-items: flex-start;
 }
 
-/* .view-more */ /*
+/* .view-more */ 
 .view-more {
     position: absolute;
 	top: 20px; 
@@ -353,15 +396,15 @@ body {
 .view-more:hover {
     color: var(--dark-teal); 
 }
-/*
+
 .gem-chart, .sales-summary ,.cash-flow-chart{
 	position: relative; 
-}*/
+}
 /* .view-more */
 /* common */
 
 
-/* shortcuts */  /*
+/* shortcuts */  
 .shortcuts {
 	flex: 1 ;
 	width: 50%;
@@ -419,7 +462,7 @@ body {
 	margin: 0;
 }
 
-/* Sales *//*
+/* Sales */
 .sales-summary {
 	flex: 1 ;
     width: 50%; 
@@ -448,7 +491,7 @@ body {
 */
 
 /* inventory */
-/*
+
 .gem-chart ,.summary-card{
 	width: 50%;
 	height: 250px; 
@@ -472,7 +515,7 @@ body {
 
 /* inventory */
 
-  /*
+
 .pending-meetings-table {
 	width: 100%;
 	border-collapse: collapse;
@@ -489,10 +532,10 @@ body {
   .pending-meetings-table th {
 	font-weight: bold;
 	background-color: #f9f9f9;
-  }*/
+  }
 
 
-/* cashflow *//*
+/* cashflow */
 .cash-flow-chart {
 	width: 100%; 
 	margin-top: 20px; 
@@ -507,7 +550,7 @@ body {
 	transition: 0.3s ease;
 }
 
-/* Cash Flow Chart Style *//*
+/* Cash Flow Chart Style */
 #cashFlowChart {
 	width: 100%;
 	height: 200px;
@@ -516,7 +559,7 @@ body {
 }
 /* cashflow */
 
-/*
+
 @media screen and (max-width: 768px) {
 	#sidebar {
 		width: 200px;
@@ -529,8 +572,8 @@ body {
 	#content nav .nav-link {
 		display: none;
 	}
-}*/
-/*
+}
+
 @media screen and (max-width: 576px) {
 	#content nav form .form-input input {
 		display: none;
@@ -576,4 +619,4 @@ body {
 	}
 }
 
-*/
+

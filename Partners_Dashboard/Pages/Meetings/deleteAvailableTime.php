@@ -1,64 +1,36 @@
 <?php
 session_start();
-include '../../../database/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../../Login/login-form.php");
+    header("Location: ../../../Login/login.html");
     exit;
 }
 
-if (!isset($_GET['date']) || !isset($_GET['time'])) {
-    header("Location: ./meeting.php?error=InvalidRequest");
-    exit;
-}
+include('../../../database/db.php');
 
 $salesRep_id = $_SESSION['user_id'];
-$date = $_GET['date'];
-$time = $_GET['time'];
 
-// Fetch the availability status of the time slot
-$sql_check = "SELECT availability 
-              FROM availabletimes 
-              WHERE salesRep_id = ? AND date = ? AND time = ?";
-$stmt = $conn->prepare($sql_check);
-$stmt->bind_param("iss", $salesRep_id, $date, $time);
-$stmt->execute();
-$result = $stmt->get_result();
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // Get the date and time to delete
+    $date = $_GET['date'];
+    $time = $_GET['time'];
 
-if ($result->num_rows === 0) {
-    // No matching time slot found
-    $stmt->close();
+    // Delete the time slot
+    $deleteSql = "DELETE FROM availabletimes WHERE salesRep_id = ? AND date = ? AND time = ?";
+    if ($stmt = $conn->prepare($deleteSql)) {
+        $stmt->bind_param("iss", $salesRep_id, $date, $time);
+        if ($stmt->execute()) {
+            // Success, redirect to meeting page with success message
+            header("Location: ./meeting.php?success=1");
+        } else {
+            // Error during execution
+            header("Location: ./meeting.php?error=1");
+        }
+        $stmt->close();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+
     $conn->close();
-    header("Location: ./meeting.php?error=NotFound");
-    exit;
-}
-
-$row = $result->fetch_assoc();
-$availability = $row['availability'];
-
-$stmt->close();
-
-/*if ($availability !== 'available') {
-    // Only allow deletion if the availability status is Pending
-    $conn->close();
-    header("Location: ./meeting.php?error=NotDeletable");
-    exit;
-}*/
-
-// Proceed to delete the time slot
-$sql_delete = "DELETE FROM availabletimes 
-               WHERE salesRep_id = ? AND date = ? AND time = ?";
-$stmt = $conn->prepare($sql_delete);
-$stmt->bind_param("iss", $salesRep_id, $date, $time);
-if ($stmt->execute()) {
-    $stmt->close();
-    $conn->close();
-    header("Location: ./meeting.php?success=1");
-    exit;
-} else {
-    $stmt->close();
-    $conn->close();
-    header("Location: ./meeting.php?error=DeleteFailed");
-    exit;
 }
 ?>

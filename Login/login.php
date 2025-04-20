@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } elseif ($user['role'] == 'Admin') {
                 header("Location: ../Admin_Dashboard/dashboard.html");
             } elseif ($user['role'] == 'SalesRep') {
-                header("Location: ../Sales_Rep_Dashboard/dashboard.html");
+                header("Location: ../Sales_Rep_Dashboard/dashboard.php");
             } elseif ($user['role'] == 'Accountant') {
                 header("Location: ../Accountant_Dashboard/dashboard.html");
             } else {
