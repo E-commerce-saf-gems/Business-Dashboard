@@ -244,6 +244,7 @@ img {
 	align-items: center;
 }
 
+<<<<<<< Updated upstream
 /*nav-bar*/
 
 @media screen and (max-width: 768px) {
@@ -408,3 +409,6 @@ img {
 .notification.active + .notification-dropdown {
     display: block;
 }
+=======
+/*nav-bar*/
+>>>>>>> Stashed changes

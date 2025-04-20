@@ -13,31 +13,51 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../Pages/Sales/sales.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../Pages/Bids/bids.html">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../Pages/transactions/transactions.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bx-money'></i>
                             <span class="text">Transactions</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../Pages/Inventory/inventory.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bxs-inbox'></i>
                             <span class="text">Inventory</span>
                         </a>
                     </li>
                     <li>
+<<<<<<< Updated upstream
                         <a href="../Pages/reports/reports.php">
+=======
+                        <a href="#">
+>>>>>>> Stashed changes
                             <i class='bx bxs-report'></i>
                             <span class="text">Reports</span>
                         </a>
@@ -99,4 +119,8 @@ function updateActiveMenu() {
 }
 
 // Run the updateActiveMenu function on page load
+<<<<<<< Updated upstream
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
+=======
+window.addEventListener('DOMContentLoaded', updateActiveMenu);
+>>>>>>> Stashed changes
