@@ -156,7 +156,7 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
     const rows = document.querySelectorAll(".sales-table tbody tr");
 
     rows.forEach(row => {
-        const date = row.children[1].textContent.trim();               // Correct index for date
+        const date = row.children[1].textContent.trim().substring(0, 10);// Extract just the date part;              
         const type = row.children[5].textContent.toLowerCase().trim(); // Correct index for type
         const statusSelect = row.children[9].querySelector('select');  // Grab the select element
         const status = statusSelect ? statusSelect.value : "";         // Get selected status value

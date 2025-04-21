@@ -2,8 +2,15 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+session_start();
 include '../database/db.php'; 
+
+if (!isset($_SESSION['user_id'])) {
+  header("Location: ./../Login/login-form.php"); 
+  exit;
+}
+
+$salesRep_id = $_SESSION['user_id'];
 
 //Get gem count 
 $gemCounts = [];
@@ -49,7 +56,7 @@ $pendingQuery = "
 ";
 $pendingMeetings = $conn->query($pendingQuery);
 
-$pendingQuery = "
+$approvedQuery = "
     SELECT m.meeting_id, c.firstName, c.email, a.date, a.time 
     FROM meeting m
     JOIN customer c ON m.customer_id = c.customer_id
@@ -57,7 +64,7 @@ $pendingQuery = "
     WHERE m.status = 'A'
     ORDER BY a.date, a.time
 ";
-$approvedMeetings = $conn->query($pendingQuery);
+$approvedMeetings = $conn->query($approvedQuery);
 
 
 // Count pending requests
@@ -189,7 +196,7 @@ $conn->close();
         
         <form action="#">
           <div class="form-input">
-            <input type="search" placeholder="Search" />
+            <input type="search" id="global-search" placeholder="Search" />
             <button type="submit" class="search-btn">
               <i class="bx bx-search"></i>
             </button>
@@ -202,7 +209,7 @@ $conn->close();
             <div class="profile">
                 <i class='bx bx-user' id="profile-icon"></i>
                 <ul class="dropdown-menu">
-                    <li><a href="./Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="./Pages/Profile/profile.php" class="dropdown-item">Profile</a></li>
                     <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                 </ul>
             </div>
@@ -322,7 +329,7 @@ $conn->close();
 </div>
 
 
-<div class="cash-flow-chart">
+<div class="sales-summary">
     <div class="card">
         <div class="card-content">
             <h3>Pending Requests</h3>
@@ -348,7 +355,7 @@ $conn->close();
   
 
                     <!-- pie chart for Gem Type Distribution-->
-                    <div class="cash-flow-chart">
+                    <div class="sales-summary">
               <h2>Gem Type <br>Distribution</h2>
               <canvas id="gemChart" ></canvas>
               <a href="./Pages/inventory/inventory.php" class="view-more">View More</a>
@@ -523,7 +530,7 @@ $conn->close();
 
     </script>
 
-
+<script src="./script.js"></script>
     <script src="../Partners_Dashboard/script.js"></script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
   </body>

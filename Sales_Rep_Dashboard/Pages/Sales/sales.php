@@ -17,6 +17,30 @@ $sql = "SELECT
         JOIN inventory i ON s.stone_id = i.stone_id
         JOIN customer c ON s.customer_id = c.customer_id";
 $result = $conn->query($sql);
+
+//for sales summary
+// Get current date
+$currentDate = date('Y-m-d');
+
+// This Month
+$sqlThisMonth = "SELECT SUM(total) AS total FROM sales WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
+$thisMonthResult = $conn->query($sqlThisMonth);
+$thisMonth = $thisMonthResult->fetch_assoc()['total'] ?? 0;
+
+// Last Month
+$sqlLastMonth = "SELECT SUM(total) AS total FROM sales 
+                 WHERE MONTH(date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) 
+                 AND YEAR(date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)";
+$lastMonthResult = $conn->query($sqlLastMonth);
+$lastMonth = $lastMonthResult->fetch_assoc()['total'] ?? 0;
+
+// Last Two Months (excluding current month)
+$sqlLastTwoMonths = "SELECT SUM(total) AS total FROM sales 
+                     WHERE date >= DATE_FORMAT(CURRENT_DATE - INTERVAL 2 MONTH, '%Y-%m-01') 
+                     AND date < DATE_FORMAT(CURRENT_DATE, '%Y-%m-01')";
+$lastTwoMonthsResult = $conn->query($sqlLastTwoMonths);
+$lastTwoMonths = $lastTwoMonthsResult->fetch_assoc()['total'] ?? 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -53,17 +77,18 @@ $result = $conn->query($sql);
                     <h2>Monthly Sales Summary</h2>
                 </div>
                 <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>Rs. 254300</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>Rs. 213200</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>Rs. 408900</p>
-                </div>
+    <h3>This Month</h3>
+    <p>Rs. <?= number_format($thisMonth, 0, '.', ',') ?></p>
+</div>
+<div class="sales-item">
+    <h3>Last Month</h3>
+    <p>Rs. <?= number_format($lastMonth, 0, '.', ',') ?></p>
+</div>
+<div class="sales-item">
+    <h3>Last Two Months</h3>
+    <p>Rs. <?= number_format($lastTwoMonths, 0, '.', ',') ?></p>
+</div>
+
             </div>
 
             <div class="sales-table-container">
@@ -139,7 +164,7 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
     const rows = document.querySelectorAll(".sales-table tbody tr");
 
     rows.forEach(row => {
-        const date = row.children[0].textContent.trim();
+        const date = row.children[0].textContent.trim().substring(0, 10);// Extract just the date part;
         const status = row.children[4].textContent.toLowerCase().trim();
         const customer = row.children[1].textContent.toLowerCase().trim();
 

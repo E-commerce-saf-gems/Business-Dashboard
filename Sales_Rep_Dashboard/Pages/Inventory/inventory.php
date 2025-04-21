@@ -18,12 +18,30 @@ $ssql = "SELECT
         JOIN buyer ON inventory.buyer_id = buyer.buyer_id
         ORDER BY inventory.date DESC";
 
+
 $result = $conn->query($ssql);
 
 // Check if query was successful
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
+
+$inventoryCounts = [];
+
+// for Monthly Inventory Summary
+$types = ['Ruby', 'Emerald', 'Sapphire', 'Amethyst', 'Diamond'];
+foreach ($types as $type) {
+    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM inventory WHERE LOWER(type) = LOWER(?) AND availability = 'available'");
+    $stmt->bind_param("s", $type);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $inventoryCounts[$type] = $count;
+    $stmt->close();
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -60,30 +78,18 @@ if (!$result) {
             ><i class="bx bx-plus"></i>Add New</a>
         </div>
         <div class="sales-summary-box">
-          <div class="sales-summary-title">
-            <h2>Monthly Inventory Summary</h2>
-          </div>
-          <div class="sales-item">
-            <h3>Ruby</h3>
-            <p>8</p>
-          </div>
-          <div class="sales-item">
-            <h3>Emerald</h3>
-            <p>4</p>
-          </div>
-          <div class="sales-item">
-            <h3>Sapphire</h3>
-            <p>5</p>
-          </div>
-          <div class="sales-item">
-            <h3>Amethyst</h3>
-            <p>2</p>
-          </div>
-          <div class="sales-item">
-            <h3>Diamond</h3>
-            <p>15</p>
-          </div>
+    <div class="sales-summary-title">
+        <h2>Monthly Inventory Summary</h2>
+    </div>
+
+    <?php foreach ($inventoryCounts as $type => $count): ?>
+        <div class="sales-item">
+            <h3><?= htmlspecialchars($type) ?></h3>
+            <p><?= $count ?></p>
         </div>
+    <?php endforeach; ?>
+</div>
+
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
@@ -233,7 +239,7 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
     const rows = document.querySelectorAll(".sales-table tbody tr");
 
     rows.forEach(row => {
-        const date = row.children[0].textContent.trim();
+        const date = row.children[0].textContent.trim() .substring(0, 10);// Extract just the date part
         const type = row.children[5].textContent.toLowerCase().trim();
         const shape = row.children[3].textContent.toLowerCase().trim();
         const color = row.children[4].textContent.toLowerCase().trim();
