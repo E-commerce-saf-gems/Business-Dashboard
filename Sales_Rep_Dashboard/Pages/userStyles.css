@@ -232,3 +232,41 @@ body {
 .sales-table td .options button i {
     margin-right: 5px;
 }
+/* Ensure the filters are displayed in one line */
+.table-filters {
+    display: flex; /* Use flexbox to align items in a row */
+    gap: 15px; /* Add spacing between filter elements */
+    align-items: center; /* Align items vertically in the center */
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    justify-content: flex-start; /* Align items to the left */
+    margin-bottom: 20px; /* Add spacing below the filters */
+    width: 100%; /* Ensure the container takes full width */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.table-filters label {
+    margin-right: 5px; /* Add spacing between label and input/select */
+    font-weight: bold; /* Optional: Make labels bold for better visibility */
+    white-space: nowrap; /* Prevent labels from wrapping */
+}
+
+.table-filters input,
+.table-filters select,
+.table-filters button {
+    padding: 8px; /* Add padding for better usability */
+    font-size: 14px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add a border for inputs and selects */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    flex-shrink: 0; /* Prevent elements from shrinking */
+}
+
+.table-filters button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.table-filters button:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}

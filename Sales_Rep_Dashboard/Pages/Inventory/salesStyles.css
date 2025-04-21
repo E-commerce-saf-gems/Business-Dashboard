@@ -287,3 +287,192 @@ select {
     width: 100%; /* Full width */
     box-sizing: border-box; /* Include padding in width calculation */
 }
+
+/* Sales Table */
+.sales-table-container {
+    margin-top: 20px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap:20px;
+}
+
+.table-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    grid-gap: 20px;
+    gap:20px;
+    align-items: center; 
+}
+
+.table-filters label {
+    font-size: 16px;
+    font-family: var(--lato);
+    color: var(--black-grey);
+    gap: 20px;
+}
+
+.table-filters input, .table-filters select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--grey);
+    font-size: 14px;
+}
+
+.table-filters .btn-filter {
+    background: var(--teal);
+    color: var(--white);
+    padding: 6px 20px;
+    border: none ;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.table-filters .btn-filter:hover {
+    background: var(--black);
+    transition: .3s ease;
+}
+
+/* Table Styles */
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th, .sales-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.sales-table th {
+    background: var(--light);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.sales-table td {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.sales-table tr:nth-child(even) {
+    background: var(--grey-light);
+}
+
+.sales-table td .actions button, .sales-table td .options button {
+    background: var(--teal);
+    color: var(--light);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.sales-table td .actions button:hover, .sales-table td .options button:hover {
+    background: var(--dark-teal);
+}
+
+.sales-table td .options button {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checkbox and Option Styling */
+.sales-table td input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+.sales-table .select-all {
+    transform: scale(1.5);
+}
+
+
+.sales-table td .btn {
+    font-size: 18px;
+}
+
+.sales-table td .btn:hover{
+    color: var(--teal);
+}
+
+/* Icons for Actions (Print and Share) */
+.sales-table td .options button i {
+    margin-right: 5px;
+}
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* Ensure the filters are displayed in one line */
+.table-filters {
+    display: flex; /* Use flexbox to align items in a row */
+    gap: 10px; /* Add spacing between filter elements */
+    align-items: center; /* Align items vertically in the center */
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    justify-content: space-between; /* Distribute items evenly */
+    margin-bottom: 20px; /* Add spacing below the filters */
+    width: 100%; /* Ensure the container takes full width */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.table-filters label {
+    margin-right: 5px; /* Add spacing between label and input/select */
+    font-weight: bold; /* Optional: Make labels bold for better visibility */
+    white-space: nowrap; /* Prevent labels from wrapping */
+}
+
+.table-filters input,
+.table-filters select,
+.table-filters button {
+    padding: 8px; /* Add padding for better usability */
+    font-size: 14px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add a border for inputs and selects */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    flex-shrink: 0; /* Prevent elements from shrinking */
+}
+
+.table-filters button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.table-filters button:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+/* Reduce the size of the Type input box */
+#type-filter {
+    margin-right: 20px;
+    width: 150px; /* Set the desired width */
+    padding: 5px; /* Adjust padding for better usability */
+    font-size: 14px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add a border for consistency */
+    border-radius: 4px; /* Optional: Add rounded corners */
+}
+
+#shape-filter{
+    margin-right: 20px;
+    width: 150px; /* Set the desired width */
+    padding: 5px; /* Adjust padding for better usability */
+    font-size: 14px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add a border for consistency */
+    border-radius: 4px; /* Optional: Add rounded corners */
+}
+
+#date-filter {
+    margin-right: 20px; /* Add space to the right of the Date filter */
+}
+
+#shape-filter {
+    margin-left: 20px; /* Add space to the left of the Shape filter */
+}
