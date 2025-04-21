@@ -33,15 +33,11 @@ class Dashboard extends HTMLElement {
 
             <section id="content">
                 <nav>
-                    <i class='bx bx-menu'></i>
-                    <a href="#" class="notification">
-                        <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
-                    </a>
+                   
                    <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
-                            <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
+                            <li><a href="../../../Admin_Dashboard/Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
                             <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
@@ -52,6 +48,21 @@ class Dashboard extends HTMLElement {
 }
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    profileIcon.addEventListener("click", function () {
+        profileMenu.classList.toggle("active"); // Toggle the 'active' class
+    });
+
+    // Close the dropdown if clicked outside
+    document.addEventListener("click", function (event) {
+        if (!profileMenu.contains(event.target) && event.target !== profileIcon) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
 
 customElements.define('dashboard-component', Dashboard);
 

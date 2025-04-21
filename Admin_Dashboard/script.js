@@ -1,3 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    profileIcon.addEventListener("click", function () {
+        profileMenu.classList.toggle("active"); // Toggle the 'active' class
+    });
+
+    // Close the dropdown if clicked outside
+    document.addEventListener("click", function (event) {
+        if (!profileMenu.contains(event.target) && event.target !== profileIcon) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
+
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu li a');
 
 allSideMenu.forEach(item=> {

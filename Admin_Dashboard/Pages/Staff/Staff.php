@@ -78,8 +78,8 @@ if (!$result) {
                     <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
                         <option value="">All</option>
                         <option value="Accountant" <?= (isset($_GET['status']) && $_GET['status'] == 'Accountant') ? 'selected' : ''; ?>>Accountant</option>
-                        <option value="Partners" <?= (isset($_GET['status']) && $_GET['status'] == 'Partners') ? 'selected' : ''; ?>>Partners</option>
-                        <option value="Sales Res." <?= (isset($_GET['status']) && $_GET['status'] == 'Sales Res.') ? 'selected' : ''; ?>>Sales Res.</option>
+                        <option value="Partner" <?= (isset($_GET['status']) && $_GET['status'] == 'Partner') ? 'selected' : ''; ?>>Partner</option>
+                        <option value="SalesRep" <?= (isset($_GET['status']) && $_GET['status'] == 'SalesRep') ? 'selected' : ''; ?>>SalesRep</option>
                     </select>
 
                     <label for="customer-filter">Staff Member:</label>
