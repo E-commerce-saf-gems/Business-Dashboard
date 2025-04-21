@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inventory Report Preview</title>
+  <title>Profit & Loss Report Preview</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     body {
@@ -21,6 +21,8 @@
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
+    
 
     .report-header {
       text-align: center;
@@ -128,11 +130,6 @@
       background-color: #6c757d;
       color: white;
     }
-
-    .zero-count {
-      color: #dc3545;
-      font-style: italic;
-    }
   </style>
 </head>
 <body>
@@ -144,7 +141,7 @@
       const reportElement = document.getElementById("reportTemplate");
       const opt = {
         margin: 0.5,
-        filename: 'Inventory_Report.pdf',
+        filename: 'Profit_Loss_Report.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -156,53 +153,50 @@
       const reportType = localStorage.getItem("reportType");
       const reportTemplate = document.getElementById("reportTemplate");
 
-      if (reportType === "inventory") {
-        const data = JSON.parse(localStorage.getItem("inventoryReportData"));
+      if (reportType === "profit-loss") {
+        const data = JSON.parse(localStorage.getItem("profitLossReportData"));
 
         if (!data) {
           reportTemplate.innerHTML = `<p>No report data found.</p>`;
           return;
         }
 
-        let breakdownHtml = '';
-        if (data.breakdown && data.breakdown.length > 0) {
-          data.breakdown.forEach(item => {
-            breakdownHtml += `
-              <tr>
-                <td>${item.attribute}</td>
-                <td class="${item.count === 0 ? 'zero-count' : ''}">${item.count}</td>
-              </tr>
-            `;
-          });
-        } else {
-          breakdownHtml = `<tr><td colspan="2" style="text-align:center;">No breakdown data available.</td></tr>`;
-        }
-
         reportTemplate.innerHTML = `
           <div class="report-container" id="reportContent">
             <div class="report-header">
-              <img src="/images/logo.png" alt="Company Logo" class="company-logo">
-              <p class="company-name">SAF Gems</p>
-              <h3 class="report-title">Inventory Report</h3>
+                <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+                <p class="company-name">SAF Gems</p>
+                <h3 class="report-title">Profit & Loss Report</h3>
             </div>
 
             <div class="report-meta">
-              <p><strong>Prepared by:</strong> Quinn Campbell</p>
-              <p><strong>Period:</strong> ${data.dateRange}</p>
-              <p><em>Inventory details in Sri Lankan Rupees (Rs.)</em></p>
+                <p><strong>Prepared by:</strong> Quinn Campbell</p>
+                <p><strong>Period:</strong> ${data.dateRange}</p>
+                <p><em>Financial statements in Sri Lankan Rupees (Rs.)</em></p>
             </div>
 
-            <table class="report-table">
-              <tr class="section-header"><th colspan="2">INVENTORY SUMMARY</th></tr>
-              <tr><td>Total Items in Inventory</td><td>${data.totalItems}</td></tr>
-              <tr><td>Total Bid Items</td><td>${data.totalBidItems}</td></tr>
-              <tr><td>Total Inventory Value</td><td>Rs. ${data.totalInventoryValue.toFixed(2)}</td></tr>
-            </table>
 
             <table class="report-table">
-              <tr class="section-header"><th colspan="2">INVENTORY BREAKDOWN</th></tr>
-              <tr><th>Attribute</th><th>Count</th></tr>
-              ${breakdownHtml}
+              <tr class="section-header"><th colspan="2">REVENUE</th></tr>
+              <tr><td>Total Sales Revenue</td><td>Rs. ${data.totalSalesRevenue.toFixed(2)}</td></tr>
+              <tr><td>Other Income</td><td>Rs. ${data.otherIncome.toFixed(2)}</td></tr>
+              <tr class="section-total"><td>Total Revenue</td><td>Rs. ${(data.totalSalesRevenue + data.otherIncome).toFixed(2)}</td></tr>
+
+              <tr class="section-header"><th colspan="2">COST OF GOODS SOLD</th></tr>
+              <tr><td>Purchases</td><td>Rs. ${data.purchases.toFixed(2)}</td></tr>
+              <tr class="section-total"><td>Total COGS</td><td>Rs. ${data.purchases.toFixed(2)}</td></tr>
+
+              <tr class="section-header"><th colspan="2">EXPENSES</th></tr>
+              <tr><td>Salaries & Wages</td><td>Rs. ${data.cuttingPolishing.toFixed(2)}</td></tr>
+              <tr><td>Rent & Utilities</td><td>Rs. ${data.certificationFees.toFixed(2)}</td></tr>
+              <tr><td>Marketing & Advertising</td><td>Rs. ${data.marketing.toFixed(2)}</td></tr>
+              <tr><td>Administrative Expenses</td><td>Rs. ${data.logistics.toFixed(2)}</td></tr>
+              <tr><td>Other Expenses</td><td>Rs. ${data.otherExpenses.toFixed(2)}</td></tr>
+              <tr class="section-total"><td>Total Expenses</td><td>Rs. ${data.totalExpenses.toFixed(2)}</td></tr>
+
+              <tr class="section-header"><th colspan="2">PROFIT</th></tr>
+              <tr><td>Gross Profit</td><td>Rs. ${data.grossProfit.toFixed(2)}</td></tr>
+              <tr><td>Net Profit</td><td>Rs. ${data.netProfit.toFixed(2)}</td></tr>
             </table>
 
             <div class="signature-block">
@@ -211,7 +205,7 @@
             </div>
 
             <div class="action-buttons">
-              <button class="back-btn" onclick="window.location.href='inventoryreport.html'">← Back to Form</button>
+              <button class="back-btn" onclick="window.location.href='profitreports.html'">← Back to Form</button>
               <button class="print-btn" onclick="window.print()">🖨️ Print</button>
               <button class="pdf-btn" onclick="downloadPDF()">⬇️ Download PDF</button>
             </div>
@@ -229,4 +223,5 @@
 
 </body>
 </html>
+
 
