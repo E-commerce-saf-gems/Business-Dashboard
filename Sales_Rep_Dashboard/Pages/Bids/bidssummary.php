@@ -1,35 +1,52 @@
 <?php
+session_start();
+$customer_id = $_SESSION['customer_id'];
+
 include '../../../database/db.php';
 
-// Function to get stone image path (edit path as per your structure)
-function getStoneImage($filename) {
-    return "../../../../Group-Project-ECommerce/assets/images/" . $filename;
-}
+date_default_timezone_set('Asia/Kolkata');
+$currentDateTime = date('Y-m-d H:i:s');
+
+$liveBidsQuery = "
+    SELECT bs.*, 
+           i.image,
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
+    FROM biddingstone bs
+    JOIN inventory i ON bs.stone_id = i.stone_id
+    WHERE bs.startDate <= '$currentDateTime' 
+      AND bs.finishDate > '$currentDateTime'
+";
+
+$liveBidsResult = $conn->query($liveBidsQuery);
+
+$upcomingQuery = "
+    SELECT bs.*, i.image
+    FROM biddingstone bs
+    JOIN inventory i ON bs.stone_id = i.stone_id
+    WHERE bs.startDate > '$currentDateTime'
+";
+
+$upcomingResult = $conn->query($upcomingQuery);
+
+$completedQuery = "
+    SELECT 
+        bs.*, 
+        i.image,
+        COUNT(b.bid_id) AS totalBids,
+        MAX(b.amount) AS highestBid,
+        CASE 
+            WHEN COUNT(b.bid_id) > 0 THEN 'Completed with Bids'
+            ELSE 'No Bids Placed'
+        END AS status
+    FROM biddingstone bs
+    LEFT JOIN bid b ON bs.biddingStone_id = b.biddingStone_id
+    JOIN inventory i ON bs.stone_id = i.stone_id
+    WHERE bs.finishDate <= '$currentDateTime'
+    GROUP BY bs.biddingStone_id
+";
 
 
-// Classify bids
-$activeBids = $completedBids = $upcomingBids = [];
-
-$sql = "SELECT bs.*, i.image AS stone_image 
-        FROM biddingstone bs 
-        JOIN inventory i ON bs.stone_id = i.stone_id";
-$result = $conn->query($sql);
-$dateNow = date("Y-m-d");
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $endDate = $row['finishDate'];
-        $startDate = $row['startDate'];
-
-        if ($dateNow < $startDate) {
-            $upcomingBids[] = $row;
-        } elseif ($dateNow >= $startDate && $dateNow <= $endDate) {
-            $activeBids[] = $row;
-        } else {
-            $completedBids[] = $row;
-        }
-    }
-}
+$completedResult = $conn->query($completedQuery);
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +66,11 @@ function updateCountdowns() {
 
     countdownElements.forEach(elem => {
         const endDateStr = elem.dataset.end;
-        const endTime = new Date(endDateStr).getTime();
+        const startDateStr = elem.dataset.start;
+        let targetTimeStr = endDateStr || startDateStr;
+        const targetTime = new Date(targetTimeStr).getTime();
         const now = new Date().getTime();
-        const distance = endTime - now;
+        const distance = targetTime - now;
 
         if (distance > 0) {
             const hours = Math.floor((distance / (1000 * 60 * 60)));
@@ -59,14 +78,12 @@ function updateCountdowns() {
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             elem.textContent = `${hours}h ${minutes}m ${seconds}s`;
         } else {
-            elem.textContent = "Ended";
+            elem.textContent = "Started";
         }
     });
 }
 
-// Initial call
 updateCountdowns();
-// Update every second
 setInterval(updateCountdowns, 1000);
 </script>
 
@@ -87,7 +104,7 @@ setInterval(updateCountdowns, 1000);
         </div>
 
         <div class="sales-summary-title">
-            <h2>Monthly Bidding Summary</h2>
+            <h2>Bidding Summary</h2>
         </div>
 
         <div class="summary-cards">
@@ -97,89 +114,146 @@ setInterval(updateCountdowns, 1000);
             <div class="card"><h3>Average Bid Value</h3></div>
         </div>
 
-        <!-- ACTIVE BIDS -->
-        <div class="sales-table-container">
-            <div class="sales-summary-title active-bids-title">
-                <ul><li><h2><span class="red-dot"></span>Active Bids</h2></li></ul>
-            </div>
-            <table class="sales-table">
-                <thead>
-                    <tr><th>Stone</th><th>Bid No</th><th>Starting Bid</th><th>Current Highest Bid</th><th>Cycle No Completed</th><th>Time Left</th></tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($activeBids as $bid): ?>
-                        <tr>
-                            <td><div class="stone-img-wrapper"><img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone"></div></td>
-                            <td><?= $bid['biddingStone_id'] ?></td>
-                            <td>$<?= number_format($bid['startingBid']) ?></td>
-                            <td>$<?= number_format($bid['currentBid']) ?></td>
-                            <td><?= $bid['cycle_no_completed'] ?>/<?= $bid['no_of_Cycles'] ?></td>
-                            <td class="countdown" data-end="<?= $bid['end_date'] ?>" id="countdown-<?= $bid['id'] ?>">Loading...</td>
-                            
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="bids-dual-container">
-            <!-- COMPLETED BIDS -->
-            <div class="bid-box completed-bids">
-                <div class="header"><h2><span class="dot green-dot"></span>Completed Bids</h2></div>
-                <div class="bids-table-wrapper">
-                    <table class="bids-table">
-                        <thead><tr><th>Stone</th><th>Starting Bid</th><th>Highest Bid</th><th>End Date</th><th>Purchase</th></tr></thead>
-                        <tbody>
-                            <?php foreach ($completedBids as $bid): ?>
+        <div class="bids-wrapper">
+                <!-- My Active Bids -->
+                <div class="bids-box">
+                    <h3 class="active-text"><span class="dot red"></span> Current Live Bids</h3>
+                    <div class="bids-table-wrapper">
+                        <table class="bids-table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <div class="stone-img-wrapper-other">
-                                            <a href="../Inventory/viewInventory.php?id=<?= $bid['stone_id'] ?>">
-                                                <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>$<?= number_format($bid['startingBid']) ?></td>
-                                    <td>$<?= number_format($bid['currentBid']) ?></td>
-                                    <td><?= $bid['finishDate'] ?></td>
-                                    <td><?= $bid['currentBid'] > 0 ? 'Purchased' : 'Not Purchased' ?></td>
+                                    <th></th>
+                                    <th>Bid ID</th>
+                                    <th>Starting Bid (Rs.)</th>
+                                    <th>Highest Bid (Rs.)</th>
+                                    <th>Actions</th>
+                                    <th>Time Left</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            </thead>
+                            <tbody>
+                            <?php while($row = $liveBidsResult->fetch_assoc()): ?>
+                                <?php
+                                    $startingBid = $row['startingBid'];
+                                    $highestBid = $row['highestBid'];
+                                    $increaseFromStart = $highestBid - $startingBid;
+                                    $increaseFormatted = number_format($increaseFromStart);
+                                ?>
+                                    <tr>
+                                        <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
+                                        <td>#<?= $row['biddingStone_id'] ?></td>
+                                        <td>
+                                            <span class="bid-result pending"><?= number_format($startingBid) ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="bid-result none"><?= number_format($highestBid) ?></span>
+                                            <span class="bid-result-difference win"><i class='bx bx-chevrons-up'></i><?= $increaseFormatted ?></span>
+                                        </td>
+                                        <td>
+                                            <a href="./activeBids.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">Details</a>
+                                        </td>
 
-            <!-- UPCOMING BIDS -->
-            <div class="bid-box upcoming-bids">
-                <div class="header">
-                    <h2><span class="dot yellow-dot"></span>Upcoming Bids</h2>
-                    <a href="./addBiddingStone.html" class="add-new-btn">+ Add New</a>
+                                        <td>
+                                            <span class="bid-result loss">
+                                                <?=date_diff(date_create($currentDateTime),date_create($row['finishDate']))->format('%dD %hH %iM')?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="bids-table-wrapper">
-                    <table class="bids-table">
-                        <thead><tr><th>Stone</th><th>Starting Bid</th><th>Start Date</th><th>Cycles</th><th>End Date</th></tr></thead>
-                        <tbody>
-                            <?php foreach ($upcomingBids as $bid): ?>
+
+                <!-- Completed Bids -->
+                <div class="bids-box">
+                    <h3 class="completed-text"><span class="dot green"></span>Completed Bids</h3>
+                    <div class="bids-table-wrapper">
+                        <table class="bids-table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <div class="stone-img-wrapper-other">
-                                            <a href="../Inventory/viewInventory.php?id=<?= $bid['stone_id'] ?>">
-                                                <img src="<?= getStoneImage($bid['stone_image']) ?>" alt="Stone">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>$<?= number_format($bid['startingBid']) ?></td>
-                                    <td><?= $bid['startDate'] ?></td>
-                                    <td><?= $bid['no_of_Cycles'] ?></td>
-                                    <td><?= $bid['finishDate'] ?></td>
+                                    <th></th>
+                                    <th>Bid ID</th>
+                                    <th>End Date</th>
+                                    <th>Starting Bid (Rs.)</th>
+                                    <th>Final Value</th>
+                                    <th>No Of Bids</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php while($row = $completedResult->fetch_assoc()): ?>
+                                    <?php
+                                        $startingBid = $row['startingBid'];
+                                        $highestBid = $row['highestBid'];
+                                        $increaseFromStart = $highestBid - $startingBid;
+                                        $increaseFormatted = number_format($increaseFromStart);
+                                    ?>
+                                    <tr>
+                                        <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
+                                        <td>#<?= $row['biddingStone_id'] ?></td>
+                                        <td><?= date('M d, Y H:i', strtotime($row['finishDate'])) ?></td>
+                                        <td>
+                                            <span class="bid-result pending"><?= number_format($startingBid) ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="bid-result none"><?= number_format($highestBid) ?></span>
+                                            <span class="bid-result-difference win">
+                                                <i class='bx bx-chevrons-up'></i><?= $increaseFormatted ?>
+                                            </span>
+                                        </td>
+                                        <td><?= $row['totalBids'] ?></td>
+                                        <td><?= $row['status'] ?></td>
+                                        <td>
+                                            <a href="./completedBid.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">Details</a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                                </tbody>
+
+                        </table>
+                    </div>
                 </div>
+                <!-- Upcoming Bids -->
+<div class="bids-box">
+    <h3 class="upcoming-text"><span class="dot yellow"></span>Upcoming Bids</h3>
+    <div class="bids-table-wrapper">
+        <table class="bids-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Bid ID</th>
+                    <th>Start Date</th>
+                    <th>Starting Bid (Rs.)</th>
+                    <th>Time To Begin</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($row = $upcomingResult->fetch_assoc()): ?>
+                    <?php
+                        $startDate = $row['startDate'];
+                        $startDiff = date_diff(date_create($currentDateTime), date_create($startDate))->format('%dD %hH %iM');
+                    ?>
+                    <tr>
+                        <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
+                        <td>#<?= $row['biddingStone_id'] ?></td>
+                        <td><?= date('M d, Y H:i', strtotime($startDate)) ?></td>
+                        <td>
+                            <span class="bid-result pending"><?= number_format($startingBid) ?></span>
+                        </td>
+                        <td><?= $startDiff ?></td>
+                        <td>
+                            <a href="./upcomingBids.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">View</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
             </div>
-        </div>
     </main>
 </section>
 
