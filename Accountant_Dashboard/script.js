@@ -48,158 +48,104 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+document.addEventListener("DOMContentLoaded", function () {
+    let salesChart;
+    let cashFlowChart;
 
-// Sample data for monthly sales
-const salesData = {
-	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	datasets: [{
-		label: "Sales ($)",
-		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
-		borderColor: "rgba(75, 192, 192, 1)",
-		backgroundColor: "rgba(75, 192, 192, 0.2)",
-		fill: true,
-		tension: 0.3, // Curve smoothness
-		pointRadius: 4,
-		pointBackgroundColor: "rgba(75, 192, 192, 1)"
-	}]
-};
+    function loadSalesChart() {
+        fetch("getSalesChartData.php")
+            .then(response => response.json())
+            .then(data => {
+                if (salesChart) {
+                    salesChart.data.labels = data.labels;
+                    salesChart.data.datasets[0].data = data.sales;
+                    salesChart.update();
+                } else {
+                    salesChart = new Chart(document.getElementById("salesChart"), {
+                        type: "line",
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: "Sales (Rs.)",
+                                data: data.sales,
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { title: { display: true, text: "Sales (Rs.)" }, beginAtZero: true }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading sales chart:", error));
+    }
 
-// Configuration options for the chart
-const config = {
-	type: "line",
-	data: salesData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "top"
-			}
-		},
-		scales: {
-			x: {
-				title: {
-					display: true,
-					text: "Month"
-				}
-			},
-			y: {
-				title: {
-					display: true,
-					text: "Sales ($)"
-				},
-				beginAtZero: true
-			}
-		}
-	}
-};
+    function loadCashFlowChart() {
+        fetch("getCashFlowChart.php")
+            .then(response => response.json())
+            .then(data => {
+                if (cashFlowChart) {
+                    cashFlowChart.data.labels = data.labels;
+                    cashFlowChart.data.datasets[0].data = data.cashIn;
+                    cashFlowChart.data.datasets[1].data = data.cashOut;
+                    cashFlowChart.update();
+                } else {
+                    cashFlowChart = new Chart(document.getElementById("cashFlowChart"), {
+                        type: "bar",
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: "Cash In",
+                                    data: data.cashIn,
+                                    backgroundColor: "rgba(75, 192, 192, 0.6)",
+                                    borderColor: "rgba(75, 192, 192, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Cash Out",
+                                    data: data.cashOut,
+                                    backgroundColor: "#3caaaa",
+                                    borderColor: "#3caaaa",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading cash flow chart:", error));
+    }
 
-// Render the chart in the canvas with id 'salesChart'
-const salesChart = new Chart(
-	document.getElementById("salesChart"),
-	config
-);
+    // Initial chart load
+    loadSalesChart();
+    loadCashFlowChart();
+
+    // Auto-refresh every 30 seconds
+    setInterval(() => {
+        loadSalesChart();
+        loadCashFlowChart();
+    }, 30000);
+});
 
 
-// Sample data for gemstone types
-const gemData = {
-	labels: ["Ruby", "Emerald", "Sapphire", "Amethyst", "Diamond"],
-	datasets: [{
-		data: [12, 19, 7, 10, 15], // Sample quantities for each gemstone type
-		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Ruby color
-			"rgba(75, 192, 192, 0.6)", // Emerald color
-			"rgba(54, 162, 235, 0.6)", // Sapphire color
-			"rgba(153, 102, 255, 0.6)", // Amethyst color
-			"rgba(255, 206, 86, 0.6)"   // Diamond color
-		],
-		borderColor: [
-			"rgba(255, 99, 132, 1)",
-			"rgba(75, 192, 192, 1)",
-			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)",
-			"rgba(255, 206, 86, 1)"
-		],
-		borderWidth: 1
-	}]
-};
-
-// Configuration for the gemstone types pie chart
-const gemConfig = {
-	type: "pie",
-	data: gemData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "right" // Position legend on the right
-			}
-		}
-	}
-};
-
-// Render the pie chart in the canvas with id 'gemChart'
-const gemChart = new Chart(
-	document.getElementById("gemChart"),
-	gemConfig
-);
-
-// cashflow
-// Updated Data and configuration for the Cash Flow Bar Chart
-const cashFlowData = {
-	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
-	datasets: [
-		{
-			label: 'Cash In',
-			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
-			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
-			borderColor: 'rgba(75, 192, 192, 1)',
-			borderWidth: 1
-		},
-		{
-			label: 'Cash Out',
-			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
-			backgroundColor: "#3caaaa", // Red color
-			borderColor: '#3caaaa',
-			borderWidth: 1
-		}
-	]
-};
-
-const cashFlowConfig = {
-	type: 'bar',
-	data: cashFlowData,
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true,
-				title: {
-					display: true,
-					text: 'Amount ($)'
-				}
-			},
-			x: {
-				title: {
-					display: true,
-					text: 'Day of the Month'
-				},
-				stacked: false // Keeps bars side-by-side for each day
-			}
-		},
-		plugins: {
-			legend: {
-				position: 'top'
-			}
-		}
-	}
-};
-
-// Initialize the Cash Flow Bar Chart
-const cashFlowChart = new Chart(
-	document.getElementById('cashFlowChart'),
-	cashFlowConfig
-);
 
 // cashflow
 
