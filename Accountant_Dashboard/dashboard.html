@@ -111,39 +111,36 @@
                 </div>
             </div>
                 
-            <!-- Filter Date Section -->   
-            <section id="filter">  
-                <h2>Finacial Overview</h2>  
-                <select id="date-filter">
-                    <option value="monthly">Monthly</option>
-                    <option value="quarterly">Quarterly</option>
-                    <option value="yearly">Yearly</option>
-                </select>  
-            </section>  
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
+                </div>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Sales</h4>
+                        <p id="totalSales">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Purchases</h4>
+                        <p id="totalPurchases">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Expenses</h4>
+                        <p id="totalExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Outstanding Payments</h4>
+                        <p id="outstandingPayments">Rs. 0</p>
+                    </div>
+                </div>
+            </section> 
         
         
-        
-        
-            <!-- Summary Cards Section -->
-            <section class="summary-cards">
-                <div class="card">
-                    <h3>Total Revenue</h3>
-                    <p id="total-revenue">$0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Total Expenses</h3>
-                    <p id="total-expenses">$0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Net Profit</h3>
-                    <p id="net-profit">$0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Outstanding Payments</h3>
-                    <p id="outstanding-payments">$0.00</p>
-                </div>
-            </section>
-
             <!-- Charts Section -->
             <section class="charts">
 
@@ -157,34 +154,16 @@
                     <canvas id="cashFlowChart"></canvas>
                     <a href="Pages/transactions/transactions.php" class="view-more">View More</a>
                 </div>
+                
             </section>
 
-            <!-- Key Metrics Section -->
-            <div class="section-header">
-                <h2>Bid Price Trends</h2>
-            </div>
-            <section class="key-metrics">
-                
-                <div class="metric top-gem-sales">
-                    <h4>Top Gem Sales</h4>
-                    <p id="top-gem-sales">$500.00</p>
-                    <img src="../Images/stone1.jpg" alt="Top Gem" class="gem-image">
-                    <p class="gem-description">
-                        Emerald, 2.5 Carats, known for its vibrant green color.
-                    </p>
-                </div>
-
-
-                <div class="metric">
-                    <h4>Average Bid Price</h4>
-                    <p id="average-bid-price">$1,500</p>
-                    <canvas id="average-bid-chart"></canvas>
-                </div>
-
-                <div class="metric">
-                    <h4>Revenue from Auctions</h4>
-                    <p id="revenue-from-auctions">$0.00</p>
-                    <canvas id="auction-revenue-chart"></canvas>
+            <section class="charts">
+                <div class="expense-chart">
+                    <h4>Monthly Expense Breakdown</h4>
+                    <label for="monthSelector">Select Month:</label>
+                    <select id="monthSelector"></select>
+                    <canvas id="expenseChart"></canvas>
+                    <a href="Pages/expenses/expenseType.php" class="view-more">View More</a>
                 </div>
             </section>
 
