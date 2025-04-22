@@ -69,8 +69,8 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Details</title>
-    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../userStyles.css">   
+    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../Pages/userStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -184,8 +184,8 @@ if (!$result) {
         }
     </script>  
     
-    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script src="../../../Admin_Dashboard/script.js"></script>
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/script.js"></script>
     <script src="../customer.js"></script>
 
 
