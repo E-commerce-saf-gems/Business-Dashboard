@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Completed Bids</title>
+  <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="./sadheeyaBids.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <dashboard-component></dashboard-component>
+  <section id="content">
+    <main>
+      <div class="bid-details-container">
+        <div class="bid-details-box">
+          <div class="bid-header">
+            <div class="bid-title">
+              <h2>Bid No #345</h2>
+            </div>
+            
+            <div class="bid-status">
+              <span class="dot dot-upcoming"></span>
+              <span class="live-text-upcoming">Upcoming</span>
+            </div>
+          </div>
+
+          <div class="bid-info-box">
+            <div class="bid-image-section">
+              <img id="mainImage" src="../../../../Group-Project-ECommerce/assets/images/stone11.jpg" alt="Stone" class="main-image">
+              <img id="certificateImage" src="../../../../Group-Project-ECommerce/assets/images/certificate.jpg" alt="Certificate" class="cert-image">
+            </div>
+
+            <div class="bid-info">
+              <div><strong>Stone ID:</strong> <span class="info-value">123</span></div>
+              <div><strong>Starting Bid:</strong> <span class="info-value">$150</span></div>
+              <div><strong>No Of Cycles:</strong> <span class="info-value">5</span></div>
+              <div><strong>Cycle Time:</strong> <span class="info-value">2h</span></div>
+            </div>
+
+            <div class="bid-info">
+              <div><strong>End Date:</strong> <span class="info-value">2025-04-25</span></div>
+              <div><strong>Time Left:</strong> <span class="info-value">Ended</span></div>
+              <div><strong>No Of Users Interested:</strong> <span class="info-value">7</span></div>
+              <div>
+                <a href="./editBid.html" class="add-new-btn">Edit</a>
+                <a href="./addBiddingStone.html" class="add-new-btn">Delete</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+  <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+  <script src="./bids.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+</html>
+
+
