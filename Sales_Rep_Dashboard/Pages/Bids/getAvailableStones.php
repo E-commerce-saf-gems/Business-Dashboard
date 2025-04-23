@@ -4,9 +4,9 @@ include("../../../database/db.php");
 try {
     // Query to fetch stones with availability = 'Available'
     $stmt = $conn->prepare("
-        SELECT stone_id, colour, shape, type, weight, amount
+        SELECT stone_id, colour, shape, type, size, amount
         FROM inventory 
-        WHERE availability = 'Available'
+        WHERE availability = 'available'
     ");
     $stmt->execute();
     $result = $stmt->get_result();
