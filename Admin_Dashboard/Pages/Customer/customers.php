@@ -34,7 +34,8 @@ $ssql = "SELECT
             customer.NIC, 
             customer.email, 
             customer.city,
-            customer.gender
+            customer.gender,
+            customer.bid_status
         FROM customer 
         WHERE 1=1"; // Use 1=1 to simplify appending conditions
 
@@ -139,7 +140,7 @@ if (!$result) {
                             <th>Telephone No</th>
                             <th>NIC</th>
                             <th>Email</th>
-                            <th>City</th>
+                            <th>Bid Status</th>
                             <!-- <th>Total Purchases</th> -->
                             <th>Actions</th>
                         </tr>
@@ -156,11 +157,11 @@ if (!$result) {
                                 echo "<td>" . $row['contactNo'] . "</td>";
                                 echo "<td>" . $row['NIC'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
-                                echo "<td>" . $row['city'] . "</td>";
+                                echo "<td>" . $row['bid_status'] . "</td>";
                                 echo "<td class='actions'>";
                                 echo "<a href='./viewcustomer.php?id=" . $row['customer_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
-                                echo "<a href='./deletecustomer.php' onclick='confirmDelete(" . $row['customer_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
-                                // echo "<a class='btn'><i class='bx bx-trash'></i></a>";
+                                if ($row['bid_status'] == 1 ) {
+                                    echo "<a href='#' onclick='confirmDelete(" . $row['customer_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";                                }                                
                                 echo "</td>";
                                 echo "</tr>";
                             }
@@ -181,7 +182,7 @@ if (!$result) {
         if (userConfirmed) {
             window.location.href = `./deletecustomer.php?id=${customerId}`;
         }
-        }
+}
     </script>  
     
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
