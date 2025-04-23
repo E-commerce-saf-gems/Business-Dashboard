@@ -197,6 +197,7 @@ if (!$result) {
                       echo "<select name='availability' onchange='this.form.submit()'>";
                       echo "<option value='available'" . ($row['availability'] === 'available' ? " selected" : "") . ">available</option>";
                       echo "<option value='not available'" . ($row['availability'] === 'not available' ? " selected" : "") . ">not available</option>";
+                      echo "<option value='Bids'" . ($row['availability'] === 'Bids' ? " selected" : "") . ">Bids</option>";
                       echo "</select>";
                       echo "</form>";
                       echo "</td>";
