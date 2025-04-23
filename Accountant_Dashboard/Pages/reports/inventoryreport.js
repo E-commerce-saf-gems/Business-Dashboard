@@ -1,5 +1,5 @@
 // Fetch inventory data and store it
-document.getElementById("fetchInventoryDataBtn").addEventListener("click", () => {
+document.getElementById("SelectDateBtn").addEventListener("click", () => {
     const startDate = document.getElementById("inventoryStartDate").value;
     const endDate = document.getElementById("inventoryEndDate").value;
 
@@ -57,7 +57,7 @@ document.getElementById("fetchInventoryDataBtn").addEventListener("click", () =>
 });
 
 // Redirect only when user clicks Generate Report button
-document.getElementById("generateInventoryReportBtn").addEventListener("click", () => {
+document.getElementById("generateReportBtn").addEventListener("click", () => {
     const reportData = localStorage.getItem("inventoryReportData");
 
     if (reportData) {

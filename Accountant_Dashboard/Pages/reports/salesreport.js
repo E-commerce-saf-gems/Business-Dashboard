@@ -1,4 +1,4 @@
-document.getElementById("fetchSalesDataBtn")?.addEventListener("click", () => {
+document.getElementById("selectDateBtn")?.addEventListener("click", () => {
     const startDateInput = document.getElementById("salesStartDate");
     const endDateInput = document.getElementById("salesEndDate");
 
@@ -42,7 +42,7 @@ document.getElementById("fetchSalesDataBtn")?.addEventListener("click", () => {
     });
 });
 
-document.getElementById("generateSalesReportBtn")?.addEventListener("click", () => {
+document.getElementById("generateReportBtn")?.addEventListener("click", () => {
     const startDate = document.getElementById("salesStartDate")?.value;
     const endDate = document.getElementById("salesEndDate")?.value;
 
