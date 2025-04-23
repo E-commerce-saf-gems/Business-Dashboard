@@ -98,6 +98,12 @@ $conn->close();
           </a>
         </li>
         <li>
+          <a href="../Sales_Rep_Dashboard/Pages/Orders/orders.php">
+            <i class="bx bxs-inbox"></i>
+            <span class="text">Orders</span>
+          </a>
+        </li>
+        <li>
           <a href="../Sales_Rep_Dashboard/Pages/Customer/customers.php">
             <i class="bx bxs-user-detail"></i>
             <span class="text">Customers</span>
