@@ -63,7 +63,7 @@ try {
     }
 
     $conn->commit();
-    header("Location: ./bidssummary.html?ReceivalSuccess=1");
+    header("Location: ./bidssummary.php?ReceivalSuccess=1");
 } catch (Exception $e) {
     $conn->rollback();
     echo "Error: " . $e->getMessage();
