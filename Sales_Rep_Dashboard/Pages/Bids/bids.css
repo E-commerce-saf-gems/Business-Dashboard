@@ -365,8 +365,8 @@
   
   /* Image styling */
   .bids-table img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 8px;
   }
@@ -433,6 +433,7 @@
         display: inline-block;
         padding: 6px 14px;
         background-color: #449b9b;
+        border: none;
         font-size: 14px;
         font-weight: 600;
         text-decoration: none;

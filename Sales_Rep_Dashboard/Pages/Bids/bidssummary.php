@@ -103,17 +103,6 @@ setInterval(updateCountdowns, 1000);
             </div>
         </div>
 
-        <div class="sales-summary-title">
-            <h2>Bidding Summary</h2>
-        </div>
-
-        <div class="summary-cards">
-            <div class="card"><h3>Total Bids Placed</h3></div>
-            <div class="card"><h3>Total Bids Revenue</h3></div>
-            <div class="card"><h3>Successful Bids</h3></div>
-            <div class="card"><h3>Average Bid Value</h3></div>
-        </div>
-
         <div class="bids-wrapper">
                 <!-- My Active Bids -->
                 <div class="bids-box">
@@ -153,9 +142,7 @@ setInterval(updateCountdowns, 1000);
                                         </td>
 
                                         <td>
-                                            <span class="bid-result loss">
-                                                <?=date_diff(date_create($currentDateTime),date_create($row['finishDate']))->format('%dD %hH %iM')?>
-                                            </span>
+                                            <span class="bid-result loss countdown" data-end="<?= $row['finishDate'] ?>"></span>
                                         </td>
                                     </tr>
                                     <?php endwhile; ?>
@@ -216,7 +203,10 @@ setInterval(updateCountdowns, 1000);
                 </div>
                 <!-- Upcoming Bids -->
 <div class="bids-box">
-    <h3 class="upcoming-text"><span class="dot yellow"></span>Upcoming Bids</h3>
+    
+        <h3 class="upcoming-text"><span class="dot orange"></span>Upcoming Bids</h3>
+        <a href="./addBiddingStone.html" class="bid-now-button bid-upcoming">+ Add New</a>
+
     <div class="bids-table-wrapper">
         <table class="bids-table">
             <thead>
@@ -242,9 +232,12 @@ setInterval(updateCountdowns, 1000);
                         <td>
                             <span class="bid-result pending"><?= number_format($startingBid) ?></span>
                         </td>
-                        <td><?= $startDiff ?></td>
                         <td>
-                            <a href="./upcomingBids.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">View</a>
+                            <span class="bid-result win countdown" data-start="<?= $row['startDate'] ?>"></span>
+                        </td>
+
+                        <td>
+                            <a href="./upcomingBid.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">View</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -256,6 +249,36 @@ setInterval(updateCountdowns, 1000);
             </div>
     </main>
 </section>
+<script>
+function updateCountdowns() {
+    const countdownElements = document.querySelectorAll('.countdown');
+
+    countdownElements.forEach(elem => {
+        const endDateStr = elem.dataset.end;
+        const startDateStr = elem.dataset.start;
+
+        let targetTimeStr = endDateStr || startDateStr;
+        const targetTime = new Date(targetTimeStr).getTime();
+        const now = new Date().getTime();
+        const distance = targetTime - now;
+
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            elem.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else {
+            elem.textContent = endDateStr ? "Ended" : "Starting soon...";
+        }
+    });
+}
+
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
+</script>
+
+
 
 <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 <script src="bids.js"></script>

@@ -14,7 +14,7 @@ $biddingStoneQuery = "
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid,
            (SELECT c.firstName FROM bid b 
             JOIN customer c ON b.customer_id = c.customer_id 
-            WHERE b.biddingStone_id = bs.biddingStone_id 
+            WHERE b.biddingStone_id = bs.biddingStone_id and b.validity = 'valid'
             ORDER BY b.amount DESC, b.time ASC LIMIT 1) AS winnerName,
            (SELECT COUNT(DISTINCT customer_id) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS uniqueBidders
     FROM biddingstone bs
@@ -27,7 +27,7 @@ $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
 $bidsQuery = "
-    SELECT b.bid_id, b.amount, b.time, c.firstName AS bidderName, 
+    SELECT b.bid_id, b.amount, b.time, c.firstName AS bidderName, b.validity,
            (SELECT COUNT(*) FROM bid WHERE biddingStone_id = $biddingStoneId) AS totalNoOfBids
     FROM bid b
     INNER JOIN customer c ON b.customer_id = c.customer_id
@@ -39,8 +39,10 @@ $bids = [];
 while ($row = $bidsResult->fetch_assoc()) {
     $bids[] = $row;
 }
-?>
 
+$isHighestBidInvalid = isset($bids[0]) && $bids[0]['validity'] === 'invalid';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,17 +55,6 @@ while ($row = $bidsResult->fetch_assoc()) {
   <link rel="stylesheet" href="./sadheeyaBids.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    .bid-image-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .main-image {
-        width: 120px;
-        height: 120px;
-    }
   </style>
 </head>
 <body>
@@ -102,7 +93,21 @@ while ($row = $bidsResult->fetch_assoc()) {
               </div>
               <div><strong>No. of Bidders:</strong> <span class="info-value"><?= $biddingStone['uniqueBidders'] ?></span></div>
               <div><strong>Final Price:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
-            </div>
+              <?php if ($biddingStone['reBidCount']==2): ?>
+                <div class="reopen-section">
+                  <a href="deleteBid.php?id=<?= $biddingStoneId ?>">
+                    <button class="bid-now-button">Remove Bid</button>
+                  </a>
+                </div>
+              <?php else:  ?> 
+                <?php if ($isHighestBidInvalid || empty($bids) || ($biddingStone['reBidCount']==2)) : ?>
+                  <div class="reopen-section">
+                    <a href="editCompletedBid.php?id=<?= $biddingStoneId ?>">
+                      <button class="bid-now-button">Reopen Bid</button>
+                    </a>
+                  </div>
+                <?php endif; ?>
+              <?php endif ?>
           </div>
         </div>
 
@@ -115,6 +120,7 @@ while ($row = $bidsResult->fetch_assoc()) {
                 <th>Time</th>
                 <th>Value</th>
                 <th>Bidder Name</th>
+                <th>Validity</th>
               </tr>
             </thead>
             <tbody>
@@ -124,7 +130,6 @@ while ($row = $bidsResult->fetch_assoc()) {
                   $next = $bids[$i + 1] ?? null;
                   $increase = ($next !== null) ? $current['amount'] - $next['amount'] : 0;
               ?>
-              <tr>
                 <td>#<?= $current['bid_id'] ?></td>
                 <td><?= date('d M Y', strtotime($current['time'])) ?></td>
                 <td><?= date('h:i A', strtotime($current['time'])) ?></td>
@@ -137,11 +142,25 @@ while ($row = $bidsResult->fetch_assoc()) {
                   <?php endif; ?>
                 </td>
                 <td><?= $current['bidderName'] ?></td>
+                <td>
+                  <?php if($current['validity'] == 'invalid'): ?> 
+                    <span class="bid-result loss">
+                      <?= $current['validity'] ?>
+                    </span>
+                  <?php else: ?>
+                    <span class="bid-result win">
+                      <?= $current['validity'] ?>
+                    </span>
+                  <?php endif; ?>
+              </td>
               </tr>
               <?php endfor; ?>
             </tbody>
           </table>
         </div>
+
+
+
       </div>
     </main>
   </section>

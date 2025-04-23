@@ -76,23 +76,13 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
             <div class="bid-info">
             <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
               <div><strong>Starts In:</strong> 
-                <span class="info-value">
-                  <?php
-                    $startTime = strtotime($biddingStone['startDate']);
-                    $now = strtotime($currentDateTime);
-                    $diff = $startTime - $now;
-
-                    if ($diff > 0) {
-                        $days = floor($diff / (60 * 60 * 24));
-                        $hours = floor(($diff % (60 * 60 * 24)) / 3600);
-                        $minutes = floor(($diff % 3600) / 60);
-                        echo "{$days}d {$hours}h {$minutes}m";
-                    } else {
-                        echo "Starting soon...";
-                    }
-                  ?>
-                </span>
+                <span id="countdown" class="bid-result win"></span>
               </div>
+              <div class="bid-actions" style="margin-top: 20px; display: flex; gap: 12px; justify-content: center;">
+                <a href="editBid.php?id=<?= $biddingStone['biddingStone_id'] ?>" class="action-button" style="padding: 8px 16px; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">Edit</a>
+                <a href="deleteBid.php?id=<?= $biddingStone['biddingStone_id'] ?>" class="action-button" style="padding: 8px 16px; background-color: #dc3545; color: white; border-radius: 5px; text-decoration: none;" onclick="return confirm('Are you sure you want to delete this bid?');">Delete</a>
+              </div>
+
             </div>
           </div>
         </div>
@@ -103,6 +93,33 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
       </div>
     </main>
   </section>
+
+  <script>
+    const countdownEl = document.getElementById("countdown");
+    const startTime = new Date("<?= $biddingStone['startDate'] ?>").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = startTime - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Starting soon...";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
+
 
   <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 </body>
