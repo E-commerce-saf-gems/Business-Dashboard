@@ -197,6 +197,32 @@ document.addEventListener("DOMContentLoaded", function () {
         loadCashFlowChart();
 		
     }, 30000);
+
+
+	const viewFilter = document.getElementById("viewFilter");
+
+    function loadFinancialOverview() {
+        const selectedFilter = viewFilter.value.toLowerCase(); // Get current filter (monthly, quarterly, yearly)
+
+        fetch(`getFinancialOverview.php?filter=${selectedFilter}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("totalSales").innerText = `Rs. ${parseFloat(data.totalSales).toLocaleString()}`;
+                document.getElementById("totalPurchases").innerText = `Rs. ${parseFloat(data.totalPurchases).toLocaleString()}`;
+                document.getElementById("totalExpenses").innerText = `Rs. ${parseFloat(data.totalExpenses).toLocaleString()}`;
+                document.getElementById("outstandingPayments").innerText = `Rs. ${parseFloat(data.outstandingPayment).toLocaleString()}`;
+            })
+            .catch(error => console.error("Error loading financial overview:", error));
+    }
+
+    // Initial load
+    loadFinancialOverview();
+
+    // Reload on filter change
+    viewFilter.addEventListener("change", loadFinancialOverview);
+
+    // Auto-refresh every 30 seconds
+    setInterval(loadFinancialOverview, 30000);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
