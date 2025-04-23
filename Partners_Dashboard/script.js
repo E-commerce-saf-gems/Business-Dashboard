@@ -34,7 +34,6 @@ menuBar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
 })
 
-
 if(window.innerWidth < 768) {
 	sidebar.classList.add('hide');
 } else if(window.innerWidth > 576) {
@@ -195,28 +194,23 @@ const cashFlowConfig = {
 	}
 };
 
-// Initialize the Cash Flow Bar Chart
 const cashFlowChart = new Chart(
 	document.getElementById('cashFlowChart'),
 	cashFlowConfig
 );
 
-// cashflow
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Activate sidebar menu based on current path
-    updateActiveMenu();
+
+	updateActiveMenu();
 
     const profileIcon = document.getElementById("profile-icon");
     const profileMenu = document.querySelector(".profile");
 
-    // Toggle dropdown visibility
     profileIcon.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent click from bubbling up
+        e.stopPropagation(); 
         profileMenu.classList.toggle("active");
     });
 
-    // Close dropdown if clicking outside
     document.addEventListener("click", function (e) {
         if (!profileMenu.contains(e.target)) {
             profileMenu.classList.remove("active");
