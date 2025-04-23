@@ -63,7 +63,7 @@
     }
 
     .section-header {
-      background-color: #e9ecef;
+      background-color: rgb(206, 254, 254);
       font-weight: bold;
       text-align: center;
     }
@@ -168,7 +168,7 @@
             </div>
 
             <div class="report-meta">
-                <p><strong>Prepared by:</strong> Quinn Campbell</p>
+                <p><strong>Prepared by:</strong> Accountant </p>
                 <p><strong>Period:</strong> ${data.dateRange}</p>
                 <p><em>Financial figures in Sri Lankan Rupees (Rs.)</em></p>
             </div>
@@ -176,8 +176,8 @@
             <table class="report-table">
               <tr class="section-header"><th colspan="2">SALES SUMMARY</th></tr>
               <tr><td>Total Sales Amount</td><td>Rs. ${data.totalSalesAmount.toFixed(2)}</td></tr>
-              <tr><td>Total Settled Amount</td><td>Rs. ${data.totalSettledAmount.toFixed(2)}</td></tr>
-              <tr><td>Total Remaining Amount</td><td>Rs. ${data.totalRemainingAmount.toFixed(2)}</td></tr>
+              <tr><td>Total Settled Amount</td><td>Rs. ${data.settledAmount.toFixed(2)}</td></tr>
+              <tr><td>Total Remaining Amount</td><td>Rs. ${data.remainingAmount.toFixed(2)}</td></tr>
               <tr><td>Number of Items Sold</td><td>${data.itemsSold}</td></tr>
             </table>
 

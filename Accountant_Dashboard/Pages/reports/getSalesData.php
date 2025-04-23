@@ -60,8 +60,8 @@ $totalRemaining = $totalSales - $totalSettled;
 // Return all data
 echo json_encode([
     "totalSalesAmount" => round($totalSales, 2),
-    "totalSettledAmount" => round($totalSettled, 2),
-    "totalRemainingAmount" => round($totalRemaining, 2),
+    "settledAmount" => round($totalSettled, 2),
+    "remainingAmount" => round($totalRemaining, 2),
     "itemsSold" => $itemsSold
 ]);
 

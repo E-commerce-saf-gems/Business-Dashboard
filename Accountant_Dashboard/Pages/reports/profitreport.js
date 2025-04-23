@@ -8,7 +8,7 @@ document.getElementById("selectDateBtn").addEventListener("click", () => {
         return;
     }
 
-    fetch('./getProfitLossData.php', {
+    fetch('getProfitLossData.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ startDate, endDate })

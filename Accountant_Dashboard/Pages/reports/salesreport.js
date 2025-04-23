@@ -1,49 +1,76 @@
-document.getElementById("fetchSalesDataBtn").addEventListener("click", () => {
-    const startDate = document.getElementById("salesStartDate").value;
-    const endDate = document.getElementById("salesEndDate").value;
+document.getElementById("fetchSalesDataBtn")?.addEventListener("click", () => {
+    const startDateInput = document.getElementById("salesStartDate");
+    const endDateInput = document.getElementById("salesEndDate");
 
-    if (!startDate || !endDate) {
-        alert("Please select both start and end dates.");
+    if (!startDateInput || !endDateInput) {
+        console.error("Start date or end date input not found.");
         return;
     }
 
-    fetch("getSalesData.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ startDate, endDate }),
+    const startDate = startDateInput.value;
+    const endDate = endDateInput.value;
+
+    if (!startDate || !endDate) {
+        alert("Please select a valid date range.");
+        return;
+    }
+
+    fetch('./getSalesData.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ startDate, endDate })
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        if (data.error) {
-            alert(data.error);
-            return;
-        }
+        console.log("Fetched Sales Data:", data);
 
-        // Extracting data
-        const totalSalesAmount = data.totalSalesAmount || 0;
-        const totalSettledAmount = data.totalSettledAmount || 0;
-        const totalRemainingAmount = data.totalRemainingAmount || 0;
-        const itemsSold = data.itemsSold || 0;
+        const totalSalesAmountInput = document.getElementById("totalSalesAmount");
+        const settledAmountInput = document.getElementById("settledAmount");
+        const remainingAmountInput = document.getElementById("remainingAmount");
+        const itemsSoldInput = document.getElementById("itemsSold");
 
-        // Store the data in localStorage
-        localStorage.setItem("reportType", "sales");
-        localStorage.setItem("salesReportData", JSON.stringify({
-            totalSalesAmount: totalSalesAmount,
-            totalSettledAmount: totalSettledAmount,
-            totalRemainingAmount: totalRemainingAmount,
-            itemsSold: itemsSold,
-            dateRange: `From ${startDate} to ${endDate}`
-        }));
+        if (totalSalesAmountInput) totalSalesAmountInput.value = data.totalSalesAmount || 0;
+        if (settledAmountInput) settledAmountInput.value = data.settledAmount || 0;
+        if (remainingAmountInput) remainingAmountInput.value = data.remainingAmount || 0;
+        if (itemsSoldInput) itemsSoldInput.value = data.itemsSold || 0;
 
-        // Navigate to salespreview.html
-        window.location.href = "salespreview.html";
+        
     })
     .catch(error => {
         console.error("Error fetching sales data:", error);
+        alert("Failed to fetch sales data.");
     });
 });
+
+document.getElementById("generateSalesReportBtn")?.addEventListener("click", () => {
+    const startDate = document.getElementById("salesStartDate")?.value;
+    const endDate = document.getElementById("salesEndDate")?.value;
+
+    if (!startDate || !endDate) {
+        alert("Please select a date range before generating the report.");
+        return;
+    }
+
+    const totalSalesAmount = parseFloat(document.getElementById("totalSalesAmount")?.value) || 0;
+    const settledAmount = parseFloat(document.getElementById("settledAmount")?.value) || 0;
+    const remainingAmount = parseFloat(document.getElementById("remainingAmount")?.value) || 0;
+    const itemsSold = parseInt(document.getElementById("itemsSold")?.value) || 0;
+
+    const reportData = {
+        dateRange: `From ${startDate} to ${endDate}`,
+        totalSalesAmount,
+        settledAmount,
+        remainingAmount,
+        itemsSold
+    };
+
+    localStorage.setItem("reportType", "sales");
+    localStorage.setItem("salesReportData", JSON.stringify(reportData));
+
+    window.location.href = "salespreview.html";
+});
+
+
 
 
 
