@@ -44,72 +44,6 @@ while ($row = $monthlySalesResult->fetch_assoc()) {
 // Reverse arrays to show oldest to newest
 $months = array_reverse($months);
 $totals = array_reverse($totals);
-/*end of monthly sales data*/
-
-$pendingQuery = "
-    SELECT m.meeting_id, c.firstName, c.email, a.date, a.time 
-    FROM meeting m
-    JOIN customer c ON m.customer_id = c.customer_id
-    JOIN availabletimes a ON m.availableTimes_id = a.availableTimes_id
-    WHERE m.status = 'P'
-    ORDER BY a.date, a.time
-";
-$pendingMeetings = $conn->query($pendingQuery);
-
-$approvedQuery = "
-    SELECT m.meeting_id, c.firstName, c.email, a.date, a.time 
-    FROM meeting m
-    JOIN customer c ON m.customer_id = c.customer_id
-    JOIN availabletimes a ON m.availableTimes_id = a.availableTimes_id
-    WHERE m.status = 'A'
-    ORDER BY a.date, a.time
-";
-$approvedMeetings = $conn->query($approvedQuery);
-
-
-// Count pending requests
-$pendingQuery = "SELECT COUNT(*) AS count FROM request WHERE status = 'P'";
-$pendingResult = $conn->query($pendingQuery);
-$pendingCount = $pendingResult->fetch_assoc()['count'];
-
-// Count approved requests
-$approvedQuery = "SELECT COUNT(*) AS count FROM request WHERE status = 'A'";
-$approvedResult = $conn->query($approvedQuery);
-$approvedCount = $approvedResult->fetch_assoc()['count'];
-
-
-$query = "
-    SELECT 
-        DATE_FORMAT(s.date, '%Y-%m') AS month,
-        i.type AS gem_type,
-        COUNT(*) AS total_sales
-    FROM sales s
-    JOIN inventory i ON s.stone_id = i.stone_id
-    GROUP BY month, gem_type
-    ORDER BY month ASC
-";
-
-$result = $conn->query($query);
-
-$salesData = [];
-
-while ($row = $result->fetch_assoc()) {
-    $month = $row['month'];
-    $type = $row['gem_type'];
-    $salesData[$type][$month] = (int)$row['total_sales'];
-}
-
-// Unique months
-$months = [];
-foreach ($salesData as $type => $monthSales) {
-    foreach ($monthSales as $month => $amount) {
-        if (!in_array($month, $months)) {
-            $months[] = $month;
-        }
-    }
-}
-sort($months);
-
 
 
 $conn->close();
@@ -266,93 +200,7 @@ $conn->close();
                 </span>
               </li>
             </ul>
-
-            <!-- Approved Meeting Details-->
-<div class="cash-flow-chart">
-<a href="./Pages/Meetings/meeting.php" class="view-more">View More</a>
-    <h3>Approved Meetings</h3>
-    <?php if ($approvedMeetings->num_rows > 0): ?>
-    <table class="pending-meetings-table">
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Email</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $approvedMeetings->fetch_assoc()): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['firstName']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['date']) ?></td>
-                <td><?= htmlspecialchars($row['time']) ?></td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-    <?php else: ?>
-    <p>No approved meetings.</p>
-    <?php endif; ?>
 </div>
- 
-
-          <!-- Pending Meeting Details-->
-            <div class="cash-flow-chart">
-            <a href="./Pages/Meetings/meeting.php" class="view-more">View More</a>
-            <h3>Pending Meetings</h3>
-            <?php if ($pendingMeetings->num_rows > 0): ?>
-            <table class="pending-meetings-table">
-          <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Email</th>
-          <th>Date</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php while ($row = $pendingMeetings->fetch_assoc()): ?>
-          <tr>
-            <td><?= htmlspecialchars($row['firstName']) ?></td>
-            <td><?= htmlspecialchars($row['email']) ?></td>
-            <td><?= htmlspecialchars($row['date']) ?></td>
-            <td><?= htmlspecialchars($row['time']) ?></td>
-          </tr>
-        <?php endwhile; ?>
-      </tbody>
-    </table>
-  <?php else: ?>
-    <p>No pending meetings.</p>
-  <?php endif; ?>
-</div>
-
-
-<div class="sales-summary">
-    <div class="card">
-        <div class="card-content">
-            <h3>Pending Requests</h3>
-            <p><?= $pendingCount ?></p>
-        </div>
-        <div class="card-icon">
-            <i class='bx bx-time-five'></i>
-        </div>
-        <a href="./Pages/requests/requests.php" class="view-more">View More</a>
-    </div>
-
-    <div class="card">
-        <div class="card-content">
-            <h3>Approved Requests</h3>
-            <p><?= $approvedCount ?></p>
-        </div>
-        <div class="card-icon">
-            <i class='bx bx-check-circle'></i>
-        </div>
-    </div>
-</div>
-
-  
 
                     <!-- pie chart for Gem Type Distribution-->
                     <div class="sales-summary">
@@ -361,47 +209,7 @@ $conn->close();
               <a href="./Pages/inventory/inventory.php" class="view-more">View More</a>
             </div>
 
-
-
-            <div class="cash-flow-chart">
-            <h2>Monthly Sales </h2>
         
-            <!-- Monthly Sales Table -->
-            <table class="sales-table">
-                <thead>
-                    <tr>
-                        <th>Month</th>
-                        <?php foreach ($salesData as $type => $monthSales): ?>
-                            <th><?= htmlspecialchars($type) ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($months as $month): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($month) ?></td>
-                            <?php foreach ($salesData as $type => $monthSales): ?>
-                                <td>
-                                    <?= isset($monthSales[$month]) ? $monthSales[$month] : 0 ?>
-                                </td>
-                            <?php endforeach; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        
-            <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
-        </div>
-        
-        <!--<div class="cash-flow-chart">
-              <h2>Cash Flow</h2>
-              <canvas id="cashFlowChart" height="200"></canvas>
-              <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
-            </div>
-          </div>-->
-
-  
-
           <!-- Bar chart for Sales Summary-->
           <div class="sales-summary">
             <h2>Monthly Sales Summary</h2>
