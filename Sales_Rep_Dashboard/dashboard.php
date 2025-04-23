@@ -136,10 +136,6 @@ $conn->close();
         
         <form action="#">
           <div class="form-input">
-            <input type="search" id="global-search" placeholder="Search" />
-            <button type="submit" class="search-btn">
-              <i class="bx bx-search"></i>
-            </button>
           </div>
         </form>
         

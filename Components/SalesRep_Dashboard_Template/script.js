@@ -3,7 +3,7 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../images/logo.png" width="90" height="90" alt="SAF GEMS" />
+                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS" />
                 </a>
                 <ul class="side-menu">
                     <li>
@@ -70,10 +70,6 @@ class Dashboard extends HTMLElement {
         
         <form action="#">
           <div class="form-input">
-            <input type="search" id="global-search" placeholder="Search" />
-            <button type="submit" class="search-btn">
-              <i class="bx bx-search"></i>
-            </button>
           </div>
         </form>
         
@@ -83,7 +79,7 @@ class Dashboard extends HTMLElement {
             <div class="profile">
                 <i class='bx bx-user' id="profile-icon"></i>
                 <ul class="dropdown-menu">
-                    <li><a href="../../Pages/Profile/profile.php" class="dropdown-item">Profile</a></li>
+                    <li><a href="../../Sales_Rep_Dashboard/Pages/Profile" class="dropdown-item">Profile</a></li>
                     <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                 </ul>
             </div>
