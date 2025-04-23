@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Line Chart (Sales Data)</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="salesChart" width="400" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("salesChart");
+        const ctx = canvas.getContext("2d");
+
+        // Sample data
+        const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const data = [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100];
+
+        const padding = 30;
+        const chartHeight = canvas.height - 2 * padding;
+        const chartWidth = canvas.width - 2 * padding;
+
+        // Find the maximum value in the data
+        const maxDataValue = Math.max(...data);
+
+        // Draw the line chart
+        ctx.beginPath();
+        ctx.moveTo(padding, chartHeight - (data[0] / maxDataValue) * chartHeight); // Move to the first data point
+
+        // Loop through the data and plot the points
+        for (let i = 1; i < data.length; i++) {
+            const x = padding + (i * chartWidth) / (data.length - 1); // X position
+            const y = chartHeight - (data[i] / maxDataValue) * chartHeight; // Y position
+            ctx.lineTo(x, y);
+        }
+
+        ctx.strokeStyle = "rgba(75, 192, 192, 1)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw the axes
+        ctx.beginPath();
+        ctx.moveTo(padding, padding); // Start of Y-axis
+        ctx.lineTo(padding, chartHeight + padding); // Y-axis
+        ctx.lineTo(chartWidth + padding, chartHeight + padding); // X-axis
+        ctx.stroke();
+
+        // Add labels for each point
+        data.forEach((value, index) => {
+            const x = padding + (index * chartWidth) / (data.length - 1);
+            const y = chartHeight - (value / maxDataValue) * chartHeight;
+
+            ctx.fillText(labels[index], x - 10, chartHeight + padding + 20); // X axis labels (months)
+            ctx.fillText(value, x - 10, y - 10); // Y axis values (sales)
+        });
+    </script>
+
+</body>
+</html>

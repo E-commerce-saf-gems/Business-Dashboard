@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Buyer Details</title>
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./editSalesStyles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Buyer</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="./sales.html">Buyer Summary</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Add Buyer</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editSalesForm">
+                    <h2>New Buyer Details</h2>
+
+                    <div class="form-group">
+                        <label for="date">Name</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="type">Email</label>
+                        <select id="type" name="type">
+                            <option value="Gem Sale">Gem Sale</option>
+                            <option value="Jewelry Sale">Jewelry Sale</option>
+                        </select>
+                    </div>
+    
+                    <!-- Customer Field -->
+                    <div class="form-group">
+                        <label for="customer">Address</label>
+                        <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
+                    </div>
+    
+                    <!-- Amount Field -->
+                    <div class="form-group">
+                        <label for="amount">Contact No</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                    </div>
+                    
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <a href="./buyers.php">
+                                <i class='bx bx-save'></i> Save</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+</body>
+</html>
