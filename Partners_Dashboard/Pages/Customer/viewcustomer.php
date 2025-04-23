@@ -29,8 +29,9 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Customer Details</title>
-    <link rel="stylesheet" href="../../../Components/Admin_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../editCustomerStyles.css">   
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./userStyles.css">   
+    <link rel="stylesheet" href="./editCustomerStyles.css">       
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -178,7 +179,8 @@ if (isset($_GET['id'])) {
             document.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
         </script>
         
-    <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
-    <script src="../../../Admin_Dashboard/script.js"></script>
+        <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+        <script src="../../../Partner_Dashboard/script.js"></script>
+        <script src="../customer.js"></script>
 </body>
 </html>

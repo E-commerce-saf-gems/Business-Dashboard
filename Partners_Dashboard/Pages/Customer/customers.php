@@ -160,15 +160,17 @@ if (!$result) {
                                 echo "<td>" . $row['bid_status'] . "</td>";
                                 echo "<td class='actions'>";
                                 echo "<a href='./viewcustomer.php?id=" . $row['customer_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
-                                if ($row['bid_status'] == 1 ) {
-                                    echo "<a href='#' onclick='confirmDelete(" . $row['customer_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";                                }                                
-                                echo "</td>";
-                                echo "</tr>";
                             }
-                        } else {
-                            echo "<tr><td colspan='9'>No customers in the database.</td></tr>";
                         }
-                        ?>
+                        //         if ($row['bid_status'] == 1 ) {
+                        //             echo "<a href='#' onclick='confirmDelete(" . $row['customer_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";                                }                                
+                        //         echo "</td>";
+                        //         echo "</tr>";
+                        //     }
+                        // } else {
+                        //     echo "<tr><td colspan='9'>No customers in the database.</td></tr>";
+                        // }
+                        // ?>
         
                     </tbody>
                 </table>
