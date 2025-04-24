@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amount = floatval($_POST['amount']);
     $description = htmlspecialchars(trim($_POST['description']));
     $visibility = htmlspecialchars(trim($_POST['visibility']));
+    $availability = htmlspecialchars(trim($_POST['availability']));
     $buyer_id = intval($_POST['buyer_id']);
     $amountSettled = floatval($_POST['amountSettled']);
 

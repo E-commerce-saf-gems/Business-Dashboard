@@ -1,96 +1,138 @@
-document.getElementById("AddStaffForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting automatically
-
-    // Retrieve input values
-    const date = document.getElementById("date").value;
-    const staffId = document.getElementById("staffid").value.trim();
-    const status = document.getElementById("status").value;
-    const phoneNumber = document.getElementById("staff").value.trim();
-
-    // Initialize a flag for form validity and a message for errors
-    let isValid = true;
-    let errorMessage = "";
-
-    // Validate the Date field
-    if (!date) {
-        isValid = false;
-        errorMessage += "Please select a date.\n";
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            const confirmed = confirm("Are you sure you want to delete this user?");
+            
+            if (confirmed) {
+                // Here you would add code to delete the item from the database
+                // For now, just remove the row from the table
+                const row = button.closest("tr");
+                row.remove();
+            }
+        });
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Helper function to set error messages
+    function setError(inputId, errorMessage) {
+        const errorElement = document.getElementById(`${inputId}-error`);
+        if (errorElement) {
+            errorElement.textContent = errorMessage; // Set error message
+        }
     }
 
-    // Validate the Staff ID - should be a positive number
-    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
-        isValid = false;
-        errorMessage += "Please enter a valid Staff ID (positive number).\n";
+    // Helper function to clear error messages
+    function clearError(inputId) {
+        const errorElement = document.getElementById(`${inputId}-error`);
+        if (errorElement) {
+            errorElement.textContent = ""; // Clear error message
+        }
     }
 
-    // Validate the Status selection
-    if (!status) {
-        isValid = false;
-        errorMessage += "Please select a status.\n";
-    }
+    // Validate Name (only letters allowed)
+    document.getElementById("name").addEventListener("input", function () {
+        const value = this.value.trim();
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+            setError("name", "Name must contain only letters.");
+        } else {
+            clearError("name");
+        }
+    });
 
-    // Validate the Phone Number - should be a 10-digit number
-    if (!phoneNumber || !/^\d{10}$/.test(phoneNumber)) {
-        isValid = false;
-        errorMessage += "Please enter a valid 10-digit phone number.\n";
-    }
+    // Password Validation
+    document.getElementById("password").addEventListener("input", function () {
+        const value = this.value.trim();
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    // If all fields are valid, redirect to Staff.html
-    if (isValid) {
-        window.location.href = "./Staff.html";
-    } else {
-        // Show error messages if validation failed
-        alert(errorMessage);
-    }
+        if (!passwordRegex.test(value)) {
+            setError(
+                "password",
+                "Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character."
+            );
+        } else {
+            clearError("password");
+        }
+    });
+
+    // Contact Number Validation (Exactly 10 digits)
+    document.getElementById("contactNo").addEventListener("input", function () {
+        const value = this.value.trim();
+        const contactNoRegex = /^\d{10}$/;
+
+        if (!contactNoRegex.test(value)) {
+            setError("contactNo", "Contact number must be exactly 10 digits.");
+        } else {
+            clearError("contactNo");
+        }
+    });
+
+    // Email Validation
+    document.getElementById("email").addEventListener("input", function () {
+        const value = this.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(value)) {
+            setError("email", "Please enter a valid email address.");
+        } else {
+            clearError("email");
+        }
+    });
+
+    // Form Validation on Submit
+    document.getElementById("AddStaffForm").addEventListener("submit", function (e) {
+        const name = document.getElementById("name").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const contactNo = document.getElementById("contactNo").value.trim();
+
+        let isValid = true;
+
+        // Validate Name
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            setError("name", "Name must contain only letters.");
+            isValid = false;
+        } else {
+            clearError("name");
+        }
+
+        // Validate Password
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            setError(
+                "password",
+                "Password must be at least 8 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character."
+            );
+            isValid = false;
+        } else {
+            clearError("password");
+        }
+
+        // Validate Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError("email", "Please enter a valid email address.");
+            isValid = false;
+        } else {
+            clearError("email");
+        }
+
+        // Validate Contact Number
+        const contactNoRegex = /^\d{10}$/;
+        if (!contactNoRegex.test(contactNo)) {
+            setError("contactNo", "Contact number must be exactly 10 digits.");
+            isValid = false;
+        } else {
+            clearError("contactNo");
+        }
+
+        // Prevent Form Submission if Invalid
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
 });
 
-/*edit customer validation */
-// Select the form element
 
-
-/*edit staff */
-document.getElementById("editStaffForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-
-    // Retrieve values of the fields
-    const date = document.getElementById("date").value;
-    const staffId = document.getElementById("customer").value.trim();
-    const phoneNumber = document.getElementById("staff").value.trim();
-    const type = document.getElementById("type").value;
-
-    // Initialize a flag to check if the form is valid
-    let isValid = true;
-    let errorMessage = "";
-
-    // Date validation
-    if (!date) {
-        isValid = false;
-        errorMessage += "Please enter the date.\n";
-    }
-
-    // Staff ID validation
-    if (!staffId || isNaN(staffId) || staffId.length < 4) {
-        isValid = false;
-        errorMessage += "Please enter a valid Staff ID (at least 4 digits).\n";
-    }
-
-    // Phone number validation
-    if (!/^\d{10}$/.test(phoneNumber)) {
-        isValid = false;
-        errorMessage += "Please enter a valid 10-digit phone number.\n";
-    }
-
-    // Type selection validation
-    if (!type) {
-        isValid = false;
-        errorMessage += "Please select a staff type.\n";
-    }
-
-    // If the form is valid, submit it; otherwise, show the error message
-    if (isValid) {
-        // Redirect to staff.html only if validation is successful
-        window.location.href = "./Staff.html";
-    } else {
-        alert(errorMessage); // Display the error messages
-    }
-});

@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amount = isset($_POST['amount']) ? $_POST['amount'] : null;
     $description = isset($_POST['description']) ? $_POST['description'] : null;
     $visibility = isset($_POST['visibility']) ? $_POST['visibility'] : null;
+    $availability = isset($_POST['availability']) ? $_POST['availability'] : null;
     $buyer_id = isset($_POST['buyer_id']) ? $_POST['buyer_id'] : null;
     $new_amount_settled = isset($_POST['amountSettled']) ? $_POST['amountSettled'] : null;
 

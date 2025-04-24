@@ -194,6 +194,5 @@ if (isset($_GET['id'])) {
     <script src="../../Pages/Inventory/script.js"></script>
     <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
-
   </body>
 </html>

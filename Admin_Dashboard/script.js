@@ -1,3 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    profileIcon.addEventListener("click", function () {
+        profileMenu.classList.toggle("active"); // Toggle the 'active' class
+    });
+
+    // Close the dropdown if clicked outside
+    document.addEventListener("click", function (event) {
+        if (!profileMenu.contains(event.target) && event.target !== profileIcon) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
+
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu li a');
 
 allSideMenu.forEach(item=> {
@@ -100,110 +116,249 @@ const monthlyuserChart = new Chart(
 	config
 );
 
+document.addEventListener("DOMContentLoaded", function () {
+    const searchButton = document.getElementById("searchButton");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+
+    // Handle search button click
+    searchButton.addEventListener("click", function () {
+        const query = searchInput.value.trim().toLowerCase(); // Get the search query
+        searchResults.innerHTML = ""; // Clear previous results
+
+        if (query === "") {
+            searchResults.innerHTML = "<p>Please enter a search term.</p>";
+            return;
+        }
+
+        // Get all text content from the webpage
+        const bodyText = document.body.innerText.toLowerCase();
+
+        // Check if the query exists in the webpage text
+        if (bodyText.includes(query)) {
+            searchResults.innerHTML = `<p>Found: "<span class="highlight">${query}</span>"</p>`;
+            highlightText(query); // Highlight the matching text
+        } else {
+            searchResults.innerHTML = `<p>No results found for "<span class="highlight">${query}</span>".</p>`;
+        }
+    });
+
+    // Function to highlight matching text on the webpage
+    function highlightText(query) {
+        const elements = document.querySelectorAll("body *:not(script):not(style)");
+
+        elements.forEach(element => {
+            if (element.children.length === 0 && element.innerText) {
+                const regex = new RegExp(`(${query})`, "gi");
+                element.innerHTML = element.innerHTML.replace(regex, `<span class="highlight">$1</span>`);
+            }
+        });
+    }
+});
+
 
 // Sample data for users
-const userData = {
-	labels: ["Online", "Offline", "Registered", "Visit"],
-	datasets: [{
-		data: [12, 19, 7, 10], // Sample quantities for each gemstone type
-		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Online color
-			"rgba(75, 192, 192, 0.6)", // Offline color
-			"rgba(54, 162, 235, 0.6)", // Registered color
-			"rgba(153, 102, 255, 0.6)", // Visit color
-			
-		],
-		borderColor: [
-			"rgba(255, 99, 132, 1)",
-			"rgba(75, 192, 192, 1)",
-			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)"
-		],
-		borderWidth: 1
-	}]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch gender-wise data from the backend
+    fetch('getGenderData.php')
+        .then(response => response.json())
+        .then(data => {
+            // Check if the API returned an error
+            if (data.error) {
+                console.error('Error from backend:', data.error);
+                return;
+            }
 
-// Configuration for the gemstone types pie chart
-const userConfig = {
-	type: "pie",
-	data: userData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "right" // Position legend on the right
-			}
-		}
-	}
-};
+            // Extract labels (genders) and data (counts) from the response
+            const labels = data.map(item => item.gender); // e.g., ["Male", "Female", "Other"]
+            const counts = data.map(item => item.count); // e.g., [50, 30, 5]
 
+            // Chart data
+            const genderData = {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)", // Male color
+                        "rgba(75, 192, 192, 0.6)", // Female color
+                        "rgba(153, 102, 255, 0.6)"  // Other color
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(153, 102, 255, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Chart configuration
+            const userConfig = {
+                type: "pie",
+                data: genderData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "right"
+                        },
+                        datalabels: {
+                            color: "#000", // Text color
+                            font: {
+                                size: 14, // Font size
+                                weight: "bold"
+                            },
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage
+                                return `${value} (${percentage}%)`; // Display count and percentage
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels] // Enable the Datalabels plugin
+            };
+
+            // Render the chart in the canvas with id 'userChart'
+            new Chart(document.getElementById("userChart"), userConfig);
+        })
+        .catch(error => console.error('Error fetching gender data:', error));
+
+        fetch('getStaffData.php')
+        .then(response => response.json())
+        .then(data => {
+            // Extract labels (roles) and data (counts) from the response
+            const labels = data.map(item => item.role); // e.g., ["Partners", "Sales Res.", "Accountants", "Admin"]
+            const counts = data.map(item => item.count); // e.g., [3, 2, 1, 1]
+
+            // Update the chart data
+            const staffData = {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)", // Partners color
+                        "rgba(75, 192, 192, 0.6)", // Sales Res color
+                        "rgba(54, 162, 235, 0.6)", // Accountant color
+                        "rgba(153, 102, 255, 0.6)"  // Admin color
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(153, 102, 255, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Configuration for the chart
+            const staffConfig = {
+                type: "pie",
+                data: staffData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "right"
+                        },
+                        datalabels: {
+                            color: "#000", // Text color
+                            font: {
+                                size: 14, // Font size
+                                weight: "bold"
+                            },
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage
+                                return `${percentage}%`; // Display percentage
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels] // Enable the Datalabels plugin
+            };
+
+            // Render the chart
+            new Chart(document.getElementById("staffFlowChart"), staffConfig);
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
+});
 // Render the pie chart in the canvas with id 'gemChart'
 const userChart = new Chart(
 	document.getElementById("userChart"),
 	userConfig
 );
 
-// Sample data for users
-const staffData = {
-	labels: ["Partners", "Sales Res.", "Accountants", "Admin"],
-	datasets: [{
-		data: [3, 2, 1, 1], // Sample quantities for each gemstone type
-		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Partners color
-			"rgba(75, 192, 192, 0.6)", // Sales Res color
-			"rgba(54, 162, 235, 0.6)", // Accountant color
-			"rgba(153, 102, 255, 0.6)", // Admin color
-			
-		],
-		borderColor: [
-			"rgba(255, 99, 132, 1)",
-			"rgba(75, 192, 192, 1)",
-			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)"
-		],
-		borderWidth: 1
-	}]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch staff data from the backend
+    fetch('getStaffData.php')
+        .then(response => response.json())
+        .then(data => {
+            // Extract labels (roles) and data (counts) from the response
+            const labels = data.map(item => item.role); // e.g., ["Partners", "Sales Res.", "Accountants", "Admin"]
+            const counts = data.map(item => item.count); // e.g., [3, 2, 1, 1]
 
-// Configuration for the gemstone types pie chart
-const staffConfig = {
-	type: "pie",
-	data: staffData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "right" // Position legend on the right
-			}
-		}
-	}
-};
+            // Update the chart data
+            const staffData = {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)", // Partners color
+                        "rgba(75, 192, 192, 0.6)", // Sales Res color
+                        "rgba(54, 162, 235, 0.6)", // Accountant color
+                        "rgba(153, 102, 255, 0.6)"  // Admin color
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(153, 102, 255, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            };
 
-// Render the pie chart in the canvas with id 'gemChart'
+            // Configuration for the chart
+            const staffConfig = {
+                type: "pie",
+                data: staffData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "right"
+                        },
+                        datalabels: {
+                            color: "#000", // Text color
+                            font: {
+                                size: 14, // Font size
+                                weight: "bold"
+                            },
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage
+                                return `${percentage}%`; // Display percentage
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels] // Enable the Datalabels plugin
+            };
+
+            // Render the chart
+            new Chart(document.getElementById("staffFlowChart"), staffConfig);
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
+});
+
+// Render the pie chart in the canvas with id 'staffFlowChart'
 const staffChart = new Chart(
-	document.getElementById("staffFlowChart"),
-	staffConfig
+    document.getElementById("staffFlowChart"),
+    staffConfig
 );
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Activate sidebar menu based on current path
-    updateActiveMenu();
-
-    const profileIcon = document.getElementById("profile-icon");
-    const profileMenu = document.querySelector(".profile");
-
-    // Toggle dropdown visibility
-    profileIcon.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent click from bubbling up
-        profileMenu.classList.toggle("active");
-    });
-
-    // Close dropdown if clicking outside
-    document.addEventListener("click", function (e) {
-        if (!profileMenu.contains(e.target)) {
-            profileMenu.classList.remove("active");
-        }
-    });
-});

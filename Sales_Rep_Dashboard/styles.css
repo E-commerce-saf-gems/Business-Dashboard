@@ -462,21 +462,35 @@ body {
 	margin: -40px auto 0;
 }
 
+<<<<<<<< HEAD:Sales_Rep_Dashboard/styles.css
 /* inventory */
 
 /* cashflow */
 .cash-flow-chart {
 	width: 100%; 
 	margin-top: 20px; 
+========
+/* Inventory */
+/* Gem Chart Section */
+.user-chart {
+	margin-top: 20px;
+>>>>>>>> Chethana:styles.css
 	padding: 20px;
 	background: var(--light);
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<<< HEAD:Sales_Rep_Dashboard/styles.css
 .cash-flow-chart:hover {
 	transform: translateY(-3px);	
 	transition: 0.3s ease;
+========
+.user-chart h2 {
+	font-size: 20px;
+	color: var(--dark);
+	margin-bottom: 16px;
+>>>>>>>> Chethana:styles.css
 }
 
 /* Cash Flow Chart Style */

@@ -15,8 +15,31 @@ $ssql = "SELECT
             inventory.visibility,
             inventory.availability
         FROM inventory
-        JOIN buyer ON inventory.buyer_id = buyer.buyer_id
-        ORDER BY inventory.date DESC";
+        JOIN buyer ON inventory.buyer_id = buyer.buyer_id 
+        WHERE 1=1"; // Ensure WHERE clause starts correctly
+
+// Apply filters
+if (isset($_GET['date']) && !empty($_GET['date'])) {
+    $date = $conn->real_escape_string($_GET['date']);
+    $ssql .= " AND DATE(inventory.date) = '$date'"; // Use DATE() to extract the date part from the timestamp
+}
+
+if (isset($_GET['type']) && !empty($_GET['type'])) {
+    $type = $conn->real_escape_string($_GET['type']);
+    $ssql .= " AND inventory.type = '$type'";
+}
+
+if (isset($_GET['shape']) && !empty($_GET['shape'])) {
+    $shape = $conn->real_escape_string($_GET['shape']);
+    $ssql .= " AND inventory.shape = '$shape'";
+}
+
+if (isset($_GET['colour']) && !empty($_GET['colour'])) {
+    $colour = $conn->real_escape_string($_GET['colour']);
+    $ssql .= " AND inventory.colour = '$colour'";
+}
+
+$ssql .= " ORDER BY inventory.date DESC"; // Ensure ORDER BY is added at the end
 
 $result = $conn->query($ssql);
 
@@ -36,6 +59,7 @@ if (!$result) {
       rel="stylesheet"
       href="../../Pages/Inventory/styles.css"
     />
+    <link rel="stylesheet" href="../../Pages/userStyles.css">   
     <link rel="stylesheet" href="../../Pages/Inventory/salesStyles.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -63,26 +87,22 @@ if (!$result) {
           <div class="sales-summary-title">
             <h2>Monthly Inventory Summary</h2>
           </div>
-          <div class="sales-item">
-            <h3>Ruby</h3>
-            <p>8</p>
-          </div>
-          <div class="sales-item">
-            <h3>Emerald</h3>
-            <p>4</p>
-          </div>
-          <div class="sales-item">
-            <h3>Sapphire</h3>
-            <p>5</p>
-          </div>
-          <div class="sales-item">
-            <h3>Amethyst</h3>
-            <p>2</p>
-          </div>
-          <div class="sales-item">
-            <h3>Diamond</h3>
-            <p>15</p>
-          </div>
+          <?php
+        // Query to get the count of each type of gem
+        $typeQuery = "SELECT type, COUNT(*) AS count FROM inventory GROUP BY type";
+        $typeResult = $conn->query($typeQuery);
+
+        if ($typeResult->num_rows > 0) {
+            while ($typeRow = $typeResult->fetch_assoc()) {
+                echo "<div class='sales-item'>";
+                echo "<h3>" . htmlspecialchars($typeRow['type']) . "</h3>";
+                echo "<p>" . htmlspecialchars($typeRow['count']) . "</p>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>No inventory data available.</p>";
+        }
+        ?>
         </div>
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
@@ -92,42 +112,36 @@ if (!$result) {
         <?php endif; ?>
 
         <div class="sales-table-container">
-          <div class="table-filters">
-            <label for="date-filter">Date:</label>
-            <input type="date" id="date-filter" />
-
-            <label for="type-filter">Type:</label>
-            <select id="type-filter">
+        <div class="table-filters">
+        <form method="GET" id="filter-form">
+          <label for="date-filter">Date:</label>
+          <input type="date" id="date-filter" name="date" value="<?= isset($_GET['date']) ? htmlspecialchars($_GET['date']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
+          <label for="type-filter">Type:</label>
+          <select id="type-filter" name="type" onchange="document.getElementById('filter-form').submit();">
               <option value="">All</option>
-              <option value="paid">Ruby</option>
-              <option value="pending">Emerald</option>
-              <option value="pending">Sapphire</option>
-              <option value="pending">Amethyst</option>
-              <option value="pending">Diamond</option>
-            </select>
+              <option value="Ruby" <?= (isset($_GET['type']) && $_GET['type'] == 'Ruby') ? 'selected' : ''; ?>>Ruby</option>
+              <option value="Emerald" <?= (isset($_GET['type']) && $_GET['type'] == 'Emerald') ? 'selected' : ''; ?>>Emerald</option>
+              <option value="Sapphire" <?= (isset($_GET['type']) && $_GET['type'] == 'Sapphire') ? 'selected' : ''; ?>>Sapphire</option>
+              <option value="Amethyst" <?= (isset($_GET['type']) && $_GET['type'] == 'Amethyst') ? 'selected' : ''; ?>>Amethyst</option>
+              <option value="Diamond" <?= (isset($_GET['type']) && $_GET['type'] == 'Diamond') ? 'selected' : ''; ?>>Diamond</option>
+          </select>
+          
 
-            <label for="shape-filter">shape:</label>
-            <select id="shape-filter">
-              <option value="">All</option>
-              <option value="paid">Round</option>
-              <option value="pending">Oval</option>
-              <option value="pending">Princess</option>
-              <option value="pending">Cushion</option>
-              <option value="pending">Emerald</option>
-              <option value="pending">Marquise</option>
-              <option value="pending">Pear</option>
-              <option value="pending">Heart</option>
-            </select>
+        <label for="shape-filter">Shape:</label>
+        <select id="shape-filter" name="shape" onchange="document.getElementById('filter-form').submit();">
+            <option value="">All</option>
+            <option value="Round" <?= (isset($_GET['shape']) && $_GET['shape'] == 'Round') ? 'selected' : ''; ?>>Round</option>
+            <option value="Oval"  <?= (isset($_GET['shape']) && $_GET['shape'] == 'Oval') ? 'selected' : ''; ?>>Oval</option>
+            <option value="Square"  <?= (isset($_GET['shape']) && $_GET['shape'] == 'Square') ? 'selected' : ''; ?>>Square</option>
+            <option value="Rectangle"  <?= (isset($_GET['shape']) && $_GET['shape'] == 'Rectangle') ? 'selected' : ''; ?>>Rectangle</option>
+        </select>
 
-            <label for="customer-filter">color:</label>
-            <input
-              type="text"
-              id="customer-filter"
-              placeholder="Search Color"
-            />
+        <!-- <label for="customer-filter">Color:</label>
+        <input type="text" id="customer-filter" name="colour" placeholder="Search Color" value="<?= isset($_GET['colour']) ? htmlspecialchars($_GET['colour']) : ''; ?>" onchange="document.getElementById('filter-form').submit();"> -->
 
-            <button class="btn-filter">Filter</button>
-          </div>
+        <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
+        </form>
+</div>
 
           <!-- Table -->
           <table class="sales-table">
@@ -147,7 +161,6 @@ if (!$result) {
               </tr>
             </thead>
             <tbody>
-            <tbody>
 
             <?php
               if ($result->num_rows > 0) {
@@ -162,10 +175,12 @@ if (!$result) {
                       echo "<td>" . $row['amount'] . "</td>";
                       echo "<td>" . $row['name'] . "</td>";
                       // echo "<td>" . $row['visibility'] . "</td>";
-                      //form for visibility check
+                      // echo "<td>" . $row['availability'] . "</td>";
+
+                      // form for visibility
                       echo "<td>";
                       echo "<form method='POST' action='./updatevisibility.php'>";
-                      echo "<input type='hidden' name='stone_id' value='" . $row['stone_id'] . "'>";
+                      echo "<input type='hidden' name='stone_id' value='" . htmlspecialchars($row['stone_id']) . "'>";
                       echo "<select name='visibility' onchange='this.form.submit()'>";
                       echo "<option value='show'" . ($row['visibility'] === 'show' ? " selected" : "") . ">show</option>";
                       echo "<option value='hide'" . ($row['visibility'] === 'hide' ? " selected" : "") . ">hide</option>";
@@ -173,16 +188,18 @@ if (!$result) {
                       echo "</form>";
                       echo "</td>";
 
-                      // Form for updating availability
+                      // form for availability
                       echo "<td>";
                       echo "<form method='POST' action='./updateavailable.php'>";
-                      echo "<input type='hidden' name='stone_id' value='" . $row['stone_id'] . "'>";
+                      echo "<input type='hidden' name='stone_id' value='" . htmlspecialchars($row['stone_id']) . "'>";
                       echo "<select name='availability' onchange='this.form.submit()'>";
-                      echo "<option value='available'" . ($row['availability'] === 'available' ? " selected" : "") . ">available</option>";
-                      echo "<option value='not available'" . ($row['availability'] === 'not available' ? " selected" : "") . ">not available</option>";
+                      echo "<option value='available'" . ($row['availability'] === 'Available' ? " selected" : "") . ">available</option>";
+                      echo "<option value='not available'" . ($row['availability'] === 'notAvailable' ? " selected" : "") . ">not available</option>";
+                      echo "<option value='Bids'" . ($row['availability'] === 'Bid' ? " selected" : "") . ">Bids</option>";
                       echo "</select>";
                       echo "</form>";
                       echo "</td>";
+
 
                       // Action buttons
                       echo "<td class='actions'>";
@@ -190,7 +207,7 @@ if (!$result) {
                       
                       if ($row['availability'] == 'available' || $row['availability'] == 'Available') {
                           echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
-                          echo "<a href='#' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                          echo "<a href='./deleteGem.php' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
                       }
 
                       echo "<a href='./viewInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-detail'></i></a>";
@@ -223,7 +240,7 @@ if (!$result) {
     
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
-    <script scr="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
+    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
 
   </body>
 </html>

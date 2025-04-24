@@ -22,33 +22,22 @@ class Dashboard extends HTMLElement {
                     </li>
 
                     <li>
-                        <a href="../../Pages/Staff/Staff.html">
+                        <a href="../../Pages/Staff/Staff.php">
                             <i class='bx bx-clipboard' ></i>
                             <span class="text">Staff</span>
                         </a>
                     </li>
+
                 </ul>
             </section>
 
             <section id="content">
                 <nav>
-                    <i class='bx bx-menu'></i>
-                    <form action="#">
-                        <div class="form-input">
-                            <input type="search" placeholder="Search">
-                            <button type="submit" class="search-btn">
-                                <i class='bx bx-search'></i>
-                            </button>
-                        </div>
-                    </form>
-                    <a href="#" class="notification">
-                        <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
-                    </a>
+                   
                    <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
-                            <li><a href="../../Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
+                            <li><a href="../../../Admin_Dashboard/Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
                             <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>
@@ -59,6 +48,21 @@ class Dashboard extends HTMLElement {
 }
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const profileIcon = document.getElementById("profile-icon");
+    const profileMenu = document.querySelector(".profile");
+
+    profileIcon.addEventListener("click", function () {
+        profileMenu.classList.toggle("active"); // Toggle the 'active' class
+    });
+
+    // Close the dropdown if clicked outside
+    document.addEventListener("click", function (event) {
+        if (!profileMenu.contains(event.target) && event.target !== profileIcon) {
+            profileMenu.classList.remove("active");
+        }
+    });
+});
 
 customElements.define('dashboard-component', Dashboard);
 

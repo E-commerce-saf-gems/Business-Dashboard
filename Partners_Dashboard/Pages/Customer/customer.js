@@ -144,3 +144,16 @@ document.getElementById("editCustomerForm").addEventListener("submit", function 
         alert(errorMessage); // Show validation error messages
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const customerFilter = document.getElementById("customer-filter");
+    const filterForm = document.getElementById("filter-form");
+    let debounceTimer;
+
+    customerFilter.addEventListener("input", function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            filterForm.submit();
+        }, 500); // Delay of 500ms
+    });
+});

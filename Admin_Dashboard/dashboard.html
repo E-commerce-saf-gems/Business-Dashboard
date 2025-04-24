@@ -7,6 +7,7 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <title>Admin Dashboard</title>
 </head>
@@ -31,34 +32,35 @@
             </li>
 
             <li>
-                <a href="../Admin_Dashboard/Pages/Staff/Staff.html">
+                <a href="../Admin_Dashboard/Pages/Staff/Staff.php">
                     <i class='bx bxs-inbox' ></i>
                     <span class="text">Staff</span>
                    
                 </a>
-            </li>         
+            </li>        
         </ul>
     </section>
 
     <section id="content">
         <nav>
             <i class='bx bx-menu'></i>
-            <form action="#">
+            <form id="searchForm">
                 <div class="form-input">
-                    <input type="search" placeholder="Search">
-                    <button type="submit" class="search-btn">
+                    <input type="search" id="searchInput" placeholder="Search">
+                    <button type="button" id="searchButton" class="search-btn">
                         <i class='bx bx-search'></i>
                     </button>
                 </div>
             </form>
-            <a href="#" class="notification">
+            <div id="searchResults"></div>
+            <!-- <a href="#" class="notification">
                 <i class='bx bxs-bell'></i>
                 <span class="num">8</span>
-            </a>
+            </a> -->
             <div class="profile">
                 <i class='bx bx-user' id="profile-icon"></i>
                 <ul class="dropdown-menu">
-                    <li><a href="../pages/Profile/MyDetails.php" class="dropdown-item">Profile</a></li>
+                    <li><a href="./Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
                     <li><a href="../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                 </ul>
             </div>
@@ -77,6 +79,10 @@
 						</li>
 					</ul>
 				</div>
+				<!-- <a href="#" class="btn-download">
+					<i class='bx bxs-download' ></i>
+					<span class="text">Download PDF</span>
+				</a> -->
 			</div>
             <div class="dashboard-container">
                 <div class="shortcuts">
@@ -85,17 +91,18 @@
                         <li>
                             <i class='bx bxs-user-plus'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/Customer/addnewcustomer.html">
-                                <h3>Add New Customer</h3></a>
+                                <a href="../../../Group-Project-ECommerce/pages/RegisterPage/register.html">
+                                    <h3>Add New Customer</h3></a>
                             </span>
                         </li>
 
-
+                        <!-- ../RegisterPage/register.html -->
+                        <!-- C:\xampp\htdocs\Group-Project-ECommerce\pages\RegisterPage\register.html -->
                         <li>
                             <i class='bx bxs-diamond'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/Customer/editcustomer.html">
-                                <h3>Edit Customer</h3></a>
+                                <a href="../Admin_Dashboard/Pages/Customer/customers.php">
+                                <h3>Delete Customer</h3></a>
                             </span>
                         </li>
 
@@ -103,8 +110,8 @@
                         <li>
                             <i class='bx bxs-dollar-circle'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/OnlineUsers/onlineusers.html">
-                                <h3>Show Online Users</h3></a>
+                                <a href="../Admin_Dashboard/Pages/Customer/customers.php">
+                                <h3>View Customers</h3></a>
                             </span>
                         </li>
 
@@ -112,21 +119,20 @@
                         <li>
                             <i class='bx bxs-credit-card'></i>
                             <span class="text">
-                                <a href="../Admin_Dashboard/Pages/Staff/Staff.html">
-                                <h3>View Staff</h3></a>
+                                <a href="../Admin_Dashboard/Pages/Staff/Staff.php">
+                                <h3>View Staff Members</h3></a>
                             </span>
                         </li>
                     </ul>
 
 
                     <div class="user-chart">
-                        <h2>Users</h2>
-                        <canvas id="userChart"></canvas> 
-                        <!-- <a href="../Admin_Dashboard/Pages/Customer/customers.php" class="view-more">View More</a> -->
+                        <h2>No of Users Registered in the System</h2>
+                        <canvas id="userChart" width="400" height="400"></canvas>                        <!-- <a href="../Admin_Dashboard/Pages/Customer/customers.php" class="view-more">View More</a> -->
                     </div>
                     <div class="user-chart">
-                        <h2>Staff</h2>
-                        <canvas id="staffFlowChart"></canvas>
+                        <h2>No of Staff Members</h2>
+                        <canvas id="staffFlowChart" width="900" height="900"></canvas>
                         <!-- <a href="../Admin_Dashboard/Pages/Staff/Staff.html" class="view-more">View More</a> -->
                     </div>
                 </div>
@@ -140,5 +146,6 @@
     <!-- <script src="../admin.js"></script> -->
     <!-- <script src="../Components/Admin_Dashboard_Template/script.js"></script> -->
     <script src="./script.js"></script>
+
 </body>
 </html>

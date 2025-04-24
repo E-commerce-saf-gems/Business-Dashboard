@@ -23,41 +23,54 @@
 				</div>
 			</div>
             <div class="edit-sales-container">
-                <form class="edit-sales-form" id="AddStaffForm">
+                <form class="edit-sales-form" id="AddStaffForm" action="../../../Admin_Dashboard/Pages/Staff/addstaff.php" method="post" enctype="multipart/form-data">
                     <h2>Add Staff Details</h2>
-
-                    <div class="form-group">
+ 
+                    <!-- <div class="form-group">
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date" required>
-                    </div>
+                    </div>  -->
     
-                    <!-- <div class="form-group">
-                        <label for="type">Type</label>
-                        <select id="type" name="type">
-                            <option value="Gem Sale">Gem Sale</option>
-                            <option value="Jewelry Sale">Jewelry Sale</option>
-                        </select>
-                    </div> -->
-    
-                    <!-- Customer Field -->
                     <div class="form-group">
-                        <label for="staffid">Staff ID</label>
-                        <input type="number" id="staffid" name="staffid" placeholder="Staff ID" required>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                        <span class="error-message" id="username-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <span class="error-message" id="password-error"></span>
                     </div>
     
                     <!-- Status Field -->
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status">
+                        <label for="role">Role</label>
+                        <select id="role" name="role">
                             <option value="Partner">Partner</option>
-                            <option value="Sales">Sales Res.</option>
-                            <option value="Acc">Accountant</option>
+                            <option value="SalesRep">SalesRep</option>
+                            <option value="Accountant">Accountant</option>
                         </select>
+                    </div>
+                    <span class="error-message" id="role-error"></span>
+                    
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
                     </div>
                     
                     <div>
-                        <label for="staff">Phone Number</label>
-                        <input type="number" id="staff" name="staff" placeholder="Phone Number" required>
+                        <label for="contactNo">Phone Number</label>
+                        <input type="number" id="contactNo" name="contactNo" placeholder="Phone Number" required>
+                        <span class="error-message" id="contactNo-error"></span>
                     </div>
                     <!-- Save Button -->
                     <div class="form-actions">
@@ -74,6 +87,7 @@
 
     <script src="../../../Components/Admin_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
+    <script src="./staff.js"></script>
 
     
 </body>
