@@ -1,0 +1,4 @@
+# Ignore Composer dependencies
+/uploads
+/vendor/
+/composer.lock
