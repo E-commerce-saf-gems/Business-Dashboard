@@ -10,8 +10,8 @@ $currentDateTime = date('Y-m-d H:i:s');
 $biddingStoneId = $_GET['id']; 
 $biddingStoneQuery = "
     SELECT bs.*, 
-           i.image,  
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid,
+           i.image, i.availability , 
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') AS highestBid,
            (SELECT c.firstName FROM bid b 
             JOIN customer c ON b.customer_id = c.customer_id 
             WHERE b.biddingStone_id = bs.biddingStone_id and b.validity = 'valid'
@@ -60,6 +60,15 @@ $isHighestBidInvalid = isset($bids[0]) && $bids[0]['validity'] === 'invalid';
 <body>
   <dashboard-component></dashboard-component>
 
+  <?php if($biddingStoneResult-> num_rows == 0):?>
+  <section id="content">
+    <main>
+      <h2>This Stone Is Currently Not Completed. Check Current Live Bids</h2>
+    </main>
+  </section>
+  <?php endif ?>
+
+  <?php if($biddingStoneResult-> num_rows >0):?>
   <section id="content">
     <main>
       <div class="bid-details-container">
@@ -93,17 +102,17 @@ $isHighestBidInvalid = isset($bids[0]) && $bids[0]['validity'] === 'invalid';
               </div>
               <div><strong>No. of Bidders:</strong> <span class="info-value"><?= $biddingStone['uniqueBidders'] ?></span></div>
               <div><strong>Final Price:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
-              <?php if ($biddingStone['reBidCount']==2): ?>
+              <?php if ($biddingStone['reBidCount']>=2): ?>
                 <div class="reopen-section">
                   <a href="deleteBid.php?id=<?= $biddingStoneId ?>">
                     <button class="bid-now-button">Remove Bid</button>
                   </a>
                 </div>
               <?php else:  ?> 
-                <?php if ($isHighestBidInvalid || empty($bids) || ($biddingStone['reBidCount']==2)) : ?>
+                <?php if (($isHighestBidInvalid || empty($bids))  && ($biddingStone['availability'] === 'Bid')) : ?>
                   <div class="reopen-section">
                     <a href="editCompletedBid.php?id=<?= $biddingStoneId ?>">
-                      <button class="bid-now-button">Reopen Bid</button>
+                      <button class="bid-now-button">Reopen Bid</button> 
                     </a>
                   </div>
                 <?php endif; ?>
@@ -163,7 +172,10 @@ $isHighestBidInvalid = isset($bids[0]) && $bids[0]['validity'] === 'invalid';
 
       </div>
     </main>
-  </section>
+  </section>   
+  <?php endif ?>
+
+
 
   <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
   <script src="./bids.js"></script>

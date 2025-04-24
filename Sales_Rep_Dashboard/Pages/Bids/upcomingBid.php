@@ -48,7 +48,16 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
 <body>
   <dashboard-component></dashboard-component>
 
+  <?php if($biddingStoneResult->num_rows ==0):?>
   <section id="content">
+    <main>
+      <h2>This Stone Is Either Live Or Ended. Check Live Or Completed Bids</h2>
+    </main>
+  </section>
+  <?php endif?>
+
+  <?php if($biddingStoneResult->num_rows > 0): ?>
+    <section id="content">
     <main>
       <div class="bid-details-container">
         <div class="bid-details-box">
@@ -93,6 +102,8 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
       </div>
     </main>
   </section>
+  <?php endif?>
+
 
   <script>
     const countdownEl = document.getElementById("countdown");

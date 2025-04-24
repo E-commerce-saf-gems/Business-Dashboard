@@ -48,7 +48,7 @@ if (!$bid) {
         <main>
             <div class="edit-sales-container">
                 <?php if ($bid): ?>
-                    <form class="edit-sales-form" id="reopenBidForm" action="updateBid.php" method="post">
+                    <form class="edit-sales-form" id="reopenBidForm" action="updateCompletedBid.php" method="post">
                         <h2>Reopen Bid for Stone #<?= $biddingStoneId ?></h2><br>
 
                         <!-- Hidden field for bidding stone ID -->

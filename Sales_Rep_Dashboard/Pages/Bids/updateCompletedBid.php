@@ -7,12 +7,13 @@ if (isset($_POST['biddingStone_id'], $_POST['finishDate'])) {
     $finishDate = $_POST['finishDate'];
 
     // Update the finish date for the bidding stone
-    $updateQuery = "UPDATE biddingstone SET finishDate = ? WHERE biddingStone_id = ?";
+    $updateQuery = "UPDATE biddingstone SET finishDate = ? , reBidCount= reBidCount+1 WHERE biddingStone_id = ?";
     $stmt = $conn->prepare($updateQuery);
     $stmt->bind_param("si", $finishDate, $biddingStoneId);
 
     if ($stmt->execute()) {
-        echo "Bidding stone's finish date has been updated successfully.";
+        header("Location: ./activeBids.php?id=$biddingStoneId") ;
+        exit;
     } else {
         echo "Error updating finish date: " . $stmt->error;
     }

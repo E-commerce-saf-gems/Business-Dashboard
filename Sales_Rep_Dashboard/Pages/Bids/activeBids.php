@@ -11,7 +11,7 @@ $biddingStoneId = $_GET['id'];
 $biddingStoneQuery = "
     SELECT bs.*, 
            i.image,  
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid,
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') AS highestBid,
            (SELECT COUNT(DISTINCT customer_id) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS uniqueBidders
     FROM biddingstone bs
     JOIN inventory i ON bs.stone_id = i.stone_id  
@@ -22,7 +22,7 @@ $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
 $bidsQuery = "
-    SELECT b.bid_id, b.amount, b.time, c.firstName AS bidderName, (SELECT COUNT(*) FROM bid WHERE biddingStone_id = $biddingStoneId) AS totalNoOfBids
+    SELECT b.bid_id,b.validity, b.amount, b.time, c.firstName AS bidderName, (SELECT COUNT(*) FROM bid WHERE biddingStone_id = $biddingStoneId) AS totalNoOfBids
     FROM bid b
     INNER JOIN customer c ON b.customer_id = c.customer_id
     WHERE b.biddingStone_id = $biddingStoneId
@@ -50,6 +50,15 @@ while ($row = $bidsResult->fetch_assoc()) {
 <body>
   <dashboard-component></dashboard-component>
 
+  <?php if($biddingStoneResult->num_rows ==0):?>
+  <section id="content">
+    <main>
+      <h2>This Stone Is Currently Not Active. Check Upcoming Or Completed Bids</h2>
+    </main>
+  </section>
+  <?php endif?>
+
+  <?php if($biddingStoneResult->num_rows >0):?>
   <section id="content">
     <main>
       <div class="bid-details-container">
@@ -105,6 +114,7 @@ while ($row = $bidsResult->fetch_assoc()) {
                 <th>Time</th>
                 <th>Value</th>
                 <th>Bidder Name</th>
+                <th>Validity</th>
               </tr>
             </thead>
             <tbody>
@@ -127,6 +137,17 @@ while ($row = $bidsResult->fetch_assoc()) {
                   <?php endif; ?>
                 </td>
                 <td><?= $current['bidderName'] ?></td>
+                <td>
+                  <?php if($current['validity'] == 'invalid'): ?> 
+                    <span class="bid-result loss">
+                      <?= $current['validity'] ?>
+                    </span>
+                  <?php else: ?>
+                    <span class="bid-result win">
+                      <?= $current['validity'] ?>
+                    </span>
+                  <?php endif; ?>
+              </td>
               </tr>
               <?php endfor; ?>
             </tbody>
@@ -135,6 +156,7 @@ while ($row = $bidsResult->fetch_assoc()) {
       </div>
     </main>
   </section>
+  <?php endif?>
 
   <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
   <script src="./bids.js"></script>

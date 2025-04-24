@@ -10,7 +10,7 @@ $currentDateTime = date('Y-m-d H:i:s');
 $liveBidsQuery = "
     SELECT bs.*, 
            i.image,
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') AS highestBid
     FROM biddingstone bs
     JOIN inventory i ON bs.stone_id = i.stone_id
     WHERE bs.startDate <= '$currentDateTime' 
@@ -230,7 +230,7 @@ setInterval(updateCountdowns, 1000);
                         <td>#<?= $row['biddingStone_id'] ?></td>
                         <td><?= date('M d, Y H:i', strtotime($startDate)) ?></td>
                         <td>
-                            <span class="bid-result pending"><?= number_format($startingBid) ?></span>
+                            <span class="bid-result pending"><?= number_format($row['startingBid']) ?></span>
                         </td>
                         <td>
                             <span class="bid-result win countdown" data-start="<?= $row['startDate'] ?>"></span>
