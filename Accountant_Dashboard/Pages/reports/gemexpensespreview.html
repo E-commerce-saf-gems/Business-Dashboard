@@ -156,8 +156,7 @@
         return;
       }
 
-      const expenses = data.expenses || {};
-      const totalExpenses = Object.values(expenses).reduce((acc, val) => acc + (parseFloat(val) || 0), 0);
+      const { gem, totals, totalCost } = data;
 
       reportTemplate.innerHTML = `
         <div class="report-container" id="reportContent">
@@ -168,22 +167,22 @@
           </div>
 
           <div class="report-meta">
-              <p><strong>Gem ID:</strong> ${data.gemDetails.gem_id}</p>
-              <p><strong>Type:</strong> ${data.gemDetails.type}</p>
-              <p><strong>Availability:</strong> ${data.gemDetails.availability}</p>
-              <p><strong>Visibility:</strong> ${data.gemDetails.visibility}</p>
-              
-              <p><em>All values in Sri Lankan Rupees (Rs.)</em></p>
+              <p><strong>Prepared by:</strong> Accountant</p>
+              <p><strong>Gem ID:</strong> ${gem.stone_id}</p>
+              <p><strong>Type:</strong> ${gem.type}</p>
+              <p><strong>Availability:</strong> ${gem.availability}</p>
+              <p><strong>Visibility:</strong> ${gem.visibility}</p>
+              <p><em>All expenses in Sri Lankan Rupees (Rs.)</em></p>
           </div>
 
           <table class="report-table">
             <tr class="section-header"><th>Expense Type</th><th>Amount (Rs.)</th></tr>
-            <tr><td>Cutting & Polishing</td><td>Rs. ${(expenses.cuttingPolishing || 0).toFixed(2)}</td></tr>
-            <tr><td>Certification Fees</td><td>Rs. ${(expenses.certificationFees || 0).toFixed(2)}</td></tr>
-            <tr><td>Marketing</td><td>Rs. ${(expenses.marketing || 0).toFixed(2)}</td></tr>
-            <tr><td>Logistics</td><td>Rs. ${(expenses.logistics || 0).toFixed(2)}</td></tr>
-            <tr><td>Other Expenses</td><td>Rs. ${(expenses.otherExpenses || 0).toFixed(2)}</td></tr>
-            <tr class="section-total"><td>Total Operational Cost</td><td>Rs. ${totalExpenses.toFixed(2)}</td></tr>
+            <tr><td>Cutting and Polishing</td><td>Rs. ${totals["Cutting and Polishing"].toFixed(2)}</td></tr>
+            <tr><td>Certifications</td><td>Rs. ${totals["Certifications"].toFixed(2)}</td></tr>
+            <tr><td>Marketing</td><td>Rs. ${totals["Marketing"].toFixed(2)}</td></tr>
+            <tr><td>Logistics</td><td>Rs. ${totals["Logistics"].toFixed(2)}</td></tr>
+            <tr><td>Other</td><td>Rs. ${totals["Other"].toFixed(2)}</td></tr>
+            <tr class="section-total"><td>Total Operational Cost</td><td>Rs. ${totalCost.toFixed(2)}</td></tr>
           </table>
 
           <div class="signature-block">
@@ -192,7 +191,7 @@
           </div>
 
           <div class="action-buttons">
-            <button class="back-btn" onclick="window.location.href='gemexpenses.html'">← Back to Form</button>
+            <button class="back-btn" onclick="window.location.href='gemexpensesreport.html'">← Back to Form</button>
             <button class="print-btn" onclick="window.print()">🖨️ Print</button>
             <button class="pdf-btn" onclick="downloadPDF()">⬇️ Download PDF</button>
           </div>
@@ -207,6 +206,3 @@
 
 </body>
 </html>
-
-
-
