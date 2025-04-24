@@ -29,6 +29,15 @@
             <div class="edit-sales-container">
                 <form class="edit-sales-form" id="editsalesform"action="addExpenses.php" method="POST">
                     <h2>New Expense Details</h2><br>
+
+                    <div class="form-group">
+                        <label for="stone_id">Select Gem</label>
+                        <select id="stone_id" name="stone_id" required>
+                            <option value="" selected disabled>Loading gems...</option>
+                        </select>
+                    </div>
+                    
+
                     <div class="form-group">
                         <label for="type">Category</label>
                         <select id="type" name="type" required>
@@ -70,5 +79,7 @@
     </section>
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./expenses.js" defer></script>
+
 </body>
 </html>

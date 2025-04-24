@@ -6,7 +6,7 @@ $dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
 $categoryFilter = isset($_GET['type']) ? $_GET['type'] : '';
 
 $sql = "SELECT * 
-        FROM expenses";
+        FROM expenses  WHERE 1";
 
 // Apply the date filter for transactions
 if ($dateFilter) {
@@ -18,7 +18,7 @@ if ($categoryFilter) {
     $sql .= " AND type LIKE '%" . $conn->real_escape_string($categoryFilter) . "%'";
 }
 
-$sql .= " ORDER BY date DESC";  // Order by the date column
+$sql .= " ORDER BY DATE(date) DESC";  // Order by the date column
 
 $result = $conn->query($sql);
 ?>
@@ -32,7 +32,8 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expenses Management</title>
     <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../transactions/styles.css">   
+    <link rel="stylesheet" href="../transactions/styles.css"> 
+    <link rel="stylesheet" href="./expenses.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     <style>
@@ -95,24 +96,36 @@ $result = $conn->query($sql);
 					</ul>
 				</div>
 			</div>
-            <div class="sales-summary-box">
-                
-                <div class="sales-summary-title">
-                    <h2>Expenses Preview</h2>
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
                 </div>
-                <div class="sales-item">
-                    <h3>Weekly Total Expenses</h3>
-                    <p>Rs.543</p>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Expenses</h4>
+                        <p id="totalExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Paid Expenses</h4>
+                        <p id="totalPaidExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Pending Expenses</h4>
+                        <p id="totalPendingExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Outstanding Expenses Type</h4>
+                        <p id="maxExpenseCategory">None</p>
+                    </div>
                 </div>
-                <div class="sales-item">
-                    <h3>Monthly Total Expenses</h3>
-                    <p>Rs.2132</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Top Expense Catagory</h3>
-                    <p>Marketing</p>
-                </div>
-            </div>
+            </section> 
+
+            
 
             <div class="head-title">
                 <div class="left">
@@ -181,6 +194,7 @@ $result = $conn->query($sql);
                     <thead>
                         <tr>
                             <th>Expense ID</th>
+                            <th>Stone ID</th>
                             <th>Date</th>
                             <th>Category</th>
                             <th>Description</th>
@@ -198,6 +212,7 @@ $result = $conn->query($sql);
                                
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['expense_id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['stone_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['date']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['type']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['description']) . "</td>";
@@ -266,6 +281,9 @@ $result = $conn->query($sql);
 
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+        <!-- At the bottom of body -->
+    <script src="expenses.js"></script>
+
 </body>
 </html>
 

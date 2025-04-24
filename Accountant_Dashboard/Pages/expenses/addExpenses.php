@@ -7,20 +7,18 @@ if (empty($_POST)) {
     die("Error: No data received.");
 }
 
-// Debugging: Print received data
-var_dump($_POST);
+// Retrieve POST data safely
+$stone_id   = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
+$type       = isset($_POST['type']) ? $_POST['type'] : null;
+$description = isset($_POST['description']) ? $_POST['description'] : null;
+$amount     = isset($_POST['amount']) ? $_POST['amount'] : null;
+$status     = isset($_POST['status']) ? $_POST['status'] : null;
 
-// Retrieve POST data with correct field mapping
-$type = !empty($_POST['type']) ? $_POST['type'] : null;  // 'type' is the expense category
-$description = !empty($_POST['description']) ? $_POST['description'] : null;  // 'description' describes the expense
-$amount = !empty($_POST['amount']) ? $_POST['amount'] : null;
-$status = !empty($_POST['status']) ? $_POST['status'] : null;
+// Debugging (Optional): Print values before insert
+// echo "Stone ID: $stone_id, Type: $type, Description: $description, Amount: $amount, Status: $status<br>";
 
-// Debugging: Print values before inserting
-echo "Type: $type, Description: $description, Amount: $amount, Status: $status<br>";
-
-// Check if any required field is missing
-if (!$type || !$description || !$amount || !$status) {
+// Validate required fields
+if (!$stone_id || !$type || !$description || !$amount || !$status) {
     die("Error: Missing required fields.");
 }
 
@@ -28,17 +26,15 @@ if (!$type || !$description || !$amount || !$status) {
 $conn->begin_transaction();
 
 try {
-    // Insert the expense into the expenses table
-    $stmt = $conn->prepare("INSERT INTO expenses (type, description, amount, status) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssds", $type, $description, $amount, $status);
+    // Insert into expenses table including stone_id
+    $stmt = $conn->prepare("INSERT INTO expenses (stone_id, type, description, amount, status) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("issds", $stone_id, $type, $description, $amount, $status);
 
     if (!$stmt->execute()) {
         throw new Exception("Error inserting expense: " . $stmt->error);
     }
 
     $stmt->close();
-
-    // Commit transaction
     $conn->commit();
 
     // Redirect on success
@@ -46,14 +42,11 @@ try {
     exit();
 
 } catch (Exception $e) {
-    // Rollback transaction on error
     $conn->rollback();
-
-    // Log the error (optional) and redirect with an error
     error_log("Transaction failed: " . $e->getMessage());
     header("Location: ../expenses/expenseType.php?ExpenseAdded=2");
     exit();
 }
-
 ?>
+
 
