@@ -20,11 +20,18 @@ li {
 
 	--light: #F9F9F9;
     --white: #FFFFFF ;
+	--blue: #3C91E6;
     --black: #000000 ;
     --teal: #46939d ;
+	--light-blue: #CFE8FF;
 	--grey: #eee;
 	--black-grey: #AAAAAA;
 	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
 }
 
 body {
@@ -37,7 +44,7 @@ body {
     position: fixed ;
     top: 0 ;
     left: 0 ;
-    width: 280px ;
+    width: 250px ;
     height: 100% ;
     background: var(--light) ;
     z-index: 1000 ;
@@ -235,7 +242,50 @@ body {
 
 /*nav-bar*/
 
-/* main */
+/* Profile dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.profile .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 10;
+}
+
+/* Dropdown menu links */
+.profile .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.profile .dropdown-menu a:hover {
+    background-color: var(--grey);
+    color: var(--teal);
+}
+
+/* Show dropdown when profile icon is clicked */
+.profile.active .dropdown-menu {
+    display: block;
+}
+
+
+
+/* main */     
 #content main {
 	width: 100%;
 	padding: 36px 24px;
@@ -320,7 +370,7 @@ body {
 
 /* main */
 
-/* common */
+/* common */ 
 .dashboard-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -331,7 +381,7 @@ body {
 	align-items: flex-start;
 }
 
-/* .view-more */
+/* .view-more */ 
 .view-more {
     position: absolute;
 	top: 20px; 
@@ -347,14 +397,14 @@ body {
     color: var(--dark-teal); 
 }
 
-.gem-chart, .sales-summary, .cash-flow-chart {
+.gem-chart, .sales-summary ,.cash-flow-chart{
 	position: relative; 
 }
 /* .view-more */
 /* common */
 
 
-/* shortcuts */
+/* shortcuts */  
 .shortcuts {
 	flex: 1 ;
 	width: 50%;
@@ -438,10 +488,11 @@ body {
 	width: 100%;
 	height: 30%; 
 }
-
+*/
 
 /* inventory */
-.gem-chart {
+
+.gem-chart ,.summary-card{
 	width: 50%;
 	height: 250px; 
 	margin-top: 20px;
@@ -462,41 +513,49 @@ body {
 	margin: -40px auto 0;
 }
 
-<<<<<<<< HEAD:Sales_Rep_Dashboard/styles.css
 /* inventory */
+
+
+.pending-meetings-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 15px;
+  }
+  
+  .pending-meetings-table th,
+  .pending-meetings-table td {
+	padding: 8px 10px;
+	border-bottom: 1px solid #eaeaea;
+	text-align: left;
+  }
+  
+  .pending-meetings-table th {
+	font-weight: bold;
+	background-color: #f9f9f9;
+  }
+
 
 /* cashflow */
 .cash-flow-chart {
 	width: 100%; 
 	margin-top: 20px; 
-========
-/* Inventory */
-/* Gem Chart Section */
-.user-chart {
-	margin-top: 20px;
->>>>>>>> Chethana:styles.css
 	padding: 20px;
 	background: var(--light);
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-<<<<<<<< HEAD:Sales_Rep_Dashboard/styles.css
 .cash-flow-chart:hover {
 	transform: translateY(-3px);	
 	transition: 0.3s ease;
-========
-.user-chart h2 {
-	font-size: 20px;
-	color: var(--dark);
-	margin-bottom: 16px;
->>>>>>>> Chethana:styles.css
 }
 
 /* Cash Flow Chart Style */
 #cashFlowChart {
 	width: 100%;
 	height: 200px;
+
+
 }
 /* cashflow */
 

@@ -13,6 +13,7 @@ $salesRep_id = $_SESSION['user_id'];
 $sql_available_times = "SELECT date, time, availability 
                         FROM availabletimes 
                         WHERE salesRep_id = ? 
+                        AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
                         ORDER BY date, time";
 $stmt = $conn->prepare($sql_available_times);
 $stmt->bind_param("i", $salesRep_id);
@@ -85,36 +86,14 @@ $jsonData = json_encode($availableTimes);
         </div>
 
         <div class="edit-availability-container">
-    <h3>My Calendar</h3>
-
-    <!-- Legend Section -->
-    <div class="legend">
-        <div class="legend-item">
-            <div class="status-indicator available"></div>
-            <span>Available</span>
+            <h3>Available Times</h3>
+            <div class="navigation-buttons">
+                <button id="prevBtn" class="btn-nav" disabled>&laquo; Previous</button>
+                <button id="nextBtn" class="btn-nav">Next &raquo;</button>
+            </div>
+            <div class="day-grid" id="dayGrid">
+            </div>
         </div>
-        <div class="legend-item">
-            <div class="status-indicator reserved"></div>
-            <span>Reserved</span>
-        </div>
-        <div class="legend-item">
-            <div class="status-indicator booked"></div>
-            <span>Booked</span>
-        </div>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="navigation-buttons">
-        <button id="prevBtn" class="btn-nav" disabled>&laquo; Previous</button>
-        <button id="nextBtn" class="btn-nav">Next &raquo;</button>
-    </div>
-
-    <!-- Calendar Grid -->
-    <div class="day-grid" id="dayGrid">
-        <!-- Day boxes go here -->
-    </div>
-</div>
-
         
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
@@ -303,6 +282,40 @@ echo "</td>";
 
     renderDays();
 </script>
+
+<script>
+    // filtering data
+document.querySelector(".btn-filter").addEventListener("click", () => {
+    const dateFilter = document.getElementById("date-filter").value;
+    const timeFilter = document.getElementById("time-filter").value;
+    const nameFilter = document.getElementById("customer-filter").value.toLowerCase();
+
+    const rows = document.querySelectorAll(".sales-table tbody tr");
+
+    rows.forEach(row => {
+        const date = row.children[2].textContent.trim();   // Date column
+        const time = row.children[3].textContent.trim();   // Time column
+        const name = row.children[4].textContent.toLowerCase().trim(); // Name column
+
+        let isVisible = true;
+
+        if (dateFilter && date !== dateFilter) {
+            isVisible = false;
+        }
+
+        if (timeFilter && time !== timeFilter) {
+            isVisible = false;
+        }
+
+        if (nameFilter && !name.includes(nameFilter)) {
+            isVisible = false;
+        }
+
+        row.style.display = isVisible ? "" : "none";
+    });
+});
+</script>
+
 <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 <script src="./meeting.js"></script>
 </body>

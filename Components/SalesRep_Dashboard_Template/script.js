@@ -3,11 +3,11 @@ class Dashboard extends HTMLElement {
         this.innerHTML = `
             <section id="sidebar">
                 <a href="#" class="logo">
-                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS">
+                    <img src="../../../images/logo.png" width="90" height="90" alt="SAF GEMS" />
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="../../dashboard.html">
+                        <a href="../../dashboard.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
@@ -32,7 +32,13 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="../../Pages/Customer/customers.php">
+                        <a href="../../Pages/Orders/orders.php">
+                            <i class='bx bxs-inbox'></i>
+                            <span class="text">Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../Pages/Customer/customers.php"">
                             <i class='bx bxs-user-detail'></i>
                             <span class="text">Customers</span>
                         </a>
@@ -49,29 +55,36 @@ class Dashboard extends HTMLElement {
                             <span class="text">Requests</span>
                         </a>
                     </li>
+                    <li>
+          <a href="../../Pages/Inquries/inquries.php">
+            <i class="bx bxs-phone-call"></i>
+            <span class="text">Inquries</span>
+          </a>
+        </li>
                 </ul>
             </section>
 
             <section id="content">
-                <nav>
-                    <i class='bx bx-menu'></i>
-                    <a href="#" class="nav-link">Categories</a>
-                    <form action="#">
-                        <div class="form-input">
-                            <input type="search" placeholder="Search">
-                            <button type="submit" class="search-btn">
-                                <i class='bx bx-search'></i>
-                            </button>
-                        </div>
-                    </form>
-                    <a href="#" class="notification">
-                        <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
-                    </a>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                    </a>
-                </nav>
+        <nav>
+        <i class="bx bx-menu"></i>
+        
+        <form action="#">
+          <div class="form-input">
+          </div>
+        </form>
+        
+ <!-- profile Dropdown -->
+ 
+
+            <div class="profile">
+                <i class='bx bx-user' id="profile-icon"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="../../Sales_Rep_Dashboard/Pages/Profile" class="dropdown-item">Profile</a></li>
+                    <li><a href="../../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                </ul>
+            </div>
+
+      </nav>
             </section>
         `;
     }
@@ -144,3 +157,36 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+
+
+const profileIcon = document.getElementById("profile-icon");
+            const profileMenu = document.querySelector(".profile");
+
+            // Toggle dropdown visibility
+            profileIcon.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent click from bubbling up
+                profileMenu.classList.toggle("active");
+            });
+
+            // Close dropdown if clicking outside
+            document.addEventListener("click", function (e) {
+                if (!profileMenu.contains(e.target)) {
+                    profileMenu.classList.remove("active");
+                }
+            });
+            document.querySelector('.notification').addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                const dropdown = document.querySelector('.notification-dropdown');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicking outside
+            document.addEventListener('click', function (e) {
+                const notification = document.querySelector('.notification');
+                const dropdown = document.querySelector('.notification-dropdown');
+                if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            
