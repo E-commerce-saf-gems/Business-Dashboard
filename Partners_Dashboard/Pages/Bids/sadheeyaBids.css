@@ -1,0 +1,232 @@
+.bid-details-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 50px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.bid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.bid-header .bid-title h2 {
+    color: #449b9b;
+    margin: 0;
+    font-weight: bold;
+}
+
+.upcoming-header {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.bid-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bid-status .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.dot-active {
+    background-color: red;
+    animation: glowPulse 1.5s infinite ease-in-out;
+}
+
+.dot-completed {
+    background-color: green;
+}
+
+.dot-upcoming{
+    background-color: orange;
+}
+
+@keyframes glowPulse {
+    0% {
+      box-shadow: 0 0 5px red;
+    }
+    50% {
+      box-shadow: 0 0 15px red, 0 0 25px red;
+    }
+    100% {
+      box-shadow: 0 0 5px red;
+    }
+}
+  
+
+.bid-status .live-text-active {
+    color: red;
+    font-weight: bold;
+}
+
+.bid-status .live-text-completed {
+    color: green;
+    font-weight: bold;
+}
+
+.bid-status .live-text-upcoming {
+    color: orange;
+    font-weight: bold;
+}
+
+.bid-info-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.bid-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.main-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 8px; /* optional: to make it look nicer */
+}
+
+
+.bid-info {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bid-info div {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    align-items: center;
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 19px;
+}
+
+.bid-cycle-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 100%;
+    margin: auto;
+}
+
+.bids-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+  
+  .bids-table th {
+    padding: 16px 14px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  .bids-table tbody tr {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .bids-table tbody td {
+    padding: 16px 14px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .bid-result {
+    padding: 2px 6px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .bid-result-div{
+    display: flex;
+    justify-content: center;
+  }
+  
+
+    .bid-result.win {
+        background-color: #e8f5e9;  /* Light green background */
+        color: #2e7d32;  /* Dark green text */
+    }
+
+    .bid-result.loss {
+        background-color: #ffebee;  /* Light red background */
+        color: #c62828;  /* Dark red text */
+    }
+
+    .bid-result.pending {
+        background-color: #fff5eb;  /* Light red background */
+        color: #c66a28;  /* Dark red text */
+    }
+
+    .bid-result.none {
+        background-color: #ebf7ff;  /* Light red background */
+        color: #2845c6;  /* Dark red text */
+    }
+    .bid-result-difference {
+        padding: 1px 4px;
+        font-size: 14px;
+        border-radius: 2px;
+        display: inline-block;
+      }
+    
+      .bid-result-difference.win {
+        color: #2e7d32;  /* Dark green text */
+    }
+    
+    .bid-result-difference.loss {
+        color: #c62828;  /* Dark red text */
+    }
+
+
+    .bid-now-button {
+        display: inline-block;
+        padding: 6px 14px;
+        background-color: #449b9b;
+        color: white ;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      a.bid-now-button {
+        text-decoration: none;
+        color: #ffffff;
+      }
+      
+      .bid-now-button:hover {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+    .bid-now-button .bid-upcoming {
+        margin-right: auto;
+    }
