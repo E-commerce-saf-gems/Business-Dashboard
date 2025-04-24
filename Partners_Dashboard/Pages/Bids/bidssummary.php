@@ -53,7 +53,7 @@ $completedResult = $conn->query($completedQuery);
 <head>
     <meta charset="UTF-8">
     <title>Accountant Bids</title>
-    <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./bids.css">
     <link rel="stylesheet" href="../../styles.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -204,7 +204,6 @@ setInterval(updateCountdowns, 1000);
 <div class="bids-box">
     
         <h3 class="upcoming-text"><span class="dot orange"></span>Upcoming Bids</h3>
-        <a href="./addBiddingStone.html" class="bid-now-button bid-upcoming">+ Add New</a>
 
     <div class="bids-table-wrapper">
         <table class="bids-table">
@@ -279,7 +278,7 @@ setInterval(updateCountdowns, 1000);
 
 
 
-<script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+<script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
 <script src="bids.js"></script>
 </body>
 </html>

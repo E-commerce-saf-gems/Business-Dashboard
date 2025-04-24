@@ -100,21 +100,6 @@ $isHighestBidInvalid = isset($bids[0]) && $bids[0]['validity'] === 'invalid';
               </div>
               <div><strong>No. of Bidders:</strong> <span class="info-value"><?= $biddingStone['uniqueBidders'] ?></span></div>
               <div><strong>Final Price:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
-              <?php if ($biddingStone['reBidCount']>=2): ?>
-                <div class="reopen-section">
-                  <a href="deleteBid.php?id=<?= $biddingStoneId ?>">
-                    <button class="bid-now-button">Remove Bid</button>
-                  </a>
-                </div>
-              <?php else:  ?> 
-                <?php if (($isHighestBidInvalid || empty($bids))  && ($biddingStone['availability'] === 'Bid')) : ?>
-                  <div class="reopen-section">
-                    <a href="editCompletedBid.php?id=<?= $biddingStoneId ?>">
-                      <button class="bid-now-button">Reopen Bid</button> 
-                    </a>
-                  </div>
-                <?php endif; ?>
-              <?php endif ?>
           </div>
         </div>
 

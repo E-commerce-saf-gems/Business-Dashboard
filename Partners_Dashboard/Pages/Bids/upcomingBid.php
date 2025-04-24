@@ -85,11 +85,6 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
               <div><strong>Starts In:</strong> 
                 <span id="countdown" class="bid-result win"></span>
               </div>
-              <div class="bid-actions" style="margin-top: 20px; display: flex; gap: 12px; justify-content: center;">
-                <a href="editBid.php?id=<?= $biddingStone['biddingStone_id'] ?>" class="action-button" style="padding: 8px 16px; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">Edit</a>
-                <a href="deleteBid.php?id=<?= $biddingStone['biddingStone_id'] ?>" class="action-button" style="padding: 8px 16px; background-color: #dc3545; color: white; border-radius: 5px; text-decoration: none;" onclick="return confirm('Are you sure you want to delete this bid?');">Delete</a>
-              </div>
-
             </div>
           </div>
         </div>
