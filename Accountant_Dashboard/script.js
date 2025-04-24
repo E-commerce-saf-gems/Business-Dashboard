@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let salesChart;
     let cashFlowChart;
 	let expenseChart;
+	let profitChart;
+	let revenueVsProfitChart;
 
     function loadSalesChart() {
         fetch("getSalesChartData.php")
@@ -106,14 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             labels: data.labels,
                             datasets: [
                                 {
-                                    label: "Cash In",
+                                    label: "Sales",
                                     data: data.cashIn,
                                     backgroundColor: "rgba(75, 192, 192, 0.6)",
                                     borderColor: "rgba(75, 192, 192, 1)",
                                     borderWidth: 1
                                 },
                                 {
-                                    label: "Cash Out",
+                                    label: "Purchases",
                                     data: data.cashOut,
                                     backgroundColor: "#3caaaa",
                                     borderColor: "#3caaaa",
@@ -134,6 +136,97 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error loading cash flow chart:", error));
     }
+
+	function loadProfitChart() {
+		fetch("getProfitChartData.php")
+			.then(response => response.json())
+			.then(data => {
+				if (profitChart) {
+					profitChart.data.labels = data.labels;
+					profitChart.data.datasets[0].data = data.profit;
+					profitChart.update();
+				} else {
+					profitChart = new Chart(document.getElementById("profitChart"), {
+						type: "line",
+						data: {
+							labels: data.labels,
+							datasets: [{
+								label: "Profit (Rs.)",
+								data: data.profit,
+								borderColor: "rgb(128, 255, 78)",
+								backgroundColor: "rgb(231, 255, 222)",
+								fill: true,
+								tension: 0.3,
+								pointRadius: 4
+							}]
+						},
+						options: {
+							responsive: true,
+							plugins: { legend: { position: "top" }},
+							scales: {
+								x: { title: { display: true, text: "Month" }},
+								y: { beginAtZero: true, title: { display: true, text: "Profit (Rs.)" }}
+							}
+						}
+					});
+				}
+			})
+			.catch(error => console.error("Error loading profit chart:", error));
+	}
+	
+	fetch("getRevenueVsProfitChart.php")
+	.then(response => response.json())
+	.then(data => {
+	  const profits = data.profit;
+	  const revenue = data.revenue;
+  
+	  const profitData = profits.map(value => value > 0 ? value : 0);
+	  const lossData = profits.map(value => value < 0 ? Math.abs(value) : 0);
+  
+	  revenueVsProfitChart = new Chart(document.getElementById("revenueVsProfitChart"), {
+		type: "bar",
+		data: {
+		  labels: data.labels,
+		  datasets: [
+			{
+			  label: "Revenue",
+			  data: revenue,
+			  backgroundColor: "rgba(235, 208, 54, 0.6)", // Yellow
+			  borderColor: "rgb(235, 208, 54)",
+			  borderWidth: 1
+			},
+			{
+			  label: "Profit",
+			  data: profitData,
+			  backgroundColor: "rgba(0, 200, 83, 0.6)", // Green
+			  borderColor: "rgb(0, 200, 83)",
+			  borderWidth: 1
+			},
+			{
+			  label: "Loss",
+			  data: lossData,
+			  backgroundColor: "rgba(244, 67, 54, 0.6)", // Red
+			  borderColor: "rgb(244, 67, 54)",
+			  borderWidth: 1
+			}
+		  ]
+		},
+		options: {
+		  responsive: true,
+		  plugins: {
+			legend: { position: "top" }
+		  },
+		  scales: {
+			x: { title: { display: true, text: "Month" }},
+			y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
+		  }
+		}
+	  });
+	})
+	.catch(error => console.error("Error loading revenue vs profit chart:", error));
+  
+	
+	
 
 	function populateMonthSelector() {
 		const selector = document.getElementById("monthSelector");
@@ -209,12 +302,16 @@ document.addEventListener("DOMContentLoaded", function () {
     loadSalesChart();
     loadCashFlowChart();
 	loadExpenseChart();
+	loadProfitChart();
+	loadRevenueVsProfitChart();
 
     // Auto-refresh every 30 seconds
     setInterval(() => {
         loadSalesChart();
         loadCashFlowChart();
 		loadExpenseChart();
+		loadProfitChart();
+		loadRevenueVsProfitChart();
     }, 30000);
 
 
