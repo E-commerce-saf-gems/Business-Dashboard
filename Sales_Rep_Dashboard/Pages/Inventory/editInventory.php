@@ -201,5 +201,122 @@ if (isset($_GET['id'])) {
     <script src="./inventory.js"></script>
     <script src="./buyerScript.js"></script>
 
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const editForm = document.getElementById("editgemForm");
+
+  // Common helpers
+  function setError(inputId, errorMessage) {
+    let errorElement = document.getElementById(`${inputId}-error`);
+    if (!errorElement) {
+      errorElement = document.createElement("span");
+      errorElement.id = `${inputId}-error`;
+      errorElement.style.color = "red";
+      errorElement.style.fontSize = "12px";
+      const inputField = document.getElementById(inputId);
+      if (inputField) inputField.parentNode.appendChild(errorElement);
+    }
+    errorElement.textContent = errorMessage;
+  }
+
+  function clearError(inputId) {
+    const errorElement = document.getElementById(`${inputId}-error`);
+    if (errorElement) {
+      errorElement.textContent = "";
+    }
+  }
+
+  if (editForm) {
+    editForm.addEventListener("submit", function (e) {
+      let isValid = true;
+
+      const getValue = (id) => document.getElementById(id)?.value.trim() || "";
+
+      const size = getValue("size");
+      const shape = getValue("shape");
+      const colour = getValue("colour");
+      const type = getValue("type");
+      const origin = getValue("origin");
+      const description = getValue("description");
+      const visibility = getValue("visibility");
+      const availability = getValue("availability");
+      const buyer_id = getValue("buyer");
+
+      const weight = parseFloat(getValue("weight"));
+      const amount = parseFloat(getValue("amount"));
+
+      const requiredFields = [
+        { field: size, id: "size", name: "Size" },
+        { field: shape, id: "shape", name: "Shape" },
+        { field: colour, id: "colour", name: "Colour" },
+        { field: type, id: "type", name: "Type" },
+        { field: origin, id: "origin", name: "Origin" },
+        { field: description, id: "description", name: "Description" },
+        { field: visibility, id: "visibility", name: "Visibility" },
+        { field: availability, id: "availability", name: "Availability" },
+        { field: buyer_id, id: "buyer", name: "Buyer ID" }
+      ];
+
+      requiredFields.forEach(({ field, id, name }) => {
+        if (!field) {
+          setError(id, `${name} is required.`);
+          isValid = false;
+        } else {
+          clearError(id);
+        }
+      });
+
+      if (isNaN(size) || weight <= 0) {
+        setError("size", "Size must be greater than 0.");
+        isValid = false;
+      } else {
+        clearError("size");
+      }
+
+      if (isNaN(weight) || weight <= 0) {
+        setError("weight", "Weight must be greater than 0.");
+        isValid = false;
+      } else {
+        clearError("weight");
+      }
+
+      if (isNaN(amount) || amount <= 0) {
+        setError("amount", "Amount must be greater than 0.");
+        isValid = false;
+      } else {
+        clearError("amount");
+      }
+
+      const alphaRegex = /^[a-zA-Z\s]+$/;
+      if (!alphaRegex.test(shape)) {
+        setError("shape", "Shape must contain only letters.");
+        isValid = false;
+      } else {
+        clearError("shape");
+      }
+
+      if (!alphaRegex.test(colour)) {
+        setError("colour", "Colour must contain only letters.");
+        isValid = false;
+      } else {
+        clearError("colour");
+      }
+
+      if (!alphaRegex.test(origin)) {
+        setError("origin", "Origin must contain only letters.");
+        isValid = false;
+      } else {
+        clearError("origin");
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+  }
+});
+</script>
+
+
   </body>
 </html>
