@@ -45,23 +45,30 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Purchases Summary</h2>
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
                 </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>Rs. 354200</p>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Purchases</h4>
+                        <p id="totalPurchases">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Settled Purchases</h4>
+                        <p id="totalSettledPurchases">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Remaining Purchases</h4>
+                        <p id="totalRemainingPurchases">Rs. 0</p>
+                    </div>
                 </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>Rs. 298500</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>Rs. 652700</p>
-                </div>
-            </div>
+            </section> 
 
             <div class="sales-table-container">
                 <div class="table-filters">
@@ -132,7 +139,7 @@ $result = $conn->query($sql);
     </script>
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
-    <script src="./sales.js"></script>
+    <script src="./purchases.js"></script>
 </body>
 </html>
 

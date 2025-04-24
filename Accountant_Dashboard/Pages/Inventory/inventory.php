@@ -211,7 +211,7 @@ if (!$result) {
     }
     </script> -->
     
-    <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="../../Pages/Inventory/script.js"></script>
   </body>
 </html>
