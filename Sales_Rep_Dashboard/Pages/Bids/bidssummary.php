@@ -1,6 +1,5 @@
 <?php
 session_start();
-$customer_id = $_SESSION['customer_id'];
 
 include '../../../database/db.php';
 

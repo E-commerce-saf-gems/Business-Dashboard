@@ -127,7 +127,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                             <th>Date</th>
                             <th>Customer Email</th>
                             <th>Total (LKR)</th>
-                            <th>Payment Method</th>
                             <th>Shipping Method</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -157,7 +156,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                                 <td><?php echo date("Y-m-d", strtotime($row['order_date'])); ?></td>
                                 <td><?php echo $row['customer_email']; ?></td>
                                 <td>LKR <?php echo number_format($row['total_amount'], 2); ?></td>
-                                <td><?php echo ucfirst($row['payment_method']); ?></td>
                                 <td><?php echo ucfirst($row['shipping_method']); ?></td>
                                 <td><?php echo ucfirst($row['order_status']); ?></td>
                                 <td>

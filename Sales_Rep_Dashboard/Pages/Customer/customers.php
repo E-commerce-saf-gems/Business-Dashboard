@@ -114,7 +114,7 @@ if (!$result) {
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter" name="date" value="<?= isset($_GET['date']) ? htmlspecialchars($_GET['date']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
 
-                    <label for="status-filter">Status:</label>
+                    <label for="status-filter">Gender:</label>
                     <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
                         <option value="">All</option>
                         <option value="M" <?= (isset($_GET['status']) && $_GET['status'] == 'M') ? 'selected' : ''; ?>>Male</option>
