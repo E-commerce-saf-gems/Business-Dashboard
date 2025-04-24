@@ -51,7 +51,7 @@ class Dashboard extends HTMLElement {
                     </li>
                    
                     <li>
-                        <a href="../../Pages/expenses/expenses.html">
+                        <a href="../../Pages/expenses/expenseType.php">
                             <i class='bx bxs-credit-card'></i>
                             <span class="text">Expense Management</span>
                         </a>

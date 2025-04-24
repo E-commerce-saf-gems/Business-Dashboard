@@ -45,23 +45,30 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Sales Summary</h2>
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
                 </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>Rs. 254300</p>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Sales</h4>
+                        <p id="totalSales">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Settled Sales</h4>
+                        <p id="totalSettledSales">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Remaining Sales</h4>
+                        <p id="totalRemainingSales">Rs. 0</p>
+                    </div>
                 </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>Rs. 213200</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>Rs. 408900</p>
-                </div>
-            </div>
+            </section> 
 
             <div class="sales-table-container">
                 <div class="table-filters">

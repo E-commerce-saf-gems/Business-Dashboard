@@ -48,318 +48,202 @@ window.addEventListener('resize', function () {
 		searchForm.classList.remove('show');
 	}
 })
+document.addEventListener("DOMContentLoaded", function () {
+    let salesChart;
+    let cashFlowChart;
+	let expenseChart;
 
-// Sample data for monthly sales
-const salesData = {
-	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	datasets: [{
-		label: "Sales ($)",
-		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
-		borderColor: "rgba(75, 192, 192, 1)",
-		backgroundColor: "rgba(75, 192, 192, 0.2)",
-		fill: true,
-		tension: 0.3, // Curve smoothness
-		pointRadius: 4,
-		pointBackgroundColor: "rgba(75, 192, 192, 1)"
-	}]
-};
-
-// Configuration options for the chart
-const config = {
-	type: "line",
-	data: salesData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "top"
-			}
-		},
-		scales: {
-			x: {
-				title: {
-					display: true,
-					text: "Month"
-				}
-			},
-			y: {
-				title: {
-					display: true,
-					text: "Sales ($)"
-				},
-				beginAtZero: true
-			}
-		}
-	}
-};
-
-// Render the chart in the canvas with id 'salesChart'
-const salesChart = new Chart(
-	document.getElementById("salesChart"),
-	config
-);
-
-
-// Sample data for gemstone types
-const gemData = {
-	labels: ["Ruby", "Emerald", "Sapphire", "Amethyst", "Diamond"],
-	datasets: [{
-		data: [12, 19, 7, 10, 15], // Sample quantities for each gemstone type
-		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Ruby color
-			"rgba(75, 192, 192, 0.6)", // Emerald color
-			"rgba(54, 162, 235, 0.6)", // Sapphire color
-			"rgba(153, 102, 255, 0.6)", // Amethyst color
-			"rgba(255, 206, 86, 0.6)"   // Diamond color
-		],
-		borderColor: [
-			"rgba(255, 99, 132, 1)",
-			"rgba(75, 192, 192, 1)",
-			"rgba(54, 162, 235, 1)",
-			"rgba(153, 102, 255, 1)",
-			"rgba(255, 206, 86, 1)"
-		],
-		borderWidth: 1
-	}]
-};
-
-// Configuration for the gemstone types pie chart
-const gemConfig = {
-	type: "pie",
-	data: gemData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "right" // Position legend on the right
-			}
-		}
-	}
-};
-
-// Render the pie chart in the canvas with id 'gemChart'
-const gemChart = new Chart(
-	document.getElementById("gemChart"),
-	gemConfig
-);
-
-// cashflow
-// Updated Data and configuration for the Cash Flow Bar Chart
-const cashFlowData = {
-	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
-	datasets: [
-		{
-			label: 'Cash In',
-			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
-			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
-			borderColor: 'rgba(75, 192, 192, 1)',
-			borderWidth: 1
-		},
-		{
-			label: 'Cash Out',
-			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
-			backgroundColor: "#3caaaa", // Red color
-			borderColor: '#3caaaa',
-			borderWidth: 1
-		}
-	]
-};
-
-const cashFlowConfig = {
-	type: 'bar',
-	data: cashFlowData,
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true,
-				title: {
-					display: true,
-					text: 'Amount ($)'
-				}
-			},
-			x: {
-				title: {
-					display: true,
-					text: 'Day of the Month'
-				},
-				stacked: false // Keeps bars side-by-side for each day
-			}
-		},
-		plugins: {
-			legend: {
-				position: 'top'
-			}
-		}
-	}
-};
-
-// Initialize the Cash Flow Bar Chart
-const cashFlowChart = new Chart(
-	document.getElementById('cashFlowChart'),
-	cashFlowConfig
-);
-
-// cashflow
-
-//Overview
-// Summary Cards Data (Dummy Example)
-document.getElementById("total-revenue").textContent = "$200,000";
-document.getElementById("total-expenses").textContent = "$100,000";
-document.getElementById("net-profit").textContent = "$100,000";
-document.getElementById("outstanding-payments").textContent = "$20,000";
-
-// Key Metrics Data
-document.getElementById("top-gem-sales").textContent = "$50,000";
-document.getElementById("average-bid-price").textContent = "$1,500";
-document.getElementById("revenue-from-auctions").textContent = "$80,000";
-
-
-
-//Revenue Pie Chart
-const auctionRevenue = 80000; // example value
-const totalRevenue = 200000; // example value
-
-new Chart(document.getElementById('auction-revenue-chart'), {
-    type: 'pie',
-    data: {
-        labels: ['Auction Revenue', 'Other Revenue'],
-        datasets: [{
-            data: [auctionRevenue, totalRevenue - auctionRevenue],
-            backgroundColor: ['teal', 'yellow']
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: { display: false }
-        }
-    }
-});
-
-//Average Bid Price
-// Example of average bid prices for the last 5 months
-const avgBidData = {
-    labels: ['July', 'August', 'September', 'October', 'November'], // Example months
-    data: [1200, 1300, 1250, 1400, 1500] // Example average bid prices for each month
-};
-
-// Get the context for the canvas element
-const avgBidCtx = document.getElementById('average-bid-chart').getContext('2d');
-
-// Create the line chart with Chart.js
-const averageBidChart = new Chart(avgBidCtx, {
-    type: 'line', // Type of chart (line or bar)
-    data: {
-        labels: avgBidData.labels, // Labels for the x-axis (months)
-        datasets: [{
-            label: 'Average Bid Price',
-            data: avgBidData.data, // Data for each month's average bid price
-            borderColor: 'teal',
-            backgroundColor: 'rgba(76, 175, 80, 0.2)',
-            fill: true,
-            tension: 0.3 // Smooth curve for the line
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: false,
-                title: {
-                    display: true,
-                    text: 'Average Bid Price ($)'
+    function loadSalesChart() {
+        fetch("getSalesChartData.php")
+            .then(response => response.json())
+            .then(data => {
+                if (salesChart) {
+                    salesChart.data.labels = data.labels;
+                    salesChart.data.datasets[0].data = data.sales;
+                    salesChart.update();
+                } else {
+                    salesChart = new Chart(document.getElementById("salesChart"), {
+                        type: "line",
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: "Sales (Rs.)",
+                                data: data.sales,
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { title: { display: true, text: "Sales (Rs.)" }, beginAtZero: true }
+                            }
+                        }
+                    });
                 }
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Months'
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                display: false // Hide legend for a cleaner look
-            }
-        }
+            })
+            .catch(error => console.error("Error loading sales chart:", error));
     }
-});
 
+    function loadCashFlowChart() {
+        fetch("getCashFlowChart.php")
+            .then(response => response.json())
+            .then(data => {
+                if (cashFlowChart) {
+                    cashFlowChart.data.labels = data.labels;
+                    cashFlowChart.data.datasets[0].data = data.cashIn;
+                    cashFlowChart.data.datasets[1].data = data.cashOut;
+                    cashFlowChart.update();
+                } else {
+                    cashFlowChart = new Chart(document.getElementById("cashFlowChart"), {
+                        type: "bar",
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: "Cash In",
+                                    data: data.cashIn,
+                                    backgroundColor: "rgba(75, 192, 192, 0.6)",
+                                    borderColor: "rgba(75, 192, 192, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Cash Out",
+                                    data: data.cashOut,
+                                    backgroundColor: "#3caaaa",
+                                    borderColor: "#3caaaa",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading cash flow chart:", error));
+    }
 
+	function populateMonthSelector() {
+		const selector = document.getElementById("monthSelector");
+		const now = new Date();
+		for (let i = 0; i < 12; i++) {
+            const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            const label = date.toLocaleString('default', { month: 'long', year: 'numeric' });
 
-// Recent Activities Data (Sample rows for table)
-/*const recentActivities = [
-    { date: "2024-11-05", type: "Sale", amount: "$5,000", status: "Completed" },
-    { date: "2024-11-03", type: "Expense", amount: "$300", status: "Pending" }
-];
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = label;
 
-const recentActivitiesList = document.getElementById("recent-activities-list");
-recentActivities.forEach(activity => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${activity.date}</td><td>${activity.type}</td><td>${activity.amount}</td><td>${activity.status}</td>`;
-    recentActivitiesList.appendChild(row);
-});*/
+            selector.appendChild(option);
+        }
+	}
+	
+	function loadExpenseChart(monthYear) {
+        fetch("getExpenseBreakdown.php?month=" + monthYear)
+            .then(response => response.json())
+            .then(data => {
+                if (expenseChart) {
+                    expenseChart.data.labels = data.labels;
+                    expenseChart.data.datasets[0].data = data.data;
+                    expenseChart.update();
+                } else {
+                    expenseChart = new Chart(document.getElementById("expenseChart"), {
+                        type: "pie",
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                data: data.data,
+                                backgroundColor: [
+                                    "rgba(255, 99, 132, 0.6)",
+                                    "rgba(54, 162, 235, 0.6)",
+                                    "rgba(255, 206, 86, 0.6)",
+                                    "rgba(75, 192, 192, 0.6)",
+                                    "rgba(153, 102, 255, 0.6)",
+                                    "rgba(255, 159, 64, 0.6)"
+                                ],
+                                borderColor: "rgba(255, 255, 255, 1)",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: "right"
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading expense chart:", error));
+    }
+	
+	// Setup dropdown
+    populateMonthSelector();
 
-// Example of dynamically adding recent activity rows
-const activities = [
-    { date: '2024-11-01', type: 'Bid Placement', amount: '$500', status: 'Completed' },
-    { date: '2024-11-02', type: 'Auction Ended', amount: '$0', status: 'Pending' },
-    { date: '2024-11-05', type: 'Payment Received', amount: '$500', status: 'Completed' }
-];
+    // Initial load for current month
+    const selector = document.getElementById("monthSelector");
+    loadExpenseChart(selector.value);
 
-// Function to generate rows dynamically
-function generateRecentActivities() {
-    const tbody = document.getElementById('recent-activities-list');
-    tbody.innerHTML = ''; // Clear any existing rows
-
-    activities.forEach(activity => {
-        const row = document.createElement('tr');
-
-        const dateCell = document.createElement('td');
-        dateCell.textContent = activity.date;
-
-        const typeCell = document.createElement('td');
-        typeCell.textContent = activity.type;
-
-        const amountCell = document.createElement('td');
-        amountCell.textContent = activity.amount;
-
-        const statusCell = document.createElement('td');
-        const statusLabel = document.createElement('span');
-        statusLabel.classList.add('status');
-        statusLabel.classList.add(activity.status.toLowerCase()); // Dynamically add class (completed/pending)
-        statusLabel.textContent = activity.status;
-
-        statusCell.appendChild(statusLabel);
-
-        row.appendChild(dateCell);
-        row.appendChild(typeCell);
-        row.appendChild(amountCell);
-        row.appendChild(statusCell);
-
-        tbody.appendChild(row);
+    // Reload on change
+    selector.addEventListener("change", function () {
+        loadExpenseChart(this.value);
     });
-}
+	
 
-// Call the function to populate the table
-generateRecentActivities();
+    // Initial chart load
+    loadSalesChart();
+    loadCashFlowChart();
+	loadExpenseChart();
 
-// Alerts List Data
-const alerts = [
-    "Payment overdue for Invoice #2345",
-    "High bid placed on Gem #453 - awaiting confirmation"
-];
+    // Auto-refresh every 30 seconds
+    setInterval(() => {
+        loadSalesChart();
+        loadCashFlowChart();
+		loadExpenseChart();
+    }, 30000);
 
-const alertsList = document.getElementById("alerts-list");
-alerts.forEach(alert => {
-    const li = document.createElement("li");
-    li.textContent = alert;
-    alertsList.appendChild(li);
+
+
+	const viewFilter = document.getElementById("viewFilter");
+
+    function loadFinancialOverview() {
+        const selectedFilter = viewFilter.value.toLowerCase(); // Get current filter (monthly, quarterly, yearly)
+
+        fetch(`getFinancialOverview.php?filter=${selectedFilter}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("totalSales").innerText = `Rs. ${parseFloat(data.totalSales).toLocaleString()}`;
+                document.getElementById("totalPurchases").innerText = `Rs. ${parseFloat(data.totalPurchases).toLocaleString()}`;
+                document.getElementById("totalExpenses").innerText = `Rs. ${parseFloat(data.totalExpenses).toLocaleString()}`;
+                document.getElementById("outstandingPayments").innerText = `Rs. ${parseFloat(data.outstandingPayment).toLocaleString()}`;
+            })
+            .catch(error => console.error("Error loading financial overview:", error));
+    }
+
+    // Initial load
+    loadFinancialOverview();
+
+    // Reload on filter change
+    viewFilter.addEventListener("change", loadFinancialOverview);
+
+    // Auto-refresh every 30 seconds
+    setInterval(loadFinancialOverview, 30000);
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     // Activate sidebar menu based on current path

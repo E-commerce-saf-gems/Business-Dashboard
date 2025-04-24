@@ -48,56 +48,6 @@ window.addEventListener('resize', function () {
 	}
 })
 
-// Sample data for monthly sales
-const salesData = {
-	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	datasets: [{
-		label: "Sales (Rs.)",
-		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
-		borderColor: "rgba(75, 192, 192, 1)",
-		backgroundColor: "rgba(75, 192, 192, 0.2)",
-		fill: true,
-		tension: 0.3, // Curve smoothness
-		pointRadius: 4,
-		pointBackgroundColor: "rgba(75, 192, 192, 1)"
-	}]
-};
-
-// Configuration options for the chart
-const config = {
-	type: "line",
-	data: salesData,
-	options: {
-		responsive: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "top"
-			}
-		},
-		scales: {
-			x: {
-				title: {
-					display: true,
-					text: "Month"
-				}
-			},
-			y: {
-				title: {
-					display: true,
-					text: "Sales (Rs.)"
-				},
-				beginAtZero: true
-			}
-		}
-	}
-};
-
-// Render the chart in the canvas with id 'salesChart'
-const salesChart = new Chart(
-	document.getElementById("salesChart"),
-	config
-);
 
 
 // Sample data for gemstone types
@@ -144,60 +94,135 @@ const gemChart = new Chart(
 	gemConfig
 );
 
-// cashflow
-// Updated Data and configuration for the Cash Flow Bar Chart
-const cashFlowData = {
-	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
-	datasets: [
-		{
-			label: 'Cash In',
-			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
-			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
-			borderColor: 'rgba(75, 192, 192, 1)',
-			borderWidth: 1
-		},
-		{
-			label: 'Cash Out',
-			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
-			backgroundColor: "#3caaaa", // Red color
-			borderColor: '#3caaaa',
-			borderWidth: 1
-		}
-	]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    let salesChart;
+    let cashFlowChart;
+	
 
-const cashFlowConfig = {
-	type: 'bar',
-	data: cashFlowData,
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true,
-				title: {
-					display: true,
-					text: 'Amount (Rs.)'
-				}
-			},
-			x: {
-				title: {
-					display: true,
-					text: 'Day'
-				},
-				stacked: false // Keeps bars side-by-side for each day
-			}
-		},
-		plugins: {
-			legend: {
-				position: 'top'
-			}
-		}
-	}
-};
+    function loadSalesChart() {
+        fetch("getSalesChartData.php")
+            .then(response => response.json())
+            .then(data => {
+                if (salesChart) {
+                    salesChart.data.labels = data.labels;
+                    salesChart.data.datasets[0].data = data.sales;
+                    salesChart.update();
+                } else {
+                    salesChart = new Chart(document.getElementById("salesChart"), {
+                        type: "line",
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: "Sales (Rs.)",
+                                data: data.sales,
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { title: { display: true, text: "Sales (Rs.)" }, beginAtZero: true }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading sales chart:", error));
+    }
 
-const cashFlowChart = new Chart(
-	document.getElementById('cashFlowChart'),
-	cashFlowConfig
-);
+    function loadCashFlowChart() {
+        fetch("getCashFlowChart.php")
+            .then(response => response.json())
+            .then(data => {
+                if (cashFlowChart) {
+                    cashFlowChart.data.labels = data.labels;
+                    cashFlowChart.data.datasets[0].data = data.cashIn;
+                    cashFlowChart.data.datasets[1].data = data.cashOut;
+                    cashFlowChart.update();
+                } else {
+                    cashFlowChart = new Chart(document.getElementById("cashFlowChart"), {
+                        type: "bar",
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: "Cash In",
+                                    data: data.cashIn,
+                                    backgroundColor: "rgba(75, 192, 192, 0.6)",
+                                    borderColor: "rgba(75, 192, 192, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Cash Out",
+                                    data: data.cashOut,
+                                    backgroundColor: "#3caaaa",
+                                    borderColor: "#3caaaa",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: "top" }},
+                            scales: {
+                                x: { title: { display: true, text: "Month" }},
+                                y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error("Error loading cash flow chart:", error));
+    }
+
+
+
+	
+
+    // Initial chart load
+    loadSalesChart();
+    loadCashFlowChart();
+	
+
+    // Auto-refresh every 30 seconds
+    setInterval(() => {
+        loadSalesChart();
+        loadCashFlowChart();
+		
+    }, 30000);
+
+
+	const viewFilter = document.getElementById("viewFilter");
+
+    function loadFinancialOverview() {
+        const selectedFilter = viewFilter.value.toLowerCase(); // Get current filter (monthly, quarterly, yearly)
+
+        fetch(`getFinancialOverview.php?filter=${selectedFilter}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("totalSales").innerText = `Rs. ${parseFloat(data.totalSales).toLocaleString()}`;
+                document.getElementById("totalPurchases").innerText = `Rs. ${parseFloat(data.totalPurchases).toLocaleString()}`;
+                document.getElementById("totalExpenses").innerText = `Rs. ${parseFloat(data.totalExpenses).toLocaleString()}`;
+                document.getElementById("outstandingPayments").innerText = `Rs. ${parseFloat(data.outstandingPayment).toLocaleString()}`;
+            })
+            .catch(error => console.error("Error loading financial overview:", error));
+    }
+
+    // Initial load
+    loadFinancialOverview();
+
+    // Reload on filter change
+    viewFilter.addEventListener("change", loadFinancialOverview);
+
+    // Auto-refresh every 30 seconds
+    setInterval(loadFinancialOverview, 30000);
+});
 
 document.addEventListener('DOMContentLoaded', function () {
 

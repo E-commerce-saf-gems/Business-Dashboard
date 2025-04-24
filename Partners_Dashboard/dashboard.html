@@ -122,22 +122,32 @@
                 </select>  
             </section>  
 
-            <section class="summary-cards">
-                <div class="card">
-                    <h3>Total Revenue</h3>
-                    <p id="total-revenue">Rs.0.00</p>
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
                 </div>
-                <div class="card">
-                    <h3>Total Expenses</h3>
-                    <p id="total-expenses">Rs.0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Net Profit</h3>
-                    <p id="net-profit">Rs.0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Outstanding Payments</h3>
-                    <p id="outstanding-payments">Rs.0.00</p>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Sales</h4>
+                        <p id="totalSales">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Purchases</h4>
+                        <p id="totalPurchases">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Expenses</h4>
+                        <p id="totalExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Outstanding Payments</h4>
+                        <p id="outstandingPayments">Rs. 0</p>
+                    </div>
                 </div>
             </section>
 

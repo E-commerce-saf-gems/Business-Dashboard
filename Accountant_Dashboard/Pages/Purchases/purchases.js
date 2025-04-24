@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const viewFilter = document.getElementById("viewFilter");
 
-    function loadSalesOverview() {
+    function loadPurchasesOverview() {
         const selectedFilter = viewFilter ? viewFilter.value.toLowerCase() : "monthly";
 
-        fetch(`getSalesOverview.php?filter=${selectedFilter}`)
+        fetch(`getPurchasesOverview.php?filter=${selectedFilter}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -31,39 +31,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
-                console.log("Sales overview data:", data);
+                console.log("Purchases overview data:", data);
 
-                const totalEl = document.getElementById("totalSales");
-                const settledEl = document.getElementById("totalSettledSales");
-                const remainingEl = document.getElementById("totalRemainingSales");
+                const totalEl = document.getElementById("totalPurchases");
+                const settledEl = document.getElementById("totalSettledPurchases");
+                const remainingEl = document.getElementById("totalRemainingPurchases");
 
                 if (!totalEl || !settledEl || !remainingEl) {
-                    console.error("One or more sales overview elements are missing in the DOM.");
+                    console.error("One or more Purchases overview elements are missing in the DOM.");
                     return;
                 }
 
                 const formatAmount = (amount) => `Rs. ${parseFloat(amount || 0).toLocaleString()}`;
 
-                totalEl.innerText = formatAmount(data.totalSales);
-                settledEl.innerText = formatAmount(data.totalSettledSales);
-                remainingEl.innerText = formatAmount(data.totalRemainingSales);
+                totalEl.innerText = formatAmount(data.totalPurchases);
+                settledEl.innerText = formatAmount(data.totalSettledPurchases);
+                remainingEl.innerText = formatAmount(data.totalRemainingPurchases);
             })
-            .catch(error => console.error("Error loading sales overview:", error));
+            .catch(error => console.error("Error loading Purchases overview:", error));
     }
 
     // Initial load
-    loadSalesOverview();
+    loadPurchasesOverview();
 
     // Reload on filter change if dropdown exists
     if (viewFilter) {
-        viewFilter.addEventListener("change", loadSalesOverview);
+        viewFilter.addEventListener("change", loadPurchasesOverview);
     }
 
     // Auto-refresh every 30 seconds
-    setInterval(loadSalesOverview, 30000);
+    setInterval(loadPurchasesOverview, 30000);
 });
-
-
-
-
 
