@@ -70,6 +70,13 @@ $result = $conn->query($sql);
                 </div>
             </section> 
 
+            <div class="table-header">
+                
+                <div class="addnew">
+                    <a href="./addSales.html" class="btn-add"><i class='bx bx-plus'></i>Add New Sale</a>
+                </div>
+            </div>
+
             <div class="sales-table-container">
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>
@@ -98,6 +105,7 @@ $result = $conn->query($sql);
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Amount Settled</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,8 +120,13 @@ $result = $conn->query($sql);
                                 echo "<td>Rs. " . number_format($row['total'], 0, '.', ',') . "</td>";
                                 echo "<td>" . $row['status'] . "</td>";
                                 echo "<td>Rs. " . number_format($row['amountSettled'], 0, '.', ',') . "</td>";
+                                echo "<td>
+                                    <a href='editSales.php?id=" . $row['sale_id'] . "' class='btn-edit'><i class='bx bx-edit'></i></a>
+                                    <a href='deleteSales.php?id=" . $row['sale_id'] . "' class='btn-delete' onclick=\"return confirm('Are you sure you want to delete this sale?');\"><i class='bx bx-trash'></i></a>
+                                </td>";
                                 echo "</td>";
                                 echo "</tr>";
+
                             }
                         } else {
                             echo "<tr><td colspan='6'>No sales found.</td></tr>";
