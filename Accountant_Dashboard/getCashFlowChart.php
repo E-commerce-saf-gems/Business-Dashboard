@@ -20,24 +20,24 @@ SELECT
     IFNULL(p.cash_out, 0) AS cash_out
 FROM (
     SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01') AS month
-    FROM sales
+    FROM transactions
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     
     UNION
     
     SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01')
-    FROM purchases
+    FROM payments
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
 ) activity
 LEFT JOIN (
-    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amountSettled) AS cash_in
-    FROM sales
+    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_in
+    FROM transactions
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     GROUP BY month
 ) s ON s.month = activity.month
 LEFT JOIN (
-    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amountSettled) AS cash_out
-    FROM purchases
+    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_out
+    FROM payments
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     GROUP BY month
 ) p ON p.month = activity.month

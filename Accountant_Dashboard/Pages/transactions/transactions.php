@@ -89,23 +89,7 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Transactions Summary</h2>
-                </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>$2543</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>$2132</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>$4089</p>
-                </div>
-            </div>
+           
 
             <div class="table-header">
                 <div class="option-tab">

@@ -174,57 +174,58 @@ document.addEventListener("DOMContentLoaded", function () {
 			.catch(error => console.error("Error loading profit chart:", error));
 	}
 	
-	fetch("getRevenueVsProfitChart.php")
-	.then(response => response.json())
-	.then(data => {
-	  const profits = data.profit;
-	  const revenue = data.revenue;
-  
-	  const profitData = profits.map(value => value > 0 ? value : 0);
-	  const lossData = profits.map(value => value < 0 ? Math.abs(value) : 0);
-  
-	  revenueVsProfitChart = new Chart(document.getElementById("revenueVsProfitChart"), {
-		type: "bar",
-		data: {
-		  labels: data.labels,
-		  datasets: [
-			{
-			  label: "Revenue",
-			  data: revenue,
-			  backgroundColor: "rgba(235, 208, 54, 0.6)", // Yellow
-			  borderColor: "rgb(235, 208, 54)",
-			  borderWidth: 1
-			},
-			{
-			  label: "Profit",
-			  data: profitData,
-			  backgroundColor: "rgba(0, 200, 83, 0.6)", // Green
-			  borderColor: "rgb(0, 200, 83)",
-			  borderWidth: 1
-			},
-			{
-			  label: "Loss",
-			  data: lossData,
-			  backgroundColor: "rgba(244, 67, 54, 0.6)", // Red
-			  borderColor: "rgb(244, 67, 54)",
-			  borderWidth: 1
-			}
-		  ]
-		},
-		options: {
-		  responsive: true,
-		  plugins: {
-			legend: { position: "top" }
-		  },
-		  scales: {
-			x: { title: { display: true, text: "Month" }},
-			y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
-		  }
-		}
-	  });
-	})
-	.catch(error => console.error("Error loading revenue vs profit chart:", error));
-  
+    function loadRevenueVsProfitChart() {
+        fetch("getRevenueVsProfitChart.php")
+        .then(response => response.json())
+        .then(data => {
+        const profits = data.profit;
+        const revenue = data.revenue;
+    
+        const profitData = profits.map(value => value > 0 ? value : 0);
+        const lossData = profits.map(value => value < 0 ? Math.abs(value) : 0);
+    
+        revenueVsProfitChart = new Chart(document.getElementById("revenueVsProfitChart"), {
+            type: "bar",
+            data: {
+            labels: data.labels,
+            datasets: [
+                {
+                label: "Revenue",
+                data: revenue,
+                backgroundColor: "rgba(235, 208, 54, 0.6)", // Yellow
+                borderColor: "rgb(235, 208, 54)",
+                borderWidth: 1
+                },
+                {
+                label: "Profit",
+                data: profitData,
+                backgroundColor: "rgba(0, 200, 83, 0.6)", // Green
+                borderColor: "rgb(0, 200, 83)",
+                borderWidth: 1
+                },
+                {
+                label: "Loss",
+                data: lossData,
+                backgroundColor: "rgba(244, 67, 54, 0.6)", // Red
+                borderColor: "rgb(244, 67, 54)",
+                borderWidth: 1
+                }
+            ]
+            },
+            options: {
+            responsive: true,
+            plugins: {
+                legend: { position: "top" }
+            },
+            scales: {
+                x: { title: { display: true, text: "Month" }},
+                y: { beginAtZero: true, title: { display: true, text: "Amount (Rs.)" }}
+            }
+            }
+        });
+        })
+        .catch(error => console.error("Error loading revenue vs profit chart:", error));
+    }
 	
 	
 
@@ -344,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Activate sidebar menu based on current path
-    updateActiveMenu();
+    //updateActiveMenu();
 
     const profileIcon = document.getElementById("profile-icon");
     const profileMenu = document.querySelector(".profile");

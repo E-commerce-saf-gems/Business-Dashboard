@@ -16,13 +16,13 @@ $sql = "
     SELECT 
         DATE_FORMAT(date_group.date, '%b') AS month,
         IFNULL((
-            SELECT SUM(s.amountSettled)
-            FROM sales s
+            SELECT SUM(s.amount)
+            FROM transactions s
             WHERE MONTH(s.date) = MONTH(date_group.date) AND YEAR(s.date) = YEAR(date_group.date)
         ), 0) AS revenue,
         IFNULL((
-            SELECT SUM(p.amountSettled)
-            FROM purchases p
+            SELECT SUM(p.amount)
+            FROM payments p
             WHERE MONTH(p.date) = MONTH(date_group.date) AND YEAR(p.date) = YEAR(date_group.date)
         ), 0) AS purchases,
         IFNULL((
@@ -33,9 +33,9 @@ $sql = "
     FROM (
         SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01') AS date
         FROM (
-            SELECT date FROM sales WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+            SELECT date FROM transactions WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
             UNION
-            SELECT date FROM purchases WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+            SELECT date FROM payments WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
             UNION
             SELECT date FROM expenses WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
         ) AS all_dates

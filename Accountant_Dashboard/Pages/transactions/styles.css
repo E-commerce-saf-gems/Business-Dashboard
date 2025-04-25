@@ -503,6 +503,76 @@ input:invalid + .error-message {
 }
 
 
+/* Overview Section Styles */
+.overview {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.overview h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Filter Dropdown */
+.overview-filter {
+    margin-bottom: 1.5rem;
+}
+
+.overview-filter select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+
+/* Overview Boxes Container */
+.overview-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Individual Box */
+.overview-box {
+    flex: 1 1 calc(25% - 1rem);
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    min-width: 200px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.overview-box:hover {
+    transform: translateY(-5px);
+}
+
+/* Headings inside Boxes */
+.overview-box h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+/* Amount Text */
+.overview-box p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+
 
 
 
