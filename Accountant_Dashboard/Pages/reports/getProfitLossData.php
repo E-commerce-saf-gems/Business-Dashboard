@@ -16,7 +16,7 @@ $response = [
 ];
 
 // Sales Revenue
-$stmt = $conn->prepare("SELECT SUM(amountSettled) FROM sales WHERE date >= ? AND date < DATE_ADD(?, INTERVAL 1 DAY)");
+$stmt = $conn->prepare("SELECT SUM(amount) FROM transactions WHERE date >= ? AND date < DATE_ADD(?, INTERVAL 1 DAY)");
 $stmt->bind_param("ss", $startDate, $endDate);
 $stmt->execute();
 $stmt->bind_result($sales);
@@ -25,7 +25,7 @@ $response['totalSalesRevenue'] = $sales ?: 0;
 $stmt->close();
 
 // Purchases
-$stmt = $conn->prepare("SELECT SUM(amountSettled) FROM purchases WHERE date >= ? AND date < DATE_ADD(?, INTERVAL 1 DAY)");
+$stmt = $conn->prepare("SELECT SUM(amount) FROM payments WHERE date >= ? AND date < DATE_ADD(?, INTERVAL 1 DAY)");
 $stmt->bind_param("ss", $startDate, $endDate);
 $stmt->execute();
 $stmt->bind_result($purchases);

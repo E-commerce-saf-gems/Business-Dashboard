@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    
 });
 
 
@@ -36,6 +38,8 @@ function filterTransactions() {
         })
         .catch(error => console.error('Error:', error));
 }
+
+
 
 
 

@@ -1,5 +1,5 @@
 // Fetch inventory data and store it
-document.getElementById("SelectDateBtn").addEventListener("click", () => {
+document.getElementById("selectDateBtn").addEventListener("click", () => {
     const startDate = document.getElementById("inventoryStartDate").value;
     const endDate = document.getElementById("inventoryEndDate").value;
 

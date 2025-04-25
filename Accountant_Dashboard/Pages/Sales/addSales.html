@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Sales Details</title>
+    <title>Add New Sale</title>
     <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./editSalesStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -13,69 +12,71 @@
     <section id="content">
         <main>
             <div class="head-title">
-				<div class="left">
-					<h1>Sales</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="./sales.html">Sales Summary</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Add Sales</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+                <div class="left">
+                    <h1>Add Sale</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="./sales.php">Sales Summary</a></li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li><a class="active" href="#">Add Sale</a></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="edit-sales-container">
-                <form class="edit-sales-form" id="editSalesForm">
+                <form class="edit-sales-form" id="editsalesform" action="./addSales.php" method="post">
                     <h2>New Sales Details</h2>
 
+                    <!-- Date -->
                     <div class="form-group">
                         <label for="date">Date</label>
-                        <input type="date" id="date" name="date" required>
+                        <input type="datetime-local" id="date" name="date" required>
                     </div>
-    
+
+                    <!-- Stone ID -->
                     <div class="form-group">
-                        <label for="type">Type</label>
-                        <select id="type" name="type">
-                            <option value="Gem Sale">Gem Sale</option>
-                            <option value="Jewelry Sale">Jewelry Sale</option>
-                        </select>
+                        <label for="stone_id">Stone ID</label>
+                        <input type="number" id="stone_id" name="stone_id" required>
                     </div>
-    
-                    <!-- Customer Field -->
+
+                    <!-- Customer ID -->
                     <div class="form-group">
-                        <label for="customer">Customer ID</label>
-                        <input type="number" id="customer" name="customer" placeholder="Customer ID" required>
+                        <label for="customer_id">Customer ID</label>
+                        <input type="number" id="customer_id" name="customer_id" required>
                     </div>
-    
-                    <!-- Amount Field -->
+
+                    <!-- Total Amount -->
                     <div class="form-group">
-                        <label for="amount">Amount ($)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                        <label for="total">Total Amount (Rs.)</label>
+                        <input type="number" id="total" name="total" required>
                     </div>
-    
-                    <!-- Status Field -->
+
+                    <!-- Status -->
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select id="status" name="status">
+                        <select id="status" name="status" required>
                             <option value="Paid">Paid</option>
                             <option value="Pending">Pending</option>
                         </select>
                     </div>
-                    
-                    <!-- Save Button -->
+
+                    <!-- Amount Settled (auto or manual) -->
+                    <div class="form-group">
+                        <label for="amountSettled">Amount Settled (Rs.)</label>
+                        <input type="number" id="amountSettled" name="amountSettled" required>
+                    </div>
+
+                    <!-- Submit -->
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <a href="./sales.html">
-                                <i class='bx bx-save'></i> Save</a>
+                            <i class='bx bx-save'></i> Save
                         </button>
                     </div>
                 </form>
             </div>
         </main>
     </section>
-
     <script src="../../../Components/Partner_Dashboard_Template/script.js"></script>
+    <script src="./sales.js"></script>
 </body>
 </html>
+

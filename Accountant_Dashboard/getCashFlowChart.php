@@ -12,20 +12,36 @@ if ($conn->connect_error) {
 
 header('Content-Type: application/json');
 
-// SQL: Combine sales and purchases by month
+// Unified months from sales and purchases (last 6 months)
 $sql = "
 SELECT 
-    DATE_FORMAT(s.date, '%b') AS month,
-    IFNULL(SUM(s.amountSettled), 0) AS cash_in,
-    IFNULL((
-        SELECT SUM(p.amountSettled)
-        FROM purchases p
-        WHERE MONTH(p.date) = MONTH(s.date) AND YEAR(p.date) = YEAR(s.date)
-    ), 0) AS cash_out
-FROM sales s
-WHERE s.date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-GROUP BY YEAR(s.date), MONTH(s.date)
-ORDER BY YEAR(s.date), MONTH(s.date)
+    DATE_FORMAT(activity.month, '%b') AS monthLabel,
+    IFNULL(s.cash_in, 0) AS cash_in,
+    IFNULL(p.cash_out, 0) AS cash_out
+FROM (
+    SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01') AS month
+    FROM transactions
+    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+    
+    UNION
+    
+    SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01')
+    FROM payments
+    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+) activity
+LEFT JOIN (
+    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_in
+    FROM transactions
+    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+    GROUP BY month
+) s ON s.month = activity.month
+LEFT JOIN (
+    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_out
+    FROM payments
+    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+    GROUP BY month
+) p ON p.month = activity.month
+ORDER BY activity.month ASC
 ";
 
 $result = $conn->query($sql);
@@ -34,17 +50,24 @@ if (!$result) {
     echo json_encode(["error" => "Query failed: " . $conn->error]);
     exit;
 }
+
 $labels = [];
 $cashIn = [];
 $cashOut = [];
 
 while ($row = $result->fetch_assoc()) {
-    $labels[] = $row['month'];
+    $labels[] = $row['monthLabel'];
     $cashIn[] = (float)$row['cash_in'];
     $cashOut[] = (float)$row['cash_out'];
 }
 
-echo json_encode(["labels" => $labels, "cashIn" => $cashIn, "cashOut" => $cashOut]);
+echo json_encode([
+    "labels" => $labels,
+    "cashIn" => $cashIn,
+    "cashOut" => $cashOut
+]);
+
 $conn->close();
 ?>
+
 

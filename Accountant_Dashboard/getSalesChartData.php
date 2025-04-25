@@ -14,8 +14,8 @@ header('Content-Type: application/json');
 
 // Get last 12 months of sales
 $sql = "
-    SELECT DATE_FORMAT(date, '%b') AS month, SUM(amountSettled) AS total
-    FROM sales
+    SELECT DATE_FORMAT(date, '%b') AS month, SUM(amount) AS total
+    FROM transactions
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
     GROUP BY YEAR(date), MONTH(date)
     ORDER BY YEAR(date), MONTH(date)
