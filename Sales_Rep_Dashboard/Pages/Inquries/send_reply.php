@@ -26,7 +26,7 @@ $mail->Port       = 465;  // Port for SSL (or use 587 for TLS)
                                  
     
         $mail->setFrom('ashcharyawaduge@gmail.com', 'Saf Gems');
-        $mail->addAddress($email, $first_name);  
+        $mail->addAddress($email);  
 
         $mail->isHTML(true);
         $mail->Subject = "Reply to Your Inquiry";
