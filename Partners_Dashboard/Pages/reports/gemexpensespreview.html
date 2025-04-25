@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sales Report Preview</title>
+  <title>Gem Expenses Report Preview</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     body {
@@ -139,7 +139,7 @@
       const reportElement = document.getElementById("reportTemplate");
       const opt = {
         margin: 0.5,
-        filename: 'Sales_Report.pdf',
+        filename: 'Gem_Expenses_Report.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -148,62 +148,61 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      const reportType = localStorage.getItem("reportType");
+      const data = JSON.parse(localStorage.getItem("gemExpensesReportData"));
       const reportTemplate = document.getElementById("reportTemplate");
 
-      if (reportType === "sales") {
-        const data = JSON.parse(localStorage.getItem("salesReportData"));
-
-        if (!data) {
-          reportTemplate.innerHTML = `<p>No report data found.</p>`;
-          return;
-        }
-
-        reportTemplate.innerHTML = `
-          <div class="report-container" id="reportContent">
-            <div class="report-header">
-                <img src="/images/logo.png" alt="Company Logo" class="company-logo">
-                <p class="company-name">SAF Gems</p>
-                <h3 class="report-title">Sales Report</h3>
-            </div>
-
-            <div class="report-meta">
-                <p><strong>Prepared by:</strong> Accountant </p>
-                <p><strong>Period:</strong> ${data.dateRange}</p>
-                <p><em>Financial figures in Sri Lankan Rupees (Rs.)</em></p>
-            </div>
-
-            <table class="report-table">
-              <tr class="section-header"><th colspan="2">SALES SUMMARY</th></tr>
-              <tr><td>Total Sales Amount</td><td>Rs. ${data.totalSalesAmount.toFixed(2)}</td></tr>
-              <tr><td>Total Settled Amount</td><td>Rs. ${data.settledAmount.toFixed(2)}</td></tr>
-              <tr><td>Total Remaining Amount</td><td>Rs. ${data.remainingAmount.toFixed(2)}</td></tr>
-              <tr><td>Number of Items Sold</td><td>${data.itemsSold}</td></tr>
-            </table>
-
-            <div class="signature-block">
-              <div class="signature-line"></div>
-              <div class="signature-label">Authorized Signature</div>
-            </div>
-
-            <div class="action-buttons">
-              <button class="back-btn" onclick="window.location.href='salesreport.html'">← Back to Form</button>
-              <button class="print-btn" onclick="window.print()">🖨️ Print</button>
-              <button class="pdf-btn" onclick="downloadPDF()">⬇️ Download PDF</button>
-            </div>
-
-            <div class="footer-note">
-              <p>Report generated on ${new Date().toLocaleDateString()}</p>
-            </div>
-          </div>
-        `;
-      } else {
-        reportTemplate.innerHTML = `<p>No report type selected.</p>`;
+      if (!data) {
+        reportTemplate.innerHTML = `<p>No report data found.</p>`;
+        return;
       }
+
+      const { gem, totals, totalCost } = data;
+
+      reportTemplate.innerHTML = `
+        <div class="report-container" id="reportContent">
+          <div class="report-header">
+              <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+              <p class="company-name">SAF Gems</p>
+              <h3 class="report-title">Gem Expenses Report</h3>
+          </div>
+
+          <div class="report-meta">
+              <p><strong>Prepared by:</strong> Accountant</p>
+              <p><strong>Gem ID:</strong> ${gem.stone_id}</p>
+              <p><strong>Type:</strong> ${gem.type}</p>
+              <p><strong>Availability:</strong> ${gem.availability}</p>
+              <p><strong>Visibility:</strong> ${gem.visibility}</p>
+              <p><em>All expenses in Sri Lankan Rupees (Rs.)</em></p>
+          </div>
+
+          <table class="report-table">
+            <tr class="section-header"><th>Expense Type</th><th>Amount (Rs.)</th></tr>
+            <tr><td>Cutting and Polishing</td><td>Rs. ${totals["Cutting and Polishing"].toFixed(2)}</td></tr>
+            <tr><td>Certifications</td><td>Rs. ${totals["Certifications"].toFixed(2)}</td></tr>
+            <tr><td>Marketing</td><td>Rs. ${totals["Marketing"].toFixed(2)}</td></tr>
+            <tr><td>Logistics</td><td>Rs. ${totals["Logistics"].toFixed(2)}</td></tr>
+            <tr><td>Other</td><td>Rs. ${totals["Other"].toFixed(2)}</td></tr>
+            <tr class="section-total"><td>Total Operational Cost</td><td>Rs. ${totalCost.toFixed(2)}</td></tr>
+          </table>
+
+          <div class="signature-block">
+            <div class="signature-line"></div>
+            <div class="signature-label">Authorized Signature</div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="back-btn" onclick="window.location.href='gemexpensesreport.html'">← Back to Form</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+            <button class="pdf-btn" onclick="downloadPDF()">⬇️ Download PDF</button>
+          </div>
+
+          <div class="footer-note">
+            <p>Report generated on ${new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      `;
     });
   </script>
 
 </body>
 </html>
-
-

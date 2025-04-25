@@ -110,10 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
         
         reportTemplate.innerHTML = `
         <div class="report-container">
-            <img src="../../../images/logo.png" alt="Company Logo" class="company-logo">
+            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
             <p class="company-name">SAF Gems</p>
             <h3 class="report-title">Profit & Loss Report</h3>
-            <p><strong>Prepared by:</strong>Saman Kumara</p>
+            <p><strong>Prepared by:</strong> Quinn Campbell</p>
             <p><strong>Period:</strong> ${data.dateRange}</p>
             <p class="financial-details">Financial statements in Sri Lankan Rupees</p>
 
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
         reportTemplate.innerHTML = `
         <div class="report-container">
-            <img src="../../../images/logo.png" alt="Company Logo" class="company-logo">
+            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
             <p class="company-name">SAF Gems</p>
             <h3 class="report-title">Sales Report</h3>
             <p><strong>Prepared by:</strong> Quinn Campbell</p>
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
         reportTemplate.innerHTML = `
         <div class="report-container">
-            <img src="../../../images/logo.png" alt="Company Logo" class="company-logo">
+            <img src="/images/logo.png" alt="Company Logo" class="company-logo">
             <p class="company-name">SAF Gems</p>
             <h3 class="report-title">Inventory Report</h3>
             <p><strong>Prepared by:</strong> Quinn Campbell</p>

@@ -40,11 +40,11 @@
                 </div>
                 <div class="form-group">
                     <label for="startingBid">Starting Bid Value (Rs.)</label>
-                    <input type="number" id="startingBid" name="startingBid" required />
+                    <input type="number" id="startingBid" name="startingBid" min="10000" required />
                 </div>
                 <div class="form-group">
                     <label for="startDate">Start Date</label>
-                    <input type="datetime-local" id="startDate" name="startDate" required />
+                    <input type="datetime-local" id="startDate" name="startDate" min="now()" required />
                 </div>
                 <div class="form-group">
                     <label for="endDate">End Date</label>

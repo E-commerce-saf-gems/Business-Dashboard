@@ -34,6 +34,10 @@ menuBar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
 })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Chethana
 if(window.innerWidth < 768) {
 	sidebar.classList.add('hide');
 } else if(window.innerWidth > 576) {
@@ -48,6 +52,8 @@ window.addEventListener('resize', function () {
 	}
 })
 
+<<<<<<< HEAD
+=======
 // Sample data for monthly sales
 const salesData = {
 	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -98,6 +104,7 @@ const salesChart = new Chart(
 	document.getElementById("salesChart"),
 	config
 );
+>>>>>>> Chethana
 
 
 // Sample data for gemstone types

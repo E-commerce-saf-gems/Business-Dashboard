@@ -47,3 +47,4 @@ while ($row = $result->fetch_assoc()) {
 echo json_encode(["labels" => $labels, "cashIn" => $cashIn, "cashOut" => $cashOut]);
 $conn->close();
 ?>
+
