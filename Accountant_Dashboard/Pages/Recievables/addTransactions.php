@@ -2,9 +2,13 @@
 
 include("../../../database/db.php");
 
-$customer_id = $_POST['customer_id'];
-$amount = $_POST['amount'];
-$stone_id = $_POST['stone_id'];
+$customer_id = $_POST['customer_id'] ?? null;
+$amount = $_POST['amount'] ?? null;
+$stone_id = $_POST['stone_id'] ?? null;
+
+if (!$customer_id || !$amount || !$stone_id) {
+    die("Missing required data.");
+}
 
 try {
     // Begin transaction
