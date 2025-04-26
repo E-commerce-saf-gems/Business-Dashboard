@@ -1,5 +1,4 @@
 <?php
-
 include("../../../database/db.php");
 
 $customer_id = $_POST['customer_id'] ?? null;
@@ -14,39 +13,30 @@ try {
     // Begin transaction
     $conn->begin_transaction();
 
-    // Insert into transactions
+    // Insert into transactions table
     $stmt = $conn->prepare("INSERT INTO transactions (customer_id, amount, stone_id) VALUES (?, ?, ?)");
     $stmt->bind_param("idi", $customer_id, $amount, $stone_id);
+    $stmt->execute();
+    $stmt->close();
 
-    if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?ReceivalSuccess=2") ;
-    }
-
-    // Update the sales table
+    // Update sales table
     $stmt = $conn->prepare("
         UPDATE sales
         SET amountSettled = amountSettled + ?
-        WHERE customer_id = ? AND stone_id = ? AND amountSettled + ? <= total
+        WHERE customer_id = ? AND stone_id = ? AND (amountSettled + ?) <= total
     ");
     $stmt->bind_param("didi", $amount, $customer_id, $stone_id, $amount);
-
-    if (!$stmt->execute()) {
-        header("Location: ../transactions/transactions.php?ReceivalSuccess=3") ;
-    }
+    $stmt->execute();
+    $stmt->close();
 
     // Commit transaction
     $conn->commit();
-    echo "Transaction and sales update completed successfully!";
-    header("Location: ../transactions/transactions.php?ReceivalSuccess=1") ;
 
-    
+    header("Location: ../transactions/transactions.php?ReceivalSuccess=1");
+    exit();
 } catch (Exception $e) {
-    // Rollback transaction on failure
     $conn->rollback();
     echo "Error: " . $e->getMessage();
+    exit();
 }
-
-// Close the prepared statement
-$stmt->close();
-$conn->close();
 ?>
