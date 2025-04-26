@@ -12,16 +12,22 @@ if ($conn->connect_error) {
 
 header('Content-Type: application/json');
 
-// Unified months from sales and purchases (last 6 months)
+// Unified months from sales, payments, and orders (last 6 months)
 $sql = "
 SELECT 
     DATE_FORMAT(activity.month, '%b') AS monthLabel,
-    IFNULL(s.cash_in, 0) AS cash_in,
+    IFNULL(s.cash_in, 0) + IFNULL(o.cash_in, 0) AS cash_in,
     IFNULL(p.cash_out, 0) AS cash_out
 FROM (
     SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01') AS month
     FROM transactions
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+
+    UNION
+
+    SELECT DATE_FORMAT(order_date, '%Y-%m-01') AS month
+    FROM orders
+    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     
     UNION
     
@@ -29,18 +35,28 @@ FROM (
     FROM payments
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
 ) activity
+
 LEFT JOIN (
     SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_in
     FROM transactions
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     GROUP BY month
 ) s ON s.month = activity.month
+
+LEFT JOIN (
+    SELECT DATE_FORMAT(order_date, '%Y-%m-01') AS month, SUM(total_amount) AS cash_in
+    FROM orders
+    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+    GROUP BY month
+) o ON o.month = activity.month
+
 LEFT JOIN (
     SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_out
     FROM payments
     WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     GROUP BY month
 ) p ON p.month = activity.month
+
 ORDER BY activity.month ASC
 ";
 
@@ -69,5 +85,3 @@ echo json_encode([
 
 $conn->close();
 ?>
-
-

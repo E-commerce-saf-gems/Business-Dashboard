@@ -28,8 +28,17 @@ switch ($filter) {
         break;
 }
 
-// Total Sales from transactions
-$salesQuery = "SELECT IFNULL(SUM(amount), 0) AS totalSales, IFNULL(MAX(amount), 0) AS outstandingPayment FROM transactions WHERE $dateCondition";
+// Total Sales from transactions and orders
+$salesQuery = "
+    SELECT IFNULL(SUM(amount), 0) + IFNULL((
+        SELECT SUM(total_amount)
+        FROM orders
+        WHERE $dateCondition
+    ), 0) AS totalSales, 
+    IFNULL(MAX(amount), 0) AS outstandingPayment 
+    FROM transactions 
+    WHERE $dateCondition
+";
 $salesResult = $conn->query($salesQuery);
 $salesRow = $salesResult->fetch_assoc();
 
@@ -52,5 +61,3 @@ echo json_encode([
 
 $conn->close();
 ?>
-
-

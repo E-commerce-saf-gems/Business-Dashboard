@@ -126,16 +126,26 @@ $result = $conn->query($sql);
                 </div>
             <?php endif; ?>
 
+            <?php if (isset($_GET['TransactionUpdateSuccess']) && $_GET['TransactionUpdateSuccess'] == 1): ?>
+                <div class="success-message">
+                    Payment receival was updateded successfully in Transactions and Sales!
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['PaymentUpdateSuccess']) && $_GET['PaymentUpdateSuccess'] == 1): ?>
+                <div class="success-message">
+                    Payment was updateded successfully in Payments and Purchases!
+                </div>
+            <?php endif; ?>
+
+
+
             <div class="sales-table-container">
                 <div class="table-filters" >
                     <form method="GET" action="transactions.php">
                     
-                        <label for="status-filter">Type:</label>
-                        <select id="status-filter">
-                            <option value="">All</option>
-                            <option value="sale" >Sales</option>
-                            <option value="purchase" >Purchase</option>
-                        </select>
+                        
+                        
                 
                         <label for="date-filter">Date:</label>
                         <input type="date" id="date-filter" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">
