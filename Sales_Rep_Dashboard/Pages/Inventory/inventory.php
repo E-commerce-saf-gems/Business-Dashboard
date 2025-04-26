@@ -107,7 +107,7 @@ if (!$result) {
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
-                    Gem availability updated successfully!
+                    Gem details updated successfully!
                 </div>
         <?php endif; ?>
 
@@ -193,9 +193,9 @@ if (!$result) {
                       echo "<form method='POST' action='./updateavailable.php'>";
                       echo "<input type='hidden' name='stone_id' value='" . htmlspecialchars($row['stone_id']) . "'>";
                       echo "<select name='availability' onchange='this.form.submit()'>";
-                      echo "<option value='available'" . ($row['availability'] === 'Available' ? " selected" : "") . ">available</option>";
-                      echo "<option value='not available'" . ($row['availability'] === 'notAvailable' ? " selected" : "") . ">not available</option>";
-                      echo "<option value='Bids'" . ($row['availability'] === 'Bid' ? " selected" : "") . ">Bids</option>";
+                      echo "<option value='available'" . ($row['availability'] === 'available' ? " selected" : "") . ">available</option>";
+                      echo "<option value='not available'" . ($row['availability'] === 'not available' ? " selected" : "") . ">not available</option>";
+                      echo "<option value='Bid'" . ($row['availability'] === 'Bid' ? " selected" : "") . ">Bid</option>";
                       echo "</select>";
                       echo "</form>";
                       echo "</td>";

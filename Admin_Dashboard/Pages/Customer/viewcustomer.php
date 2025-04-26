@@ -162,13 +162,7 @@ if (isset($_GET['id'])) {
                     </div>
                     
                     <!-- Save Button -->
-                    <div class="form-actions">
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">
-                                <i class='bx bx-save'></i> Save Changes
-                            </button>
-                        </div>
-                    </div>
+                    
                 </form>
             </div>
         </main>
