@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Report</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./reports.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+          <div class="head-title">
+            <div class="left">
+              <h1>Report</h1>
+              <ul class="breadcrumb">
+                <li><a class="active" href="./reports.html">Home</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li><a class="active" href="#">Generate Report</a></li>
+              </ul>
+            </div>
+          </div>
+
+            <!-- Report Boxes Section -->
+            <div id="inventoryReportForm" class="report-form">
+              <h2>Inventory Report</h2>
+          
+              <label>Date Range:
+                <input type="date" id="inventoryStartDate"> to 
+                <input type="date" id="inventoryEndDate">
+              </label>
+              <button id="selectDateBtn"> Select Date </button>
+          
+              <h3>Inventory Summary</h3>
+              <label>Total Items in Inventory: 
+                <input type="number" id="totalItems" readonly>
+              </label>
+              <label>Total Items Used to Bid: 
+                <input type="number" id="totalBidItems" readonly>
+              </label>
+              <label>Total Inventory Value (Rs.): 
+                <input type="number" id="totalInventoryValue" step="0.01" readonly>
+              </label>
+              <!-- Report Period -->
+              <label>Report Period:
+                <input type="text" id="reportPeriod" readonly>
+              </label>
+          
+              <button id="generateReportBtn">Generate Inventory Report</button>
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./inventoryreport.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</body>
+</html>

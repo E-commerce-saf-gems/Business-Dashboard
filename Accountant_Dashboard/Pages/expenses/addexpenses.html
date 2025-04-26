@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Management</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="../transactions/styles.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Expenses</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="./expenseType.php">Home</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Add Expenses</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="edit-sales-container">
+                <form class="edit-sales-form" id="editsalesform"action="addExpenses.php" method="POST">
+                    <h2>New Expense Details</h2><br>
+
+                    <div class="form-group">
+                        <label for="stone_id">Select Gem</label>
+                        <select id="stone_id" name="stone_id" required>
+                            <option value="" selected disabled>Loading gems...</option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="type">Category</label>
+                        <select id="type" name="type" required>
+                            <option value="" selected disabled>Choose Category</option>
+                            <option value="Cutting and Polishing">Cutting and Polishing</option>
+                            <option value="Certifications">Certifications</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Logistics">Logistics</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" placeholder="Describe the expense" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="amount">Cost</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="" selected disabled>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save</button>
+                    </div>
+                </form>
+                
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./expenses.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="../../../Components/Accountant_Dashboard_Template/styles.css">
+    <link rel="stylesheet" href="./reports.css">   
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <dashboard-component></dashboard-component>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+                <div class="left">
+                  <h1>Report</h1>
+                  <ul class="breadcrumb">
+                    <li><a class="active" href="./reports.html">Home</a></li>
+                    <li><i class='bx bx-chevron-right'></i></li>
+                    <li><a class="active" href="#">Generate Report</a></li>
+                  </ul>
+                </div>
+              </div>
+
+            <!-- Report Boxes Section -->
+            <div id="salesReportForm" class="report-form">
+                <h2>Sales Report</h2>
+                <label>Date Range:
+                    <input type="date" id="salesStartDate"> to 
+                    <input type="date" id="salesEndDate">
+                </label>
+                <button id="selectDateBtn"> Select Date </button>
+        
+                <h3>Sales Summary</h3>
+                <label>Total Sales Amount: 
+                    <input type="number" id="totalSalesAmount" step="0.01" readonly>
+                </label>
+                <label>Total Settled Amount: 
+                    <input type="number" id="settledAmount" step="0.01" readonly>
+                </label>
+                <label>Total Remaining Amount: 
+                    <input type="number" id="remainingAmount" step="0.01" readonly>
+                </label>
+                <label>Number of Items Sold: 
+                    <input type="number" id="itemsSold" readonly>
+                </label>
+        
+                <button id="generateReportBtn">Generate Sales Report</button>
+            </div>
+        </main>
+    </section>
+
+    <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
+    <script src="./salesreport.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
