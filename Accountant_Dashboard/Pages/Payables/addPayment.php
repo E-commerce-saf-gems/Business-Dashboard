@@ -2,61 +2,68 @@
 
 include '../../../database/db.php';
 
-var_dump($_POST);
-
-// Get POST data
-$buyer_id = isset($_POST['buyer_id']) ? $_POST['buyer_id'] : null;
-$amount = isset($_POST['amount']) ? $_POST['amount'] : null;
-$stone_id = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
+$buyer_id = $_POST['buyer_id'] ?? null;
+$amount = $_POST['amount'] ?? null;
+$stone_id = $_POST['stone_id'] ?? null;
 
 if (!$buyer_id || !$amount || !$stone_id) {
     echo "Error: Missing required fields";
     exit();
 }
 
+// Start transaction
 $conn->begin_transaction();
 
 try {
-    // Insert the payment
-    $stmt = $conn->prepare("INSERT INTO payment (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
+    // Insert into payments
+    $stmt = $conn->prepare("INSERT INTO payments (buyer_id, amount, stone_id) VALUES (?, ?, ?)");
+    if (!$stmt) {
+        throw new Exception("Prepare failed for INSERT: " . $conn->error);
+    }
+
     $stmt->bind_param("idi", $buyer_id, $amount, $stone_id);
 
     if (!$stmt->execute()) {
-        throw new Exception("Error inserting payment: " . $stmt->error);
+        throw new Exception("Execute failed for INSERT: " . $stmt->error);
     }
 
+    echo "Payment inserted successfully.<br>";
     $stmt->close();
 
-    // Update the purchases table
+    // Update purchases
     $stmt = $conn->prepare("
         UPDATE purchases 
         SET amountSettled = amountSettled + ?
-        WHERE buyer_id = ? AND stone_id = ? AND amountSettled < total
+        WHERE buyer_id = ? AND stone_id = ? AND amountSettled + ? <= total
     ");
-    $stmt->bind_param("dii", $amount, $buyer_id, $stone_id , );
-
-    if (!$stmt->execute()) {
-        throw new Exception("Error updating purchase: " . $stmt->error);
+    if (!$stmt) {
+        throw new Exception("Prepare failed for UPDATE: " . $conn->error);
     }
 
+    $stmt->bind_param("diii", $amount, $buyer_id, $stone_id, $amount);
+
+    if (!$stmt->execute()) {
+        throw new Exception("Execute failed for UPDATE: " . $stmt->error);
+    }
+
+    if ($stmt->affected_rows === 0) {
+        throw new Exception("No rows updated in purchases. Check buyer_id, stone_id, or amount constraints.");
+    }
+
+    echo "Purchases updated successfully.<br>";
     $stmt->close();
 
-    // Commit the transaction
+    // Commit transaction
     $conn->commit();
+    echo "Transaction committed.<br>";
 
-    // Redirect on success
     header("Location: ../transactions/transactions.php?PaymentSuccess=1");
     exit();
 
 } catch (Exception $e) {
-    // Rollback the transaction on error
     $conn->rollback();
-
-    // Log the error (optional) and redirect with an error
-    error_log("Transaction failed: " . $e->getMessage());
-    header("Location: ../transactions/transactions.php?PaymentSuccess=2");
+    echo "Transaction failed: " . $e->getMessage();
     exit();
 }
-
-// Close the connection
 ?>
+
