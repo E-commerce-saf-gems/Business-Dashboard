@@ -106,7 +106,7 @@ $jsonData = json_encode($availableTimes);
                 <label for="date-filter">Date:</label>
                 <input type="date" id="date-filter" />
 
-                <label for="status-filter">Time:</label>
+                <label for="time-filter">Time:</label>
                 <input type="time" id="time-filter" />
 
                 <label for="customer-filter">Name:</label>
@@ -294,7 +294,7 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
 
     rows.forEach(row => {
         const date = row.children[2].textContent.trim();   // Date column
-        const time = row.children[3].textContent.trim();   // Time column
+        const time = row.children[3].textContent.trim().slice(0, 5);   // Time column
         const name = row.children[4].textContent.toLowerCase().trim(); // Name column
 
         let isVisible = true;
