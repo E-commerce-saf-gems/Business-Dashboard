@@ -107,7 +107,7 @@ if (!$result) {
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
-                    Gem availability updated successfully!
+                    Gem details updated successfully!
                 </div>
         <?php endif; ?>
 
