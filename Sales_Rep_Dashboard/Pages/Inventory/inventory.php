@@ -155,8 +155,8 @@ if (!$result) {
                 <th>Type</th>
                 <th>Amount</th>
                 <th>Buyer Name</th>
-                <th>Visibility</th>
                 <th>Availability</th>
+                <th>Visibility</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -174,8 +174,7 @@ if (!$result) {
                       echo "<td>" . $row['type'] . "</td>";
                       echo "<td>" . $row['amount'] . "</td>";
                       echo "<td>" . $row['name'] . "</td>";
-                      // echo "<td>" . $row['visibility'] . "</td>";
-                      // echo "<td>" . $row['availability'] . "</td>";
+                      echo "<td>" . $row['availability'] . "</td>";
 
                       // form for visibility
                       echo "<td>";
@@ -188,24 +187,13 @@ if (!$result) {
                       echo "</form>";
                       echo "</td>";
 
-                      // form for availability
-                      echo "<td>";
-                      echo "<form method='POST' action='./updateavailable.php'>";
-                      echo "<input type='hidden' name='stone_id' value='" . htmlspecialchars($row['stone_id']) . "'>";
-                      echo "<select name='availability' onchange='this.form.submit()'>";
-                      echo "<option value='available'" . ($row['availability'] === 'available' ? " selected" : "") . ">available</option>";
-                      echo "<option value='not available'" . ($row['availability'] === 'not available' ? " selected" : "") . ">not available</option>";
-                      echo "<option value='Bid'" . ($row['availability'] === 'Bid' ? " selected" : "") . ">Bid</option>";
-                      echo "</select>";
-                      echo "</form>";
-                      echo "</td>";
-
+                    
 
                       // Action buttons
                       echo "<td class='actions'>";
 
                       
-                      if ($row['availability'] == 'available' || $row['availability'] == 'Available') {
+                      if ($row['visibility'] == 'show' || $row['visibility'] == 'Show') {
                           echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
                           echo "<a href='./deleteGem.php' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
                       }
