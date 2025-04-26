@@ -4,7 +4,7 @@ include '../../../database/db.php';
 header('Content-Type: application/json');
 
 // Fetch all gems from the inventory
-$sql = "SELECT stone_id, type, availability, visibility FROM inventory ORDER BY stone_id ASC";
+$sql = "SELECT stone_id, colour , type, shape, size, availability, visibility FROM inventory ORDER BY stone_id ASC";
 $result = $conn->query($sql);
 
 $gems = [];

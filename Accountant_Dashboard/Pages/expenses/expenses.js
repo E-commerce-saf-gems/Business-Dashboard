@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data.forEach(gem => {
                 const option = document.createElement('option');
                 option.value = gem.stone_id;
-                option.textContent = `ID: ${gem.stone_id} | Type: ${gem.type} | Availability: ${gem.availability} | Visibility: ${gem.visibility}`;
+                option.textContent = `ID: ${gem.stone_id} | ${gem.colour} ${gem.type} ${gem.shape} shaped ${gem.size} Carat weighted gem | Availability: ${gem.availability} | Visibility: ${gem.visibility}`;
                 dropdown.appendChild(option);
             });
         })
