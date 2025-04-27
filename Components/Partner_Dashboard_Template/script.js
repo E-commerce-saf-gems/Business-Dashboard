@@ -79,7 +79,7 @@ class Dashboard extends HTMLElement {
                     <div class="profile">
                         <i class='bx bx-user' id="profile-icon"></i>
                         <ul class="dropdown-menu">
-                            <li><a href="/pages/Profile/MyDetails.php" class="dropdown-item">Profile</a></li>
+                            <li><a href="../../Pages/Profile/profile.php" class="dropdown-item">Profile</a></li>
                             <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
                         </ul>
                     </div>

@@ -54,6 +54,24 @@ $pending_orders_result = $conn->query($pending_orders_sql);
             <!-- Dashboard Overview -->
             <div class="dashboard-container">
 
+            <div class="table-filters">
+                    <label for="date-filter">Date:</label>
+                    <input type="date" id="date-filter">
+                    
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="">All</option>
+                        <option value="A">Approved</option>
+                        <option value="P">Pending</option>
+                        <option value="C">Complete</option>
+                    </select>
+
+                    <label for="customer-filter">Type:</label>
+                    <input type="text" id="customer-filter" placeholder="Search Gem Type">
+                    
+                    <button class="btn-filter">Filter</button>
+                </div>
+
                 <!-- Today's Orders -->
                 <div class="dashboard-card">
                     <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
@@ -65,28 +83,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                                         Order #<?php echo $row['order_id']; ?>
                                     </a>
                                     <span class="shipping-method"><?php echo ucfirst($row['shipping_method']); ?></span>
-
-                                    <?php if ($row['shipping_method'] === 'store-pickup'): ?>
-                                        <form method="POST" action="./updateOrderStatus.php" style="display:inline;">
-                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
-                                            <input type="hidden" name="new_status"
-                                                value="<?php echo ($row['order_status'] == 'ready for collection') ? 'completed' : 'ready for collection'; ?>">
-                                            <button type="submit"
-                                                class="status-btn <?php echo ($row['order_status'] == 'ready for collection') ? 'btn-complete' : 'btn-ready'; ?>">
-                                                <?php echo ($row['order_status'] == 'ready for collection') ? 'Complete Order' : 'Ready for Collection'; ?>
-                                            </button>
-                                        </form>
-                                    <?php elseif ($row['shipping_method'] === 'home-delivery'): ?>
-                                        <form method="POST" action="updateOrderStatus.php" style="display:inline;">
-                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
-                                            <input type="hidden" name="new_status"
-                                                value="<?php echo ($row['order_status'] == 'ready for delivery') ? 'completed' : 'ready for delivery'; ?>">
-                                            <button type="submit"
-                                                class="status-btn <?php echo ($row['order_status'] == 'ready for delivery') ? 'btn-complete' : 'btn-delivery'; ?>">
-                                                <?php echo ($row['order_status'] == 'ready for delivery') ? 'Completed' : 'Sent for Delivery'; ?>
-                                            </button>
-                                        </form>
-                                    <?php endif; ?>
 
                                 </li>
                             <?php endwhile; ?>
@@ -176,19 +172,19 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                                     <td>LKR <?php echo number_format($row['total_amount'], 2); ?></td>
                                     <td><?php echo ucfirst($row['shipping_method']); ?></td>
                                     <td>
-                                        <form method="POST" action="updateOrderStatus.php" class="status-form">
-                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
-                                            <select name="order_status" class="status-dropdown" onchange="this.form.submit()">
-                                                <?php
-                                                $statuses = ['pending', 'confirmed', 'ready for collection', 'ready for delivery', 'completed'];
-                                                foreach ($statuses as $status) {
-                                                    $selected = ($row['order_status'] === $status) ? 'selected' : '';
-                                                    echo "<option value=\"$status\" $selected>" . ucfirst($status) . "</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </form>
-                                    </td>
+                                    <form method="POST" action="updateOrderStatus.php" class="status-form">
+    <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+    <select name="order_status" class="status-dropdown" onchange="this.form.submit()">
+        <?php
+        $statuses = ['pending', 'confirmed', 'ready for collection', 'ready for delivery', 'completed'];
+        foreach ($statuses as $status) {
+            $selected = ($row['order_status'] === $status) ? 'selected' : '';
+            echo "<option value=\"$status\" $selected>" . ucfirst($status) . "</option>";
+        }
+        ?>
+    </select>
+</form>
+</td>
                                     <td>
                                         <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" class="btn-view">View</a>
                                     </td>
@@ -207,8 +203,12 @@ $pending_orders_result = $conn->query($pending_orders_sql);
     </section>
     <script src="./orders.js"></script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    
 </body>
 
 </html>
 
 <?php $conn->close(); ?>
+
+
+

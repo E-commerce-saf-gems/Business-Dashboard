@@ -28,17 +28,26 @@ switch ($filter) {
         break;
 }
 
-// Sales
-$salesQuery = "SELECT IFNULL(SUM(amountSettled), 0) AS totalSales, IFNULL(MAX(amountSettled), 0) AS maxSale FROM sales WHERE $dateCondition";
+// Total Sales from transactions and orders
+$salesQuery = "
+    SELECT IFNULL(SUM(amount), 0) + IFNULL((
+        SELECT SUM(total_amount)
+        FROM orders
+        WHERE $dateCondition
+    ), 0) AS totalSales, 
+    IFNULL(MAX(amount), 0) AS outstandingPayment 
+    FROM transactions 
+    WHERE $dateCondition
+";
 $salesResult = $conn->query($salesQuery);
 $salesRow = $salesResult->fetch_assoc();
 
-// Purchases
-$purchasesQuery = "SELECT IFNULL(SUM(amountSettled), 0) AS totalPurchases FROM purchases WHERE $dateCondition";
+// Total Purchases from payments
+$purchasesQuery = "SELECT IFNULL(SUM(amount), 0) AS totalPurchases FROM payments WHERE $dateCondition";
 $purchasesResult = $conn->query($purchasesQuery);
 $purchasesRow = $purchasesResult->fetch_assoc();
 
-// Expenses (only Paid)
+// Total Expenses (only Paid)
 $expensesQuery = "SELECT IFNULL(SUM(amount), 0) AS totalExpenses FROM expenses WHERE $dateCondition AND status = 'Paid'";
 $expensesResult = $conn->query($expensesQuery);
 $expensesRow = $expensesResult->fetch_assoc();
@@ -47,9 +56,8 @@ echo json_encode([
     "totalSales" => (float)$salesRow['totalSales'],
     "totalPurchases" => (float)$purchasesRow['totalPurchases'],
     "totalExpenses" => (float)$expensesRow['totalExpenses'],
-    "outstandingPayment" => (float)$salesRow['maxSale']
+    "outstandingPayment" => (float)$salesRow['outstandingPayment']
 ]);
 
 $conn->close();
 ?>
-

@@ -84,11 +84,9 @@ while ($row = $bidsResult->fetch_assoc()) {
 
             <div class="bid-info">
               <?php
-                // Calculate the time left between current time and finish date
                 $finishDate = $biddingStone['finishDate'];
                 $timeLeft = date_diff(date_create($currentDateTime), date_create($finishDate));
                 
-                // Format the time left (only Days, Hours, and Minutes)
                 $timeLeftFormatted = $timeLeft->invert ? 'Expired' : $timeLeft->format('%dD %hH %iM');
               ?>
               <div><strong>Time Left:</strong> <span class="info-value"><?= $timeLeftFormatted ?></span></div>

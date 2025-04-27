@@ -2,7 +2,6 @@
 include("../../../database/db.php");
 
 try {
-    // Query to fetch stones with availability = 'Available'
     $stmt = $conn->prepare("
         SELECT stone_id, colour, shape, type, size, amount
         FROM inventory 
@@ -15,11 +14,10 @@ try {
     while ($row = $result->fetch_assoc()) {
         $stones[] = $row;
     }
-    // Send data as JSON
     header('Content-Type: application/json');
-    echo json_encode($stones); // Send stones data as JSON response
+    echo json_encode($stones); 
 } catch (Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]); // Handle any errors
+    echo json_encode(["error" => $e->getMessage()]); 
 }
 
 $stmt->close();

@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label for="startingBid">Starting Bid Value (Rs.)</label>
-                    <input type="number" id="startingBid" name="startingBid" min="10000" required />
+                    <input type="number" id="startingBid" name="startingBid" min="100000" required />
                 </div>
                 <div class="form-group">
                     <label for="startDate">Start Date</label>
@@ -58,5 +58,32 @@
 
 <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 <script src="./bids.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // Fix timezone offset
+
+        const isoNow = now.toISOString().slice(0,16); // yyyy-MM-ddTHH:mm
+
+        // Set min value of startDate to now
+        document.getElementById('startDate').setAttribute('min', isoNow);
+
+        // Set finishDate min when startDate changes
+        document.getElementById('startDate').addEventListener('change', (e) => {
+            const start = new Date(e.target.value);
+            start.setHours(start.getHours() + 1); // At least 1 hour later
+            start.setMinutes(start.getMinutes() - start.getTimezoneOffset()); // Fix timezone offset again
+            const minFinish = start.toISOString().slice(0,16);
+            document.getElementById('finishDate').setAttribute('min', minFinish);
+        });
+
+        // Trigger change event on load if value is pre-filled
+        const startInput = document.getElementById('startDate');
+        if (startInput.value) {
+            const event = new Event('change');
+            startInput.dispatchEvent(event);
+        }
+    });
+</script>
 </body>
 </html>

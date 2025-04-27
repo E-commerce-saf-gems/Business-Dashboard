@@ -46,6 +46,59 @@ $months = array_reverse($months);
 $totals = array_reverse($totals);
 
 
+
+// Get today's date
+$today = date("Y-m-d");
+
+// Query to fetch today's approved meetings
+$sql = "
+    SELECT a.time, c.firstName AS customer_name, c.email 
+    FROM meeting AS m
+    JOIN availabletimes AS a ON m.availableTimes_id = a.availableTimes_id
+    JOIN customer AS c ON m.customer_id = c.customer_id
+    WHERE a.salesRep_id = ? 
+    AND DATE(a.date) = ? 
+    AND m.status = 'A' 
+    ORDER BY a.time
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("is", $salesRep_id, $today);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Get today's approved meetings - corrected version
+$today_meetings = [];
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $today_meetings[] = [
+                'time' => $row['time'],
+                'customer_name' => $row['customer_name'],
+                'email' => $row['email']
+            ];
+        }
+    }
+}
+
+
+
+
+
+
+
+
+// Fetch today's orders
+$today_orders_sql = "SELECT order_id,shipping_method,order_status FROM orders WHERE DATE(order_date) = ? && (order_status='confirmed' || order_status='ready for collection') ";
+$today_orders_stmt = $conn->prepare($today_orders_sql);
+$today_orders_stmt->bind_param("s", $today);
+$today_orders_stmt->execute();
+$today_orders_result = $today_orders_stmt->get_result();
+
+
+
+
 $conn->close();
 ?>
 
@@ -57,7 +110,7 @@ $conn->close();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
-
+    <link rel="stylesheet" href="./Sales/editSalesStyles.css" />  
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -174,10 +227,10 @@ $conn->close();
             <h2>Shortcuts</h2>
             <ul class="shortcut-options">
               <li>
-              <a href="Pages/Customers/addcustomer.php">
+              <a href="Pages/Customer/customers.php">
                 <i class="bx bxs-user-plus"></i>
                 <span class="text">
-                  <h3>Add Customer</h3>
+                  <h3>view Customer</h3>
                 </span>
               </li>
               <li>
@@ -221,6 +274,74 @@ $conn->close();
             <!-- View More as an underlined text link -->
             <a href="./Pages/Sales/sales.php" class="view-more">View More</a>
           </div>
+
+<!-- Today's Approved Meetings -->
+<div class="sales-summary">
+    <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Approved Meetings</h2>
+    <div class="approved-meetings-list">
+        <?php if (!empty($today_meetings)): ?>
+            <ul>
+                <?php foreach ($today_meetings as $meeting): ?>
+                    <li>
+                        <strong><?php echo date('h:i A', strtotime($meeting['time'])); ?></strong>
+                        <span><?php echo htmlspecialchars($meeting['customer_name']); ?></span>
+                        <a href="mailto:<?php echo htmlspecialchars($meeting['email']); ?>">
+                            <i class='bx bx-envelope'></i>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>No approved meetings scheduled for today.</p>
+        <?php endif; ?>
+    </div>
+    <a href="./Pages/Meetings/meeting.php" class="view-more">View All Meetings</a>
+</div>
+
+
+
+
+           <!-- Today's Orders -->
+<div class="sales-summary">
+    <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
+    <div class="scrollable-list">
+        <ul>
+            <?php 
+            $today_orders_result->data_seek(0); // Reset pointer if needed
+            while ($row = $today_orders_result->fetch_assoc()): 
+                $order_id = htmlspecialchars($row['order_id']);
+                $shipping_method = htmlspecialchars($row['shipping_method']);
+                $order_status = htmlspecialchars($row['order_status']);
+            ?>
+                <li class="order-item">
+                    <a href="./viewOrder.php?id=<?= $order_id ?>" class="order-link">
+                        Order #<?= $order_id ?>
+                    </a>  
+                    <span class="shipping-method">
+                        <?= ucfirst(str_replace('-', ' ', $shipping_method)) ?>
+                    </span>
+                    
+                    <?php if ($shipping_method === 'store-pickup'): ?>
+                        <button class="status-btn pickup-btn" 
+                            data-order-id="<?= $order_id ?>" 
+                            data-current-status="<?= $order_status ?>"
+                            data-shipping-method="<?= $shipping_method ?>">
+                            <?= ($order_status == 'ready for collection') ? 'Mark as Collected' : 'Prepare for Collection' ?>
+                        </button>
+                    <?php elseif ($shipping_method === 'home-delivery'): ?>
+                        <button class="status-btn delivery-btn" 
+                            data-order-id="<?= $order_id ?>" 
+                            data-current-status="<?= $order_status ?>"
+                            data-shipping-method="<?= $shipping_method ?>">
+                            <?= ($order_status == 'ready for delivery') ? 'Mark as Delivered' : 'Prepare for Delivery' ?>
+                        </button>
+                    <?php endif; ?>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    </div>
+</div>
+    </div>
         </div>
       </main>
     </section>

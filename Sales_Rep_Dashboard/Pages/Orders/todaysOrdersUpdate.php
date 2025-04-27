@@ -1,9 +1,9 @@
 <?php
 include '../../../database/db.php';
 
-if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
+if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
     $order_id = $_POST['order_id'];
-    $new_status = $_POST['order_status'];
+    $new_status = $_POST['new_status'];
 
     $update_sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
     $stmt = $conn->prepare($update_sql);
@@ -11,11 +11,12 @@ if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
     if ($stmt) {
         $stmt->bind_param("si", $new_status, $order_id);
         if ($stmt->execute()) {
-            $stmt->close();  // Close the statement after execution
+        $stmt->close();
+
             header("Location: ./orders.php?success=1");
             exit();
         } else {
-            $stmt->close();  // Close the statement after execution
+        $stmt->close();
             header("Location: ./orders.php?success=2");
             exit();
         }
