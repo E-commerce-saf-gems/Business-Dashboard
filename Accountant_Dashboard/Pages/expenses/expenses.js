@@ -73,3 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
+
+document.getElementById("amount").addEventListener("input", function() {
+    const amountField = this;
+    const errorMsg = document.getElementById("errorMsg");
+
+    if (value < 0) {
+    errorMsg.textContent = "❌ Error: Amount cannot be negative.";
+    amountField.value = ""; // Clear the invalid input
+    } else if (value === 0) {
+        errorMsg.textContent = "❌ Error: Amount cannot be 0.";
+        amountField.value = ""; // Clear the invalid input
+    } else {
+        errorMsg.textContent = ""; // Clear the error if value is valid
+    }
+});
+
+
+
+

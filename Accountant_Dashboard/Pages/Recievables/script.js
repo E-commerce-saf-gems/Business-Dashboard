@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 });
                             } else {
                                 const noStonesMessage = document.createElement('option');
-                                noStonesMessage.textContent = 'No stones available for this customer.';
+                                noStonesMessage.textContent = 'No stones available for this customer to settle total amount.';
                                 noStonesMessage.disabled = true;
                                 stoneDropdown.appendChild(noStonesMessage);
                             }
@@ -109,10 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const max = parseFloat(amountInput.getAttribute("max"));
             const value = parseFloat(amountInput.value);
     
-            if (value < 0) {
-                amountError.textContent = "Amount cannot be negative.";
-            } else if (max && value > max) {
-                amountError.textContent = `Amount cannot exceed Rs. ${max}`;
+            if (value < 0 ) {
+                amountError.textContent = "❌ Error: Amount cannot be a negative value";
+            
+            }else if (max && value > max) {
+                amountError.textContent = `❌ Error: Amount cannot exceed Rs. ${max}`;
             } else {
                 amountError.textContent = "";
             }

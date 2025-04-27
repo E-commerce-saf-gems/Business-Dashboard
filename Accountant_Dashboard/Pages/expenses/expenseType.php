@@ -140,24 +140,10 @@ $result = $conn->query($sql);
 
             <div class="report-boxes-container">
                 <button class="report-box" onclick="location.href='./addExpenses.html'">
-                    Cutting and Polishing
+                    Add New Expense
                 </button>
 
-                <button class="report-box" onclick="location.href='./addExpenses.html'">
-                    Certifications
-                </button>
-
-                <button class="report-box" onclick="location.href='./addExpenses.html'">
-                    Marketing
-                </button>
-
-                <button class="report-box" onclick="location.href='./addExpenses.html'">
-                    Logistics
-                </button>
-
-                <button class="report-box" onclick="location.href='./addExpenses.html'">
-                    Other
-                </button>
+                
             </div>
 
 

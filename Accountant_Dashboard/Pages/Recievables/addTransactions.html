@@ -76,6 +76,24 @@
         </main>
     </section>
 
+    <script>
+    document.getElementById('select-customer').addEventListener('click', function () {
+        const emailInput = document.getElementById('customer-email');
+        const emailValue = emailInput.value.trim();
+    
+        // Simple email regex
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!emailPattern.test(emailValue)) {
+            alert('Please enter a valid email address.');
+            emailInput.focus();
+        } else {
+            // continue your "Select" button functionality here
+            console.log('Valid email. Proceed...');
+        }
+    });
+    </script>
+
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="./script.js"></script>
 </body>

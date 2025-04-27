@@ -139,11 +139,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
 </section>
 
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
     const buyerDropdown = document.getElementById('buyer');
     const stoneDropdown = document.getElementById('stone');
+    const amountInput = document.getElementById('amount'); // Assuming there's an amount input
+    const amountError = document.getElementById('amount-error') || createErrorElement('amount'); // Create error element if it doesn't exist
+    const editPaymentForm = document.getElementById('editPaymentForm') || document.querySelector('form'); // Get the form
+    
     const currentBuyerId = "<?= htmlspecialchars($payment['buyer_id']) ?>";
     const currentStoneId = "<?= htmlspecialchars($payment['stone_id']) ?>";
+    
+    let stonesData = {}; // stone_id => amountToBeSettled mapping
+
+    // Function to create error element if it doesn't exist
+    function createErrorElement(inputId) {
+        const input = document.getElementById(inputId);
+        if (!input) return null;
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.id = `${inputId}-error`;
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginTop = '5px';
+        errorDiv.style.fontSize = '14px';
+        
+        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+        return errorDiv;
+    }
 
     // Fetch all buyers
     fetch('./getBuyers.php')
@@ -158,11 +180,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 buyerDropdown.appendChild(option);
             });
-
+            
             // AFTER loading buyers, now load related stones
             loadStones(currentBuyerId);
         })
-        .catch(error => console.error('Error loading buyers:', error));
+        .catch(error => {
+            console.error('Error loading buyers:', error);
+            showError('buyer-error', 'Failed to load buyers. Please try again.');
+        });
 
     // Load stones based on selected buyer
     function loadStones(buyerId) {
@@ -171,6 +196,8 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(`./getStones.php?buyer_id=${buyerId}`)
                 .then(response => response.json())
                 .then(stones => {
+                    stonesData = {}; // Reset stones data
+                    
                     stones.forEach(stone => {
                         const option = document.createElement('option');
                         option.value = stone.stone_id;
@@ -179,18 +206,127 @@ document.addEventListener('DOMContentLoaded', function () {
                             option.selected = true;
                         }
                         stoneDropdown.appendChild(option);
+                        
+                        // Save stone data for validation
+                        stonesData[stone.stone_id] = parseFloat(stone.amountToBeSettled);
                     });
+                    
+                    // Validate amount after loading stones (if there's an amount input)
+                    if (amountInput) {
+                        validateAmount();
+                    }
                 })
-                .catch(error => console.error('Error loading stones:', error));
+                .catch(error => {
+                    console.error('Error loading stones:', error);
+                    showError('stone-error', 'Failed to load stones. Please try again.');
+                });
         }
     }
 
+    // Show error message
+    function showError(errorId, message) {
+        const errorElement = document.getElementById(errorId) || createErrorElement(errorId.replace('-error', ''));
+        if (errorElement) {
+            errorElement.textContent = message;
+        }
+    }
+
+    // Clear error message
+    function clearError(errorId) {
+        const errorElement = document.getElementById(errorId);
+        if (errorElement) {
+            errorElement.textContent = '';
+        }
+    }
+
+    // Function to validate amount
+    function validateAmount() {
+        if (!amountInput) return true; // Skip if no amount input
+        
+        const amountValue = parseFloat(amountInput.value);
+        const selectedStoneId = stoneDropdown.value;
+        const availableAmount = stonesData[selectedStoneId];
+        
+        // Clear previous error
+        clearError('amount-error');
+        
+        // Check for empty value
+        if (amountInput.value.trim() === '') {
+            showError('amount-error', 'Please enter an amount.');
+            return false;
+        }
+        
+        // Check for invalid number
+        if (isNaN(amountValue)) {
+            showError('amount-error', 'Please enter a valid amount.');
+            return false;
+        }
+        
+        // Check for negative amount
+        if (amountValue < 0) {
+            showError('amount-error', '❌ Error: Amount cannot be negative.');
+            return false;
+        }
+
+        if (amountValue === 0) {
+            showError('amount-error', '❌ Error: Amount cannot be 0(Zero).');
+            return false;
+        }
+        
+        // Check if amount exceeds available amount to be settled
+        if (availableAmount !== undefined && amountValue > availableAmount) {
+            showError('amount-error', `❌ Error: Amount cannot be greater than the available amount to be settled (Rs.${availableAmount}).`);
+            return false;
+        }
+        
+        return true;
+    }
+
+    // Event listeners
     buyerDropdown.addEventListener('change', function () {
         loadStones(this.value);
+        clearError('buyer-error');
     });
-
     
+    stoneDropdown.addEventListener('change', function () {
+        clearError('stone-error');
+        if (amountInput) {
+            validateAmount();
+        }
+    });
+    
+    // Add validation for amount input if it exists
+    if (amountInput) {
+        amountInput.addEventListener('input', validateAmount);
+    }
+    
+    // Form submission validation
+    if (editPaymentForm) {
+        editPaymentForm.addEventListener('submit', function (e) {
+            // Validate buyer selection
+            if (!buyerDropdown.value) {
+                showError('buyer-error', 'Please select a buyer.');
+                e.preventDefault();
+                return;
+            }
+            
+            // Validate stone selection
+            if (!stoneDropdown.value) {
+                showError('stone-error', 'Please select a stone.');
+                e.preventDefault();
+                return;
+            }
+            
+            // Validate amount if it exists
+            if (amountInput && !validateAmount()) {
+                e.preventDefault();
+                amountInput.focus();
+                return;
+            }
+        });
+    }
 });
+
 </script>
 
 <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>

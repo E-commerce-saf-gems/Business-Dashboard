@@ -114,6 +114,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['expense_id'])) {
         </main>
     </section>
 
+    <script >
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const editExpensesForm = document.getElementById('editExpensesForm'); // Your form ID
+    const amountInput = document.getElementById('amount'); // Your input ID
+    const amountError = document.createElement('div'); // Create a new error div dynamically
+
+    // Styling the error message div
+    amountError.style.color = 'red';
+    amountError.style.fontWeight = 'bold';
+    amountError.style.fontSize = '14px';
+    amountError.style.marginTop = '5px';
+
+    // Insert error message div after the amount input
+    amountInput.parentNode.appendChild(amountError);
+
+    // Validate on typing
+    amountInput.addEventListener('input', function() {
+        validateAmount();
+    });
+
+    // Function to validate amount
+    function validateAmount() {
+        const amountValue = parseFloat(amountInput.value);
+
+        // Clear previous error
+        amountError.textContent = "";
+
+        
+
+        // Negative number
+        if (amountValue < 0) {
+            amountError.textContent = "❌ Error: Cost cannot be negative.";
+            return false;
+        }
+
+        // Zero value
+        if (amountValue === 0) {
+            amountError.textContent = "❌ Error: Cost cannot be 0 (Zero).";
+            return false;
+        }
+
+        return true;
+    }
+
+    // Validate on form submit
+    editExpensesForm.addEventListener('submit', function (e) {
+        const amountValue = parseFloat(amountInput.value);
+
+        amountError.textContent = ""; // Clear previous
+
+        if (isNaN(amountValue)) {
+            amountError.textContent = "Please enter a valid cost.";
+            e.preventDefault();
+            return;
+        }
+
+        if (!validateAmount()) {
+            e.preventDefault();
+            amountInput.focus();
+            return;
+        }
+    });
+});
+</script>
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
 </body>
 </html>
+
+

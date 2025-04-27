@@ -1,3 +1,17 @@
+// Helper function to get today's date as Date object
+function getToday() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today;
+}
+
+// Validate future dates
+function isFutureDate(dateStr) {
+    const selectedDate = new Date(dateStr);
+    const today = getToday();
+    return selectedDate > today;
+}
+
 // Select button: Fetch and fill profit & loss data
 document.getElementById("selectDateBtn").addEventListener("click", () => {
     const startDate = document.getElementById("plStartDate").value;
@@ -5,6 +19,12 @@ document.getElementById("selectDateBtn").addEventListener("click", () => {
 
     if (!startDate || !endDate) {
         alert("Please select a valid date range.");
+        return;
+    }
+
+    // Validate future dates
+    if (isFutureDate(startDate) || isFutureDate(endDate)) {
+        alert("Future dates are not allowed. Please select valid dates.");
         return;
     }
 
@@ -22,12 +42,9 @@ document.getElementById("selectDateBtn").addEventListener("click", () => {
         document.getElementById("marketing").value = data.marketing || 0;
         document.getElementById("logistics").value = data.logistics || 0;
         document.getElementById("otherExpenses").value = data.otherExpenses || 0;
-
-        // Optional: auto-calculate totals here if desired
     })
     .catch(error => console.error("Error fetching data:", error));
 });
-
 
 // Generate Report button: Store data and go to preview page
 document.getElementById("generateReportBtn").addEventListener("click", () => {
@@ -39,17 +56,23 @@ document.getElementById("generateReportBtn").addEventListener("click", () => {
         return;
     }
 
+    // Validate future dates before generating
+    if (isFutureDate(startDate) || isFutureDate(endDate)) {
+        alert("Future dates are not allowed. Please select valid dates.");
+        return;
+    }
+
     const totalSalesRevenue = parseFloat(document.getElementById("totalSalesRevenue").value) || 0;
     const otherIncome = parseFloat(document.getElementById("otherIncome")?.value) || 0;
     const purchases = parseFloat(document.getElementById("purchases").value) || 0;
     const cuttingPolishing = parseFloat(document.getElementById("cuttingPolishing").value) || 0;
-    const certificationFees = parseFloat(document.getElementById("certificationFees").value) || 0; // Add this lines = parseFloat(document.getElementById("rentUtilities").value) || 0;
+    const certificationFees = parseFloat(document.getElementById("certificationFees").value) || 0;
     const marketing = parseFloat(document.getElementById("marketing").value) || 0;
     const logistics = parseFloat(document.getElementById("logistics").value) || 0;
     const otherExpenses = parseFloat(document.getElementById("otherExpenses").value) || 0;
 
     const totalExpenses = cuttingPolishing + certificationFees + marketing + logistics + otherExpenses;
-    const grossProfit = totalSalesRevenue - purchases; // No COGS logic yet
+    const grossProfit = totalSalesRevenue - purchases;
     const netProfit = grossProfit + otherIncome - totalExpenses;
 
     const reportData = {
@@ -74,4 +97,18 @@ document.getElementById("generateReportBtn").addEventListener("click", () => {
 
     window.location.href = "Profitlosspreview.html";
 });
+
+// Corrected: Set max attribute for date inputs to disable future dates from picker
+window.addEventListener('DOMContentLoaded', () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayFormatted = `${year}-${month}-${day}`;
+
+    document.getElementById('plStartDate').setAttribute('max', todayFormatted);
+    document.getElementById('plEndDate').setAttribute('max', todayFormatted);
+});
+
+
 

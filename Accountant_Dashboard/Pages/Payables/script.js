@@ -89,9 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const value = parseFloat(amountInput.value);
 
         if (value < 0) {
-            amountError.textContent = "Amount cannot be a negative value";
-        } else if (max && value > max) {
-            amountError.textContent = `Amount cannot exceed Rs. ${max}`;
+            amountError.textContent = "❌ Error: Amount cannot be a negative value";
+        } else if (value === 0) {
+            amountError.textContent = "❌ Error: Amount cannot be a 0";
+        }else if (max && value > max) {
+            amountError.textContent = `❌ Error: Amount cannot exceed Rs. ${max}`;
         } else {
             amountError.textContent = "";
         }
