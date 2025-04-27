@@ -18,7 +18,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountant Dashboard</title>
+    <title>Partner Dashboard</title>
     <link rel="stylesheet" href="../../../Components/Partner_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="./styles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -39,30 +39,14 @@ $result = $conn->query($sql);
 				</div>
 			</div>
 
-            <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Transactions Summary</h2>
-                </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>Rs. 254300</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>Rs. 213200</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>Rs. 408900</p>
-                </div>
-            </div>
+           
 
             <!-- <div class="addnew">
                 <a href="./customerType.html" class="btn-add"><i class='bx bx-plus'></i>Add New</a>
             </div> -->
 
             <div class="sales-table-container">
-                <div class="table-filters">
+                <!-- <div class="table-filters">
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter">
                     
@@ -77,7 +61,7 @@ $result = $conn->query($sql);
                     <input type="text" id="customer-filter" placeholder="Search Customer">
                     
                     <button class="btn-filter">Filter</button>
-                </div>
+                </div> -->
 
                 <table class="sales-table">
                     <thead>

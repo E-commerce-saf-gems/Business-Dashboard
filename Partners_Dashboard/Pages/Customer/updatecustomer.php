@@ -2,7 +2,6 @@
 include('../../../database/db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve and sanitize POST data
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
     $username = isset($_POST['username']) ? $_POST['username'] : null;
     $password = isset($_POST['password']) ? $_POST['password'] : null;
@@ -12,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contactNo = isset($_POST['contactNo']) ? $_POST['contactNo'] : null;
 
  
-    // Prepare and execute the inventory update
     $sql = "UPDATE customer SET role = ?, name = ?, email = ?, contactNo = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssii", $role, $name, $email, $contactNo, $user_id);

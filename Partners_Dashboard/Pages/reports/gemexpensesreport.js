@@ -66,31 +66,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   function generateGemExpensesReport() {
+    const gemId = document.getElementById("gemId").textContent;
+
+    // Check if gem is selected
+    if (!gemId || gemId.trim() === "") {
+        // Display error message if no gem is selected
+        alert("Please select a gem before generating the report.");
+        return;  // Exit the function to prevent redirection
+    }
+
     const reportData = {
-      gem: {
-        stone_id: document.getElementById("gemId").textContent,
-        type: document.getElementById("gemType").textContent,
-        availability: document.getElementById("gemAvailability").textContent,
-        visibility: document.getElementById("gemVisibility").textContent
-      },
-      totals: {
-        "Cutting and Polishing": parseFloat(document.getElementById("cuttingPolishing").value) || 0,
-        "Certifications": parseFloat(document.getElementById("certificationFees").value) || 0,
-        "Marketing": parseFloat(document.getElementById("marketing").value) || 0,
-        "Logistics": parseFloat(document.getElementById("logistics").value) || 0,
-        "Other": parseFloat(document.getElementById("otherExpenses").value) || 0
-      }
+        gem: {
+            stone_id: gemId,
+            type: document.getElementById("gemType").textContent,
+            availability: document.getElementById("gemAvailability").textContent,
+            visibility: document.getElementById("gemVisibility").textContent
+        },
+        totals: {
+            "Cutting and Polishing": parseFloat(document.getElementById("cuttingPolishing").value) || 0,
+            "Certifications": parseFloat(document.getElementById("certificationFees").value) || 0,
+            "Marketing": parseFloat(document.getElementById("marketing").value) || 0,
+            "Logistics": parseFloat(document.getElementById("logistics").value) || 0,
+            "Other": parseFloat(document.getElementById("otherExpenses").value) || 0
+        }
     };
-  
+
     // Calculate total cost
     reportData.totalCost = Object.values(reportData.totals).reduce((sum, value) => sum + value, 0);
-  
+
     // Save to localStorage with correct key
     localStorage.setItem("gemExpensesReportData", JSON.stringify(reportData));
-  
+
     // Redirect to preview page
     window.location.href = "gemexpensespreview.html";
-  }
+}
+
   
   
   

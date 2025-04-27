@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Customer Details</title>
+    <title>Edit Customer Details</title>
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="../Sales/salesStyles.css" />
-    <link rel="stylesheet" href="../Sales/editSalesStyles.css" />    
+    <link rel="stylesheet" href="../editCustomerStyles.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -18,22 +17,21 @@
 					<h1>Customers</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Add New Customer</a>
+							<a class="active" href="#">Edit Customer Details</a>
 						</li>
 					</ul>
 				</div>
 			</div>
             <div class="edit-sales-container">
-                <form class="edit-sales-form" id="AddCustomerForm" action="./addCustomer.php" method="POST" >
-                    <h2>Add Customer Details</h2>
+                <form class="edit-sales-form" id="editCustomerForm">
+                    <h2>Edit Customer Details</h2>
 
-                     <!-- NIC Field -->
-                     <div class="form-group">
+    
+                    <div class="form-group">
                         <label for="NIC">NIC Number</label>
                         <input type="text" id="NIC" name="NIC" placeholder="NIC Number" required>
                     </div>
 
-                    <!-- Title Field -->
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" id="title" name="title" placeholder="Title" required>
@@ -70,7 +68,6 @@
                     </div>
 
                     
-                    <!-- Email Field -->
                      <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" placeholder="Email Address" required>
@@ -126,15 +123,13 @@
                         <input type="text" id="verificationStatus" name="verificationStatus" 
                         placeholder="Verification Status" required>
                     </div>
-
-                    <!-- Save Button -->
+                    
                     <div class="form-actions">
                         <div class="form-actions">
                             <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
                             </button>
                         </div>
-                        
                     </div>
                 </form>
             </div>
@@ -143,10 +138,5 @@
 
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="../../../Admin_Dashboard/script.js"></script>
-
-
-
-    
-
 </body>
 </html>
