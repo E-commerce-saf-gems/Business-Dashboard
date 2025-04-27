@@ -47,7 +47,7 @@ $result = $conn->query($sql);
                     <h1>Bidding Stones Summary</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="./bids.html">Home</a>
+                            <a href="./bidssummary.php">Home</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>

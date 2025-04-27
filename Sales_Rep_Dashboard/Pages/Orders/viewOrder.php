@@ -108,7 +108,6 @@ $stones_result = $conn->query($stones_sql);
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
-                                    <th>Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,8 +125,7 @@ $stones_result = $conn->query($stones_sql);
                                         </div>
                                     </td>
                                     <td>1</td>
-                                    <td>--</td> <!-- Replace with unit price if available -->
-                                    <td>--</td> <!-- Replace with subtotal if available -->
+                                    <td><?php echo $stone['amount']; ?></td> <!-- Replace with unit price if available -->
                                 </tr>
                                 <?php endwhile; ?>
                             </tbody>

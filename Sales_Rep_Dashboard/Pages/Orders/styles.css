@@ -55,6 +55,12 @@
     display: flex;
     gap: 10px;
 }
+.order-link, .btn-view {
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
 
 .action-button {
     background-color: #449b9b;
@@ -276,4 +282,37 @@ tbody td {
 .status-btn:hover {
     background-color: #357f7f; /* Darker teal */
     transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
+.scrollable-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+a {
+    text-decoration: none ;
+    color: #000000;
+}
+
+.success-message {
+    background-color: #d4ede9; /* Light green background */
+    color: #449f9f ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #edd4d4; /* Light green background */
+    color: #9f4444 ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
 }

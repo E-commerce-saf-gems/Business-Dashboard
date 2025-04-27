@@ -47,10 +47,11 @@ function sendReadyForCollectionEmail($first_name, $email, $order_id) {
     }
 }
 
-if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
+if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
+    
+    $order_id = $_POST['order_id'];
+    $new_status = $_POST['new_status'];
 
-    $order_id = $_POST['order_id'];  // Ensure order_id is an integer
-    $new_status = $_POST['order_status'];
 
     $update_sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
     $stmt = $conn->prepare($update_sql);
@@ -74,8 +75,8 @@ if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
 
     // If the new status is 'ready for collection', fetch customer details & send email
     if ($new_status == "ready for collection") {
-        $query = "SELECT customer.first_name, customer.email FROM orders 
-                  JOIN customer ON orders.user_id = customer.user_id 
+        $query = "SELECT customer.firstName, customer.email FROM orders 
+                  JOIN customer ON orders.customer_id = customer.customer_id 
                   WHERE orders.order_id = ?";
         $stmt2 = $conn->prepare($query);
 
@@ -89,12 +90,13 @@ if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            sendReadyForCollectionEmail($user['first_name'], $user['email'], $order_id);
+            sendReadyForCollectionEmail($user['firstName'], $user['email'], $order_id);
         }
 
         $stmt2->close();
     }
 
+    header("Location: ./orders.php?success=1");
     echo "success";
 
     $stmt->close();

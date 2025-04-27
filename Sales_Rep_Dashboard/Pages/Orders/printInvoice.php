@@ -30,7 +30,7 @@ if ($order_result->num_rows === 0) {
 $order = $order_result->fetch_assoc();
 
 // Fetch stone details for the order
-$stones_sql = "SELECT i.*
+$stones_sql = "SELECT i.* 
                FROM inventory i
                INNER JOIN order_items oi ON oi.stone_id = i.stone_id
                WHERE oi.order_id = ?";
@@ -91,7 +91,6 @@ $stones_result = $stones_stmt->get_result();
                         <tr>
                             <td>1</td> <!-- Default quantity 1 -->
                             <td><?php echo $stone['colour'] . ' ' . $stone['type'] . ' ' . $stone['size'] . ' carats'; ?></td>
-                            <td><?php echo number_format($stone['amount'], 2); ?></td>
                             <td><?php echo number_format($stone['amount'], 2); ?></td>
                         </tr>
                         <?php endwhile; ?>

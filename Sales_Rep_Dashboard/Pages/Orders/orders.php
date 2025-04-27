@@ -28,6 +28,7 @@ $pending_orders_result = $conn->query($pending_orders_sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +36,10 @@ $pending_orders_result = $conn->query($pending_orders_sql);
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
     <link rel="stylesheet" href="../Sales/salesStyles.css" />
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="../Sales/editSalesStyles.css" />  
+    <link rel="stylesheet" href="../Sales/editSalesStyles.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
     <dashboard-component></dashboard-component>
 
@@ -51,40 +53,46 @@ $pending_orders_result = $conn->query($pending_orders_sql);
 
             <!-- Dashboard Overview -->
             <div class="dashboard-container">
-                
+
                 <!-- Today's Orders -->
                 <div class="dashboard-card">
-    <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
-    <div class="scrollable-list">
-            <ul>
-                <?php while ($row = $today_orders_result->fetch_assoc()): ?>
-                    <li>
-                        <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" style="color: #007bff; font-weight: bold; text-decoration: none;">
-                            Order #<?php echo $row['order_id']; ?>
-                        </a>  
-                        <span style="font-size: 12px; color: #777;"><?php echo ucfirst($row['shipping_method']); ?></span>
-                        
-                        <?php if ($row['shipping_method'] === 'store-pickup'): ?>
-                            <button class="status-btn" 
-                                data-order-id="<?php echo $row['order_id']; ?>" 
-                                data-new-status="<?php echo ($row['order_status'] == 'ready for collection') ? 'completed' : 'ready for collection'; ?>" 
-                                style="background: <?php echo ($row['order_status'] == 'ready for collection') ? '#28a745' : '#007bff'; ?>;">
-                                <?php echo ($row['order_status'] == 'ready for collection') ? 'Complete Order' : 'Ready for Collection'; ?>
-                            </button>
-                        <?php elseif ($row['shipping_method'] === 'home-delivery'): ?>
-                            <button class="status-btn" 
-                                data-order-id="<?php echo $row['order_id']; ?>" 
-                                data-new-status="<?php echo ($row['order_status'] == 'ready for delivery') ? 'completed' : 'ready for delivery'; ?>" 
-                                style="background: <?php echo ($row['order_status'] == 'ready for delivery') ? '#28a745' : '#ffc107'; ?>;">
-                                <?php echo ($row['order_status'] == 'ready for delivery') ? 'Completed' : 'Sent for Delivery'; ?>
-                            </button>
-                        <?php endif; ?>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        </div>
-    </div>
+                    <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
+                    <div class="scrollable-list">
+                        <ul>
+                            <?php while ($row = $today_orders_result->fetch_assoc()): ?>
+                                <li>
+                                    <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" class="order-link">
+                                        Order #<?php echo $row['order_id']; ?>
+                                    </a>
+                                    <span class="shipping-method"><?php echo ucfirst($row['shipping_method']); ?></span>
 
+                                    <?php if ($row['shipping_method'] === 'store-pickup'): ?>
+                                        <form method="POST" action="./updateOrderStatus.php" style="display:inline;">
+                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                            <input type="hidden" name="new_status"
+                                                value="<?php echo ($row['order_status'] == 'ready for collection') ? 'completed' : 'ready for collection'; ?>">
+                                            <button type="submit"
+                                                class="status-btn <?php echo ($row['order_status'] == 'ready for collection') ? 'btn-complete' : 'btn-ready'; ?>">
+                                                <?php echo ($row['order_status'] == 'ready for collection') ? 'Complete Order' : 'Ready for Collection'; ?>
+                                            </button>
+                                        </form>
+                                    <?php elseif ($row['shipping_method'] === 'home-delivery'): ?>
+                                        <form method="POST" action="updateOrderStatus.php" style="display:inline;">
+                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                            <input type="hidden" name="new_status"
+                                                value="<?php echo ($row['order_status'] == 'ready for delivery') ? 'completed' : 'ready for delivery'; ?>">
+                                            <button type="submit"
+                                                class="status-btn <?php echo ($row['order_status'] == 'ready for delivery') ? 'btn-complete' : 'btn-delivery'; ?>">
+                                                <?php echo ($row['order_status'] == 'ready for delivery') ? 'Completed' : 'Sent for Delivery'; ?>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    </div>
+                </div>
 
                 <!-- Missed Pickups -->
                 <div class="dashboard-card">
@@ -93,8 +101,8 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                         <ul>
                             <?php while ($row = $missed_pickups_result->fetch_assoc()): ?>
                                 <li>
-                                    Order #<?php echo $row['order_id']; ?>  
-                                    <span style="font-size: 12px; color:rgb(241, 14, 37);">Missed: <?php echo $row['pickup_date']; ?></span>
+                                    Order #<?php echo $row['order_id']; ?>
+                                    <span class="missed-pickup">Missed: <?php echo $row['pickup_date']; ?></span>
                                 </li>
                             <?php endwhile; ?>
                         </ul>
@@ -115,8 +123,18 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
+
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    Order Status Has Been Updated
+                </div>
+            <?php elseif (isset($_GET['success']) && $_GET['success'] == 2): ?>
+                <div class="error-message">
+                    Failed To Update Order Status
+                </div>
+            <?php endif; ?>
 
             <!-- Sales Table -->
             <div class="sales-table-container">
@@ -150,20 +168,35 @@ $pending_orders_result = $conn->query($pending_orders_sql);
 
                         if ($orders_result->num_rows > 0):
                             while ($row = $orders_result->fetch_assoc()):
-                        ?>
+                                ?>
+                                <tr>
+                                    <td>#<?php echo $row['order_id']; ?></td>
+                                    <td><?php echo date("Y-m-d", strtotime($row['order_date'])); ?></td>
+                                    <td><?php echo $row['customer_email']; ?></td>
+                                    <td>LKR <?php echo number_format($row['total_amount'], 2); ?></td>
+                                    <td><?php echo ucfirst($row['shipping_method']); ?></td>
+                                    <td>
+                                        <form method="POST" action="updateOrderStatus.php" class="status-form">
+                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                            <select name="order_status" class="status-dropdown" onchange="this.form.submit()">
+                                                <?php
+                                                $statuses = ['pending', 'confirmed', 'ready for collection', 'ready for delivery', 'completed'];
+                                                foreach ($statuses as $status) {
+                                                    $selected = ($row['order_status'] === $status) ? 'selected' : '';
+                                                    echo "<option value=\"$status\" $selected>" . ucfirst($status) . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" class="btn-view">View</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; else: ?>
                             <tr>
-                                <td>#<?php echo $row['order_id']; ?></td>
-                                <td><?php echo date("Y-m-d", strtotime($row['order_date'])); ?></td>
-                                <td><?php echo $row['customer_email']; ?></td>
-                                <td>LKR <?php echo number_format($row['total_amount'], 2); ?></td>
-                                <td><?php echo ucfirst($row['shipping_method']); ?></td>
-                                <td><?php echo ucfirst($row['order_status']); ?></td>
-                                <td>
-                                    <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" class="btn-view">View</a>
-                                </td>
+                                <td colspan="8">No orders found.</td>
                             </tr>
-                        <?php endwhile; else: ?>
-                            <tr><td colspan="8">No orders found.</td></tr>
                         <?php endif; ?>
                     </tbody>
 
@@ -175,6 +208,7 @@ $pending_orders_result = $conn->query($pending_orders_sql);
     <script src="./orders.js"></script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 </body>
+
 </html>
 
 <?php $conn->close(); ?>
