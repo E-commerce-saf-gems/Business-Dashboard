@@ -7,19 +7,19 @@ class Dashboard extends HTMLElement {
                 </a>
                 <ul class="side-menu">
                     <li>
-                        <a href="/Sales_Rep_Dashboard/dashboard.html">
+                        <a href="/Sales_Rep_Dashboard/dashboard.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/Sales_Rep_Dashboard/Pages/Sales/sales.html">
+                        <a href="/Sales_Rep_Dashboard/Pages/Sales/sales.php">
                             <i class='bx bx-chart'></i>
                             <span class="text">Sales</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/Sales_Rep_Dashboard/Pages/Bids/bidssummary.php">
                             <i class='bx bx-dollar-circle'></i>
                             <span class="text">Bids</span>
                         </a>
@@ -32,19 +32,19 @@ class Dashboard extends HTMLElement {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../../Sales_Rep_Dashboard/Pages/Customer/customers.php">
                             <i class='bx bxs-user-detail'></i>
                             <span class="text">Customers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/Sales_Rep_Dashboard/Pages/Meetings/meeting.html">
+                        <a href="/Sales_Rep_Dashboard/Pages/Meetings/meeting.php">
                             <i class='bx bx-calendar'></i>
                             <span class="text">Meetings</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="Sales_Rep_Dashboard/Pages/Requests/requests.php">
                             <i class='bx bxs-dashboard'></i>
                             <span class="text">Requests</span>
                         </a>
