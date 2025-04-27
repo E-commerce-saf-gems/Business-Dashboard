@@ -28,16 +28,14 @@ $declinedCount = $statusCounts['declined'];
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Gems</title>
     <link rel="stylesheet" href="../../../Components/SalesRep_Dashboard_Template/styles.css">
-    <link rel="stylesheet" href="./requests.css">
+    <link rel="stylesheet" href="./requests.css">   
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
-
 <body>
     <dashboard-component></dashboard-component>
 
@@ -58,27 +56,15 @@ $declinedCount = $statusCounts['declined'];
                 <div class="sales-summary-title">
                     <h2>Monthly Requests Summary</h2>
                 </div>
-                <div class="sales-item">
-                    <h3>Pending</h3>
-                    <p style="color: orange"><?php echo $pendingCount; ?></p>
-                </div>
-                <div class="sales-item">
-                    <h3>Completed</h3>
-                    <p style="color: green"><?php echo $completedCount; ?></p>
-                </div>
-                <div class="sales-item">
-                    <h3>Declined</h3>
-                    <p style="color: red"><?php echo $declinedCount; ?></p>
-                </div>
-                <div class="sales-item">
-                    <h3>Approved</h3>
-                    <p style="color: lightblue"><?php echo $approvedCount; ?></p>
-                </div>
+                <div class="sales-item"><h3>Pending</h3><p style="color: orange"><?php echo $pendingCount; ?></p></div>
+                <div class="sales-item"><h3>Completed</h3><p style="color: green"><?php echo $completedCount; ?></p></div>
+                <div class="sales-item"><h3>Declined</h3><p style="color: red"><?php echo $declinedCount; ?></p></div>
+                <div class="sales-item"><h3>Approved</h3><p style="color: lightblue"><?php echo $approvedCount; ?></p></div>
             </div>
 
             <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
-                    Request status was updated successfully! And Email has been Sent!
+                    Request status was updated successfully!
                 </div>
             <?php endif; ?>
 
@@ -86,7 +72,7 @@ $declinedCount = $statusCounts['declined'];
                 <div class="table-filters">
                     <label for="date-filter">Date:</label>
                     <input type="date" id="date-filter">
-
+                    
                     <label for="status-filter">Status:</label>
                     <select id="status-filter">
                         <option value="">All</option>
@@ -97,7 +83,7 @@ $declinedCount = $statusCounts['declined'];
 
                     <label for="customer-filter">Gem Type:</label>
                     <input type="text" id="customer-filter" placeholder="Search Gem Type">
-
+                    
                     <button class="btn-filter">Filter</button>
                 </div>
 
@@ -129,10 +115,10 @@ $declinedCount = $statusCounts['declined'];
                                 echo "<td>" . $row['requirement'] . "</td>";
 
                                 echo "<td>";
-                                echo "<form method='POST' action='./updateRequest.php' onsubmit='return handleStatusChange(this)'>";
+                                echo "<form method='POST' action='./updateRequest.php' onsubmit='return handleStatusChange(this)'>"; 
                                 echo "<input type='hidden' name='request_id' value='" . $row['request_id'] . "'>";
-                                echo "<input type='hidden' name='decline_reason' id='decline_reason_" . $row['request_id'] . "' value=''>";
-                                echo "<select name='status' data-original-value='" . $row['status'] . "' onchange='handleStatusChange(this, " . $row['request_id'] . ")'>";
+                                echo "<input type='hidden' name='decline_reason' id='decline_reason_" . $row['request_id'] . "' value=''>"; 
+                                echo "<select name='status' data-original-value='" . $row['status'] . "' onchange='handleStatusChange(this, " . $row['request_id'] . ")'>"; 
                                 echo "<option value='P'" . ($row['status'] === 'P' ? " selected" : "") . ">Pending</option>";
                                 echo "<option value='A'" . ($row['status'] === 'A' ? " selected" : "") . ">Approved</option>";
                                 echo "<option value='C'" . ($row['status'] === 'C' ? " selected" : "") . ">Complete</option>";
@@ -140,10 +126,10 @@ $declinedCount = $statusCounts['declined'];
                                 echo "</select>";
                                 echo "<button id='update_btn_" . $row['request_id'] . "' type='submit' style='display: none;'>Update</button>";
                                 echo "</form>";
-                                echo "</td>";
-
+                                echo "</td>";  
+                                
                                 echo "<td>" . $row['declineReason'] . "</td>";
-                                echo "</tr>";
+                                echo "</tr>"; 
                             }
                         } else {
                             echo "<tr><td colspan='9'>No requests found.</td></tr>";
@@ -151,7 +137,7 @@ $declinedCount = $statusCounts['declined'];
                         ?>
                     </tbody>
                 </table>
-            </div>
+            </div> 
 
             <div id="custom-prompt" class="modal">
                 <div class="modal-content">
@@ -169,7 +155,7 @@ $declinedCount = $statusCounts['declined'];
     </section>
 
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             const message = document.querySelector(".success-message");
             if (message) {
                 message.style.display = "none";
@@ -225,44 +211,44 @@ $declinedCount = $statusCounts['declined'];
             updateButton.style.display = 'none';
             document.getElementById('custom-prompt').style.display = 'none';
         };
+    </script>
+    <script>
+    document.querySelector('.btn-filter').addEventListener('click', function() {
+        const dateFilter = document.getElementById('date-filter').value;
+        const statusFilter = document.getElementById('status-filter').value;
+        const gemTypeFilter = document.getElementById('customer-filter').value.toLowerCase();
 
-        document.querySelector('.btn-filter').addEventListener('click', function () {
-            const dateFilter = document.getElementById('date-filter').value;
-            const statusFilter = document.getElementById('status-filter').value;
-            const gemTypeFilter = document.getElementById('customer-filter').value.toLowerCase();
+        const rows = document.querySelectorAll('.sales-table tbody tr');
 
-            const rows = document.querySelectorAll('.sales-table tbody tr');
+        rows.forEach(row => {
+            const date = row.cells[0].innerText.trim();
+            const email = row.cells[1].innerText.trim();
+            const shape = row.cells[2].innerText.trim();
+            const type = row.cells[3].innerText.trim();
+            const statusSelect = row.querySelector('select');
+            const status = statusSelect ? statusSelect.value : '';
 
-            rows.forEach(row => {
-                const date = row.cells[0].innerText.trim();
-                const email = row.cells[1].innerText.trim();
-                const shape = row.cells[2].innerText.trim();
-                const type = row.cells[3].innerText.trim();
-                const statusSelect = row.querySelector('select');
-                const status = statusSelect ? statusSelect.value : '';
+            let show = true;
 
-                let show = true;
+            if (dateFilter && !date.startsWith(dateFilter)) {
+                show = false;
+            }
+            if (statusFilter && status !== statusFilter) {
+                show = false;
+            }
+            if (gemTypeFilter && !(shape.toLowerCase().includes(gemTypeFilter) || type.toLowerCase().includes(gemTypeFilter))) {
+                show = false;
+            }
 
-                if (dateFilter && !date.startsWith(dateFilter)) {
-                    show = false;
-                }
-                if (statusFilter && status !== statusFilter) {
-                    show = false;
-                }
-                if (gemTypeFilter && !(shape.toLowerCase().includes(gemTypeFilter) || type.toLowerCase().includes(gemTypeFilter))) {
-                    show = false;
-                }
-
-                row.style.display = show ? '' : 'none';
-            });
+            row.style.display = show ? '' : 'none';
         });
-</>
+    });
+</script>
 
 
-            <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
     <script src="./admin.js"></script>
 </body>
-
 </html>
 
 <?php
