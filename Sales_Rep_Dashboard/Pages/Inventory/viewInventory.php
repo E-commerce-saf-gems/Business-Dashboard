@@ -199,10 +199,11 @@ if (isset($_GET['id'])) {
         
 
     
+      <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
+    <script src="./script.js"></script>
+    <script src="./buyerScript.js"></script>
+    <script src="./inventory.js"></script>
 
-    <script src="../../Pages/Inventory/script.js"></script>
-    <script src="../../../Sales_Rep_Dashboard/Pages/Inventory/inventory.js"></script>
-    <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
 
   </body>
 </html>
