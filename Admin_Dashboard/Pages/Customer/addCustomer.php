@@ -2,8 +2,9 @@
 
 include('../../database/db.php'); 
 
-$errors = [];
+$errors = [];   //empty array to collect validation errors later
 
+//use phpmailer to send emails
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -11,7 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../../vendor/autoload.php';
 
 function sendVerificationEmail($first_name, $email, $token) {
-    $mail = new PHPMailer(true);
+    $mail = new PHPMailer(true);    //create a new mail object
 
     try {
         //Server settings
@@ -25,7 +26,7 @@ function sendVerificationEmail($first_name, $email, $token) {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
-        //Recipients
+        //set sender and recipient
         $mail->setFrom('sadheeysalim10@gmail.com', 'Saf Gems');
         $mail->addAddress($email, $first_name);     //Add a recipient
 
@@ -51,9 +52,9 @@ function sendVerificationEmail($first_name, $email, $token) {
     }
 }
 
-
+//Only run the code if the form was submitted using the POST method.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    //collect the data from the form using the $_POST superglobal array
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $first_name = mysqli_real_escape_string($conn, $_POST['firstName']); 
     $last_name = mysqli_real_escape_string($conn, $_POST['lastName']);

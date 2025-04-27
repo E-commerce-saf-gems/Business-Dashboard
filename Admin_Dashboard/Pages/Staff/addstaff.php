@@ -22,7 +22,7 @@ if ($conn->query($sql) === TRUE) {
 // Get the last inserted inventory ID
     $user_id = $conn->insert_id;
 
-    // Redirect to inventory.php upon success
+    // Redirect to staff.php upon success
     header("Location: ../../../Admin_Dashboard/Pages/Staff/Staff.php");
     exit(); // Ensure no further code is executed after redirection
 } else {

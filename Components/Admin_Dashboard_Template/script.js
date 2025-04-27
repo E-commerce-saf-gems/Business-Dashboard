@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 customElements.define('dashboard-component', Dashboard);
 
+
+//automatically highlight the current page in the sidebar menu
 function updateActiveMenu() {
     const allSideMenu = document.querySelectorAll('#sidebar .side-menu li a');
     const currentPath = window.location.pathname;

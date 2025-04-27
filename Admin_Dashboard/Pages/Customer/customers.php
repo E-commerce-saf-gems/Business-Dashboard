@@ -41,7 +41,9 @@ $ssql = "SELECT
 //Apply filters
 if (isset($_GET['date']) && !empty($_GET['date'])) {
     $date = $conn->real_escape_string($_GET['date']);
-    $ssql .= " AND DATE(date) = '$date'"; // Use DATE() to extract the date part from the timestamp
+    $ssql .= " AND DATE(date) = '$date'";
+    //fetch customers who registered on the selected date
+    // Use DATE() to extract the date part from the timestamp
 }
 
 if (isset($_GET['status']) && !empty($_GET['status'])) {
