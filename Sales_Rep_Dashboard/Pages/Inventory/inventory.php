@@ -193,7 +193,7 @@ if (!$result) {
                       echo "<td class='actions'>";
 
                       
-                      if ($row['visibility'] == 'show' || $row['visibility'] == 'Show') {
+                      if ($row['availability'] == 'available' && $row['visibility'] == 'show') {
                           echo "<a href='./editInventory.php?id=" . $row['stone_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>";
                           echo "<a href='./deleteGem.php' onclick='confirmDelete(" . $row['stone_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
                       }
