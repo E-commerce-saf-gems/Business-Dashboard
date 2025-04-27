@@ -85,7 +85,7 @@ $conn->close();
           </a>
         </li>
         <li>
-          <a href="../Sales_Rep_Dashboard/Pages/Bids/bids.html">
+          <a href="../Sales_Rep_Dashboard/Pages/Bids/bidssummary.php">
             <i class="bx bx-dollar-circle"></i>
             <span class="text">Bids</span>
           </a>

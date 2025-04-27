@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE stone_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "sssssssssiii", 
+        "ssssssssssii", 
         $size, $shape, $colour, $type, $origin, $certificate_name, $amount, $image_name, $description, $visibility, $buyer_id, $stone_id
     );
 
