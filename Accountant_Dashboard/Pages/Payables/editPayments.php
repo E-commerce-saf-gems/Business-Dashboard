@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['payment_id'])) {
         }
 
         $conn->commit();
-        header("Location: ./payments.php?UpdateSuccess=1");
+        header("Location: ../transactions/transactions.php?PaymentUpdateSuccess=1");
     } catch (Exception $e) {
         $conn->rollback();
         echo "Error: " . $e->getMessage();

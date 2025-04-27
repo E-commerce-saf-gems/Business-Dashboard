@@ -34,7 +34,7 @@ try {
     $stmt = $conn->prepare("
         UPDATE purchases 
         SET amountSettled = amountSettled + ?
-        WHERE buyer_id = ? AND stone_id = ? AND amountSettled + ? <= total
+        WHERE buyer_id = ? AND stone_id = ? AND amountSettled + ? <= amount
     ");
     if (!$stmt) {
         throw new Exception("Prepare failed for UPDATE: " . $conn->error);

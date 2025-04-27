@@ -105,10 +105,10 @@ $conn->close();
 
                 <!-- Summary Section -->
                 <div class="summary">
-                    <p>Subtotal: Rs.<?php echo number_format($invoice['amount']*1, 2); ?></p>
-                    <p>Sales Tax: Rs.<?php echo number_format($invoice['amount'] * 0.05, 2); ?></p>
+                    <
                     
-                    <p><strong>Total Due: Rs.<?php echo number_format($invoice['amount'] + ($invoice['amount'] * 0.05), 2); ?></strong></p>
+                    
+                    <p><strong>Total Due: Rs.<?php echo number_format($invoice['amount'] * 1, 2); ?></strong></p>
                 </div>
 
                 <!-- Footer Section -->
