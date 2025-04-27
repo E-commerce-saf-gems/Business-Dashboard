@@ -54,24 +54,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
             <!-- Dashboard Overview -->
             <div class="dashboard-container">
 
-            <div class="table-filters">
-                    <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
-                    
-                    <label for="status-filter">Status:</label>
-                    <select id="status-filter">
-                        <option value="">All</option>
-                        <option value="A">Approved</option>
-                        <option value="P">Pending</option>
-                        <option value="C">Complete</option>
-                    </select>
-
-                    <label for="customer-filter">Type:</label>
-                    <input type="text" id="customer-filter" placeholder="Search Gem Type">
-                    
-                    <button class="btn-filter">Filter</button>
-                </div>
-
                 <!-- Today's Orders -->
                 <div class="dashboard-card">
                     <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
