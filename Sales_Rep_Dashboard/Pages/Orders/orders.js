@@ -13,12 +13,11 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => response.text())
             .then(data => {
-                console.log("Server response:", data); // Debugging log
+                console.log("Server response:", data); 
 
                 if (data.trim() === "success") {
-                    // Change button text and style
                     this.textContent = "Completed";
-                    this.style.background = "#28a745"; // Green color
+                    this.style.background = "#28a745"; 
                     this.setAttribute("data-new-status", "completed");
                 } else {
                     alert("Failed to update order status: " + data);

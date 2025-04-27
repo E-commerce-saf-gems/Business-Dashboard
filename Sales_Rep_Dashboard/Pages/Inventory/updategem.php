@@ -2,7 +2,6 @@
 include('../../../database/db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve and sanitize POST data
     $stone_id = isset($_POST['stone_id']) ? $_POST['stone_id'] : null;
     $size = isset($_POST['size']) ? $_POST['size'] : null;
     $shape = isset($_POST['shape']) ? $_POST['shape'] : null;
@@ -16,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $buyer_id = isset($_POST['buyer_id']) ? $_POST['buyer_id'] : null;
     $new_amount_settled = isset($_POST['amountSettled']) ? $_POST['amountSettled'] : null;
 
-    // File handling
     $image_name = isset($_POST['current_image']) ? $_POST['current_image'] : null;
     $certificate_name = isset($_POST['current_certificate']) ? $_POST['current_certificate'] : null;
 
@@ -34,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($certificate_tmp_name, $certificate_folder);
     }
 
-    // Prepare and execute the inventory update
     $sql = "UPDATE inventory 
             SET size=?, shape=?, colour=?, type=?, origin=?, certificate=?, amount=?, image=?, description=?, visibility=?, buyer_id=? 
             WHERE stone_id=?";
@@ -45,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($stmt->execute()) {
-        // Update the amountSettled in the purchases table
         $current_settled_sql = "SELECT amountSettled FROM purchases WHERE stone_id = ? AND buyer_id = ?";
         $current_stmt = $conn->prepare($current_settled_sql);
         $current_stmt->bind_param("ii", $stone_id, $buyer_id);
@@ -58,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $current_amount_settled = $current_row['amountSettled'];
         }
 
-        // Update purchases table if amountSettled has changed
         if ($new_amount_settled != $current_amount_settled) {
             $update_purchases_sql = "UPDATE purchases SET amountSettled = ? WHERE stone_id = ? AND buyer_id = ?";
             $update_purchases_stmt = $conn->prepare($update_purchases_sql);

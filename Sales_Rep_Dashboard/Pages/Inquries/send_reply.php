@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $mail->Host       = 'smtp.gmail.com';   
 $mail->SMTPAuth   = true;  
 $mail->Username   = 'ashcharyawaduge@gmail.com';  
-$mail->Password   = 'zmikpzbtyihohwwi';  // Your App Password (without spaces)
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  // FIX: Use correct encryption method
-$mail->Port       = 465;  // Port for SSL (or use 587 for TLS)
+$mail->Password   = 'zmikpzbtyihohwwi';  
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  
+$mail->Port       = 465;  
                                  
     
         $mail->setFrom('ashcharyawaduge@gmail.com', 'Saf Gems');

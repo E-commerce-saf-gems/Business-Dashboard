@@ -14,7 +14,6 @@ function sendVerificationEmail($first_name, $email, $token) {
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
        

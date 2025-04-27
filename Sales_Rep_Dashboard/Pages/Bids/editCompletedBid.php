@@ -1,11 +1,9 @@
 <?php
-// Ensure the customer is logged in and the bidding stone ID is available
 
 include '../../../database/db.php';
 
 $biddingStoneId = $_GET['id']; 
 
-// Query to get the bidding stone details
 $query = "
     SELECT bs.*, 
            i.image
@@ -20,7 +18,6 @@ date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 $minFinishDate = date('Y-m-d\TH:i', strtotime($currentDateTime)+3600);
 
-// Ensure that the bid exists
 if (!$bid) {
     echo "No bidding stone found for ID: $biddingStoneId";
     exit;
@@ -49,23 +46,19 @@ if (!$bid) {
                     <form class="edit-sales-form" id="reopenBidForm" action="updateCompletedBid.php" method="post">
                         <h2>Reopen Bid for Stone #<?= $biddingStoneId ?></h2><br>
 
-                        <!-- Hidden field for bidding stone ID -->
                         <input type="hidden" name="biddingStone_id" value="<?= $bid['biddingStone_id'] ?>">
 
-                        <!-- Starting Bid (Readonly) -->
                         <div class="form-group">
                             <label for="startingBid">Starting Bid Value (Rs.)</label>
                             <input type="number" id="startingBid" name="startingBid" value="<?= $bid['startingBid'] ?>" readonly />
                         </div>
 
-                        <!-- Start Date (Readonly) -->
                         <div class="form-group">
                             <label for="startDate">Start Date and Time</label>
                             <input type="datetime-local" id="startDate" name="startDate" 
                                    value="<?= date('Y-m-d\TH:i', strtotime($bid['startDate'])) ?>" readonly />
                         </div>
 
-                        <!-- Finish Date (Editable) -->
                         <div class="form-group">
                             <label for="finishDate">Finish Date and Time</label>
                             <input type="datetime-local" id="finishDate" name="finishDate" 
@@ -73,7 +66,6 @@ if (!$bid) {
                                    min="<?= $minFinishDate ?>" required />
                         </div>
 
-                        <!-- Submit Button -->
                         <button type="submit" class="btn-save"><i class='bx bx-save'></i>Confirm</button>
                     </form>
                 <?php else: ?>

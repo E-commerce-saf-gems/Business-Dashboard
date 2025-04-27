@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     $buyers_sql = "SELECT buyer_id, email FROM buyer";
     $buyers_result = $conn->query($buyers_sql);
 
-    $amountSettled = 0; // Initialize amountSettled
+    $amountSettled = 0; 
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
 
         if ($settled_result->num_rows > 0) {
             $settled_row = $settled_result->fetch_assoc();
-            $amountSettled = $settled_row['amountSettled']; // Assign the fetched value
+            $amountSettled = $settled_row['amountSettled']; 
         }
 
     } else {

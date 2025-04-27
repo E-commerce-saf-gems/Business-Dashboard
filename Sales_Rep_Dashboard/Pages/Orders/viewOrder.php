@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../../database/db.php'); // Include database connection
+include('../../../database/db.php'); 
 
 if (!isset($_GET['id'])) {
     echo "Order ID is required.";
@@ -10,7 +10,6 @@ if (!isset($_GET['id'])) {
 $order_id = $_GET['id'];
 $customer_id = $_SESSION['customer_id'] ?? null;
 
-// Fetch order details
 $order_sql = "SELECT * FROM orders WHERE order_id = $order_id";
 $order_result = $conn->query($order_sql);
 
@@ -21,7 +20,6 @@ if ($order_result->num_rows === 0) {
 
 $order = $order_result->fetch_assoc();
 
-// Fetch stone details for the order
 $stones_sql = "SELECT i.* 
                FROM inventory i
                INNER JOIN order_items oi ON oi.stone_id = i.stone_id

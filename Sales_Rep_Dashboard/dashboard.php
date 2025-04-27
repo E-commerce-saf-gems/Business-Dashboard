@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $salesRep_id = $_SESSION['user_id'];
 
-//Get gem count 
 $gemCounts = [];
 $gemTypes = ['ruby', 'emerald', 'sapphire', 'amethyst', 'diamond'];
 
@@ -23,7 +22,6 @@ foreach ($gemTypes as $type) {
     $gemCounts[$type] = $row['count'];
 }
 
-// Get monthly sales data (last 6 months)
 $monthlySalesQuery = "
     SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM(total) AS total_sales 
     FROM sales 
@@ -41,7 +39,6 @@ while ($row = $monthlySalesResult->fetch_assoc()) {
     $totals[] = $row['total_sales'];
 }
 
-// Reverse arrays to show oldest to newest
 $months = array_reverse($months);
 $totals = array_reverse($totals);
 

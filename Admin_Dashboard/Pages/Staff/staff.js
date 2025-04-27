@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const confirmed = confirm("Are you sure you want to delete this user?");
             
             if (confirmed) {
-                // Here you would add code to delete the item from the database
-                // For now, just remove the row from the table
+                
                 const row = button.closest("tr");
                 row.remove();
             }
@@ -16,23 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 document.addEventListener("DOMContentLoaded", function () {
-    // Helper function to set error messages
     function setError(inputId, errorMessage) {
         const errorElement = document.getElementById(`${inputId}-error`);
         if (errorElement) {
-            errorElement.textContent = errorMessage; // Set error message
+            errorElement.textContent = errorMessage; 
         }
     }
 
-    // Helper function to clear error messages
     function clearError(inputId) {
         const errorElement = document.getElementById(`${inputId}-error`);
         if (errorElement) {
-            errorElement.textContent = ""; // Clear error message
+            errorElement.textContent = ""; 
         }
     }
 
-    // Validate Name (only letters allowed)
     document.getElementById("name").addEventListener("input", function () {
         const value = this.value.trim();
         if (!/^[a-zA-Z\s]+$/.test(value)) {
@@ -42,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Password Validation
     document.getElementById("password").addEventListener("input", function () {
         const value = this.value.trim();
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -57,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Contact Number Validation (Exactly 10 digits)
     document.getElementById("contactNo").addEventListener("input", function () {
         const value = this.value.trim();
         const contactNoRegex = /^\d{10}$/;
@@ -69,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Email Validation
     document.getElementById("email").addEventListener("input", function () {
         const value = this.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -81,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Form Validation on Submit
     document.getElementById("AddStaffForm").addEventListener("submit", function (e) {
         const name = document.getElementById("name").value.trim();
         const password = document.getElementById("password").value.trim();
@@ -90,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let isValid = true;
 
-        // Validate Name
         if (!/^[a-zA-Z\s]+$/.test(name)) {
             setError("name", "Name must contain only letters.");
             isValid = false;
@@ -98,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
             clearError("name");
         }
 
-        // Validate Password
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(password)) {
             setError(
@@ -110,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
             clearError("password");
         }
 
-        // Validate Email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError("email", "Please enter a valid email address.");
@@ -119,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
             clearError("email");
         }
 
-        // Validate Contact Number
         const contactNoRegex = /^\d{10}$/;
         if (!contactNoRegex.test(contactNo)) {
             setError("contactNo", "Contact number must be exactly 10 digits.");
@@ -128,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
             clearError("contactNo");
         }
 
-        // Prevent Form Submission if Invalid
         if (!isValid) {
             e.preventDefault();
         }

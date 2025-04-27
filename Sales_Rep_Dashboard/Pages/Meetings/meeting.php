@@ -9,11 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 
 $salesRep_id = $_SESSION['user_id'];
 
-// Fetch available times for the logged-in sales representative
 $sql_available_times = "SELECT date, time, availability 
                         FROM availabletimes 
                         WHERE salesRep_id = ? 
-                        AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
+                        AND CONCAT(date, ' ', time) >= NOW()     
                         ORDER BY date, time";
 $stmt = $conn->prepare($sql_available_times);
 $stmt->bind_param("i", $salesRep_id);
@@ -34,7 +33,6 @@ while ($row = $availableTimesResult->fetch_assoc()) {
 
 $stmt->close();
 
-// Fetch meetings for the logged-in sales representative
 $sql_meetings = "SELECT m.meeting_id, m.type, a.date, a.time, 
                         c.firstName AS customer_name, c.email AS email, 
                         m.status 

@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Corrected SQL query syntax
 $ssql = "SELECT 
             user_id,
             username,
@@ -13,10 +12,9 @@ $ssql = "SELECT
         FROM user WHERE 1=1";
 
 
-// Apply filters
 if (isset($_GET['staff-id']) && !empty($_GET['staff-id'])) {
     $staffId = $conn->real_escape_string($_GET['staff-id']);
-    $ssql .= " AND user_id LIKE '%$staffId%'"; // Use LIKE for partial matches
+    $ssql .= " AND user_id LIKE '%$staffId%'"; 
 }
 
 if (isset($_GET['status']) && !empty($_GET['status'])) {
@@ -31,7 +29,6 @@ if (isset($_GET['staff-name']) && !empty($_GET['staff-name'])) {
 
 $result = $conn->query($ssql);
 
-// Check if query was successful
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
@@ -105,7 +102,6 @@ if (!$result) {
                     </thead>
                    <tbody>
                 <?php
-                // Check if there are results and display each row in the table
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
@@ -151,6 +147,5 @@ if (!$result) {
 </html>
 
 <?php
-// Close the database connection
 $conn->close();
 ?>

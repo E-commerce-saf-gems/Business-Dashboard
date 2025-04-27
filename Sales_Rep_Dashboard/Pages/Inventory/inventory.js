@@ -1,4 +1,3 @@
-// Function to handle delete confirmation
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtons = document.querySelectorAll(".delete-btn");
     
@@ -8,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const confirmed = confirm("Are you sure you want to delete this item?");
             
             if (confirmed) {
-                // Here you would add code to delete the item from the database
-                // For now, just remove the row from the table
                 const row = button.closest("tr");
                 row.remove();
             }
@@ -20,19 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Helper function to set error messages
   function setError(inputId, errorMessage) {
     const errorElement = document.getElementById(`${inputId}-error`);
-    errorElement.textContent = errorMessage; // Set error message
+    errorElement.textContent = errorMessage; 
   }
 
-  // Helper function to clear error messages
   function clearError(inputId) {
     const errorElement = document.getElementById(`${inputId}-error`);
-    errorElement.textContent = ""; // Clear error message
+    errorElement.textContent = ""; 
   }
 
-  // Validate weight (greater than 0)
   document.getElementById("weight").addEventListener("input", function () {
     const value = parseFloat(this.value);
     if (isNaN(value) || value <= 0) {
@@ -42,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate amount (greater than 0)
   document.getElementById("amount").addEventListener("input", function () {
     const value = parseFloat(this.value);
     if (isNaN(value) || value <= 0) {
@@ -52,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate amountSettled (greater than 0, less than or equal to amount)
   document.getElementById("amountSettled").addEventListener("input", function () {
     const settledValue = parseFloat(this.value);
     const amountValue = parseFloat(document.getElementById("amount").value);
@@ -65,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate shape (letters only)
   document.getElementById("shape").addEventListener("input", function () {
     const value = this.value.trim();
     if (!/^[a-zA-Z\s]+$/.test(value)) {
@@ -75,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate colour (letters only)
   document.getElementById("colour").addEventListener("input", function () {
     const value = this.value.trim();
     if (!/^[a-zA-Z\s]+$/.test(value)) {
@@ -85,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Validate origin (letters only)
   document.getElementById("origin").addEventListener("input", function () {
     const value = this.value.trim();
     if (!/^[a-zA-Z\s]+$/.test(value)) {
@@ -95,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Final form validation on submit
   document.getElementById("addgemForm").addEventListener("submit", function (e) {
     const size = parseFloat(document.getElementById("size").value);
     const weight = parseFloat(document.getElementById("weight").value);
@@ -107,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isValid = true;
 
-    // Re-run all validations
     if (isNaN(weight) || weight <= 0) {
       setError("weight", "Weight must be greater than 0.");
       isValid = false;
@@ -133,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
       isValid = false;
     }
 
-    // If invalid, prevent submission
     if (!isValid) {
       e.preventDefault();
     }
@@ -150,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (e) {
     let isValid = true;
 
-    // Form fields for validation
     const size = document.getElementById("size").value.trim();
     const shape = document.getElementById("shape").value.trim();
     const colour = document.getElementById("colour").value.trim();
@@ -168,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const weight = weightElement ? parseFloat(weightElement.value.trim()) : NaN;
     const amount = amountElement ? parseFloat(amountElement.value.trim()) : NaN;
 
-    // Array of required fields
     const requiredFields = [
       { field: size, id: "size", name: "Size" },
       { field: shape, id: "shape", name: "Shape" },
@@ -240,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
     errorElement.textContent = errorMessage;
 }
 
-// Helper function to clear error messages
 function clearError(inputId) {
     const errorElement = document.getElementById(`${inputId}-error`);
     if (errorElement) {

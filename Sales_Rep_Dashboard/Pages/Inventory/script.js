@@ -104,7 +104,6 @@ function updateActiveMenu() {
     });
 }
 
-// Run the updateActiveMenu function on page load
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
 const menuBar = document.querySelector('#content nav .bx.bx-menu');

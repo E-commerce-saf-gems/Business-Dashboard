@@ -1,17 +1,14 @@
 <?php
 include '../../../database/db.php';
 
-// Get today's date
 $today = date("Y-m-d");
 
-// Fetch today's orders
 $today_orders_sql = "SELECT order_id,shipping_method,order_status FROM orders WHERE DATE(order_date) = ? && (order_status='confirmed' || order_status='ready for collection') ";
 $today_orders_stmt = $conn->prepare($today_orders_sql);
 $today_orders_stmt->bind_param("s", $today);
 $today_orders_stmt->execute();
 $today_orders_result = $today_orders_stmt->get_result();
 
-// Fetch missed pickups
 $missed_pickups_sql = "SELECT order_id, pickup_date FROM orders 
                        WHERE shipping_method = 'store-pickup' 
                        AND pickup_date < ? 
@@ -21,7 +18,6 @@ $missed_pickups_stmt->bind_param("s", $today);
 $missed_pickups_stmt->execute();
 $missed_pickups_result = $missed_pickups_stmt->get_result();
 
-// Fetch pending orders
 $pending_orders_sql = "SELECT order_id FROM orders WHERE order_status = 'pending'";
 $pending_orders_result = $conn->query($pending_orders_sql);
 ?>

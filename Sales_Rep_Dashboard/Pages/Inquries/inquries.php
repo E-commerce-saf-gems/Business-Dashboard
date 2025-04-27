@@ -49,7 +49,6 @@ include '../../../database/db.php';
             </div>
 </div>
 
-            <!-- Contact Inquiries Table -->
             <div class="sales-table-container">
                 <table class="sales-table">
                     <thead>
@@ -88,7 +87,6 @@ include '../../../database/db.php';
         </main>
     </section>
 
-    <!-- Reply Popup Modal -->
     <div id="reply-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

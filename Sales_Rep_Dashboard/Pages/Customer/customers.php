@@ -1,31 +1,25 @@
 <?php
 include '../../../database/db.php';
 
-// Get the current month and year
 $currentMonth = date('m');
 $currentYear = date('Y');
 
-// Get the last month and year
 $lastMonth = $currentMonth - 1;
 $lastMonthYear = $currentYear;
 
-// Handle year transition (e.g., January -> December of the previous year)
 if ($lastMonth == 0) {
     $lastMonth = 12;
     $lastMonthYear = $currentYear - 1;
 }
 
-// Query to get the count of customers registered this month
 $thisMonthQuery = "SELECT COUNT(*) AS thisMonthCount FROM customer WHERE MONTH(date) = $currentMonth AND YEAR(date) = $currentYear";
 $thisMonthResult = $conn->query($thisMonthQuery);
 $thisMonthCount = $thisMonthResult->fetch_assoc()['thisMonthCount'] ?? 0;
 
-// Query to get the count of customers registered last month
 $lastMonthQuery = "SELECT COUNT(*) AS lastMonthCount FROM customer WHERE MONTH(date) = $lastMonth AND YEAR(date) = $lastMonthYear";
 $lastMonthResult = $conn->query($lastMonthQuery);
 $lastMonthCount = $lastMonthResult->fetch_assoc()['lastMonthCount'] ?? 0;
 
-// Corrected SQL query syntax
 $ssql = "SELECT 
             customer.customer_id,
             customer.date, 
@@ -36,12 +30,11 @@ $ssql = "SELECT
             customer.city,
             customer.gender
         FROM customer 
-        WHERE 1=1"; // Use 1=1 to simplify appending conditions
+        WHERE 1=1"; 
 
-//Apply filters
 if (isset($_GET['date']) && !empty($_GET['date'])) {
     $date = $conn->real_escape_string($_GET['date']);
-    $ssql .= " AND DATE(date) = '$date'"; // Use DATE() to extract the date part from the timestamp
+    $ssql .= " AND DATE(date) = '$date'"; 
 }
 
 if (isset($_GET['status']) && !empty($_GET['status'])) {
@@ -57,7 +50,6 @@ if (isset($_GET['customer-name']) && !empty($_GET['customer-name'])) {
 
 $result = $conn->query($ssql);
 
-// Check if query was successful
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
@@ -146,7 +138,6 @@ if (!$result) {
                     </thead>
                     <tbody>
                     <?php
-                        // Check if there are results and display each row in the table
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()){
                                 echo "<tr>";

@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Get stone_id from URL
 $biddingStoneId = $_GET['id'];
 date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d\TH:i');
@@ -81,23 +80,20 @@ if ($biddingStoneId > 0) {
 <script>
     window.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // Fix timezone offset
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); 
 
-        const isoNow = now.toISOString().slice(0,16); // yyyy-MM-ddTHH:mm
+        const isoNow = now.toISOString().slice(0,16); 
 
-        // Set min value of startDate to now
         document.getElementById('startDate').setAttribute('min', isoNow);
 
-        // Set finishDate min when startDate changes
         document.getElementById('startDate').addEventListener('change', (e) => {
             const start = new Date(e.target.value);
-            start.setHours(start.getHours() + 1); // At least 1 hour later
-            start.setMinutes(start.getMinutes() - start.getTimezoneOffset()); // Fix timezone offset again
+            start.setHours(start.getHours() + 1); 
+            start.setMinutes(start.getMinutes() - start.getTimezoneOffset()); 
             const minFinish = start.toISOString().slice(0,16);
             document.getElementById('finishDate').setAttribute('min', minFinish);
         });
 
-        // Trigger change event on load if value is pre-filled
         const startInput = document.getElementById('startDate');
         if (startInput.value) {
             const event = new Event('change');

@@ -53,10 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const profileMenu = document.querySelector(".profile");
 
     profileIcon.addEventListener("click", function () {
-        profileMenu.classList.toggle("active"); // Toggle the 'active' class
+        profileMenu.classList.toggle("active"); 
     });
 
-    // Close the dropdown if clicked outside
     document.addEventListener("click", function (event) {
         if (!profileMenu.contains(event.target) && event.target !== profileIcon) {
             profileMenu.classList.remove("active");
@@ -67,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
 customElements.define('dashboard-component', Dashboard);
 
 
-//automatically highlight the current page in the sidebar menu
 function updateActiveMenu() {
     const allSideMenu = document.querySelectorAll('#sidebar .side-menu li a');
     const currentPath = window.location.pathname;
@@ -91,7 +89,6 @@ function updateActiveMenu() {
     });
 }
 
-// Run the updateActiveMenu function on page load
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
@@ -135,19 +132,16 @@ window.addEventListener('resize', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Activate sidebar menu based on current path
     updateActiveMenu();
 
     const profileIcon = document.getElementById("profile-icon");
     const profileMenu = document.querySelector(".profile");
 
-    // Toggle dropdown visibility
     profileIcon.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent click from bubbling up
+        e.stopPropagation(); 
         profileMenu.classList.toggle("active");
     });
 
-    // Close dropdown if clicking outside
     document.addEventListener("click", function (e) {
         if (!profileMenu.contains(e.target)) {
             profileMenu.classList.remove("active");

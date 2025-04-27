@@ -16,12 +16,11 @@ $ssql = "SELECT
             inventory.availability
         FROM inventory
         JOIN buyer ON inventory.buyer_id = buyer.buyer_id 
-        WHERE 1=1"; // Ensure WHERE clause starts correctly
+        WHERE 1=1"; 
 
-// Apply filters
 if (isset($_GET['date']) && !empty($_GET['date'])) {
     $date = $conn->real_escape_string($_GET['date']);
-    $ssql .= " AND DATE(inventory.date) = '$date'"; // Use DATE() to extract the date part from the timestamp
+    $ssql .= " AND DATE(inventory.date) = '$date'"; 
 }
 
 if (isset($_GET['type']) && !empty($_GET['type'])) {
@@ -39,11 +38,10 @@ if (isset($_GET['colour']) && !empty($_GET['colour'])) {
     $ssql .= " AND inventory.colour = '$colour'";
 }
 
-$ssql .= " ORDER BY inventory.date DESC"; // Ensure ORDER BY is added at the end
+$ssql .= " ORDER BY inventory.date DESC"; 
 
 $result = $conn->query($ssql);
 
-// Check if query was successful
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
@@ -88,7 +86,6 @@ if (!$result) {
             <h2>Monthly Inventory Summary</h2>
           </div>
           <?php
-        // Query to get the count of each type of gem
         $typeQuery = "SELECT type, COUNT(*) AS count FROM inventory GROUP BY type";
         $typeResult = $conn->query($typeQuery);
 
@@ -143,7 +140,6 @@ if (!$result) {
         </form>
 </div>
 
-          <!-- Table -->
           <table class="sales-table">
             <thead>
               <tr>
@@ -176,7 +172,6 @@ if (!$result) {
                       echo "<td>" . $row['name'] . "</td>";
                       echo "<td>" . $row['availability'] . "</td>";
 
-                      // form for visibility
                       echo "<td>";
                       echo "<form method='POST' action='./updatevisibility.php'>";
                       echo "<input type='hidden' name='stone_id' value='" . htmlspecialchars($row['stone_id']) . "'>";
@@ -188,8 +183,6 @@ if (!$result) {
                       echo "</td>";
 
                     
-
-                      // Action buttons
                       echo "<td class='actions'>";
 
                       

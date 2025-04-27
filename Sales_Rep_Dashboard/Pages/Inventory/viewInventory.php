@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     $buyers_sql = "SELECT buyer_id, email FROM buyer";
     $buyers_result = $conn->query($buyers_sql);
 
-    $amountSettled = 0; // Initialize amountSettled
+    $amountSettled = 0; 
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
 
         if ($settled_result->num_rows > 0) {
             $settled_row = $settled_result->fetch_assoc();
-            $amountSettled = $settled_row['amountSettled']; // Assign the fetched value
+            $amountSettled = $settled_row['amountSettled']; 
         }
 
     } else {
@@ -115,7 +115,6 @@ if (isset($_GET['id'])) {
               <input type="number" id="amount" name="amount" placeholder="Enter Amount" value="<?php echo $row['amount'];?>" required />
             </div>
 
-            <!-- Image Upload Field -->
             <div class="form-group">
               <label for="image">Image:</label>
               <?php if (!empty($row['image'])): ?>
@@ -125,11 +124,9 @@ if (isset($_GET['id'])) {
                 </div>
               <?php endif; ?>
               <input type="file" id="image" name="image" accept=".pdf,.jpg,.jpeg,.png" />
-              <!-- Hidden field to pass the current image file name -->
               <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($row['image']); ?>" />
             </div>
 
-            <!-- Certificate Upload Field -->
             <div class="form-group">
               <label for="certificate">Certificate:</label>
               <?php if (!empty($row['certificate'])): ?>

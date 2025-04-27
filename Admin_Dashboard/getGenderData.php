@@ -12,12 +12,9 @@ $password = "";
 $dbname = "safgems";
 
 try {
-    //php data object (PDO) for database connection
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    //error handling mode
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Query to get gender-wise totals
     $stmt = $pdo->prepare("
         SELECT gender, COUNT(*) AS count
         FROM customer
@@ -25,7 +22,6 @@ try {
     ");
     $stmt->execute();
 
-    //takes all the rows returned and puts them in an associative array
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($data);
 

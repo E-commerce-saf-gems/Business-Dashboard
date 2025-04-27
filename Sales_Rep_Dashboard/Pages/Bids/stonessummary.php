@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Get filter values from GET request
 $dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
 $customerFilter = isset($_GET['customer']) ? $_GET['customer'] : '';
 
@@ -10,16 +9,14 @@ $sql = "SELECT bs.biddingstone_id, bs.startingBid , bs.currentBid , bs.startDate
         JOIN inventory as st ON bs.stone_id = st.stone_id
         WHERE 1";
 
-// Apply the date filter for transactions
 if ($dateFilter) {
     $sql .= " AND DATE(t.date) = '" . $conn->real_escape_string($dateFilter) . "'";
 }
 
-// Apply the customer filter for transactions
 if ($customerFilter) {
     $sql .= " AND c.email LIKE '%" . $conn->real_escape_string($customerFilter) . "%'";
 }
-$sql .= " ORDER BY bs.startDate DESC";  // Order by the date column
+$sql .= " ORDER BY bs.startDate DESC";  
 
 
 $result = $conn->query($sql);
