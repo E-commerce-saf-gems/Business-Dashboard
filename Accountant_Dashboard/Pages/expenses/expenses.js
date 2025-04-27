@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data.forEach(gem => {
                 const option = document.createElement('option');
                 option.value = gem.stone_id;
-                option.textContent = `ID: ${gem.stone_id} | Type: ${gem.type} | Availability: ${gem.availability} | Visibility: ${gem.visibility}`;
+                option.textContent = `ID: ${gem.stone_id} | ${gem.colour} ${gem.type} ${gem.shape} shaped ${gem.size} Carat weighted gem | Availability: ${gem.availability} | Visibility: ${gem.visibility}`;
                 dropdown.appendChild(option);
             });
         })
@@ -72,4 +72,29 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.innerHTML = '<option disabled>Error loading gems</option>';
         });
 });
+
+
+document.getElementById("amount").addEventListener("input", function() {
+    const amountField = this;
+    const errorMsg = document.getElementById("errorMsg");
+
+    if (value < 0) {
+    errorMsg.textContent = "❌ Error: Amount cannot be negative.";
+    amountField.value = ""; // Clear the invalid input
+    } else if (value === 0) {
+        errorMsg.textContent = "❌ Error: Amount cannot be 0.";
+        amountField.value = ""; // Clear the invalid input
+    } else {
+        errorMsg.textContent = ""; // Clear the error if value is valid
+    }
+});
+
+
+
+
+
+
+
+
+
 

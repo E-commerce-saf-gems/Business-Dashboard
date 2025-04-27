@@ -1,19 +1,63 @@
 <?php
-include('../../../database/db.php'); // Include your database connection
+// Include database connection
+include('../../../database/db.php');
 
-$query = "SELECT customer_id, email FROM customer";
-$result = $conn->query($query);
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$customers = [];
+    // Get the email from POST data, trim spaces
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $customers[] = $row;
+    // Validate if email is provided
+    if (empty($email)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Email is required'
+        ]);
+        exit;
     }
+
+    // Prepare SQL to fetch customer details (customer_id, NIC, full name)
+    $stmt = $conn->prepare("
+        SELECT customer_id, NIC, CONCAT(firstName, ' ', lastName) AS fullName
+        FROM customer
+        WHERE email = ?
+    ");
+    $stmt->bind_param("s", $email); // Bind the email parameter
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if a customer was found
+    if ($row = $result->fetch_assoc()) {
+        // Customer found - return customer details
+        echo json_encode([
+            'success' => true,
+            'customer' => [
+                'customer_id' => $row['customer_id'],
+                'name' => $row['fullName'],
+                'nic' => $row['NIC']
+            ]
+            // Stones related to this customer will be fetched separately (as per your system design)
+        ]);
+    } else {
+        // Customer not found - return error
+        echo json_encode([
+            'success' => false,
+            'message' => 'Customer not found'
+        ]);
+    }
+
+} else {
+    // Invalid request method - only POST allowed
+    echo json_encode([
+        'success' => false,
+        'message' => 'Invalid request'
+    ]);
 }
 
-header('Content-Type: application/json');
-echo json_encode($customers);
-
+// Close the database connection
 $conn->close();
 ?>
+
+
+

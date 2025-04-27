@@ -97,18 +97,16 @@ $result = $conn->query($sql);
                     <a href="../Recievables/invoices.php" class="tab-btn"><i></i>Invoice</a>
                     <a href="../Payables/payments.php" class="tab-btn"><i></i>Payment</a>
                 </div>
-                <div class="addnew">
-                    <a href="./customerType.php" class="btn-add"><i class='bx bx-plus'></i>Add New Trader</a>
-                </div>
+                
             </div>
 
             <?php if (isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 1): ?>
                 <div class="success-message">
-                    Payment receival was recorded successfully in Transactions and Sales!
+                    Invoice was recorded successfully in Transactions and Sales!
                 </div>
             <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 2): ?>
                 <div class="error-message">
-                    An error occurred when recording the payment! Try Again!
+                    An error occurred when recording the invoice! Try Again!
                 </div>
             <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 3): ?>
                 <div class="error-message">
@@ -126,16 +124,36 @@ $result = $conn->query($sql);
                 </div>
             <?php endif; ?>
 
+            <?php if (isset($_GET['ReceivalUpdateSuccess']) && $_GET['ReceivalUpdateSuccess'] == 1): ?>
+                <div class="success-message">
+                    Invoice was recorded successfully Update in Transctions and Sales!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the invoice! Try Again!
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['PaymentUpdateSuccess']) && $_GET['PaymentUpdateSuccess'] == 1): ?>
+                <div class="success-message">
+                    Payment was recorded successfully Update in Payments and Purchases!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the payment! Try Again!
+                </div>
+            <?php endif; ?>
+
+            
+
+
+
             <div class="sales-table-container">
                 <div class="table-filters" >
                     <form method="GET" action="transactions.php">
                     
-                        <label for="status-filter">Type:</label>
-                        <select id="status-filter">
-                            <option value="">All</option>
-                            <option value="sale" >Sales</option>
-                            <option value="purchase" >Purchase</option>
-                        </select>
+                        
+                        
                 
                         <label for="date-filter">Date:</label>
                         <input type="date" id="date-filter" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">

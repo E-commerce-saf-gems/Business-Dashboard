@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssisssi", $date, $type, $stone_id, $customer_id, $buyer_id, $amount, $status, $transaction_id);
 
     if ($stmt->execute()) {
-        header("Location: transactions.php?message=Transaction updated successfully");
+        header("Location: transactions.php?ReceivalUpdateSuccess=1");
         exit();
     } else {
         echo "Error updating transaction: " . $stmt->error;

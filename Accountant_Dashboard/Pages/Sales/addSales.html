@@ -26,50 +26,32 @@
                 <form class="edit-sales-form" id="editsalesform" action="./addSales.php" method="post">
                     <h2>New Sales Details</h2>
 
-                    <!-- Date -->
                     <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="datetime-local" id="date" name="date" required>
-                    </div>
-
-                    <!-- Stone ID -->
-                    <div class="form-group">
-                        <label for="stone_id">Stone ID</label>
-                        <input type="number" id="stone_id" name="stone_id" required>
-                    </div>
-
-                    <!-- Customer ID -->
-                    <div class="form-group">
-                        <label for="customer_id">Customer ID</label>
-                        <input type="number" id="customer_id" name="customer_id" required>
-                    </div>
-
-                    <!-- Total Amount -->
-                    <div class="form-group">
-                        <label for="total">Total Amount (Rs.)</label>
-                        <input type="number" id="total" name="total" required>
-                    </div>
-
-                    <!-- Status -->
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status" required>
-                            <option value="Paid">Paid</option>
-                            <option value="Pending">Pending</option>
+                        <label for="email">Customer Email</label>
+                        <select id="email" name="email" required>
+                            <option value="">Select a Customer Email</option>
                         </select>
                     </div>
-
-                    <!-- Amount Settled (auto or manual) -->
+                    
                     <div class="form-group">
-                        <label for="amountSettled">Amount Settled (Rs.)</label>
-                        <input type="number" id="amountSettled" name="amountSettled" required>
+                        <label for="stone">Sale Stones</label>
+                        <select id="stone" name="stone_id" required>
+                            <option value="">Select a Stone</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="amount">Amount (Rs.)</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="1" required>
                     </div>
 
-                    <!-- Submit -->
+                    <div class="form-group">
+                        <label for="amount">Amount to be Settled(Rs.)</label>
+                        <input type="number" id="amountSettled" name="amountSettled" placeholder="Enter Amount" min="10000" required>
+                    </div>
+                    
                     <div class="form-actions">
-                        <button type="submit" class="btn-save">
-                            <i class='bx bx-save'></i> Save
-                        </button>
+                        <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save</button>
                     </div>
                 </form>
             </div>

@@ -38,13 +38,13 @@ try {
     $conn->commit();
 
     // Redirect on success
-    header("Location: ../expenses/expenseType.php?ExpenseAdded=1");
+    header("Location: ../expenses/expenseType.php?ExpenseAddSuccess=1");
     exit();
 
 } catch (Exception $e) {
     $conn->rollback();
     error_log("Transaction failed: " . $e->getMessage());
-    header("Location: ../expenses/expenseType.php?ExpenseAdded=2");
+    header("Location: ../expenses/expenseType.php?ExpenseAddSuccess=2");
     exit();
 }
 ?>

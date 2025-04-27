@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['transaction_id'])) {
 
         // Commit transaction
         $conn->commit();
-        header("Location: ./invoices.php?DeleteSuccess=1");
+        header("Location: ./invoices.php?ReceivalDeleteSuccess=1");
     } catch (Exception $e) {
         // Rollback on error
         $conn->rollback();

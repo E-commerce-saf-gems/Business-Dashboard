@@ -115,6 +115,16 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
+            <?php if (isset($_GET['ReceivalDeleteSuccess']) && $_GET['ReceivalDeleteSuccess'] == 1): ?>
+                <div class="success-message">
+                    Invoice was deleted successfully from Transactions and Sales!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the payment! Try Again!
+                </div>
+            <?php endif; ?>
+
 
             
             <div class="sales-table-container">
@@ -140,7 +150,7 @@ $result = $conn->query($sql);
                             <th>Customer Email</th>
                             <th>Amount</th>
                             <th>Option</th>
-                            <th>Action</th>
+                            
 
                         </tr>
                     </thead>
@@ -160,10 +170,7 @@ $result = $conn->query($sql);
                                         <a href='./editTransactions.php?transaction_id=" . $row['transaction_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
                                         <button class='btn deleteBtn' data-id='" . $row['transaction_id'] . "'><i class='bx bx-trash'></i></button>
                                     </td>";
-                                echo "<td class='actions'>
-                                    <a href='#' class='btn'><i class='bx bx-printer'></i></a>        
-                                    <a href='#' class='btn'><i class='bx bx-send'></i></a>
-                                </td>";
+                                
                                 echo "</tr>";
                             }
                         } else {

@@ -32,11 +32,26 @@
                 <form class="edit-sales-form" id="editsalesform" action="./addTransactions.php" method="post">
                     <h2>New Payment Receival</h2><br>
                     <div class="form-group">
-                        <label for="customer">Customer Email</label>
-                        <select id="customer" name="customer_id" required>
-                            <option value="">Select a Customer</option>
-                        </select>
-                        
+                        <label for="customerEmail">Customer Email</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="email" id="customer-email" name="email" placeholder="Enter Customer Email" required>
+                            <button type="button" id="select-customer" class="btn-save" style="padding: 5px 15px;">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Add this hidden field in your form -->
+                    <input type="hidden" id="customer_id" name="customer_id">
+                
+                    <div class="form-group">
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customer-name" name="customer_name" disabled>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="customerNIC">NIC No</label>
+                        <input type="text" id="nic" name="customer_nic" disabled>
                     </div>
                     
                     <div class="form-group">
@@ -49,10 +64,9 @@
     
                     <div class="form-group">
                         <label for="amount">Amount (Rs.)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="0" step="100" required>
-                        
+                        <input type="number" id="amount" name="amount" placeholder="Enter Amount" min="0" step="1000" required>
                     </div>
-                    <div id="amount-error" class="error-message"></div>
+                    
                     
                     <div class="form-actions">
                         <button type="submit" class="btn-save"><i class='bx bx-save'></i> Save</button>
@@ -61,6 +75,24 @@
             </div>
         </main>
     </section>
+
+    <script>
+    document.getElementById('select-customer').addEventListener('click', function () {
+        const emailInput = document.getElementById('customer-email');
+        const emailValue = emailInput.value.trim();
+    
+        // Simple email regex
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!emailPattern.test(emailValue)) {
+            alert('Please enter a valid email address.');
+            emailInput.focus();
+        } else {
+            // continue your "Select" button functionality here
+            console.log('Valid email. Proceed...');
+        }
+    });
+    </script>
 
     <script src="../../../Components/Accountant_Dashboard_Template/script.js"></script>
     <script src="./script.js"></script>

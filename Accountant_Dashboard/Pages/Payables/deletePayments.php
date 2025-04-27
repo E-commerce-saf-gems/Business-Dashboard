@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment_id'])) {
         $conn->begin_transaction();
 
         // Fetch transaction details
-        $getPaymentSQL = "SELECT amount, buyer_id, stone_id FROM payment WHERE payment_id = ?";
+        $getPaymentSQL = "SELECT amount, buyer_id, stone_id FROM payments WHERE payment_id = ?";
         $stmt = $conn->prepare($getPaymentSQL);
         $stmt->bind_param("i", $payment_id);
         $stmt->execute();
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment_id'])) {
         $stone_id = $payment['stone_id'];
 
         // Delete the payment from payment table
-        $deletePaymentSQL = "DELETE FROM payment WHERE payment_id = ?";
+        $deletePaymentSQL = "DELETE FROM payments WHERE payment_id = ?";
         $stmt = $conn->prepare($deletePaymentSQL);
         $stmt->bind_param("i", $payment_id);
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['payment_id'])) {
 
         // Commit transaction
         $conn->commit();
-        header("Location: ./payments.php?DeleteSuccess=1");
+        header("Location: ./payments.php?PaymentDeleteSuccess=1");
     } catch (Exception $e) {
         // Rollback on error
         $conn->rollback();

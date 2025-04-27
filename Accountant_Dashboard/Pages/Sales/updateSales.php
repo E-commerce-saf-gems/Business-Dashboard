@@ -1,25 +1,23 @@
 <?php
 include '../../../database/db.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sale_id = $_POST['sale_id'];
-    $stone_id = $_POST['stone_id'];
-    $customer_id = $_POST['customer_id'];
-    $total = $_POST['total'];
-    $date = $_POST['date'];
     $amountSettled = $_POST['amountSettled'];
 
-    $sql = "UPDATE sales SET stone_id=?, customer_id=?, total=?, date=?, amountSettled=? WHERE sale_id=?";
+    // Update the sales record with the new amountSettled
+    $sql = "UPDATE sales SET amountSettled = ? WHERE sale_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiisii", $stone_id, $customer_id, $total, $date, $amountSettled, $sale_id);
+    $stmt->bind_param("di", $amountSettled, $sale_id);
 
     if ($stmt->execute()) {
-        header("Location: sales.php?updated=1");
+        // Redirect back to the sales list page with a success message
+        header("Location: sales.php?SalesUpdateSuccess=1");
     } else {
-        echo "Error updating record: " . $stmt->error;
+        // Handle the error case
+        echo "Error: " . $stmt->error;
     }
-
-    $stmt->close();
 }
-$conn->close();
 ?>
+
+
