@@ -47,41 +47,37 @@ function sendReadyForCollectionEmail($first_name, $email, $order_id) {
     }
 }
 
-if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
-    
+if (isset($_POST['order_id']) && (isset($_POST['order_status']) || isset($_POST['new_status']))) {
     $order_id = $_POST['order_id'];
-    $new_status = $_POST['new_status'];
-
+    $new_status = isset($_POST['order_status']) ? $_POST['order_status'] : $_POST['new_status'];
 
     $update_sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
     $stmt = $conn->prepare($update_sql);
 
     if (!$stmt) {
-        die("SQL Prepare failed: " . $conn->error); // Debugging
+        die("SQL Prepare failed: " . $conn->error);
     }
 
-    // Bind parameters BEFORE executing
     $stmt->bind_param("si", $new_status, $order_id);
 
-    // Execute the statement
     if (!$stmt->execute()) {
-        die("Failed to update order status: " . $stmt->error); // Debugging
+        die("Failed to update order status: " . $stmt->error);
     }
 
-    // Check if any rows were updated
     if ($stmt->affected_rows === 0) {
-        die("Order ID not found or status already updated."); // Debugging
+        die("Order ID not found or status already updated.");
     }
 
-    // If the new status is 'ready for collection', fetch customer details & send email
+    // If the new status is 'ready for collection', send email
     if ($new_status == "ready for collection") {
-        $query = "SELECT customer.firstName, customer.email FROM orders 
+        $query = "SELECT customer.first_name, customer.email 
+                  FROM orders 
                   JOIN customer ON orders.customer_id = customer.customer_id 
                   WHERE orders.order_id = ?";
         $stmt2 = $conn->prepare($query);
 
         if (!$stmt2) {
-            die("Prepare failed: " . $conn->error); // Debugging
+            die("Prepare failed: " . $conn->error);
         }
 
         $stmt2->bind_param("i", $order_id);
@@ -90,18 +86,18 @@ if (isset($_POST['order_id']) && isset($_POST['new_status'])) {
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            sendReadyForCollectionEmail($user['firstName'], $user['email'], $order_id);
+            sendReadyForCollectionEmail($user['first_name'], $user['email'], $order_id);
         }
 
         $stmt2->close();
     }
 
     header("Location: ./orders.php?success=1");
-    echo "success";
+    exit();
 
     $stmt->close();
-    $conn->close();
 }
+
 
 $conn->close();
 ?>
