@@ -104,11 +104,11 @@ $result = $conn->query($sql);
 
             <?php if (isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 1): ?>
                 <div class="success-message">
-                    Payment receival was recorded successfully in Transactions and Sales!
+                    Invoice was recorded successfully in Transactions and Sales!
                 </div>
             <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 2): ?>
                 <div class="error-message">
-                    An error occurred when recording the payment! Try Again!
+                    An error occurred when recording the invoice! Try Again!
                 </div>
             <?php elseif(isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 3): ?>
                 <div class="error-message">
@@ -126,17 +126,27 @@ $result = $conn->query($sql);
                 </div>
             <?php endif; ?>
 
-            <?php if (isset($_GET['TransactionUpdateSuccess']) && $_GET['TransactionUpdateSuccess'] == 1): ?>
+            <?php if (isset($_GET['ReceivalUpdateSuccess']) && $_GET['ReceivalUpdateSuccess'] == 1): ?>
                 <div class="success-message">
-                    Payment receival was updateded successfully in Transactions and Sales!
+                    Invoice was recorded successfully Update in Transctions and Sales!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the invoice! Try Again!
                 </div>
             <?php endif; ?>
 
             <?php if (isset($_GET['PaymentUpdateSuccess']) && $_GET['PaymentUpdateSuccess'] == 1): ?>
                 <div class="success-message">
-                    Payment was updateded successfully in Payments and Purchases!
+                    Payment was recorded successfully Update in Payments and Purchases!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the payment! Try Again!
                 </div>
             <?php endif; ?>
+
+            
 
 
 

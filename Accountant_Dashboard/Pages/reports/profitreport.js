@@ -1,16 +1,5 @@
 // Helper function to get today's date as Date object
-function getToday() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return today;
-}
 
-// Validate future dates
-function isFutureDate(dateStr) {
-    const selectedDate = new Date(dateStr);
-    const today = getToday();
-    return selectedDate > today;
-}
 
 // Select button: Fetch and fill profit & loss data
 document.getElementById("selectDateBtn").addEventListener("click", () => {
@@ -22,11 +11,7 @@ document.getElementById("selectDateBtn").addEventListener("click", () => {
         return;
     }
 
-    // Validate future dates
-    if (isFutureDate(startDate) || isFutureDate(endDate)) {
-        alert("Future dates are not allowed. Please select valid dates.");
-        return;
-    }
+    
 
     fetch('getProfitLossData.php', {
         method: 'POST',
@@ -56,11 +41,7 @@ document.getElementById("generateReportBtn").addEventListener("click", () => {
         return;
     }
 
-    // Validate future dates before generating
-    if (isFutureDate(startDate) || isFutureDate(endDate)) {
-        alert("Future dates are not allowed. Please select valid dates.");
-        return;
-    }
+    
 
     const totalSalesRevenue = parseFloat(document.getElementById("totalSalesRevenue").value) || 0;
     const otherIncome = parseFloat(document.getElementById("otherIncome")?.value) || 0;
@@ -98,17 +79,8 @@ document.getElementById("generateReportBtn").addEventListener("click", () => {
     window.location.href = "Profitlosspreview.html";
 });
 
-// Corrected: Set max attribute for date inputs to disable future dates from picker
-window.addEventListener('DOMContentLoaded', () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const todayFormatted = `${year}-${month}-${day}`;
 
-    document.getElementById('plStartDate').setAttribute('max', todayFormatted);
-    document.getElementById('plEndDate').setAttribute('max', todayFormatted);
-});
+
 
 
 
