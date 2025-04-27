@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     stones.forEach(stone => {
                         const option = document.createElement("option");
                         option.value = stone.stone_id;
-                        option.textContent = `${stone.type} (Carats: ${stone.weight}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
+                        option.textContent = `${stone.type} (Carats: ${stone.size}) (Amount To Be Settled: Rs.${stone.amountToBeSettled})`;
                         option.dataset.amountToBeSettled = stone.amountToBeSettled; // Store the value in a dataset
                         stoneDropdown.appendChild(option);
                     });
@@ -98,15 +98,32 @@ document.addEventListener("DOMContentLoaded", function () {
             amountError.textContent = "";
         }
     });
+
+    // Function to filter transactions
+    function filterTransactions() {
+        const date = document.getElementById("date-filter").value;
+        const customer = document.getElementById("customer-filter").value;
+
+        // Prepare the URL with filter parameters
+        let url = "transactions.php?";
+        if (date) url += `date=${encodeURIComponent(date)}&`;
+        if (customer) url += `customer=${encodeURIComponent(customer)}&`;
+
+        // Fetch filtered data from the server
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch filtered transactions");
+                return response.text();
+            })
+            .then(data => {
+                // Update the table body with filtered data
+                document.getElementById("transaction-body").innerHTML = data;
+            })
+            .catch(error => console.error("Error:", error));
+    }
 });
 
-// Auto-hide success messages after 5 seconds
-setTimeout(function () {
-    const message = document.querySelector(".success-message");
-    if (message) {
-        message.style.display = "none";
-    }
-}, 5000);
+
 
 // Function to filter transactions
 function filterTransactions() {

@@ -115,6 +115,16 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
+            <?php if (isset($_GET['ReceivalDeleteSuccess']) && $_GET['ReceivalDeleteSuccess'] == 1): ?>
+                <div class="success-message">
+                    Invoice was deleted successfully from Transactions and Sales!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the payment! Try Again!
+                </div>
+            <?php endif; ?>
+
 
             
             <div class="sales-table-container">

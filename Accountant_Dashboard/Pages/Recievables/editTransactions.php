@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['transaction_id'])) {
         }
 
         $conn->commit();
-        header("Location: ../transactions/transactions.php?TransactionsUpdateSuccess=1");
+        header("Location: ../transactions/transactions.php?ReceivalUpdateSuccess=1");
     } catch (Exception $e) {
         $conn->rollback();
         echo "Error: " . $e->getMessage();

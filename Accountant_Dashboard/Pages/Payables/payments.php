@@ -111,6 +111,16 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
+            <?php if (isset($_GET['PaymentDeleteSuccess']) && $_GET['PaymentDeleteSuccess'] == 1): ?>
+                <div class="success-message">
+                    Payment was deleted successfully from Payments and Purchases!
+                </div>
+            <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                <div class="error-message">
+                    An error occurred when recording the payment! Try Again!
+                </div>
+            <?php endif; ?>
+
 
             
             <div class="sales-table-container">
