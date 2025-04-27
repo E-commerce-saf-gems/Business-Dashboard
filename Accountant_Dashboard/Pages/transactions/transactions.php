@@ -97,9 +97,7 @@ $result = $conn->query($sql);
                     <a href="../Recievables/invoices.php" class="tab-btn"><i></i>Invoice</a>
                     <a href="../Payables/payments.php" class="tab-btn"><i></i>Payment</a>
                 </div>
-                <div class="addnew">
-                    <a href="./customerType.php" class="btn-add"><i class='bx bx-plus'></i>Add New Trader</a>
-                </div>
+                
             </div>
 
             <?php if (isset($_GET['ReceivalSuccess']) && $_GET['ReceivalSuccess'] == 1): ?>
