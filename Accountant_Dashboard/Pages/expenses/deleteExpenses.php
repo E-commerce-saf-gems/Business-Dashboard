@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['expense_id'])) {
 
         // Commit transaction
         $conn->commit();
-        header("Location: ../expenses/expenseType.php?DeleteSuccess=1");
+        header("Location: ../expenses/expenseType.php?ExpenseDeleteSuccess=1");
     } catch (Exception $e) {
         // Rollback on error
         $conn->rollback();

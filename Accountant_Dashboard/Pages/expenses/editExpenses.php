@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['expense_id'])) {
 
         // Commit transaction
         $conn->commit();
-        header("Location: ../expenses/expenseType.php?ExpenseUpdated=1");
+        header("Location: ../expenses/expenseType.php?ExpenseUpdateSuccess=1");
         exit();
     } catch (Exception $e) {
         // Rollback on error

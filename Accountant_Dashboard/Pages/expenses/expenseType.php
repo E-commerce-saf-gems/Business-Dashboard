@@ -173,6 +173,37 @@ $result = $conn->query($sql);
                         <button><a href="expenseType.php" class="btn-clear">Clear</a></button>
                     </form>
                 </div>
+
+                <?php if (isset($_GET['ExpenseAddSuccess']) && $_GET['ExpenseAddSuccess'] == 1): ?>
+                    <div class="success-message">
+                        Expense was added successfully!
+                    </div>
+                <?php elseif (isset($_GET['ExpenseAddSuccess']) && $_GET['ExpenseAddSuccess'] == 2): ?>
+                    <div class="error-message">
+                        An error occurred while adding the expense! Try Again!
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['ExpenseUpdateSuccess']) && $_GET['ExpenseUpdateSuccess'] == 1): ?>
+                    <div class="success-message">
+                        Expense was updated successfully!
+                    </div>
+                <?php elseif (isset($_GET['ExpenseUpdateSuccess']) && $_GET['ExpenseUpdateSuccess'] == 2): ?>
+                    <div class="error-message">
+                        An error occurred while updating the expense! Try Again!
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['ExpenseDeleteSuccess']) && $_GET['ExpenseDeleteSuccess'] == 1): ?>
+                    <div class="success-message">
+                        Expense was deleted successfully!
+                    </div>
+                <?php elseif(isset($_GET['PaymentSuccess']) && $_GET['PaymentSuccess'] == 2): ?>
+                    <div class="error-message">
+                        An error occurred when recording the payment! Try Again!
+                    </div>
+                <?php endif; ?>
+
    
 
                 <!-- Table -->
