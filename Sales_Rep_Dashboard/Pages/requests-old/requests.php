@@ -5,17 +5,15 @@
         
         <select name="status" data-original-value="<?php echo $row['status']; ?>" onchange="handleStatusChange(this, <?php echo $row['request_id']; ?>)">
             <?php
-            // Dynamic status dropdown options based on current status
             $statusOptions = [
-                'P' => ['P' => 'Pending', 'A' => 'Approve', 'D' => 'Decline'],  // Pending status
-                'A' => ['A' => 'Approved', 'C' => 'Complete', 'D' => 'Decline'], // Approved status
-                'C' => ['C' => 'Completed', 'P' => 'Pending', 'D' => 'Decline'], // Completed status
-                'D' => ['D' => 'Declined', 'A' => 'Approve', 'P' => 'Pending'],  // Declined status
+                'P' => ['P' => 'Pending', 'A' => 'Approve', 'D' => 'Decline'], 
+                'A' => ['A' => 'Approved', 'C' => 'Complete', 'D' => 'Decline'], 
+                'C' => ['C' => 'Completed', 'P' => 'Pending', 'D' => 'Decline'],
+                'D' => ['D' => 'Declined', 'A' => 'Approve', 'P' => 'Pending'], 
             ];
 
-            // Iterate through the options based on the request's current status
             foreach ($statusOptions[$row['status']] as $statusKey => $statusLabel) {
-                $selected = $row['status'] === $statusKey ? "selected" : ""; // Mark the current status as selected
+                $selected = $row['status'] === $statusKey ? "selected" : ""; 
                 echo "<option value=\"$statusKey\" $selected>$statusLabel</option>";
             }
             ?>

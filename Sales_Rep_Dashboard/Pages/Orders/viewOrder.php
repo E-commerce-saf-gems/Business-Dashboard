@@ -43,7 +43,6 @@ $stones_result = $conn->query($stones_sql);
 <body>
     <dashboard-component></dashboard-component>
 
-    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
             <h2>Dashboard</h2>
@@ -57,7 +56,6 @@ $stones_result = $conn->query($stones_sql);
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <custom-header></custom-header>
         <section id="content">
@@ -72,13 +70,11 @@ $stones_result = $conn->query($stones_sql);
                 </div>
 
                 <div class="order-details-container">
-                    <!-- Order Header -->
                     <div class="order-header">
                         <h1>Order #<?php echo $order['order_id']; ?></h1>
                         <p><strong>Order Date:</strong> <?php echo $order['order_date']; ?> <span class="status-badge"><?php echo $order['order_status']; ?></span></p>
                     </div>
 
-                    <!-- Order Summary Table -->
                     <div class="order-summary-table">
                         <table>
                             <thead>
@@ -100,7 +96,6 @@ $stones_result = $conn->query($stones_sql);
                         </table>
                     </div>
 
-                    <!-- Product Details Table -->
                     <div class="product-details-table">
                         <table>
                             <thead>
@@ -125,14 +120,13 @@ $stones_result = $conn->query($stones_sql);
                                         </div>
                                     </td>
                                     <td>1</td>
-                                    <td><?php echo $stone['amount']; ?></td> <!-- Replace with unit price if available -->
+                                    <td><?php echo $stone['amount']; ?></td> 
                                 </tr>
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- Order Summary Footer -->
                     <div class="order-summary-footer">
                         <table>
                             <tbody>

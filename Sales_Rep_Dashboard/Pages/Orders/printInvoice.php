@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../../database/db.php'); // Include database connection
+include('../../../database/db.php'); 
 
 if (!isset($_GET['id'])) {
     echo "Order ID is required.";
@@ -10,7 +10,6 @@ if (!isset($_GET['id'])) {
 $order_id = intval($_GET['id']);
 $customer_id = $_SESSION['customer_id'] ?? null;
 
-// Fetch order details
 $order_sql = "SELECT 
                 o.*, 
                 c.firstName, c.lastName, c.address1, c.address2, c.city, c.country, c.postalCode, c.contactNo, c.email
@@ -29,7 +28,6 @@ if ($order_result->num_rows === 0) {
 
 $order = $order_result->fetch_assoc();
 
-// Fetch stone details for the order
 $stones_sql = "SELECT i.* 
                FROM inventory i
                INNER JOIN order_items oi ON oi.stone_id = i.stone_id
@@ -89,7 +87,7 @@ $stones_result = $stones_stmt->get_result();
                     <tbody>
                         <?php while ($stone = $stones_result->fetch_assoc()): ?>
                         <tr>
-                            <td>1</td> <!-- Default quantity 1 -->
+                            <td>1</td> 
                             <td><?php echo $stone['colour'] . ' ' . $stone['type'] . ' ' . $stone['size'] . ' carats'; ?></td>
                             <td><?php echo number_format($stone['amount'], 2); ?></td>
                         </tr>

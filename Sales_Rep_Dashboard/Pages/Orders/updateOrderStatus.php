@@ -11,11 +11,11 @@ if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
     if ($stmt) {
         $stmt->bind_param("si", $new_status, $order_id);
         if ($stmt->execute()) {
-            $stmt->close();  // Close the statement after execution
+            $stmt->close();  
             header("Location: ./orders.php?success=1");
             exit();
         } else {
-            $stmt->close();  // Close the statement after execution
+            $stmt->close();  
             header("Location: ./orders.php?success=2");
             exit();
         }

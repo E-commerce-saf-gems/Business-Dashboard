@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Fetch data from the 'sales', 'inventory', and 'customer' tables using a JOIN
 $sql = "SELECT 
             s.sale_id, 
             s.date, 

@@ -51,10 +51,7 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                 </div>
             </div>
 
-            <!-- Dashboard Overview -->
             <div class="dashboard-container">
-
-                <!-- Today's Orders -->
                 <div class="dashboard-card">
                     <h2><i class='bx bx-calendar-check dashboard-icon'></i> Today's Collections / Deliveries</h2>
                     <div class="scrollable-list">
@@ -72,7 +69,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                     </div>
                 </div>
 
-                <!-- Missed Pickups -->
                 <div class="dashboard-card">
                     <h2><i class='bx bx-time-five dashboard-icon'></i> Missed Pickups</h2>
                     <div class="scrollable-list">
@@ -87,7 +83,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                     </div>
                 </div>
 
-                <!-- Pending Orders -->
                 <div class="dashboard-card">
                     <h2><i class='bx bx-hourglass dashboard-icon'></i> Pending Orders</h2>
                     <div class="scrollable-list">
@@ -114,7 +109,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                 </div>
             <?php endif; ?>
 
-            <!-- Sales Table -->
             <div class="sales-table-container">
                 <table class="sales-table">
                     <thead>
@@ -130,7 +124,6 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                     </thead>
                     <tbody>
                         <?php
-                        // Fetch all orders
                         $order_sql = "SELECT 
                                         o.order_id, 
                                         o.order_date, 
@@ -154,19 +147,19 @@ $pending_orders_result = $conn->query($pending_orders_sql);
                                     <td>LKR <?php echo number_format($row['total_amount'], 2); ?></td>
                                     <td><?php echo ucfirst($row['shipping_method']); ?></td>
                                     <td>
-                                    <form method="POST" action="updateOrderStatus.php" class="status-form">
-    <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
-    <select name="order_status" class="status-dropdown" onchange="this.form.submit()">
-        <?php
-        $statuses = ['pending', 'confirmed', 'ready for collection', 'ready for delivery', 'completed'];
-        foreach ($statuses as $status) {
-            $selected = ($row['order_status'] === $status) ? 'selected' : '';
-            echo "<option value=\"$status\" $selected>" . ucfirst($status) . "</option>";
-        }
-        ?>
-    </select>
-</form>
-</td>
+                                        <form method="POST" action="updateOrderStatus.php" class="status-form">
+                                            <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                            <select name="order_status" class="status-dropdown" onchange="this.form.submit()">
+                                                <?php
+                                                $statuses = ['pending', 'confirmed', 'ready for collection', 'ready for delivery', 'completed'];
+                                                foreach ($statuses as $status) {
+                                                    $selected = ($row['order_status'] === $status) ? 'selected' : '';
+                                                    echo "<option value=\"$status\" $selected>" . ucfirst($status) . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </form>
+                                    </td>
                                     <td>
                                         <a href="./viewOrder.php?id=<?php echo $row['order_id']; ?>" class="btn-view">View</a>
                                     </td>
@@ -185,12 +178,9 @@ $pending_orders_result = $conn->query($pending_orders_sql);
     </section>
     <script src="./orders.js"></script>
     <script src="../../../Components/SalesRep_Dashboard_Template/script.js"></script>
-    
+
 </body>
 
 </html>
 
 <?php $conn->close(); ?>
-
-
-
