@@ -11,6 +11,7 @@ $finishDate = str_replace('T', ' ', $_POST['finishDate']);
 try {
     $conn->begin_transaction();
 
+    // Insert into biddingstone table
     $stmt = $conn->prepare("
         INSERT INTO biddingstone (stone_id, startingBid, startDate, finishDate) 
         VALUES (?, ?, ?, ?)
@@ -20,6 +21,7 @@ try {
     if ($stmt->execute()) {
         $bidding_id = $stmt->insert_id;
 
+        // Update inventory availability
         $updateStmt = $conn->prepare("UPDATE inventory SET availability = 'Bid' WHERE stone_id = ?");
         $updateStmt->bind_param("i", $stone_id);
         $updateStmt->execute();

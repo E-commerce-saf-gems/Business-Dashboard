@@ -1,7 +1,12 @@
 <?php
 include '../../../database/db.php';
 
-// Fetch data from the 'purchases', 'stone', and 'buyer' tables using a JOIN
+// Initialize variables for filters
+$dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
+$statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
+$buyerFilter = isset($_GET['buyer']) ? $_GET['buyer'] : '';
+
+// Build the SQL query with filters
 $sql = "SELECT 
             p.purchase_id, 
             p.date, 
@@ -15,7 +20,20 @@ $sql = "SELECT
             END AS status
         FROM purchases p
         JOIN inventory i ON p.stone_id = i.stone_id
-        JOIN buyer b ON p.buyer_id = b.buyer_id";
+        JOIN buyer b ON p.buyer_id = b.buyer_id
+        WHERE 1=1";
+
+// Apply filters to the query
+if (!empty($dateFilter)) {
+    $sql .= " AND p.date = '$dateFilter'";
+}
+if (!empty($statusFilter)) {
+    $sql .= " AND (CASE WHEN p.amountSettled = p.amount THEN 'Paid' ELSE 'Pending' END) = '$statusFilter'";
+}
+if (!empty($buyerFilter)) {
+    $sql .= " AND b.email LIKE '%$buyerFilter%'";
+}
+
 $result = $conn->query($sql);
 ?>
 
@@ -45,41 +63,23 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
-            <div class="sales-summary-box">
-                <div class="sales-summary-title">
-                    <h2>Monthly Purchases Summary</h2>
-                </div>
-                <div class="sales-item">
-                    <h3>This Month</h3>
-                    <p>Rs. 354200</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Month</h3>
-                    <p>Rs. 298500</p>
-                </div>
-                <div class="sales-item">
-                    <h3>Last Two Months</h3>
-                    <p>Rs. 652700</p>
-                </div>
-            </div>
-
             <div class="sales-table-container">
-                <div class="table-filters">
+                <form method="GET" class="table-filters">
                     <label for="date-filter">Date:</label>
-                    <input type="date" id="date-filter">
+                    <input type="date" id="date-filter" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">
                     
                     <label for="status-filter">Status:</label>
-                    <select id="status-filter">
+                    <select id="status-filter" name="status">
                         <option value="">All</option>
-                        <option value="Paid">Paid</option>
-                        <option value="Pending">Pending</option>
+                        <option value="paid" <?php echo $statusFilter === 'paid' ? 'selected' : ''; ?>>Paid</option>
+                        <option value="pending" <?php echo $statusFilter === 'pending' ? 'selected' : ''; ?>>Pending</option>
                     </select>
 
                     <label for="buyer-filter">Buyer:</label>
-                    <input type="text" id="buyer-filter" placeholder="Search Buyer">
+                    <input type="text" id="buyer-filter" name="buyer" placeholder="Search Buyer" value="<?php echo htmlspecialchars($buyerFilter); ?>">
                     
-                    <button class="btn-filter">Filter</button>
-                </div>
+                    <button type="submit" class="btn-filter">Filter</button>
+                </form>
 
                 <!-- Table -->
                 <table class="sales-table">
@@ -91,7 +91,6 @@ $result = $conn->query($sql);
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Amount Settled</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,10 +105,7 @@ $result = $conn->query($sql);
                                 echo "<td>Rs. " . number_format($row['amount'], 0, '.', ',') . "</td>";
                                 echo "<td>" . $row['status'] . "</td>";
                                 echo "<td>Rs. " . number_format($row['amountSettled'], 0, '.', ',') . "</td>";
-                                echo "<td class='actions'>";
-                                echo "<a class='btn printBtn'><i class='bx bx-printer'></i></a>";
-                                echo "<a class='btn'><i class='bx bx-trash'></i></a>";
-                                echo "</td>";
+                                
                                 echo "</tr>";
                             }
                         } else {

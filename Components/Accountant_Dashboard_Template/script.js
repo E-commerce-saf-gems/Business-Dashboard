@@ -24,13 +24,6 @@ class Dashboard extends HTMLElement {
                             <span class="text">Purchases</span>
                         </a>
                     </li>
-
-                    <li>
-                        <a href="../../Pages/Bids/bidssummary.php">
-                            <i class='bx bx-dollar-circle'></i>
-                            <span class="text">Bids</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="../../Pages/transactions/transactions.php">
                             <i class='bx bx-money'></i>
@@ -61,25 +54,7 @@ class Dashboard extends HTMLElement {
             </section>
 
             <section id="content">
-                <nav>
-                    <i class='bx bx-menu'></i>
-                    <a href="#" class="nav-link">Categories</a>
-                    <form action="#">
-                        <div class="form-input">
-                            <input type="search" placeholder="Search">
-                            <button type="submit" class="search-btn">
-                                <i class='bx bx-search'></i>
-                            </button>
-                        </div>
-                    </form>
-                    <a href="#" class="notification">
-                        <i class='bx bxs-bell'></i>
-                        <span class="num">8</span>
-                    </a>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                    </a>
-                </nav>
+
             </section>
         `;
     }

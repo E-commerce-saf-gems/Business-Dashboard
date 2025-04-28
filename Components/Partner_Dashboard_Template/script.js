@@ -50,39 +50,21 @@ class Dashboard extends HTMLElement {
                             <span class="text">Reports</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="../../Pages/Customer/customers.html">
+                            <i class='bx bxs-report'></i>
+                            <span class="text">Customer</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
 
             <section id="content">
                 <nav>
-                    <i class='bx bx-menu'></i>
-                    <form action="#">
-                        <div class="form-input">
-                            <input type="search" placeholder="Search">
-                            <button type="submit" class="search-btn">
-                                <i class='bx bx-search'></i>
-                            </button>
-                        </div>
-                    </form>
-                    <a href="#" class="notification">
-                        <i class='bx bxs-bell'></i>
-                        <span class="num">4</span>
-                    </a>
-                    <div class="notification-dropdown">
-                        <ul>
-                            <li>New Sales Update</li>
-                            <li>Chamath Settled a payment</li>
-                            <li>Your payment is due</li>
-                            <li>View this months profite and loss</li>
-                        </ul>
-                    </div>
-                    <div class="profile">
-                        <i class='bx bx-user' id="profile-icon"></i>
-                        <ul class="dropdown-menu">
-                            <li><a href="../../Pages/Profile/profile.php" class="dropdown-item">Profile</a></li>
-                            <li><a href="../../../login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
-                        </ul>
-                    </div>
+                    
+                    
+                    
                 </nav>
             </section>
         `;

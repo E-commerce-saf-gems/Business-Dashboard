@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gem Expenses Report Preview</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .report-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .report-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .company-logo {
+      width: 100px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .company-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+
+    .report-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .report-meta {
+      margin-bottom: 20px;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .report-table td,
+    .report-table th {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .section-header {
+      background-color: rgb(206, 254, 254);
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .section-total {
+      background-color: #d4edda;
+      font-weight: bold;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #6c757d;
+      text-align: center;
+    }
+
+    .signature-block {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .signature-line {
+      margin-top: 30px;
+      border-top: 2px dotted #333;
+      width: 250px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .signature-label {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px auto 0;
+    }
+
+    .action-buttons button {
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .print-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .pdf-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .back-btn {
+      background-color: #6c757d;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="reportTemplate"></div>
+
+  <script>
+    function downloadPDF() {
+      const reportElement = document.getElementById("reportTemplate");
+      const opt = {
+        margin: 0.5,
+        filename: 'Gem_Expenses_Report.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(reportElement).save();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const data = JSON.parse(localStorage.getItem("gemExpensesReportData"));
+      const reportTemplate = document.getElementById("reportTemplate");
+
+      if (!data) {
+        reportTemplate.innerHTML = `<p>No report data found.</p>`;
+        return;
+      }
+
+      const expenses = data.expenses || {};
+      const totalExpenses = Object.values(expenses).reduce((acc, val) => acc + (parseFloat(val) || 0), 0);
+
+      reportTemplate.innerHTML = `
+        <div class="report-container" id="reportContent">
+          <div class="report-header">
+              <img src="/images/logo.png" alt="Company Logo" class="company-logo">
+              <p class="company-name">SAF Gems</p>
+              <h3 class="report-title">Gem Expenses Report</h3>
+          </div>
+
+          <div class="report-meta">
+              <p><strong>Gem ID:</strong> ${data.gemDetails.gem_id}</p>
+              <p><strong>Type:</strong> ${data.gemDetails.type}</p>
+              <p><strong>Availability:</strong> ${data.gemDetails.availability}</p>
+              <p><strong>Visibility:</strong> ${data.gemDetails.visibility}</p>
+              
+              <p><em>All values in Sri Lankan Rupees (Rs.)</em></p>
+          </div>
+
+          <table class="report-table">
+            <tr class="section-header"><th>Expense Type</th><th>Amount (Rs.)</th></tr>
+            <tr><td>Cutting & Polishing</td><td>Rs. ${(expenses.cuttingPolishing || 0).toFixed(2)}</td></tr>
+            <tr><td>Certification Fees</td><td>Rs. ${(expenses.certificationFees || 0).toFixed(2)}</td></tr>
+            <tr><td>Marketing</td><td>Rs. ${(expenses.marketing || 0).toFixed(2)}</td></tr>
+            <tr><td>Logistics</td><td>Rs. ${(expenses.logistics || 0).toFixed(2)}</td></tr>
+            <tr><td>Other Expenses</td><td>Rs. ${(expenses.otherExpenses || 0).toFixed(2)}</td></tr>
+            <tr class="section-total"><td>Total Operational Cost</td><td>Rs. ${totalExpenses.toFixed(2)}</td></tr>
+          </table>
+
+          <div class="signature-block">
+            <div class="signature-line"></div>
+            <div class="signature-label">Authorized Signature</div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="back-btn" onclick="window.location.href='gemexpenses.html'">← Back to Form</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+            <button class="pdf-btn" onclick="downloadPDF()">⬇️ Download PDF</button>
+          </div>
+
+          <div class="footer-note">
+            <p>Report generated on ${new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
+
+
+

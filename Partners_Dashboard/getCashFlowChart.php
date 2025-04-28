@@ -12,52 +12,20 @@ if ($conn->connect_error) {
 
 header('Content-Type: application/json');
 
-// Unified months from sales, payments, and orders (last 6 months)
+// SQL: Combine sales and purchases by month
 $sql = "
 SELECT 
-    DATE_FORMAT(activity.month, '%b') AS monthLabel,
-    IFNULL(s.cash_in, 0) + IFNULL(o.cash_in, 0) AS cash_in,
-    IFNULL(p.cash_out, 0) AS cash_out
-FROM (
-    SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01') AS month
-    FROM transactions
-    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-
-    UNION
-
-    SELECT DATE_FORMAT(order_date, '%Y-%m-01') AS month
-    FROM orders
-    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-    
-    UNION
-    
-    SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-01')
-    FROM payments
-    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-) activity
-
-LEFT JOIN (
-    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_in
-    FROM transactions
-    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-    GROUP BY month
-) s ON s.month = activity.month
-
-LEFT JOIN (
-    SELECT DATE_FORMAT(order_date, '%Y-%m-01') AS month, SUM(total_amount) AS cash_in
-    FROM orders
-    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-    GROUP BY month
-) o ON o.month = activity.month
-
-LEFT JOIN (
-    SELECT DATE_FORMAT(date, '%Y-%m-01') AS month, SUM(amount) AS cash_out
-    FROM payments
-    WHERE date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-    GROUP BY month
-) p ON p.month = activity.month
-
-ORDER BY activity.month ASC
+    DATE_FORMAT(s.date, '%b') AS month,
+    IFNULL(SUM(s.amountSettled), 0) AS cash_in,
+    IFNULL((
+        SELECT SUM(p.amountSettled)
+        FROM purchases p
+        WHERE MONTH(p.date) = MONTH(s.date) AND YEAR(p.date) = YEAR(s.date)
+    ), 0) AS cash_out
+FROM sales s
+WHERE s.date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+GROUP BY YEAR(s.date), MONTH(s.date)
+ORDER BY YEAR(s.date), MONTH(s.date)
 ";
 
 $result = $conn->query($sql);
@@ -66,22 +34,17 @@ if (!$result) {
     echo json_encode(["error" => "Query failed: " . $conn->error]);
     exit;
 }
-
 $labels = [];
 $cashIn = [];
 $cashOut = [];
 
 while ($row = $result->fetch_assoc()) {
-    $labels[] = $row['monthLabel'];
+    $labels[] = $row['month'];
     $cashIn[] = (float)$row['cash_in'];
     $cashOut[] = (float)$row['cash_out'];
 }
 
-echo json_encode([
-    "labels" => $labels,
-    "cashIn" => $cashIn,
-    "cashOut" => $cashOut
-]);
-
+echo json_encode(["labels" => $labels, "cashIn" => $cashIn, "cashOut" => $cashOut]);
 $conn->close();
 ?>
+

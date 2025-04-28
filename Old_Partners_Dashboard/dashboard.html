@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Partner Dashboard</title>
+</head>
+<body>
+    <section id="sidebar">
+        <a href="#" class="logo">
+			<img src="./logo.png" width="90" height="90" alt="SAF GEMS">
+        </a>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/Sales/sales.php">
+                    <i class='bx bx-chart'></i>
+                    <span class="text">Sales</span>
+                </a>
+            </li>
+            </li>
+            <li>
+                <a href="./Pages/Purchases/purchases.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="text">Purchases</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/transactions/transactions.php">
+                    <i class='bx bx-money'></i>
+                    <span class="text">Transactions</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/Inventory/inventory.php">
+                    <i class='bx bxs-inbox'></i>
+                    <span class="text">Inventory</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/Bids/bidssummary.php">
+                    <i class='bx bx-dollar-circle'></i>
+                    <span class="text">Bids</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/reports/reports.html">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Pages/Customer/customers.php">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Customer</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="content">
+        <nav>
+            
+            <div class="profile">
+                <i class='bx bx-user' id="profile-icon"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="./Pages/Profile/profile.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </section>
+
+    <section id="content">
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+            <section class="overview">
+                <h2>Financial Overview</h2>
+                <div class="overview-filter">
+                    <select id="viewFilter">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
+                </div>
+                <div class="overview-boxes">
+                    <div class="overview-box">
+                        <h4>Total Sales</h4>
+                        <p id="totalSales">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Purchases</h4>
+                        <p id="totalPurchases">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Total Expenses</h4>
+                        <p id="totalExpenses">Rs. 0</p>
+                    </div>
+                    <div class="overview-box">
+                        <h4>Outstanding Payments</h4>
+                        <p id="outstandingPayments">Rs. 0</p>
+                    </div>
+                </div>
+            </section> 
+
+            <div class="dashboard-container">
+                <div class="shortcuts">
+                    <h2>Shortcuts</h2>
+                    <ul class="shortcut-options">
+                        <li>
+                            <a href="./Pages/Customer/customers.php">
+                                <i class='bx bxs-user-plus'></i>
+                                <span class="text">
+                                    <h3>View Customer</h3>
+                                </span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="./Pages/reports/reports.html">
+                                <i class='bx bxs-report'></i>
+                                <span class="text">
+                                    <h3>View Report</h3>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./Pages/Sales/sales.php">
+                                <i class='bx bxs-dollar-circle'></i>
+                                <span class="text">
+                                    <h3>View Sales</h3>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./Pages/transactions/transactions.php">
+                                <i class='bx bxs-credit-card'></i>
+                                <span class="text">
+                                    <h3>View Transaction</h3>
+                                </span>
+                            </a>
+                            
+                        </li>
+                    </ul>
+
+                    <div class="chart-container">
+                        <div class="metric">
+                            <h2>Average Bid Price</h2>
+                            <br>
+                            <canvas id="average-bid-chart"></canvas>
+                        </div>
+                        <div class="metric">
+                            <h2>Revenue from Auctions</h2>
+                            <canvas id="auction-revenue-chart"></canvas>
+                        </div>
+                    </div>
+                
+                    <div class="cash-flow-chart">
+                        <h2>Cash Flow</h2>
+                        <canvas id="cashFlowChart"></canvas>
+                        <a href="../Partners_Dashboard/Pages/Sales/sales.php" class="view-more">View More</a>
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="sales-summary">
+                        <h2>Monthly Sales Summary</h2>
+                        <canvas id="salesChart"></canvas>
+                        <a href="../Partners_Dashboard/Pages/Sales/sales.php" class="view-more">View More</a>
+                    </div>
+                    <div class="gem-chart">
+                        <h2>Inventory</h2>
+                        <canvas id="gemChart"></canvas> 
+                        <a href="../Partners_Dashboard/Pages/Inventory/inventory.php" class="view-more">View More</a>
+                    </div>
+                </div>
+            </div>  
+        </main>
+    </section>
+    <script>
+            const profileIcon = document.getElementById("profile-icon");
+            const profileMenu = document.querySelector(".profile");
+
+            // Toggle dropdown visibility
+            profileIcon.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent click from bubbling up
+                profileMenu.classList.toggle("active");
+            });
+
+            // Close dropdown if clicking outside
+            document.addEventListener("click", function (e) {
+                if (!profileMenu.contains(e.target)) {
+                    profileMenu.classList.remove("active");
+                }
+            });
+            document.querySelector('.notification').addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                const dropdown = document.querySelector('.notification-dropdown');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicking outside
+            document.addEventListener('click', function (e) {
+                const notification = document.querySelector('.notification');
+                const dropdown = document.querySelector('.notification-dropdown');
+                if (!notification.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+    </script>
+	<script src="./script.js"></script>
+</body>
+</html>
