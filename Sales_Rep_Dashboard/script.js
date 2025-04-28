@@ -49,22 +49,22 @@ window.addEventListener('resize', function () {
 	}
 })
 
-// Sample data for monthly sales
+
 const salesData = {
 	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	datasets: [{
 		label: "Sales ($)",
-		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], // Sample data points
+		data: [500, 700, 800, 600, 750, 900, 850, 950, 700, 800, 1000, 1100], 
 		borderColor: "rgba(75, 192, 192, 1)",
 		backgroundColor: "rgba(75, 192, 192, 0.2)",
 		fill: true,
-		tension: 0.3, // Curve smoothness
+		tension: 0.3, 
 		pointRadius: 4,
 		pointBackgroundColor: "rgba(75, 192, 192, 1)"
 	}]
 };
 
-// Configuration options for the chart
+
 const config = {
 	type: "line",
 	data: salesData,
@@ -94,24 +94,24 @@ const config = {
 	}
 };
 
-// Render the chart in the canvas with id 'salesChart'
+
 const salesChart = new Chart(
 	document.getElementById("salesChart"),
 	config
 );
 
 
-// Sample data for gemstone types
+
 const gemData = {
 	labels: ["Ruby", "Emerald", "Sapphire", "Amethyst", "Diamond"],
 	datasets: [{
-		data: [12, 19, 7, 10, 15], // Sample quantities for each gemstone type
+		data: [12, 19, 7, 10, 15], 
 		backgroundColor: [
-			"rgba(255, 99, 132, 0.6)", // Ruby color
-			"rgba(75, 192, 192, 0.6)", // Emerald color
-			"rgba(54, 162, 235, 0.6)", // Sapphire color
-			"rgba(153, 102, 255, 0.6)", // Amethyst color
-			"rgba(255, 206, 86, 0.6)"   // Diamond color
+			"rgba(255, 99, 132, 0.6)", 
+			"rgba(75, 192, 192, 0.6)", 
+			"rgba(54, 162, 235, 0.6)", 
+			"rgba(153, 102, 255, 0.6)", 
+			"rgba(255, 206, 86, 0.6)"   
 		],
 		borderColor: [
 			"rgba(255, 99, 132, 1)",
@@ -124,7 +124,7 @@ const gemData = {
 	}]
 };
 
-// Configuration for the gemstone types pie chart
+
 const gemConfig = {
 	type: "pie",
 	data: gemData,
@@ -133,34 +133,33 @@ const gemConfig = {
 		plugins: {
 			legend: {
 				display: true,
-				position: "right" // Position legend on the right
+				position: "right" 
 			}
 		}
 	}
 };
 
-// Render the pie chart in the canvas with id 'gemChart'
+
 const gemChart = new Chart(
 	document.getElementById("gemChart"),
 	gemConfig
 );
 
-// cashflow
-// Updated Data and configuration for the Cash Flow Bar Chart
+
 const cashFlowData = {
-	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), // Labels from 1 to 15 representing days of the month
+	labels: Array.from({ length: 10 }, (_, i) => `${i + 1}`), 
 	datasets: [
 		{
 			label: 'Cash In',
-			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], // Example data for Cash In each day
-			backgroundColor: 'rgba(75, 192, 192, 0.6)', // Teal color
+			data: [120, 150, 200, 180, 210, 230, 170, 160, 200, 220], 
+			backgroundColor: 'rgba(75, 192, 192, 0.6)', 
 			borderColor: 'rgba(75, 192, 192, 1)',
 			borderWidth: 1
 		},
 		{
 			label: 'Cash Out',
-			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], // Example data for Cash Out each day
-			backgroundColor: "#3caaaa", // Red color
+			data: [100, 130, 150, 140, 170, 160, 150, 140, 180, 190], 
+			backgroundColor: "#3caaaa", 
 			borderColor: '#3caaaa',
 			borderWidth: 1
 		}
@@ -184,7 +183,7 @@ const cashFlowConfig = {
 					display: true,
 					text: 'Day'
 				},
-				stacked: false // Keeps bars side-by-side for each day
+				stacked: false 
 			}
 		},
 		plugins: {
@@ -195,10 +194,9 @@ const cashFlowConfig = {
 	}
 };
 
-// Initialize the Cash Flow Bar Chart
+
 const cashFlowChart = new Chart(
 	document.getElementById('cashFlowChart'),
 	cashFlowConfig
 );
 
-// cashflow

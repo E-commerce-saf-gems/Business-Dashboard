@@ -9,11 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 
 $salesRep_id = $_SESSION['user_id'];
 
-// Fetch available times for the logged-in sales representative
 $sql_available_times = "SELECT date, time, availability 
                         FROM availabletimes 
                         WHERE salesRep_id = ? 
-                        AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
+                        AND CONCAT(date, ' ', time) >= NOW()     
                         ORDER BY date, time";
 $stmt = $conn->prepare($sql_available_times);
 $stmt->bind_param("i", $salesRep_id);
@@ -34,7 +33,6 @@ while ($row = $availableTimesResult->fetch_assoc()) {
 
 $stmt->close();
 
-// Fetch meetings for the logged-in sales representative
 $sql_meetings = "SELECT m.meeting_id, m.type, a.date, a.time, 
                         c.firstName AS customer_name, c.email AS email, 
                         m.status 
@@ -173,15 +171,14 @@ $jsonData = json_encode($availableTimes);
                             echo "</td>";
 
 
-                            // Add a Delete button only if the status is "Request To Delete"
 echo "<td>";
-if ($row['status'] === 'R') { // 'R' is the code for "Request To Delete"
+if ($row['status'] === 'R') { 
     echo "<form method='POST' action='./deleteMeeting.php'>";
     echo "<input type='hidden' name='meeting_id' value='" . $row['meeting_id'] . "'>";
     echo "<button type='submit' class='btn-delete' onclick='return confirm(\"Are you sure you want to delete this meeting?\")'>Delete</button>";
     echo "</form>";
 } else {
-    echo "-"; // Placeholder or leave blank if no action needed
+    echo "-"; 
 }
 echo "</td>";
 
@@ -293,9 +290,9 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
     const rows = document.querySelectorAll(".sales-table tbody tr");
 
     rows.forEach(row => {
-        const date = row.children[2].textContent.trim();   // Date column
-        const time = row.children[3].textContent.trim().slice(0, 5);   // Time column
-        const name = row.children[4].textContent.toLowerCase().trim(); // Name column
+        const date = row.children[2].textContent.trim();   
+        const time = row.children[3].textContent.trim().slice(0, 5);   
+        const name = row.children[4].textContent.toLowerCase().trim(); 
 
         let isVisible = true;
 

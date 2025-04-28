@@ -73,7 +73,7 @@ class Dashboard extends HTMLElement {
           </div>
         </form>
         
- <!-- profile Dropdown -->
+ 
  
 
             <div class="profile">
@@ -117,7 +117,7 @@ function updateActiveMenu() {
     });
 }
 
-// Run the updateActiveMenu function on page load
+
 window.addEventListener('DOMContentLoaded', updateActiveMenu);
 
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
@@ -162,25 +162,25 @@ window.addEventListener('resize', function () {
 const profileIcon = document.getElementById("profile-icon");
             const profileMenu = document.querySelector(".profile");
 
-            // Toggle dropdown visibility
+            
             profileIcon.addEventListener("click", function (e) {
-                e.stopPropagation(); // Prevent click from bubbling up
+                e.stopPropagation(); 
                 profileMenu.classList.toggle("active");
             });
 
-            // Close dropdown if clicking outside
+            
             document.addEventListener("click", function (e) {
                 if (!profileMenu.contains(e.target)) {
                     profileMenu.classList.remove("active");
                 }
             });
             document.querySelector('.notification').addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default link behavior
+                e.preventDefault(); 
                 const dropdown = document.querySelector('.notification-dropdown');
                 dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
             });
 
-            // Close the dropdown if clicking outside
+            
             document.addEventListener('click', function (e) {
                 const notification = document.querySelector('.notification');
                 const dropdown = document.querySelector('.notification-dropdown');

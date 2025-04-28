@@ -16,7 +16,7 @@ $salesRep_id = $_SESSION['user_id'];
 $date = $_GET['date'];
 $time = $_GET['time'];
 
-// Fetch the availability status of the time slot
+
 $sql_check = "SELECT availability 
               FROM availabletimes 
               WHERE salesRep_id = ? AND date = ? AND time = ?";
@@ -26,7 +26,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    // No matching time slot found
+    
     $stmt->close();
     $conn->close();
     header("Location: ./meeting.php?error=NotFound");
@@ -39,13 +39,11 @@ $availability = $row['availability'];
 $stmt->close();
 
 if ($availability !== 'available') {
-    // Only allow deletion if the availability status is Pending
     $conn->close();
     header("Location: ./meeting.php?error=NotDeletable");
     exit;
 }
 
-// Proceed to delete the time slot
 $sql_delete = "DELETE FROM availabletimes 
                WHERE salesRep_id = ? AND date = ? AND time = ?";
 $stmt = $conn->prepare($sql_delete);

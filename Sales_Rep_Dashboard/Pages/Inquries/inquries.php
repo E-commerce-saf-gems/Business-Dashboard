@@ -33,7 +33,7 @@ include '../../../database/db.php';
             </div>
 
 
-            <!-- Filter Section -->
+            
             <div class="sales-table-container">
             <div class="table-filters">
                 <label for="email-filter">Email:</label>
@@ -49,7 +49,7 @@ include '../../../database/db.php';
             </div>
 </div>
 
-            <!-- Contact Inquiries Table -->
+            
             <div class="sales-table-container">
                 <table class="sales-table">
                     <thead>
@@ -88,7 +88,7 @@ include '../../../database/db.php';
         </main>
     </section>
 
-    <!-- Reply Popup Modal -->
+    
     <div id="reply-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -113,7 +113,6 @@ include '../../../database/db.php';
             const replyMessageInput = document.getElementById("reply-message");
             const replyForm = document.getElementById("reply-form");
 
-            // Open Modal
             replyButtons.forEach(button => {
                 button.addEventListener("click", function () {
                     replyEmailInput.value = this.dataset.email;
@@ -122,12 +121,10 @@ include '../../../database/db.php';
                 });
             });
 
-            // Close Modal
             closeModal.addEventListener("click", function () {
                 modal.style.display = "none";
             });
 
-            // Send Reply via AJAX
             replyForm.addEventListener("submit", function (e) {
                 e.preventDefault();
                 const email = replyEmailInput.value;
@@ -140,7 +137,7 @@ include '../../../database/db.php';
                 })
                 .then(response => response.text())
                 .then(data => {
-                    alert(data); // Show success or error message
+                    alert(data); 
                     modal.style.display = "none";
                 })
                 .catch(error => console.error("Error:", error));
@@ -148,7 +145,7 @@ include '../../../database/db.php';
         });
     </script>
     <script>
-        // filtering data
+        
 document.querySelector(".btn-filter").addEventListener("click", () => {
     const emailFilter = document.getElementById("email-filter").value;
     const phoneFilter = document.getElementById("phone-filter").value;
@@ -157,9 +154,9 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
     const rows = document.querySelectorAll(".sales-table tbody tr");
 
     rows.forEach(row => {
-        const email = row.children[1].textContent.trim();   // Email column
-        const phone = row.children[2].textContent.trim();   // phone column
-        const name = row.children[3].textContent.toLowerCase().trim(); // Name column
+        const email = row.children[1].textContent.trim();   
+        const phone = row.children[2].textContent.trim();   
+        const name = row.children[3].textContent.toLowerCase().trim(); 
 
         let isVisible = true;
 
@@ -182,7 +179,7 @@ document.querySelector(".btn-filter").addEventListener("click", () => {
 
 
     <style>
-        /* Modal Styles */
+        
         .modal { display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); }
         .modal-content { background-color: white; margin: auto; padding: 20px; border: 1px solid #888; width: 50%; text-align: center; }
         .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }

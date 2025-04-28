@@ -1,4 +1,4 @@
-// Function to handle delete confirmation
+
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtons = document.querySelectorAll(".delete-btn");
     
@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const confirmed = confirm("Are you sure you want to delete this item?");
             
             if (confirmed) {
-                // Here you would add code to delete the item from the database
-                // For now, just remove the row from the table
+                
                 const row = button.closest("tr");
                 row.remove();
             }
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-      // Real-time validation
+      
       document.addEventListener("DOMContentLoaded", function () {
         const dateInput = document.getElementById("date");
         const timeInput = document.getElementById("time");
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const today = new Date();
           const selectedDate = new Date(dateInput.value);
 
-          // Reset errors and check date validity
+          
           dateError.style.display = "none";
           if (selectedDate < today.setHours(0, 0, 0, 0)) {
             dateError.style.display = "block";
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `${dateInput.value}T${timeInput.value}`
           );
 
-          // Reset errors and check time validity
+          
           timeError.style.display = "none";
           if (selectedDate.toDateString() === now.toDateString()) {
             if (selectedTime <= now) {
@@ -56,16 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
           return true;
         }
 
-        // Event listeners for real-time validation
+        
         dateInput.addEventListener("input", validateDate);
         timeInput.addEventListener("input", validateTime);
 
-        // Validate before form submission
+        
         form.addEventListener("submit", function (e) {
           const isDateValid = validateDate();
           const isTimeValid = validateTime();
           if (!isDateValid || !isTimeValid) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault(); 
           }
         });
 });
