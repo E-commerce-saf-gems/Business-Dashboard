@@ -1,7 +1,6 @@
 <?php
 include '../../../database/db.php';
 
-// Corrected SQL query syntax
 $ssql = "SELECT 
             inventory.stone_id, 
             inventory.date, 
@@ -83,7 +82,7 @@ if (!$result) {
         </div>
         <div class="sales-summary-box">
           <div class="sales-summary-title">
-            <h2>Monthly Inventory Summary</h2>
+            <h2>Inventory Summary</h2>
           </div>
           <?php
         $typeQuery = "SELECT type, COUNT(*) AS count FROM inventory GROUP BY type";
@@ -133,8 +132,7 @@ if (!$result) {
             <option value="Rectangle"  <?= (isset($_GET['shape']) && $_GET['shape'] == 'Rectangle') ? 'selected' : ''; ?>>Rectangle</option>
         </select>
 
-        <!-- <label for="customer-filter">Color:</label>
-        <input type="text" id="customer-filter" name="colour" placeholder="Search Color" value="<?= isset($_GET['colour']) ? htmlspecialchars($_GET['colour']) : ''; ?>" onchange="document.getElementById('filter-form').submit();"> -->
+        
 
         <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
         </form>
@@ -227,6 +225,5 @@ if (!$result) {
 </html>
 
 <?php
-// Close the database connection
 $conn->close();
 ?>

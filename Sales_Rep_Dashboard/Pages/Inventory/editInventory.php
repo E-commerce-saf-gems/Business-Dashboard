@@ -154,13 +154,7 @@ if (isset($_GET['id'])) {
             </select>
             </div>
 
-            <!-- <div class="form-group">
-              <label for="availability">Availability:</label>
-              <select id="availability" name="availability">
-                <option value="available" <?php if ($row['availability'] === 'available') echo 'selected'; ?>>available</option>
-                <option value="not available" <?php if ($row['availability'] === 'notavailable') echo 'selected'; ?>>not available</option>
-              </select>
-            </div> -->
+            
 
             <div class="form-group">
                 <label for="buyer">Select Buyer:</label>
